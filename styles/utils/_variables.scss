@@ -1,14 +1,13 @@
-@import './config/_colorsConfig.scss';
-@import './config/_typographyConfig.scss';
-@import './config/_radioButtonsConfig.scss';
-@import './config/_checkboxConfig.scss';
-@import './config/_textInputConfig.scss';
-@import './config/_buttonsConfig.scss';
-@import './config/_linkConfig.scss';
-@import './config/_shadowsConfig.scss';
-@import './config/_transitionConfig.scss';
-@import './config/_selectInputConfig.scss';
-@import './config/_gradientsConfig.scss';
+@import "./config/_colorsConfig.scss";
+@import "./config/_typographyConfig.scss";
+@import "./config/_radioButtonsConfig.scss";
+@import "./config/_checkboxConfig.scss";
+@import "./config/_textInputConfig.scss";
+@import "./config/_linkConfig.scss";
+@import "./config/_shadowsConfig.scss";
+@import "./config/_transitionConfig.scss";
+@import "./config/_selectInputConfig.scss";
+@import "./config/_gradientsConfig.scss";
 
 //
 // VARIABLES
@@ -108,49 +107,60 @@ $breakpoints: (
 //
 
 $alignments: (
-  'center',
-  'space-between',
-  'space-around',
-  'space-evenly',
-  'flex-start',
-  'flex-end',
-  'baseline',
-  'stretch',
-  'auto'
+  "center",
+  "space-between",
+  "space-around",
+  "space-evenly",
+  "flex-start",
+  "flex-end",
+  "baseline",
+  "stretch",
+  "auto"
 );
 
-$textAlignments: ('left', 'right', 'center', 'revert');
+$textAlignments: ("left", "right", "center", "revert");
 
 //
 // DISPLAYS
 //
 
 $displays: (
-  'block',
-  'inline-block',
-  'inline',
-  'grid',
-  'table',
-  'table-row',
-  'table-cell',
-  'flex',
-  'inline-flex',
-  'none'
+  "block",
+  "inline-block",
+  "inline",
+  "grid",
+  "table",
+  "table-row",
+  "table-cell",
+  "flex",
+  "inline-flex",
+  "none"
 );
 
 //
 // FLEX UTILITIES
 //
 
-$flexDirections: ('row', 'column', 'row-reverse', 'column-reverse');
-$flexWraps: ('wrap', 'nowrap', 'wrap-reverse');
+$flexDirections: ("row", "column", "row-reverse", "column-reverse");
+$flexWraps: ("wrap", "nowrap", "wrap-reverse");
 $flexSizes: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 //
 // CURSORS
 //
 
-$cursors: (default, pointer, help, wait, crosshair, not-allowed, zoom-in, zoom-out, grab, auto);
+$cursors: (
+  default,
+  pointer,
+  help,
+  wait,
+  crosshair,
+  not-allowed,
+  zoom-in,
+  zoom-out,
+  grab,
+  auto
+);
 
 //
 // WIDTH/HEIGHT
