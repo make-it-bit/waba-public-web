@@ -1,0 +1,112 @@
+//
+// TEXT INPUTS
+//
+
+// sizes
+
+$text-input-size-base: 1rem !default;
+
+$text-input-xs-padding-x: $text-input-size-base * calc(6 / 16);
+$text-input-xs-padding-y: $text-input-size-base * calc(4 / 16);
+$text-input-xs-font-size: $text-input-size-base * calc(10 / 16);
+$text-input-xs-line-height: $text-input-size-base * calc(12 / 16);
+
+$text-input-sm-padding-x: $text-input-size-base * calc(8 / 16);
+$text-input-sm-padding-y: $text-input-size-base * calc(6 / 16);
+$text-input-sm-font-size: $text-input-size-base * calc(14 / 16);
+$text-input-sm-line-height: $text-input-size-base * calc(20 / 16);
+
+$text-input-reg-padding-x: $text-input-size-base * calc(16 / 16);
+$text-input-reg-padding-y: $text-input-size-base * calc(12 / 16);
+$text-input-reg-font-size: $text-input-size-base * calc(16 / 16);
+$text-input-reg-line-height: $text-input-size-base * calc(24 / 16);
+
+$text-input-lg-padding-x: $text-input-size-base * calc(16 / 16);
+$text-input-lg-padding-y: $text-input-size-base * calc(8 / 16);
+$text-input-lg-font-size: $text-input-size-base * calc(18 / 16);
+$text-input-lg-line-height: $text-input-size-base * calc(28 / 16);
+
+$message-box-padding-x: $text-input-size-base * calc(16 / 16);
+$message-box-padding-y: $text-input-size-base * calc(158 / 16);
+
+// borders
+
+$text-input-sm-border-radius: 4px;
+$text-input-reg-border-radius: 6px;
+$text-input-lg-border-radius: 8px;
+
+$text-input-reg-border: 1px solid $black;
+$text-input-hover-border: 1px solid $black;
+$text-input-focus-border: 1px solid $black;
+$text-input-active-border: 1px solid $black;
+$text-input-error-border: 1px solid $black;
+$text-input-disabled-border: none;
+
+$text-input-borders: (
+  // 1 --> reg
+  $text-input-reg-border,
+  // 2 --> hover
+  $text-input-hover-border,
+  // 3 --> focus
+  $text-input-focus-border,
+  // 4 --> active
+  $text-input-active-border,
+  // 5 --> error
+  $text-input-error-border,
+  // 6 --> disabled
+  $text-input-disabled-border
+);
+
+// colors
+
+$text-input-reg-color: $neutral;
+$text-input-hover-color: $neutral;
+$text-input-focus-color: $neutral;
+$text-input-active-color: $neutral;
+$text-input-error-color: $neutral;
+$text-input-disabled-color: $neutral;
+$text-input-label-color: $black;
+$text-input-placeholder-color: $black;
+
+$text-input-colors: (
+  // 1 --> reg bg
+  $text-input-reg-color,
+  // 2 --> hover bg
+  $text-input-hover-color,
+  // 3 --> focus bg
+  $text-input-focus-color,
+  // 4 --> active bg
+  $text-input-active-color,
+  // 5 --> error bg
+  $text-input-error-color,
+  // 6 --> disabled bg
+  $text-input-disabled-color,
+  // 7 --> label color
+  $text-input-label-color,
+  // 8 --> placeholder color
+  $text-input-placeholder-color
+);
+
+// shadows
+
+$text-input-reg-shadow: none;
+$text-input-hover-shadow: none;
+$text-input-focus-shadow: none;
+$text-input-active-shadow: none;
+$text-input-error-shadow: none;
+$text-input-disabled-shadow: none;
+
+$text-input-shadows: (
+  // 1 --> reg
+  $text-input-reg-shadow,
+  // 2 --> hover
+  $text-input-hover-shadow,
+  // 3 --> focus
+  $text-input-focus-shadow,
+  // 4 --> active
+  $text-input-active-shadow,
+  // 5 --> error
+  $text-input-error-shadow,
+  // 6 --> disabled
+  $text-input-disabled-shadow
+);

@@ -1,0 +1,112 @@
+//
+// TEXT INPUTS
+//
+
+// sizes
+
+$select-input-size-base: 1rem !default;
+
+$select-input-xs-padding-x: $select-input-size-base * calc(6 / 16);
+$select-input-xs-padding-y: $select-input-size-base * calc(4 / 16);
+$select-input-xs-font-size: $select-input-size-base * calc(10 / 16);
+$select-input-xs-line-height: $select-input-size-base * calc(12 / 16);
+
+$select-input-sm-padding-x: $select-input-size-base * calc(8 / 16);
+$select-input-sm-padding-y: $select-input-size-base * calc(6 / 16);
+$select-input-sm-font-size: $select-input-size-base * calc(14 / 16);
+$select-input-sm-line-height: $select-input-size-base * calc(20 / 16);
+
+$select-input-reg-padding-x: $select-input-size-base * calc(12 / 16);
+$select-input-reg-padding-y: $select-input-size-base * calc(6 / 16);
+$select-input-reg-font-size: $select-input-size-base * calc(16 / 16);
+$select-input-reg-line-height: $select-input-size-base * calc(24 / 16);
+
+$select-input-lg-padding-x: $select-input-size-base * calc(16 / 16);
+$select-input-lg-padding-y: $select-input-size-base * calc(8 / 16);
+$select-input-lg-font-size: $select-input-size-base * calc(18 / 16);
+$select-input-lg-line-height: $select-input-size-base * calc(28 / 16);
+
+// borders
+
+$select-input-sm-border-radius: 4px;
+$select-input-reg-border-radius: 6px;
+$select-input-lg-border-radius: 8px;
+
+$select-input-reg-border: 1px solid $black;
+$select-input-hover-border: 1px solid $black;
+$select-input-focus-border: 1px solid $black;
+$select-input-active-border: 1px solid $black;
+$select-input-error-border: 1px solid $black;
+$select-input-disabled-border: none;
+
+$select-input-borders: (
+  // 1 --> reg
+  $select-input-reg-border,
+  // 2 --> hover
+  $select-input-hover-border,
+  // 3 --> focus
+  $select-input-focus-border,
+  // 4 --> active
+  $select-input-active-border,
+  // 5 --> error
+  $select-input-error-border,
+  // 6 --> disabled
+  $select-input-disabled-border
+);
+
+// colors
+
+$select-input-reg-color: $neutral;
+$select-input-hover-color: $neutral;
+$select-input-focus-color: $neutral;
+$select-input-active-color: $neutral;
+$select-input-error-color: $neutral;
+$select-input-disabled-color: $neutral;
+$select-input-label-color: $black;
+$select-input-placeholder-color: $black;
+$select-input-option-color: $black;
+
+$select-input-colors: (
+  // 1 --> reg bg
+  $select-input-reg-color,
+  // 2 --> hover bg
+  $select-input-hover-color,
+  // 3 --> focus bg
+  $select-input-focus-color,
+  // 4 --> active bg
+  $select-input-active-color,
+  // 5 --> error bg
+  $select-input-error-color,
+  // 6 --> disabled bg
+  $select-input-disabled-color,
+  // 7 --> label color
+  $select-input-label-color,
+  // 8 --> placeholder color
+  $select-input-placeholder-color,
+  // 9 --> option color
+  $select-input-option-color
+);
+
+// shadows
+
+$select-input-reg-shadow: 0px 1px 6px rgba(233, 227, 227, 0.5);
+$select-input-hover-shadow: 0px 2px 8px rgba(225, 217, 217, 0.5);
+$select-input-focus-shadow: 0px 1px 4px rgba(120, 101, 233, 0.25);
+$select-input-active-shadow: 0px 1px 1px rgba(225, 217, 217, 0.5);
+$select-input-error-shadow: none;
+$select-input-disabled-shadow: none;
+
+$select-input-shadows: (
+  // 1 --> reg
+  $select-input-reg-shadow,
+  // 2 --> hover
+  $select-input-hover-shadow,
+  // 3 --> focus
+  $select-input-focus-shadow,
+  // 4 --> active
+  $select-input-active-shadow,
+  // 5 --> error
+  $select-input-error-shadow,
+  // 6 --> disabled
+  $select-input-disabled-shadow
+);

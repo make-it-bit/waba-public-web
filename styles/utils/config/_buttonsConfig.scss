@@ -1,0 +1,189 @@
+// BUTTONS
+
+// sizes
+
+// shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
+$button-size-base: 1rem !default;
+
+$btn-sm-padding-x: $button-size-base * calc(12 / 16);
+$btn-sm-padding-y: $button-size-base * calc(6 / 16);
+$btn-sm-font-size: $button-size-base * calc(14 / 16);
+$btn-sm-line-height: $button-size-base * calc(20 / 16);
+
+$btn-reg-padding-x: $button-size-base * calc(16 / 16);
+$btn-reg-padding-y: $button-size-base * calc(6 / 16);
+$btn-reg-font-size: $button-size-base * calc(16 / 16);
+$btn-reg-line-height: $button-size-base * calc(24 / 16);
+
+$btn-lg-padding-x: $button-size-base * calc(24 / 16);
+$btn-lg-padding-y: $button-size-base * calc(8 / 16);
+$btn-lg-font-size: $button-size-base * calc(18 / 16);
+$btn-lg-line-height: $button-size-base * calc(28 / 16);
+
+$button-styles: (
+  primary: (
+    // 1 --> text
+    $neutral,
+    // 2 --> bg
+    $black,
+    // 3 --> bg hover
+    $purple-dark,
+    // 4 --> bg focus
+    $black,
+    // 5 --> bg active
+    $neutral,
+    //6  --> bg disabeld
+    $black,
+  ),
+  secondary: (
+    // 1 --> text
+    $black,
+    // 2 --> bg
+    $neutral,
+    // 3 --> bg hover
+    $black,
+    // 4 --> bg focus
+    $neutral,
+    // 5 --> bg active
+    $neutral,
+    //6  --> bg disabeld
+    $neutral,
+  ),
+);
+
+//
+// shadows
+//
+
+$primary-button-reg-shadow: none;
+$primary-button-hover-shadow: none;
+$primary-button-focus-shadow: none;
+$primary-button-active-shadow: none;
+
+$secondary-button-reg-shadow: none;
+$secondary-button-hover-shadow: none;
+$secondary-button-focus-shadow: none;
+$secondary-button-active-shadow: none;
+
+$button-shadows: (
+  primary: (
+    // 1 --> reg
+    $primary-button-reg-shadow,
+    // 2 --> hover
+    $primary-button-hover-shadow,
+    // 3 --> focus
+    $primary-button-focus-shadow,
+    // 4 --> active
+    $primary-button-active-shadow,
+  ),
+  secondary: (
+    // 1 --> reg
+    $secondary-button-reg-shadow,
+    // 2 --> hover
+    $secondary-button-hover-shadow,
+    // 3 --> focus
+    $secondary-button-focus-shadow,
+    // 4 --> active
+    $secondary-button-active-shadow,
+  ),
+);
+
+//
+// borders
+//
+
+$button-sm-border-radius: 64px;
+$button-reg-border-radius: 64px;
+$button-lg-border-radius: 64px;
+
+$primary-button-reg-border: none;
+$primary-button-hover-border: none;
+$primary-button-focus-border: none;
+$primary-button-active-border: solid $black;
+$primary-button-disabled-border: 0;
+
+$secondary-button-reg-border: 1px solid $black;
+$secondary-button-hover-border: none;
+$secondary-button-focus-border: 3px solid $black;
+$secondary-button-active-border: 1px solid $black;
+$secondary-button-disabled-border: 1px solid $black;
+
+//
+// borders
+//
+
+$primary-button-reg-cursor: pointer;
+$primary-button-disabled-cursor: default;
+
+$secondary-button-reg-cursor: pointer;
+$secondary-button-disabled-cursor: default;
+
+$button-borders: (
+  primary: (
+    // 1 --> reg
+    $primary-button-reg-border,
+    // 2 --> hover
+    $primary-button-hover-border,
+    // 3 --> focus
+    $primary-button-focus-border,
+    // 4 --> active
+    $primary-button-active-border,
+    // 5 --> disabled
+    $primary-button-disabled-border,
+  ),
+  secondary: (
+    // 1 --> reg
+    $secondary-button-reg-border,
+    // 2 --> hover
+    $secondary-button-hover-border,
+    // 3 --> focus
+    $secondary-button-focus-border,
+    // 4 --> active
+    $secondary-button-active-border,
+    // 5 --> disabled
+    $secondary-button-disabled-border,
+  ),
+);
+
+$button-font-colors: (
+  primary: (
+    // 1 --> reg
+    $neutral,
+    // 2 --> hover
+    $neutral,
+    // 3 --> focus
+    $black,
+    // 4 --> active
+    $black,
+    // 5 --> disabled
+    $neutral,
+  ),
+  secondary: (
+    // 1 --> reg
+    $black,
+    // 2 --> hover
+    $neutral,
+    // 3 --> focus
+    $black,
+    // 4 --> active
+    $black,
+    // 5 --> disabled
+    $black,
+  ),
+);
+
+$button-cursors: (
+  primary: (
+    // 1 --> reg
+    $primary-button-reg-cursor,
+    // 2 --> disabled
+    $primary-button-disabled-cursor,
+  ),
+  secondary: (
+    // 1 --> reg
+    $secondary-button-reg-cursor,
+    // 2 --> disabled
+    $secondary-button-disabled-cursor,
+  ),
+);

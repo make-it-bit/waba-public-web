@@ -1,0 +1,145 @@
+@mixin input-size($padding-y, $padding-x, $font-size, $line-height) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+@mixin label-size($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+.selectInput {
+  width: 100%;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: nth($select-input-colors, 1);
+  border: nth($select-input-borders, 1);
+  box-shadow: nth($select-input-shadows, 1);
+
+  &-sm {
+    @extend .selectInput;
+    @include input-size(
+      $select-input-sm-padding-y,
+      $select-input-sm-padding-x,
+      $select-input-sm-font-size,
+      $select-input-sm-line-height
+    );
+    border-radius: $text-input-sm-border-radius;
+    &__label {
+      @include label-size(
+        $select-input-sm-font-size,
+        $select-input-sm-line-height
+      );
+      color: nth($select-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &-reg {
+    @extend .selectInput;
+    @include input-size(
+      $select-input-reg-padding-y,
+      $select-input-reg-padding-x,
+      $select-input-reg-font-size,
+      $select-input-reg-line-height
+    );
+    border-radius: $text-input-reg-border-radius;
+
+    &__label {
+      @include label-size(
+        $select-input-reg-font-size,
+        $select-input-reg-line-height
+      );
+      color: nth($select-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &-lg {
+    @extend .selectInput;
+    @include input-size(
+      $select-input-lg-padding-y,
+      $select-input-lg-padding-x,
+      $select-input-lg-font-size,
+      $select-input-lg-line-height
+    );
+    border-radius: $text-input-lg-border-radius;
+
+    &__label {
+      @include label-size(
+        $select-input-lg-font-size,
+        $select-input-lg-line-height
+      );
+      color: nth($select-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &-xs {
+    @extend .selectInput;
+    @include input-size(
+      $select-input-xs-padding-y,
+      $select-input-xs-padding-x,
+      $select-input-xs-font-size,
+      $select-input-xs-line-height
+    );
+    border-radius: $text-input-sm-border-radius;
+    &__label {
+      @include label-size(
+        $select-input-xs-font-size,
+        $select-input-xs-line-height
+      );
+      color: nth($select-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &:hover,
+  &--hover {
+    background-color: nth($select-input-colors, 2);
+    border: nth($select-input-borders, 2);
+    box-shadow: nth($select-input-shadows, 2);
+    transition: $global-transition;
+  }
+  &:focus,
+  &--focus {
+    background-color: nth($select-input-colors, 3);
+    border: nth($select-input-borders, 3);
+    box-shadow: nth($select-input-shadows, 3);
+    transition: $global-transition;
+  }
+  &:active,
+  &--active {
+    background-color: nth($select-input-colors, 4);
+    border: nth($select-input-borders, 4);
+    box-shadow: nth($select-input-shadows, 4);
+    transition: $global-transition;
+  }
+  &--error {
+    background-color: nth($select-input-colors, 5);
+    border: nth($select-input-borders, 5);
+    box-shadow: nth($select-input-shadows, 5);
+    transition: $global-transition;
+  }
+  &--disabled {
+    background-color: nth($select-input-colors, 6);
+    border: nth($select-input-borders, 6);
+    box-shadow: nth($select-input-shadows, 6);
+    transition: $global-transition;
+    &:hover {
+      background-color: nth($select-input-colors, 6);
+      border: nth($select-input-borders, 6);
+      box-shadow: nth($select-input-shadows, 6);
+      transition: $global-transition;
+    }
+  }
+  &--placeholder {
+    color: nth($select-input-colors, 8);
+  }
+
+  &--option {
+    color: nth($select-input-colors, 9);
+  }
+}

@@ -1,0 +1,114 @@
+// RADIO BUTTONS
+
+// sizes
+
+$radio-button-size-base: 1rem !default;
+
+$radio-button-outer-sm-size: $radio-button-size-base * calc(14 / 16);
+$radio-button-inner-sm-size: $radio-button-size-base * calc(6 / 16);
+$radio-button-sm-font-size: $radio-button-size-base * calc(14 / 16);
+$radio-button-sm-line-height: $radio-button-size-base * calc(20 / 16);
+
+$radio-button-outer-reg-size: $radio-button-size-base * calc(18 / 16);
+$radio-button-inner-reg-size: $radio-button-size-base * calc(10 / 16);
+$radio-button-reg-font-size: $radio-button-size-base * calc(16 / 16);
+$radio-button-reg-line-height: $radio-button-size-base * calc(24 / 16);
+
+$radio-button-outer-lg-size: $radio-button-size-base * calc(24 / 16);
+$radio-button-inner-lg-size: $radio-button-size-base * calc(12 / 16);
+$radio-button-lg-font-size: $radio-button-size-base * calc(18 / 16);
+$radio-button-lg-line-height: $radio-button-size-base * calc(28 / 16);
+
+// label color
+
+$radio-button-label-color: $black;
+
+// tickbox inner dot color
+
+$radio-button-inner-color: $black;
+
+// borders
+
+$radio-button-border-radius: 16px;
+
+$radio-button-checked-reg-border: 1px solid $black;
+$radio-button-checked-hover-border: 1px solid $black;
+$radio-button-checked-focus-border: 1px solid $black;
+$radio-button-checked-active-border: 1px solid $black;
+$radio-button-checked-disabled-border: 1px solid $black;
+
+$radio-button-unchecked-reg-border: 1px solid $black;
+$radio-button-unchecked-hover-border: 1px solid $black;
+$radio-button-unchecked-focus-border: 1px solid $black;
+$radio-button-unchecked-active-border: 1px solid $black;
+$radio-button-unchecked-disabled-border: 1px solid $black;
+
+$disabled-button-border: none;
+
+$radio-button-borders: (
+  checked: (
+    // 1 --> reg
+    $radio-button-checked-reg-border,
+    // 2 --> hover
+    $radio-button-checked-hover-border,
+    // 3 --> focus
+    $radio-button-checked-focus-border,
+    // 4 --> active
+    $radio-button-checked-active-border,
+    // 5 --> disabled
+    $radio-button-checked-disabled-border,
+  ),
+  unchecked: (
+    // 1 --> reg
+    $radio-button-unchecked-reg-border,
+    // 2 --> hover
+    $radio-button-unchecked-hover-border,
+    // 3 --> focus
+    $radio-button-unchecked-focus-border,
+    // 4 --> active
+    $radio-button-unchecked-active-border,
+    // 5 --> disabled
+    $radio-button-unchecked-disabled-border,
+  ),
+);
+
+// backgrounds
+
+$radio-button-checked-reg-bg: $neutral;
+$radio-button-checked-hover-bg: $neutral;
+$radio-button-checked-focus-bg: $neutral;
+$radio-button-checked-active-bg: $neutral;
+$radio-button-checked-disabled-bg: $neutral;
+
+$radio-button-unchecked-reg-bg: $neutral;
+$radio-button-unchecked-hover-bg: $neutral;
+$radio-button-unchecked-focus-bg: $neutral;
+$radio-button-unchecked-active-bg: $neutral;
+$radio-button-unchecked-disabled-bg: $neutral;
+
+$radio-button-bg: (
+  checked: (
+    // 1 --> reg
+    $radio-button-checked-reg-bg,
+    // 2 --> hover
+    $radio-button-checked-hover-bg,
+    // 3 --> focus
+    $radio-button-checked-focus-bg,
+    // 4 --> active
+    $radio-button-checked-active-bg,
+    // 5 --> disabled
+    $radio-button-checked-disabled-bg,
+  ),
+  unchecked: (
+    // 1 --> reg
+    $radio-button-unchecked-reg-bg,
+    // 2 --> hover
+    $radio-button-unchecked-hover-bg,
+    // 3 --> focus
+    $radio-button-unchecked-focus-bg,
+    // 4 --> active
+    $radio-button-unchecked-active-bg,
+    // 5 --> disabled
+    $radio-button-unchecked-disabled-bg,
+  ),
+);

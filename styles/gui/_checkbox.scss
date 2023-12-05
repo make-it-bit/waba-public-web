@@ -1,0 +1,182 @@
+@mixin checkbox-size($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin label-size($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+.checkbox {
+  input[type="checkbox"]:checked,
+  input[type="checkbox"]:not(:checked) {
+    display: none;
+  }
+
+  color: $checkbox-label-color;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__svg {
+    // Change this if svg has different path
+    & > g > g > use {
+      fill: $black;
+    }
+  }
+
+  &-sm {
+    @extend .checkbox;
+    gap: 4px;
+  }
+
+  &-reg {
+    @extend .checkbox;
+    gap: 6px;
+  }
+
+  &-lg {
+    @extend .checkbox;
+    gap: 8px;
+  }
+
+  &__label {
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &-sm {
+      @extend .checkbox__label;
+      @include label-size($checkbox-sm-font-size, $checkbox-sm-line-height);
+    }
+
+    &-reg {
+      @extend .checkbox__label;
+      @include label-size($checkbox-reg-font-size, $checkbox-reg-line-height);
+    }
+
+    &-lg {
+      @extend .checkbox__label;
+      @include label-size($checkbox-lg-font-size, $checkbox-lg-line-height);
+    }
+  }
+
+  &__tickbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: $checkbox-border-radius;
+
+    &-sm {
+      @extend .checkbox__tickbox;
+      @include checkbox-size($checkbox-outer-sm-size);
+
+      & > div > div > svg {
+        @include checkbox-size($checkbox-inner-sm-size);
+      }
+    }
+
+    &-reg {
+      @extend .checkbox__tickbox;
+      @include checkbox-size($checkbox-outer-reg-size);
+
+      & > div > div > svg {
+        @include checkbox-size($checkbox-inner-reg-size);
+      }
+    }
+
+    &-lg {
+      @extend .checkbox__tickbox;
+      @include checkbox-size($checkbox-outer-lg-size);
+
+      & > div > div > svg {
+        @include checkbox-size($checkbox-inner-lg-size);
+      }
+    }
+  }
+
+  &__checked,
+  &__checked--default {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, checked), 1);
+      border: nth(map-get($checkbox-borders, checked), 1);
+    }
+  }
+  &__checked:hover,
+  &__checked--hover {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, checked), 2);
+      border: nth(map-get($checkbox-borders, checked), 2);
+    }
+  }
+  &__checked:focus,
+  &__checked--focus {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, checked), 3);
+      border: nth(map-get($checkbox-borders, checked), 3);
+    }
+  }
+  &__checked:active,
+  &__checked--active {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, checked), 4);
+      border: nth(map-get($checkbox-borders, checked), 4);
+    }
+  }
+  &__checked:disabled,
+  &__checked--disabled {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, checked), 5);
+      border: nth(map-get($checkbox-borders, checked), 5);
+    }
+  }
+  &__checked--error {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, checked), 6);
+      border: nth(map-get($checkbox-borders, checked), 6);
+    }
+  }
+  &__unchecked {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, unchecked), 1);
+      border: nth(map-get($checkbox-borders, unchecked), 1);
+    }
+  }
+  &__unchecked--hover,
+  &__unchecked:hover {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, unchecked), 2);
+      border: nth(map-get($checkbox-borders, unchecked), 2);
+    }
+  }
+  &__unchecked--focus,
+  &__unchecked:focus-visible {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, unchecked), 3);
+      border: nth(map-get($checkbox-borders, unchecked), 3);
+    }
+  }
+  &__unchecked--active,
+  &__unchecked:active {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, unchecked), 4);
+      border: nth(map-get($checkbox-borders, unchecked), 4);
+    }
+  }
+  &__unchecked--disabled,
+  &__unchecked:disabled {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, unchecked), 5);
+      border: nth(map-get($checkbox-borders, unchecked), 5);
+    }
+  }
+  &__unchecked--error {
+    & > div {
+      background-color: nth(map-get($checkbox-bg, unchecked), 6);
+      border: nth(map-get($checkbox-borders, unchecked), 6);
+    }
+  }
+}

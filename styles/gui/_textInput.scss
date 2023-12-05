@@ -1,0 +1,170 @@
+@mixin input-size($padding-y, $padding-x, $font-size, $line-height) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+@mixin label-size($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+.input {
+  &--placeholder {
+    color: nth($text-input-colors, 8);
+  }
+
+  &-xs {
+    @extend .input;
+    @include input-size(
+      $text-input-xs-padding-y,
+      $text-input-xs-padding-x,
+      $text-input-xs-font-size,
+      $text-input-xs-line-height
+    );
+    border-radius: $text-input-sm-border-radius;
+    &__label {
+      @include label-size($text-input-xs-font-size, $text-input-xs-line-height);
+      color: nth($text-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &-sm {
+    @extend .input;
+    @include input-size(
+      $text-input-sm-padding-y,
+      $text-input-sm-padding-x,
+      $text-input-sm-font-size,
+      $text-input-sm-line-height
+    );
+    border-radius: $text-input-sm-border-radius;
+    &__label {
+      @include label-size($text-input-sm-font-size, $text-input-sm-line-height);
+      color: nth($text-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &-reg {
+    @extend .input;
+    @include input-size(
+      $text-input-reg-padding-y,
+      $text-input-reg-padding-x,
+      $text-input-reg-font-size,
+      $text-input-reg-line-height
+    );
+    border-radius: $text-input-reg-border-radius;
+
+    &__label {
+      @include label-size(
+        $text-input-reg-font-size,
+        $text-input-reg-line-height
+      );
+      color: nth($text-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  &-lg {
+    @extend .input;
+    @include input-size(
+      $text-input-lg-padding-y,
+      $text-input-lg-padding-x,
+      $text-input-lg-font-size,
+      $text-input-lg-line-height
+    );
+    border-radius: $text-input-lg-border-radius;
+
+    &__label {
+      @include label-size($text-input-lg-font-size, $text-input-lg-line-height);
+      color: nth($text-input-colors, 7);
+      text-align: left;
+    }
+  }
+
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: nth($text-input-colors, 1);
+  border: nth($text-input-borders, 1);
+  box-shadow: nth($text-input-shadows, 1);
+  &:hover,
+  &--hover {
+    background-color: nth($text-input-colors, 2);
+    border: nth($text-input-borders, 2);
+    box-shadow: nth($text-input-shadows, 2);
+    transition: $global-transition;
+  }
+  &:focus,
+  &--focus {
+    background-color: nth($text-input-colors, 3);
+    border: nth($text-input-borders, 3);
+    box-shadow: nth($text-input-shadows, 3);
+    transition: $global-transition;
+  }
+  &:active,
+  &--active {
+    background-color: nth($text-input-colors, 4);
+    border: nth($text-input-borders, 4);
+    box-shadow: nth($text-input-shadows, 4);
+    transition: $global-transition;
+  }
+  &--error {
+    background-color: nth($text-input-colors, 5);
+    border: nth($text-input-borders, 5);
+    box-shadow: nth($text-input-shadows, 5);
+    transition: $global-transition;
+  }
+  &--disabled {
+    background-color: nth($text-input-colors, 6);
+    border: nth($text-input-borders, 6);
+    box-shadow: nth($text-input-shadows, 6);
+    transition: $global-transition;
+    &:hover {
+      background-color: nth($text-input-colors, 6);
+      border: nth($text-input-borders, 6);
+      box-shadow: nth($text-input-shadows, 6);
+      transition: $global-transition;
+    }
+  }
+}
+
+.input-unit-sm {
+  @include input-size(
+    $text-input-sm-padding-y,
+    $text-input-sm-padding-x,
+    $text-input-sm-font-size,
+    $text-input-sm-line-height
+  );
+  border: nth($text-input-borders, 1);
+  border-left: none;
+  border-top-right-radius: $text-input-sm-border-radius;
+  border-bottom-right-radius: $text-input-sm-border-radius;
+}
+
+.input-unit-reg {
+  @include input-size(
+    $text-input-reg-padding-y,
+    $text-input-reg-padding-x,
+    $text-input-reg-font-size,
+    $text-input-reg-line-height
+  );
+  border: nth($text-input-borders, 1);
+  border-left: none;
+  border-top-right-radius: $text-input-reg-border-radius;
+  border-bottom-right-radius: $text-input-reg-border-radius;
+}
+
+.input-unit-lg {
+  @include input-size(
+    $text-input-lg-padding-y,
+    $text-input-lg-padding-x,
+    $text-input-lg-font-size,
+    $text-input-lg-line-height
+  );
+  border: nth($text-input-borders, 1);
+  border-left: none;
+  border-top-right-radius: $text-input-lg-border-radius;
+  border-bottom-right-radius: $text-input-lg-border-radius;
+}

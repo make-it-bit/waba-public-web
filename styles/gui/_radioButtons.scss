@@ -1,0 +1,188 @@
+@mixin radio-button-size($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin label-size($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+.radioButton {
+  input[type="radio"]:checked,
+  input[type="radio"]:not(:checked) {
+    display: none;
+  }
+  color: $radio-button-label-color;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &-sm {
+    @extend .radioButton;
+    gap: 4px;
+  }
+
+  &-reg {
+    @extend .radioButton;
+    gap: 6px;
+  }
+
+  &-lg {
+    @extend .radioButton;
+    gap: 8px;
+  }
+
+  &__label {
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &-sm {
+      @extend .radioButton__label;
+      @include label-size(
+        $radio-button-sm-font-size,
+        $radio-button-sm-line-height
+      );
+    }
+    &-reg {
+      @extend .radioButton__label;
+      @include label-size(
+        $radio-button-reg-font-size,
+        $radio-button-reg-line-height
+      );
+    }
+    &-lg {
+      @extend .radioButton__label;
+      @include label-size(
+        $radio-button-lg-font-size,
+        $radio-button-lg-line-height
+      );
+    }
+  }
+
+  &__tickbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: $radio-button-border-radius;
+
+    &-sm {
+      @extend .radioButton__tickbox;
+      @include radio-button-size($radio-button-outer-sm-size);
+
+      & > div > div > svg {
+        @include radio-button-size($radio-button-inner-sm-size);
+      }
+    }
+
+    &-reg {
+      @extend .radioButton__tickbox;
+      @include radio-button-size($radio-button-outer-reg-size);
+
+      & > div > div > svg {
+        @include radio-button-size($radio-button-inner-reg-size);
+      }
+    }
+
+    &-lg {
+      @extend .radioButton__tickbox;
+      @include radio-button-size($radio-button-outer-lg-size);
+
+      & > div > div > svg {
+        @include radio-button-size($radio-button-inner-lg-size);
+      }
+    }
+
+    &__inner {
+      background-color: $radio-button-inner-color;
+      border-radius: 50%;
+      &-sm {
+        @extend .radioButton__tickbox__inner;
+        @include radio-button-size($radio-button-inner-sm-size);
+      }
+
+      &-reg {
+        @extend .radioButton__tickbox__inner;
+        @include radio-button-size($radio-button-inner-reg-size);
+      }
+
+      &-lg {
+        @extend .radioButton__tickbox__inner;
+        @include radio-button-size($radio-button-inner-lg-size);
+      }
+    }
+  }
+  &__checked,
+  &__checked--default {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, checked), 1);
+      border: nth(map-get($radio-button-borders, checked), 1);
+    }
+  }
+  &__checked:hover,
+  &__checked--hover {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, checked), 2);
+      border: nth(map-get($radio-button-borders, checked), 2);
+    }
+  }
+  &__checked:focus-visible,
+  &__checked--focus {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, checked), 3);
+      border: nth(map-get($radio-button-borders, checked), 3);
+    }
+  }
+  &__checked:active,
+  &__checked--active {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, checked), 4);
+      border: nth(map-get($radio-button-borders, checked), 4);
+    }
+  }
+  &__checked:disabled,
+  &__checked--disabled {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, checked), 5);
+      border: nth(map-get($radio-button-borders, checked), 5);
+    }
+  }
+  &__unchecked {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, unchecked), 1);
+      border: nth(map-get($radio-button-borders, unchecked), 1);
+    }
+  }
+
+  &__unchecked--hover,
+  &___unchecked:hover {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, unchecked), 2);
+      border: nth(map-get($radio-button-borders, unchecked), 2);
+    }
+  }
+  &__unchecked--focus,
+  &__unchecked:focus-visible {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, unchecked), 3);
+      border: nth(map-get($radio-button-borders, unchecked), 3);
+    }
+  }
+  &__unchecked--active,
+  &__unchecked:active {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, unchecked), 4);
+      border: nth(map-get($radio-button-borders, unchecked), 4);
+    }
+  }
+  &__unchecked--disabled,
+  &__unchecked:disabled {
+    & > div {
+      background-color: nth(map-get($radio-button-bg, unchecked), 5);
+      border: nth(map-get($radio-button-borders, unchecked), 5);
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.caretDown {
+  position: absolute;
+  & div > svg > g > g {
+    fill: $black;
+  }
+  &Sm {
+    width: 16px;
+    height: 16px;
+    right: 8px;
+    top: 9px;
+
+    & > div > svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &Reg {
+    height: 20px;
+    width: 20px;
+    right: 12px;
+    top: 9px;
+
+    & > div > svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  &Lg {
+    height: 24px;
+    width: 24px;
+    right: 10px;
+    top: 11px;
+
+    & > div > svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+}
