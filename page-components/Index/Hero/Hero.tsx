@@ -8,20 +8,23 @@ import { Tag } from "../../../components";
 
 import { Button } from "../../../gui-components/client";
 
-import { background, video } from "./_hero.module.scss";
+import styles from "./_hero.module.scss";
 
 const Hero = () => {
   const router = useRouter();
 
   return (
     <div
-      className={classNames("relative h-screen overflow-hidden", background)}
+      className={classNames(
+        "relative h-screen overflow-hidden",
+        styles.background
+      )}
     >
       <video
         autoPlay
         muted
         loop
-        className={classNames("absolute top-0 left-216", video)}
+        className={classNames("absolute top-0 left-216", styles.video)}
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
