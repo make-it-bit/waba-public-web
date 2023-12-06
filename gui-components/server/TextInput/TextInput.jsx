@@ -2,35 +2,38 @@ import React from "react";
 import classNames from "classnames";
 
 const TextInput = ({
-  name,
-  label = undefined,
-  size = "reg",
-  placeholder = "",
   type = "text",
+  theme = "dark",
+  name,
   value,
+  /* size = "reg", */
+  label = undefined,
+  placeholder = "",
   disabled = false,
   errorMessage = undefined,
 }) => {
-  const sizes = {
+  const themes = {
+    dark: "bg-transparent border border-black-100 hover:border-black-40 focus:border-none focus:outline focus:outline-1 focus:outline-purple-100 focus:drop-shadow-text-input disabled:border-black-20 placeholder-black-60 hover:placeholder-black-80 focus:text-black-100 disabled:placeholder-black-40",
+    light:
+      "bg-transparent border border-white-100 hover:border-white-40 focus:border-none focus:outline focus:outline-1 focus:outline-purple-100 focus:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus:text-white-100 disabled:placeholder-white-40",
+  }[theme];
+
+  /* const sizes = {
     sm: "input-sm",
     reg: "input-reg",
     lg: "input-lg",
-  }[size];
+  }[size]; */
+
   return (
     <>
-      {label && (
-        <label className={`${sizes}__label word-no-break`} htmlFor={name}>
-          {label}
-        </label>
-      )}
+      {label && <label htmlFor={name}>{label}</label>}
       <div className="flex">
         <input
           className={classNames(
-            "width-100",
-            sizes,
-            errorMessage && "input--error",
-            disabled && "input--disabled",
-            "input--placeholder"
+            /* sizes, */
+            themes,
+            errorMessage && "border-signal-red text-black-60",
+            "w-100 px-16 py-6.5"
           )}
           type={type}
           id={name}

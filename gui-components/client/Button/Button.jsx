@@ -69,7 +69,7 @@ const Button = ({
         blockMaxWidthBreakpointMap,
         btnBlock && "block",
         svg && "flex items-center gap-8",
-        "relative px-24 p-8"
+        "relative justify-center px-24 p-8"
       )}
       onClick={onClick}
       type={type}

@@ -2,9 +2,10 @@
 
 module.exports = {
   content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./gui-components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     container: {
@@ -16,6 +17,7 @@ module.exports = {
         0: "0",
         2: "2px",
         4: "4px",
+        6.5: "6.5px",
         8: "8px",
         12: "12px",
         16: "16px",
@@ -70,6 +72,9 @@ module.exports = {
           red: "rgb(255, 54, 114)",
         },
       },
+    },
+    dropShadow: {
+      "text-input": "0 0px 8px rgba(65, 28, 113, 1)",
     },
     plugins: [],
   },
