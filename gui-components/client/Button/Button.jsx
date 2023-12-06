@@ -11,7 +11,7 @@ const Button = ({
   /* size = "reg", */
   onClick,
   disabled = false,
-  svg,
+  svg = true,
   inlineMaxWidthBreakpoint = undefined,
   blockMaxWidthBreakpoint = undefined,
   btnBlock = false,

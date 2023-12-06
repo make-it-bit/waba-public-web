@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import { padding } from "./_textInput.module.scss";
+
 const TextInput = ({
   type = "text",
   theme = "dark",
@@ -33,7 +35,8 @@ const TextInput = ({
             /* sizes, */
             themes,
             errorMessage && "border-signal-red text-black-60",
-            "w-100 px-16 py-6.5"
+            "w-100 px-16",
+            padding
           )}
           type={type}
           id={name}

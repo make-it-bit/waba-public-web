@@ -1,0 +1,12 @@
+.background {
+  background: linear-gradient(
+    90deg,
+    #f6eff0 23.25%,
+    rgba(246, 239, 240, 0) 40.94%
+  );
+}
+
+.video {
+  mix-blend-mode: darken;
+  z-index: -1;
+}

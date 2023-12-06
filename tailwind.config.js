@@ -3,7 +3,7 @@
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./page-components/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./gui-components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -17,7 +17,6 @@ module.exports = {
         0: "0",
         2: "2px",
         4: "4px",
-        6.5: "6.5px",
         8: "8px",
         12: "12px",
         16: "16px",
@@ -26,6 +25,13 @@ module.exports = {
         40: "40px",
         48: "48px",
         56: "56px",
+        64: "64px",
+        88: "88px",
+        104: "104px",
+        144: "144px",
+        160: "160px",
+        216: "216px",
+        248: "248px",
       },
       colors: {
         transparent: "transparent",
@@ -75,6 +81,18 @@ module.exports = {
     },
     dropShadow: {
       "text-input": "0 0px 8px rgba(65, 28, 113, 1)",
+    },
+    flexGrow: {
+      0: 0,
+      1: 1,
+      2: 2,
+    },
+    borderRadius: {
+      40: "40px",
+    },
+    translate: {
+      "neg-1/2": "-50%",
+      "1/2": "50%",
     },
     plugins: [],
   },
