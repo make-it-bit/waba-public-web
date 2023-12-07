@@ -13,6 +13,16 @@ module.exports = {
       padding: "0.75rem",
     },
     extend: {
+      fontFamily: {
+        rufina: '"Rufina"',
+      },
+      lineHeight: {
+        base: "30px",
+        xs: "19px",
+        sm: "27px",
+        xl: "26px",
+        "7xl": "86px",
+      },
       spacing: {
         0: "0",
         2: "2px",
@@ -94,15 +104,6 @@ module.exports = {
     translate: {
       "neg-1/2": "-50%",
       "1/2": "50%",
-    },
-    fontFamily: {
-      rufina: '"Rufina"',
-    },
-    lineHeight: {
-      base: "30px",
-      xs: "19px",
-      sm: "27px",
-      xl: "26px",
     },
     plugins: [],
   },
