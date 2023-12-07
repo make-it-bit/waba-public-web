@@ -4,10 +4,12 @@
     #f6eff0 23.25%,
     rgba(246, 239, 240, 0) 40.94%
   );
-}
 
-.video {
-  mix-blend-mode: darken;
-  object-fit: cover;
-  z-index: -1;
+  @media (max-width: 1024px) {
+    background: linear-gradient(
+      180deg,
+      #f6eff0 61.5%,
+      rgba(246, 239, 240, 0) 64.66%
+    );
+  }
 }

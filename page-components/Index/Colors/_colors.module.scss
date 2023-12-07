@@ -1,0 +1,10 @@
+.textBackground {
+  background: radial-gradient(
+    51.56% 188.16% at 50% 50%,
+    #3aacff 0%,
+    #ede4f3 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
