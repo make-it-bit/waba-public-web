@@ -5,7 +5,7 @@ const Button = ({
   CTA,
   type = "button",
   style = "primary",
-  /* size = "reg", */
+  size = "reg",
   disabled = false,
   inlineMaxWidthBreakpoint = undefined,
   blockMaxWidthBreakpoint = undefined,
@@ -22,7 +22,7 @@ const Button = ({
       "text-white-100 disabled:text-white-60 bg-transparent hover:bg-white-10 active:bg-white-5 disabled:bg-transparent focus:bg-transparent focus:outline focus:outline-2 focus:outline-white-100",
   }[style];
 
-  /* const sizeMap = { sm: "btn-sm", lg: "btn-lg", reg: "btn-reg" }[size]; */
+  const sizeMap = { sm: "px-16 py-[1px]", reg: "px-24 py-8" }[size];
 
   const inlineMaxWidthBreakpointMap = {
     xs: "btn-inline-block-xs",
@@ -44,11 +44,11 @@ const Button = ({
     <button
       className={classNames(
         styleMap,
-        /* sizeMap, */
+        sizeMap,
         inlineMaxWidthBreakpointMap,
         blockMaxWidthBreakpointMap,
         btnBlock && "block",
-        "relative px-24 py-8"
+        "relative justify-center text-base leading-base"
       )}
       type={type}
       disabled={disabled}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import { PromoBar, Navbar } from "../page-components";
 
 import "./_globals.scss";
@@ -12,12 +12,17 @@ export const metadata = {
   description: "Waba",
 };
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({
+  variable: "--dmSans-font",
+  subsets: ["latin"],
+  display: "swap",
+  style: "normal",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={dmSans.className}>
         <div className="sticky top-0 z-10">
           <PromoBar />
           <Navbar />

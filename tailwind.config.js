@@ -26,6 +26,7 @@ module.exports = {
         48: "48px",
         56: "56px",
         64: "64px",
+        72: "72px",
         88: "88px",
         104: "104px",
         144: "144px",
@@ -93,6 +94,15 @@ module.exports = {
     translate: {
       "neg-1/2": "-50%",
       "1/2": "50%",
+    },
+    fontFamily: {
+      rufina: '"Rufina"',
+    },
+    lineHeight: {
+      base: "30px",
+      xs: "19px",
+      sm: "27px",
+      xl: "26px",
     },
     plugins: [],
   },

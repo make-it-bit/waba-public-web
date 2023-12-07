@@ -32,7 +32,9 @@ const Hero = () => {
         <div className="grid grid-cols-12">
           <div className="col-start-1 col-end-7 flex flex-col mt-248 mb-104">
             <div>
-              <h1 className="text-7xl mb-32">Discover Liberating Beauty</h1>
+              <h1 className="text-7xl mb-32 font-rufina">
+                Discover Liberating Beauty
+              </h1>
               <h2 className="text-base ">
                 Our innovative light-based device is more than just a skincare
                 solution. It's a gateway to a freer, more confident you.

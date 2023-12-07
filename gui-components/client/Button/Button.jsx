@@ -8,7 +8,7 @@ const Button = ({
   CTA,
   type = "button",
   style = "primary",
-  /* size = "reg", */
+  size = "reg",
   onClick,
   disabled = false,
   svg = true,
@@ -42,7 +42,7 @@ const Button = ({
     buttonCaret = "icons/caret-right-white-60.svg";
   }
 
-  /* const sizeMap = { sm: "btn-sm", lg: "btn-lg", reg: "btn-reg" }[size]; */
+  const sizeMap = { sm: "px-16 py-[1px]", reg: "px-24 py-8" }[size];
 
   const inlineMaxWidthBreakpointMap = {
     xs: "btn-inline-block-xs",
@@ -64,12 +64,12 @@ const Button = ({
     <button
       className={classNames(
         styleMap,
-        /* sizeMap, */
+        sizeMap,
         inlineMaxWidthBreakpointMap,
         blockMaxWidthBreakpointMap,
         btnBlock && "block",
         svg && "flex items-center gap-8",
-        "relative justify-center px-24 p-8"
+        "relative justify-center text-base leading-base"
       )}
       onClick={onClick}
       type={type}
