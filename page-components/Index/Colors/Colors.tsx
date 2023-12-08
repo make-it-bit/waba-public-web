@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import classNames from "classnames";
 
 import { Button } from "../../../gui-components/client";
@@ -9,6 +10,7 @@ import { Button } from "../../../gui-components/client";
 import styles from "./_colors.module.scss";
 
 const Colors = () => {
+  const [activeColor, setActiveColor] = useState("blue");
   const router = useRouter();
 
   return (
@@ -20,26 +22,26 @@ const Colors = () => {
           </h1>
         </div>
         <div className="col-start-1 col-span-4 flex flex-col justify-between text-black-100">
-          <div className="mb-48">
+          <div className="mb-48" onClick={() => setActiveColor("blue")}>
             <p className="text-sm leading-sm">Blue head</p>
             <p className="font-rufina text-xl leading-xl">
               Removes skin imperfections - spots, inflammation and blemishes
             </p>
           </div>
-          <div className="mb-48">
+          <div className="mb-48" onClick={() => setActiveColor("red")}>
             <p className="text-sm text-sm leading-sm">Red head</p>
             <p className="font-rufina text-xl leading-xl">
               Reduces fine lines + wrinkles and firm the skin
             </p>
           </div>
-          <div>
+          <div onClick={() => setActiveColor("infrared")}>
             <p className="text-sm text-sm leading-sm">Infrared head</p>
             <p className="font-rufina text-xl leading-xl">
               Revitalise and balance skin tone
             </p>
           </div>
         </div>
-        <div className="col-start-5 col-span-4 flex justify-center text-center">
+        <div className="relative col-start-5 col-span-4 flex justify-center text-center">
           <p
             className={classNames(
               "text-8xl leading-8xl mt-56",
@@ -48,6 +50,27 @@ const Colors = () => {
           >
             Blue head
           </p>
+          <Image
+            src={`/${activeColor}-lights.svg`}
+            alt="blue lights"
+            width={287}
+            height={574}
+            className="absolute top-0 left-1/2 translate-x-neg-1/2"
+          />
+          {/* <Image
+            src="/device-head-blue.png"
+            alt="device's blue head"
+            width={109}
+            height={78}
+            className="absolute top-[139px] left-[186px]"
+          />
+          <Image
+            src="/device-body.png"
+            alt="device's body"
+            width={96.98}
+            height={407.24}
+            className="absolute top-[217px] left-[186px]"
+          /> */}
         </div>
         <div className="col-start-9 col-span-5 flex flex-col justify-between">
           <p className="text-sm leading-sm mb-56">

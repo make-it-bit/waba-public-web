@@ -20,17 +20,17 @@ const Hero = () => {
         styles.background
       )}
     >
+      <video
+        autoPlay
+        muted
+        loop
+        className="absolute lg:top-0 top-144 lg:left-248 left-0 w-full h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1]"
+      >
+        <source src="/hero-video.mp4" type="video/mp4" />
+      </video>
       <div className="container">
-        <video
-          autoPlay
-          muted
-          loop
-          className="absolute lg:top-0 top-400 lg:left-248 left-0 w-full h-full object-cover mix-blend-darken lg:z-[-1]"
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
         <div className="lg:grid grid-cols-12">
-          <div className="col-start-1 col-end-7 flex flex-col lg:items-start items-center lg:text-left text-center lg:mt-248 mt-56 mb-104">
+          <div className="col-start-1 xl:col-span-6 col-span-4 flex flex-col lg:items-start items-center lg:text-left text-center lg:mt-248 mt-56 lg:mb-104">
             <div>
               <h1 className="font-rufina lg:text-7xl text-5xl lg:leading-7xl leading-5xl mb-32">
                 Discover Liberating Beauty
