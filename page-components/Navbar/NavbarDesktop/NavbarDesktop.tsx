@@ -30,7 +30,7 @@ const NavbarDesktop = () => {
           </div>
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
             <Image
-              src="/logos/logo.svg"
+              src="/logos/logo-black.svg"
               alt="waba logo"
               width={96}
               height={24}

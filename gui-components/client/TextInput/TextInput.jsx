@@ -32,13 +32,13 @@ const TextInput = ({
   return (
     <>
       {label && <label htmlFor={name}>{label}</label>}
-      <div className="flex">
+      <div className="flex grow-1">
         <input
           className={classNames(
             /* sizes, */
             themes,
             errorMessage && "border-signal-red text-black-60",
-            "w-100 px-16",
+            "w-full px-16 text-sm leading-sm",
             padding
           )}
           type={type}
