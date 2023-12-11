@@ -16,12 +16,12 @@ const MainInfo = () => {
       <div className="grid grid-cols-12 gap-y-24">
         <div className="col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[526px]">
-            <Image
+            {/* <Image
               src="/device.png"
               fill
               className="absolute rotate-90 w-full h-full object-contain"
               alt="device"
-            />
+            /> */}
             <div className="absolute bg-[#f3ecee] w-full h-full top-0 left-0 z-[-1]"></div>
           </div>
         </div>

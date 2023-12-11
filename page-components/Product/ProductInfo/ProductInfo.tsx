@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import classNames from "classnames";
 
 import Features from "./Features/Features";
 import Science from "./Science/Science";
@@ -22,7 +23,7 @@ const ProductInfo = () => {
   ];
   const navbarPages = [
     <Features key={0} />,
-    <Science key={1} />,
+    <Science key={1} background={styles.background1} />,
     <Included key={2} />,
     <Results key={3} />,
     <Specifications key={4} />,
@@ -34,7 +35,7 @@ const ProductInfo = () => {
   };
 
   return (
-    <div className={backgrounds[pageIndex]}>
+    <div className={classNames("relative", backgrounds[pageIndex])}>
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="col-start-3 col-span-8">

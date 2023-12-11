@@ -12,3 +12,5 @@ export { default as CTABlock } from "./Index/CTABlock";
 
 export { default as MainInfo } from "./Product/MainInfo";
 export { default as ProductInfo } from "./Product/ProductInfo";
+export { default as Warranty } from "./Product/Warranty";
+export { default as FAQ } from "./Product/FAQ";

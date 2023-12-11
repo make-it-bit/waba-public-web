@@ -1,14 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import classNames from "classnames";
 
 import { TextInput, Button } from "../../gui-components/client";
 
-const Footer = () => {
+const Footer = ({ mt = null }) => {
   return (
     <div className="bg-black-100">
       <div className="container">
-        <div className="grid grid-cols-12 mt-448 pt-224">
+        <div className={classNames("grid grid-cols-12 pt-224", mt && "mt-448")}>
           <div className="col-start-5 col-span-4 mb-184">
             <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
               <Image
