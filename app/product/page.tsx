@@ -1,9 +1,16 @@
-import React from 'react';
+import React from "react";
 
-type Props = {};
+export const dynamic = "force-static";
 
-const Page = (props: Props) => {
-  return <div>page</div>;
+import { MainInfo, ProductInfo } from "../../page-components";
+
+const Product = () => {
+  return (
+    <>
+      <MainInfo />
+      <ProductInfo />
+    </>
+  );
 };
 
-export default Page;
+export default Product;

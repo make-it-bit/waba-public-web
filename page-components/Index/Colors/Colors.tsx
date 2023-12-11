@@ -27,19 +27,28 @@ const Colors = () => {
           </h1>
         </div>
         <div className="col-start-1 col-span-4 flex flex-col justify-between text-black-100">
-          <div className="mb-48" onClick={() => setActiveColor("Blue")}>
+          <div
+            className="mb-48 cursor-pointer"
+            onClick={() => setActiveColor("Blue")}
+          >
             <p className="text-sm leading-sm">Blue head</p>
             <p className="font-rufina text-xl leading-xl">
               Removes skin imperfections - spots, inflammation and blemishes
             </p>
           </div>
-          <div className="mb-48" onClick={() => setActiveColor("Red")}>
+          <div
+            className="mb-48 cursor-pointer"
+            onClick={() => setActiveColor("Red")}
+          >
             <p className="text-sm text-sm leading-sm">Red head</p>
             <p className="font-rufina text-xl leading-xl">
               Reduces fine lines + wrinkles and firm the skin
             </p>
           </div>
-          <div onClick={() => setActiveColor("Infrared")}>
+          <div
+            className="cursor-pointer"
+            onClick={() => setActiveColor("Infrared")}
+          >
             <p className="text-sm text-sm leading-sm">Infrared head</p>
             <p className="font-rufina text-xl leading-xl">
               Revitalise and balance skin tone

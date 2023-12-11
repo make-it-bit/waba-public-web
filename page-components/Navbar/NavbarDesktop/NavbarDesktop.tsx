@@ -15,7 +15,7 @@ const NavbarDesktop = () => {
       <div className="container">
         <div className="relative flex justify-between items-center py-32 gap-8">
           <div className="flex items-center xl:gap-64 gap-32">
-            <Link href="#" className="text-sm leading-sm text-black-100">
+            <Link href="/product" className="text-sm leading-sm text-black-100">
               Product
             </Link>
             <Link href="#" className="text-sm leading-sm text-black-100">

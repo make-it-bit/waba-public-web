@@ -38,7 +38,10 @@ const Footer = () => {
           <div className="col-start-2 col-span-10">
             <div className="flex flex-col gap-32">
               <div className="flex justify-center gap-64">
-                <Link href="#" className="text-sm leading-sm text-white-100">
+                <Link
+                  href="/product"
+                  className="text-sm leading-sm text-white-100"
+                >
                   Product
                 </Link>
                 <Link href="#" className="text-sm leading-sm text-white-100">

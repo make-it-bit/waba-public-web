@@ -45,7 +45,7 @@ const NavbarMobile = () => {
         </div>
         <div className="flex flex-col items-center mt-72 gap-48">
           <Link
-            href="#"
+            href="/product"
             className="font-rufina text-xl leading-xl text-white-100"
           >
             Product
