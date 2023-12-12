@@ -21,3 +21,5 @@ export { default as ResultsTestimonials } from "./Results/ResultsTestimonials";
 export { default as ResultsWarranty } from "./Results/ResultsWarranty";
 
 export { default as FaqShipping } from "./FAQ/FaqShipping";
+
+export { default as BusinessCareersHero } from "./BusinessCareersHero";

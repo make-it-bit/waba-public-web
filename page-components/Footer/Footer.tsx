@@ -45,7 +45,7 @@ const Footer = ({ small = false }) => {
           )}
           <div className="col-start-2 col-span-10">
             <div className="flex flex-col gap-32">
-              <div className="flex justify-center gap-64">
+              <div className="flex justify-center items-center gap-64 text-center">
                 <Link
                   href="/product"
                   className="text-sm leading-sm text-white-100"
@@ -64,11 +64,20 @@ const Footer = ({ small = false }) => {
                 <Link href="#" className="text-sm leading-sm text-white-100">
                   About Us
                 </Link>
-                <Link href="/faq" className="text-sm leading-sm text-white-100">
-                  FAQ
-                </Link>
                 <Link href="#" className="text-sm leading-sm text-white-100">
                   Blog
+                </Link>
+                <Link
+                  href="/careers-at-waba"
+                  className="text-sm leading-sm text-white-100"
+                >
+                  Careers
+                </Link>
+                <Link
+                  href="/waba-for-business"
+                  className="text-sm leading-sm text-white-100"
+                >
+                  WABA for Business
                 </Link>
               </div>
               <div className="border border-white-100"></div>
