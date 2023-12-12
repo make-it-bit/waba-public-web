@@ -10,7 +10,7 @@ const Warranty = () => {
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="col-start-1 col-span-12">
-            <div className="relative flex items-center w-full min-h-[577px]">
+            <div className="relative flex items-center w-full min-h-[577px] z-10">
               <Image
                 src="/product-warranty-img.png"
                 fill

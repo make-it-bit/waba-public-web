@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import styles from "./_testimonials.module.scss";
 import { TestimonialCard } from "../../../components";
+
+import styles from "./_testimonials.module.scss";
 
 const Testimonials = () => {
   return (

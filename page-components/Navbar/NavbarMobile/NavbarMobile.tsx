@@ -57,7 +57,7 @@ const NavbarMobile = () => {
             The Science Behind
           </Link>
           <Link
-            href="#"
+            href="/results"
             className="font-rufina text-xl leading-xl text-white-100"
           >
             Results

@@ -5,37 +5,44 @@ import classNames from "classnames";
 
 import { TextInput, Button } from "../../gui-components/client";
 
-const Footer = ({ mt = null }) => {
+const Footer = ({ small = false }) => {
   return (
     <div className="bg-black-100">
       <div className="container">
-        <div className={classNames("grid grid-cols-12 pt-224", mt && "mt-448")}>
-          <div className="col-start-5 col-span-4 mb-184">
-            <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
-              <Image
-                src="/icons/email-white.svg"
-                alt="email"
-                width={56}
-                height={56}
-              />
-              <h1 className="font-rufina text-4xl leading-4xl">
-                Keep up with the latest news from WABA
-              </h1>
-              <p className="text-sm leading-sm">
-                No-SPAM Guarantee. Just useful insights on your skincare.
-              </p>
+        <div
+          className={classNames(
+            "grid grid-cols-12",
+            small ? "pt-48" : "pt-224 mt-448"
+          )}
+        >
+          {!small && (
+            <div className="col-start-5 col-span-4 mb-184">
+              <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
+                <Image
+                  src="/icons/email-white.svg"
+                  alt="email"
+                  width={56}
+                  height={56}
+                />
+                <h1 className="font-rufina text-4xl leading-4xl">
+                  Keep up with the latest news from WABA
+                </h1>
+                <p className="text-sm leading-sm">
+                  No-SPAM Guarantee. Just useful insights on your skincare.
+                </p>
+              </div>
+              <div className="flex gap-8">
+                <TextInput
+                  theme="light"
+                  name="footer-email"
+                  value=""
+                  placeholder="Enter your email"
+                  onChange={() => {}}
+                />
+                <Button CTA="Subscribe" onClick={() => {}} svg />
+              </div>
             </div>
-            <div className="flex gap-8">
-              <TextInput
-                theme="light"
-                name="footer-email"
-                value=""
-                placeholder="Enter your email"
-                onChange={() => {}}
-              />
-              <Button CTA="Subscribe" onClick={() => {}} svg />
-            </div>
-          </div>
+          )}
           <div className="col-start-2 col-span-10">
             <div className="flex flex-col gap-32">
               <div className="flex justify-center gap-64">
@@ -48,7 +55,10 @@ const Footer = ({ mt = null }) => {
                 <Link href="#" className="text-sm leading-sm text-white-100">
                   The Science Behind
                 </Link>
-                <Link href="#" className="text-sm leading-sm text-white-100">
+                <Link
+                  href="/results"
+                  className="text-sm leading-sm text-white-100"
+                >
                   Results
                 </Link>
                 <Link href="#" className="text-sm leading-sm text-white-100">

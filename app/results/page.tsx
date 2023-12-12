@@ -5,28 +5,30 @@ import React from "react";
 export const dynamic = "force-static";
 
 import {
-  MainInfo,
-  ProductInfo,
-  Warranty,
-  FAQ,
+  ResultsHero,
+  Examples,
+  ResultsTestimonials,
+  ResultsWarranty,
   CTABlock,
+  PreFooterCard,
   Footer,
 } from "../../page-components";
 
 import { ScrollingBar } from "../../components";
 
-const Product = () => {
+const Results = () => {
   return (
     <>
-      <MainInfo />
-      <ProductInfo />
-      <Warranty />
-      <FAQ />
+      <ResultsHero />
+      <Examples />
+      <ResultsTestimonials />
+      <ResultsWarranty />
       <ScrollingBar />
       <CTABlock />
-      <Footer small />
+      <PreFooterCard />
+      <Footer />
     </>
   );
 };
 
-export default Product;
+export default Results;

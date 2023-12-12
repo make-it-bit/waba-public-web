@@ -21,7 +21,7 @@ const NavbarDesktop = () => {
             <Link href="#" className="text-sm leading-sm text-black-100">
               The Science Behind
             </Link>
-            <Link href="#" className="text-sm leading-sm text-black-100">
+            <Link href="/results" className="text-sm leading-sm text-black-100">
               Results
             </Link>
             <Link href="#" className="text-sm leading-sm text-black-100">

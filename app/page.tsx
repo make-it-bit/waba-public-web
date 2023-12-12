@@ -28,7 +28,7 @@ const Home = () => {
       <ScrollingBar />
       <CTABlock />
       <PreFooterCard />
-      <Footer mt />
+      <Footer />
     </>
   );
 };

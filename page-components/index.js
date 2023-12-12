@@ -14,3 +14,8 @@ export { default as MainInfo } from "./Product/MainInfo";
 export { default as ProductInfo } from "./Product/ProductInfo";
 export { default as Warranty } from "./Product/Warranty";
 export { default as FAQ } from "./Product/FAQ";
+
+export { default as ResultsHero } from "./Results/ResultsHero";
+export { default as Examples } from "./Results/Examples";
+export { default as ResultsTestimonials } from "./Results/ResultsTestimonials";
+export { default as ResultsWarranty } from "./Results/ResultsWarranty";
