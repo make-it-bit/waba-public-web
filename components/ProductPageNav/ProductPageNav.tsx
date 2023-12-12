@@ -3,9 +3,9 @@
 import React from "react";
 import classNames from "classnames";
 
-const ProductPageNav = ({ pageIndex, navbarItems, handleClick }) => {
+const ProductPageNav = ({ pageIndex, navbarItems, handleClick, justify }) => {
   return (
-    <div className="flex justify-evenly items-center mt-64">
+    <div className={classNames("flex items-center mt-64 mb-32", justify)}>
       {navbarItems.map((item, index) => (
         <p
           key={index}

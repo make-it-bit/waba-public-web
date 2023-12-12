@@ -5,7 +5,7 @@ import Image from "next/image";
 const Science = ({ background }) => {
   return (
     <>
-      <div className="grid grid-cols-12 mt-184 pb-288">
+      <div className="grid grid-cols-12 mt-152 pb-288">
         <video
           autoPlay
           muted

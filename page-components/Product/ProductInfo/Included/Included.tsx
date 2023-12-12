@@ -3,7 +3,7 @@ import React from "react";
 const Included = () => {
   return (
     <>
-      <div className="grid grid-cols-12 mt-72 pb-112">
+      <div className="grid grid-cols-12 mt-40 pb-112">
         <div className="col-start-2 col-span-4">
           <h1 className="font-rufina text-4xl leading-4xl mb-48">
             We include everything your skin needs

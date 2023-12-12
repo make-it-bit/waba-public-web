@@ -69,7 +69,7 @@ const NavbarMobile = () => {
             About Us
           </Link>
           <Link
-            href="#"
+            href="/faq"
             className="font-rufina text-xl leading-xl text-white-100"
           >
             FAQ

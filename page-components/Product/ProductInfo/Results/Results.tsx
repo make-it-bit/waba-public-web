@@ -5,7 +5,7 @@ import { TestimonialCard } from "../../../../components";
 const Results = () => {
   return (
     <>
-      <div className="grid grid-cols-12 mt-72 mb-64">
+      <div className="grid grid-cols-12 mt-40 mb-64">
         <div className="col-start-5 col-span-4 text-center">
           <h1 className="font-rufina text-4xl leading-4xl text-black-100">
             Real people, real stories, real results

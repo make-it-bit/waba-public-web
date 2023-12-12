@@ -37,6 +37,7 @@ const FAQ = () => {
                 "Safety",
               ]}
               handleClick={handleClick}
+              justify="justify-evenly"
             />
           </div>
         </div>

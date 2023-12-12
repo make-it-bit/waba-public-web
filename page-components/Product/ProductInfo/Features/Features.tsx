@@ -13,7 +13,7 @@ const FeatureCard = ({ icon, title, description }) => {
 
 const Features = () => {
   return (
-    <div className="grid grid-cols-3 gap-x-96 gap-y-64 mt-64 mb-80">
+    <div className="grid grid-cols-3 gap-x-96 gap-y-64 mt-32 mb-80">
       <FeatureCard
         icon="/icons/swivel.svg"
         title="90-degree swivelling head"

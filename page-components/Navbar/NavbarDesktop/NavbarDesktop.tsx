@@ -37,7 +37,7 @@ const NavbarDesktop = () => {
             />
           </Link>
           <div className="flex items-center gap-64">
-            <Link href="#" className="text-sm leading-sm text-black-100">
+            <Link href="/faq" className="text-sm leading-sm text-black-100">
               FAQ
             </Link>
             <Link href="#" className="text-sm leading-sm text-black-100">

@@ -49,6 +49,7 @@ const ProductInfo = () => {
                 "Technical specifications",
               ]}
               handleClick={handleClick}
+              justify="justify-evenly"
             />
           </div>
         </div>
