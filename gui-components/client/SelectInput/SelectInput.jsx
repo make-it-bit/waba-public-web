@@ -4,7 +4,12 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
-import { caretDownSm, caretDownReg, caretDownLg, caretDown } from "./_selectInput.module.scss";
+import {
+  caretDownSm,
+  caretDownReg,
+  caretDownLg,
+  caretDown,
+} from "./_selectInput.module.scss";
 
 const SelectInput = ({
   name,
@@ -66,7 +71,11 @@ const SelectInput = ({
           ))}
         </select>
         <ReactSVG
-          className={classNames(svgSizes, caretDown, "flex justify-center items-center")}
+          className={classNames(
+            svgSizes,
+            caretDown,
+            "flex justify-center items-center"
+          )}
           src="/caret-down.svg"
           beforeInjection={(svg) => {
             svg.classList.add("block");

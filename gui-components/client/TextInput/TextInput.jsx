@@ -13,8 +13,8 @@ const TextInput = ({
   /* size = "reg", */
   label = undefined,
   placeholder = "",
-  onChange,
   disabled = false,
+  onChange,
   errorMessage = undefined,
 }) => {
   const themes = {
@@ -45,8 +45,8 @@ const TextInput = ({
           id={name}
           name={name}
           value={value}
-          disabled={disabled}
           placeholder={placeholder}
+          disabled={disabled}
           onChange={onChange}
         />
       </div>

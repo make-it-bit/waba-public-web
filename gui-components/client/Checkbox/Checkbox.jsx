@@ -19,11 +19,19 @@ const Checkbox = ({
       <label
         className={classNames(
           `checkbox-${size}`,
-          errorMessage && (value ? `checkbox__checked--error` : "checkbox__unchecked--error"),
+          errorMessage &&
+            (value ? `checkbox__checked--error` : "checkbox__unchecked--error"),
           value ? `checkbox__checked` : "checkbox__unchecked"
         )}
       >
-        <input type="checkbox" name={name} checked={value} id={name} disabled={disabled} onChange={onChange} />
+        <input
+          type="checkbox"
+          name={name}
+          checked={value}
+          id={name}
+          disabled={disabled}
+          onChange={onChange}
+        />
         <div className={`checkbox__tickbox-${size} relative`}>
           {value && (
             <ReactSVG

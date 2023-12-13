@@ -3,7 +3,6 @@ import { DM_Sans } from "next/font/google";
 import { PromoBar, Navbar } from "../page-components";
 
 import "./_globals.scss";
-import "styles/_globals.scss";
 
 export const dynamic = "force-static";
 

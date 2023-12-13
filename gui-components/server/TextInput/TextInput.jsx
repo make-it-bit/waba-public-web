@@ -42,8 +42,8 @@ const TextInput = ({
           id={name}
           name={name}
           value={value}
-          disabled={disabled}
           placeholder={placeholder}
+          disabled={disabled}
         />
       </div>
     </>

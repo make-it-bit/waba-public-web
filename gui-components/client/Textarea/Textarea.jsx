@@ -4,14 +4,22 @@ import React from "react";
 import classNames from "classnames";
 
 const Textarea = ({
+  theme = "dark",
   name,
-  label = null,
   value,
-  onChange,
-  /* size, */ rows = 5,
-  maxLength = 1000,
+  /* size, */
+  label = undefined,
   placeholder,
+  rows = 5,
+  maxLength = 1000,
+  onChange,
 }) => {
+  const themes = {
+    dark: "bg-transparent border border-black-100 hover:border-black-40 focus:border-none focus:outline focus:outline-1 focus:outline-purple-100 focus:drop-shadow-text-input disabled:border-black-20 placeholder-black-60 hover:placeholder-black-80 focus:text-black-100 disabled:placeholder-black-40",
+    light:
+      "bg-transparent border border-white-100 hover:border-white-40 focus:border-none focus:outline focus:outline-1 focus:outline-purple-100 focus:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus:text-white-100 disabled:placeholder-white-40",
+  }[theme];
+
   /* const sizes = {
     sm: "input-sm",
     reg: "input-reg",
@@ -20,20 +28,21 @@ const Textarea = ({
 
   return (
     <div>
-      {label && (
-        <label /* className={`${sizes}__label word-no-break`} */ htmlFor={name}>
-          {label}
-        </label>
-      )}
+      {label && <label htmlFor={name}>{label}</label>}
       <textarea
-        className={classNames("input pt-8 pr-16 pb-8 pl-16 col-12" /* sizes */)}
+        className={classNames(
+          /* sizes, */
+          themes,
+          /* errorMessage && "border-signal-red text-black-60", */
+          "w-full px-16 py-8 text-sm leading-sm"
+        )}
+        id={name}
+        name={name}
+        value={value}
+        placeholder={placeholder}
         rows={rows}
         maxLength={maxLength}
         onChange={onChange}
-        name={name}
-        id={name}
-        value={value}
-        placeholder={placeholder}
       />
     </div>
   );

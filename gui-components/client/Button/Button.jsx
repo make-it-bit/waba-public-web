@@ -71,8 +71,8 @@ const Button = ({
         svg && "flex items-center gap-8",
         "relative justify-center text-base leading-base"
       )}
-      onClick={onClick}
       type={type}
+      onClick={onClick}
       disabled={disabled}
     >
       {CTA}
