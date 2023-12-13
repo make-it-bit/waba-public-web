@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
-import {
+/* import {
   caretDownSm,
   caretDownReg,
   caretDownLg,
   caretDown,
-} from "./_selectInput.module.scss";
+} from "./_selectInput.module.scss"; */
 
 const SelectInput = ({
   name,
@@ -27,11 +27,12 @@ const SelectInput = ({
     reg: "selectInput-reg",
     lg: "selectInput-lg",
   }[size];
-  const svgSizes = {
+
+  /* const svgSizes = {
     sm: caretDownSm,
     reg: caretDownReg,
     lg: caretDownLg,
-  }[size];
+  }[size]; */
 
   const [selectOptions, setSelectOptions] = useState([]);
 
@@ -72,8 +73,8 @@ const SelectInput = ({
         </select>
         <ReactSVG
           className={classNames(
-            svgSizes,
-            caretDown,
+            /* svgSizes,
+            caretDown, */
             "flex justify-center items-center"
           )}
           src="/caret-down.svg"

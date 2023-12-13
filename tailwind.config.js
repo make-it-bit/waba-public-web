@@ -67,9 +67,11 @@ module.exports = {
         400: "400px",
         416: "416px",
         448: "448px",
+        456: "456px",
         464: "464px",
         472: "472px",
         480: "480px",
+        1000: "1000px",
       },
       colors: {
         transparent: "transparent",

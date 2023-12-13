@@ -1,18 +1,18 @@
 import React from "react";
 import classNames from "classnames";
 
-import { caretDownSm, caretDownReg, caretDownLg, caretDown } from "./_selectInput.module.scss";
-
-const SelectInput = ({ name, id = undefined, value, label, size = "reg", disabled = false }) => {
+const SelectInput = ({
+  name,
+  id = undefined,
+  value,
+  label,
+  size = "reg",
+  disabled = false,
+}) => {
   const sizes = {
     sm: "selectInput-sm",
     reg: "selectInput-reg",
     lg: "selectInput-lg",
-  }[size];
-  const svgSizes = {
-    sm: caretDownSm,
-    reg: caretDownReg,
-    lg: caretDownLg,
   }[size];
 
   return (

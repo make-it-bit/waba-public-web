@@ -5,18 +5,22 @@ import classNames from "classnames";
 
 import { TextInput, Button } from "../../gui-components/client";
 
+import styles from "./_footer.module.scss";
+
 const Footer = ({ small = false }) => {
   return (
-    <div className="bg-black-100">
+    <div className={styles.background}>
       <div className="container">
         <div
           className={classNames(
             "grid grid-cols-12",
-            small ? "pt-48" : "pt-224 mt-448"
+            small
+              ? "pt-48 pb-72"
+              : "md:pt-224 pt-120 md:pb-32 pb-72 md:mt-456 mt-1000"
           )}
         >
           {!small && (
-            <div className="col-start-5 col-span-4 mb-184">
+            <div className="md:col-start-5 col-start-2 md:col-span-4 col-span-10 md:mb-184 mb-48">
               <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
                 <Image
                   src="/icons/email-white.svg"
@@ -31,7 +35,7 @@ const Footer = ({ small = false }) => {
                   No-SPAM Guarantee. Just useful insights on your skincare.
                 </p>
               </div>
-              <div className="flex gap-8">
+              <div className="flex md:flex-row flex-col md:gap-8 gap-16">
                 <TextInput
                   theme="light"
                   name="footer-email"
@@ -39,13 +43,19 @@ const Footer = ({ small = false }) => {
                   placeholder="Enter your email"
                   onChange={() => {}}
                 />
-                <Button CTA="Subscribe" onClick={() => {}} svg />
+                <Button
+                  CTA="Subscribe"
+                  style="tertiary"
+                  onClick={() => {}}
+                  svg
+                />
               </div>
             </div>
           )}
           <div className="col-start-2 col-span-10">
-            <div className="flex flex-col gap-32">
-              <div className="flex justify-center items-center gap-64 text-center">
+            <div className="flex flex-col md:gap-32 gap-48">
+              <div className="md:hidden block border border-white-100"></div>
+              <div className="flex md:flex-row flex-col lg:justify-evenly md:justify-between items-center md:gap-0 gap-8 text-center">
                 <Link
                   href="/product"
                   className="text-sm leading-sm text-white-100"
@@ -81,27 +91,25 @@ const Footer = ({ small = false }) => {
                 </Link>
               </div>
               <div className="border border-white-100"></div>
-            </div>
-            <div className="grid grid-cols-10 my-32">
-              <div className="col-start-5 col-span-2">
-                <div className="flex justify-center items-center gap-40">
-                  <Image
-                    src="/logos/instagram.svg"
-                    alt="instagram"
-                    width={16}
-                    height={16}
-                  />
-                  <Image src="/logos/x.svg" alt="x" width={16} height={16} />
-                  <Image
-                    src="/logos/facebook.svg"
-                    alt="facebook"
-                    width={16}
-                    height={16}
-                  />
+              <div className="relative flex md:flex-row flex-col md:justify-end justify-center items-center gap-y-48">
+                <div className="md:absolute top-0 left-1/2 md:translate-x-neg-1/2">
+                  <div className="flex gap-40">
+                    <Image
+                      src="/logos/instagram.svg"
+                      alt="instagram"
+                      width={16}
+                      height={16}
+                    />
+                    <Image src="/logos/x.svg" alt="x" width={16} height={16} />
+                    <Image
+                      src="/logos/facebook.svg"
+                      alt="facebook"
+                      width={16}
+                      height={16}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="col-start-9 col-span-2">
-                <div className="flex justify-between items-center">
+                <div className="flex gap-40">
                   <Link href="#" className="text-xs leading-xs text-white-100">
                     Shipping Policy
                   </Link>

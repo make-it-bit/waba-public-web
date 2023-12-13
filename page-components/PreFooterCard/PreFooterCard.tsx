@@ -14,8 +14,8 @@ const PreFooterCard = () => {
 
   return (
     <div className="container absolute left-1/2 translate-x-neg-1/2">
-      <div className="grid grid-cols-12 gap-24">
-        <div className="col-start-1 col-span-6">
+      <div className="grid grid-cols-12 md:grid-flow-row grid-flow-col gap-24">
+        <div className="col-start-1 md:col-span-6 col-span-12">
           <div className="flex h-full">
             <div className="relative flex flex-col justify-end w-full min-h-[522px] p-64">
               <Image
@@ -51,7 +51,7 @@ const PreFooterCard = () => {
             </div>
           </div>
         </div>
-        <div className="col-start-7 col-span-6">
+        <div className="md:col-start-7 col-start-1 md:col-span-6 col-span-12">
           <div className="flex h-full">
             <div className="relative flex flex-col justify-end w-full min-h-[522px] p-64">
               <Image
