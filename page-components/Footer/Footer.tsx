@@ -54,7 +54,9 @@ const Footer = ({ small = false }) => {
           )}
           <div className="col-start-2 col-span-10">
             <div className="flex flex-col md:gap-32 gap-48">
-              <div className="md:hidden block border border-white-100"></div>
+              {!small && (
+                <div className="md:hidden block border border-white-100"></div>
+              )}
               <div className="flex md:flex-row flex-col lg:justify-evenly md:justify-between items-center md:gap-0 gap-8 text-center">
                 <Link
                   href="/product"

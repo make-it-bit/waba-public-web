@@ -9,67 +9,68 @@ const Form = ({ title, content }) => {
   const router = useRouter();
 
   return (
-    <div className="bg-supplementary-warm-gray pb-400">
-      <div className="container absolute top-472 left-1/2 translate-x-neg-1/2">
+    <div className="relative md:pb-400 z-20">
+      <div className="container md:absolute bottom-0 left-1/2 md:translate-x-neg-1/2 md:mt-112 md:mb-184">
+        {/* top-[-352px] */}
         <div className="grid grid-cols-12">
-          <div className="col-start-2 col-span-10 bg-white-100">
-            <div className="flex justify-center gap-64 p-72">
-              <div className="flex flex-col gap-32">
-                <h2 className="font-rufina text-4xl leading-4xl">
-                  Get in touch
-                </h2>
-                <p className="text-sm leading-sm">
-                  If you have any questions, please complete the contact form. A
-                  member of our concierge team will get back to you as soon as
-                  possible.
-                </p>
-                <p className="text-xs leading-xs text-black-60">
-                  * Mandatory Fields
-                </p>
+          <div className="col-start-2 col-span-10 md:bg-white-100">
+            <div className="grid grid-cols-10 md:gap-0 gap-y-56 md:px-0 px-16 md:py-0 py-72">
+              <div className="col-start-1 md:col-span-4 col-span-10">
+                <div className="flex flex-col md:items-start items-center md:gap-32 gap-24 md:pl-72 md:py-72 md:mr-64">
+                  <h2 className="font-rufina text-4xl leading-4xl">{title}</h2>
+                  <p className="text-sm leading-sm md:text-left text-center">
+                    {content}
+                  </p>
+                  <p className="text-xs leading-xs text-black-60">
+                    * Mandatory Fields
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col gap-24">
-                <div className="flex gap-24">
+              <div className="md:col-start-5 col-start-1 md:col-span-6 col-span-10">
+                <div className="flex flex-col gap-24 md:pr-72 md:py-72">
+                  <div className="flex gap-24">
+                    <TextInput
+                      name="first-name"
+                      value=""
+                      placeholder="First Name*"
+                      onChange={() => {}}
+                    />
+                    <TextInput
+                      name="last-name"
+                      value=""
+                      placeholder="Last Name*"
+                      onChange={() => {}}
+                    />
+                  </div>
+                  <div className="flex gap-24">
+                    <TextInput
+                      name="email"
+                      value=""
+                      placeholder="Email*"
+                      onChange={() => {}}
+                    />
+                    <TextInput
+                      name="number"
+                      value=""
+                      placeholder="Phone Number*"
+                      onChange={() => {}}
+                    />
+                  </div>
                   <TextInput
-                    name="first-name"
+                    name="subject"
                     value=""
-                    placeholder="First Name*"
+                    placeholder="Subject*"
                     onChange={() => {}}
                   />
-                  <TextInput
-                    name="last-name"
+                  <Textarea
+                    name="enquiry"
                     value=""
-                    placeholder="Last Name*"
+                    placeholder="Enquiry*"
                     onChange={() => {}}
                   />
-                </div>
-                <div className="flex gap-24">
-                  <TextInput
-                    name="email"
-                    value=""
-                    placeholder="Email*"
-                    onChange={() => {}}
-                  />
-                  <TextInput
-                    name="number"
-                    value=""
-                    placeholder="Phone Number*"
-                    onChange={() => {}}
-                  />
-                </div>
-                <TextInput
-                  name="subject"
-                  value=""
-                  placeholder="Subject*"
-                  onChange={() => {}}
-                />
-                <Textarea
-                  name="enquiry"
-                  value=""
-                  placeholder="Enquiry*"
-                  onChange={() => {}}
-                />
-                <div className="flex justify-end">
-                  <Button CTA="Send message" onClick={() => {}} svg />
+                  <div className="md:flex contents justify-end mt-24">
+                    <Button CTA="Send message" onClick={() => {}} svg />
+                  </div>
                 </div>
               </div>
             </div>
