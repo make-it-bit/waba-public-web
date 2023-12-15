@@ -23,3 +23,10 @@ export { default as ResultsWarranty } from "./Results/ResultsWarranty";
 export { default as FaqShipping } from "./FAQ/FaqShipping";
 
 export { default as BusinessCareersHero } from "./BusinessCareersHero";
+export { default as AboutScienceHero } from "./AboutScienceHero";
+
+export { default as Origins } from "./About/Origins";
+export { default as TextImage } from "./About/TextImage";
+export { default as Sustainability } from "./About/Sustainability";
+export { default as Trust } from "./About/Trust";
+export { default as Difference } from "./About/Difference";

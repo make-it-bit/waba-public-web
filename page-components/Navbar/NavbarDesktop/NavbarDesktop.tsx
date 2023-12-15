@@ -18,13 +18,19 @@ const NavbarDesktop = () => {
             <Link href="/product" className="text-sm leading-sm text-black-100">
               Product
             </Link>
-            <Link href="#" className="text-sm leading-sm text-black-100">
+            <Link
+              href="/science-behind"
+              className="text-sm leading-sm text-black-100"
+            >
               The Science Behind
             </Link>
             <Link href="/results" className="text-sm leading-sm text-black-100">
               Results
             </Link>
-            <Link href="#" className="text-sm leading-sm text-black-100">
+            <Link
+              href="/about-us"
+              className="text-sm leading-sm text-black-100"
+            >
               About Us
             </Link>
           </div>

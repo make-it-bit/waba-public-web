@@ -20,17 +20,17 @@ const BusinessCareersHero = ({ image, title, content }) => {
         )}
       ></div>
       <div className="container">
-        <div className="grid grid-cols-12 lg:grid-flow-col grid-flow-row gap-y-24 text-white-100 lg:pt-192 lg:pb-464 py-104">
+        <div className="grid grid-cols-12 lg:grid-flow-col grid-flow-row gap-y-24 lg:pt-192 lg:pb-464 py-104">
           <div className="lg:col-start-2 col-start-1 lg:col-span-4 col-span-12">
             <div className="flex lg:justify-start justify-center lg:items-end h-full">
-              <h1 className="font-rufina lg:text-7xl text-5xl lg:leading-7xl leading-5xl">
+              <h1 className="font-rufina lg:text-7xl text-5xl lg:leading-7xl leading-5xl text-white-100">
                 {title}
               </h1>
             </div>
           </div>
           <div className="lg:col-start-7 col-start-1 lg:col-span-5 col-span-12">
             <div className="flex lg:items-end h-full">
-              <p className="text-sm leading-sm lg:text-left text-center">
+              <p className="text-sm leading-sm lg:text-left text-center text-supplementary-warm-gray">
                 {content}
               </p>
             </div>

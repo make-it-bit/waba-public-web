@@ -28,6 +28,7 @@ const Foundations = () => {
                 icon="/icons/easy.svg"
                 title="Easy-to-use"
                 content="Blue Light therapy focuses on achieving a clearer and more harmonious complexion by specifically targeting common skin concerns such as spots."
+                paddingMargin="px-80 py-48"
               />
             </div>
             <div className="col-start-5 col-span-4">
@@ -37,6 +38,7 @@ const Foundations = () => {
                 content="Patented light beam shaping lens ensures rapid and guaranteed results, while the optical homogenized light output guarantees even distribution across all skin areas."
                 leftBorder
                 rightBorder
+                paddingMargin="px-80 py-48"
               />
             </div>
             <div className="col-start-9 col-span-4">
@@ -44,6 +46,7 @@ const Foundations = () => {
                 icon="/icons/safe.svg"
                 title="Safe"
                 content="A natural, non-invasive device crafted from medical-grade materials, rigorously tested for safety."
+                paddingMargin="px-80 py-48"
               />
             </div>
           </div>

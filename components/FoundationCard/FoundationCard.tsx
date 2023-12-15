@@ -8,13 +8,15 @@ const FoundationCard = ({
   content,
   leftBorder = false,
   rightBorder = false,
+  paddingMargin = "",
 }) => {
   return (
     <div
       className={classNames(
-        "flex flex-col items-center text-center px-80 py-48 gap-24 text-black-100",
+        "flex flex-col items-center text-center gap-24 text-black-100 h-full",
         leftBorder && "border-l border-black-100",
-        rightBorder && "border-r border-black-100"
+        rightBorder && "border-r border-black-100",
+        paddingMargin
       )}
     >
       <Image src={icon} alt="icon" width={56} height={56} />

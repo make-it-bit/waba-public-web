@@ -51,7 +51,7 @@ const NavbarMobile = () => {
             Product
           </Link>
           <Link
-            href="#"
+            href="/science-behind"
             className="font-rufina text-xl leading-xl text-white-100"
           >
             The Science Behind
@@ -63,7 +63,7 @@ const NavbarMobile = () => {
             Results
           </Link>
           <Link
-            href="#"
+            href="/about-us"
             className="font-rufina text-xl leading-xl text-white-100"
           >
             About Us

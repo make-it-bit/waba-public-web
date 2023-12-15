@@ -64,7 +64,10 @@ const Footer = ({ small = false }) => {
                 >
                   Product
                 </Link>
-                <Link href="#" className="text-sm leading-sm text-white-100">
+                <Link
+                  href="/science-behind"
+                  className="text-sm leading-sm text-white-100"
+                >
                   The Science Behind
                 </Link>
                 <Link
@@ -73,7 +76,10 @@ const Footer = ({ small = false }) => {
                 >
                   Results
                 </Link>
-                <Link href="#" className="text-sm leading-sm text-white-100">
+                <Link
+                  href="/about-us"
+                  className="text-sm leading-sm text-white-100"
+                >
                   About Us
                 </Link>
                 <Link href="#" className="text-sm leading-sm text-white-100">
