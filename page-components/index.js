@@ -30,3 +30,9 @@ export { default as TextImage } from "./About/TextImage";
 export { default as Sustainability } from "./About/Sustainability";
 export { default as Trust } from "./About/Trust";
 export { default as Difference } from "./About/Difference";
+
+export { default as Skin } from "./Science/Skin";
+export { default as Photobiomodulation } from "./Science/Photobiomodulation";
+export { default as Wavelengths } from "./Science/Wavelengths";
+export { default as Beam } from "./Science/Beam";
+export { default as ScienceWarranty } from "./Science/ScienceWarranty";

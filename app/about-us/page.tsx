@@ -20,9 +20,9 @@ const AboutUs = () => {
   return (
     <>
       <AboutScienceHero
-        image="/about-us-hero-img.png"
         title="The Story of WABA"
         content="Our brand was born from the vision of diverse minds encompassing science, engineering, and design. We noticed a void in the beauty industry—a discrepancy between extravagant claims and the actual capabilities of products, fuelled by a web of misleading information and promises. With an unwavering passion for truth, we set out to bridge this gap and provide you with products that deliver real results."
+        image="/about-us-hero-img.png"
       />
       <Origins />
       <TextImage
