@@ -9,16 +9,15 @@ const Form = ({ title, content }) => {
   const router = useRouter();
 
   return (
-    <div className="relative md:pb-400 z-20">
-      <div className="container md:absolute bottom-0 left-1/2 md:translate-x-neg-1/2 md:mt-112 md:mb-184">
-        {/* top-[-352px] */}
+    <div className="relative lg:pb-400 z-20">
+      <div className="container lg:absolute bottom-0 left-1/2 lg:translate-x-neg-1/2 lg:mb-184">
         <div className="grid grid-cols-12">
-          <div className="col-start-2 col-span-10 md:bg-white-100">
-            <div className="grid grid-cols-10 md:gap-0 gap-y-56 md:px-0 px-16 md:py-0 py-72">
-              <div className="col-start-1 md:col-span-4 col-span-10">
-                <div className="flex flex-col md:items-start items-center md:gap-32 gap-24 md:pl-72 md:py-72 md:mr-64">
+          <div className="sm:col-start-2 col-start-1 sm:col-span-10 col-span-12 lg:bg-white-100">
+            <div className="grid sm:grid-cols-10 grid-cols-12 lg:gap-0 gap-y-56 lg:px-0 px-16 lg:py-0 py-72">
+              <div className="col-start-1 lg:col-span-4 sm:col-span-10 col-span-12">
+                <div className="flex flex-col lg:items-start items-center lg:gap-32 gap-24 lg:pl-72 lg:py-72 lg:mr-24">
                   <h2 className="font-rufina text-4xl leading-4xl">{title}</h2>
-                  <p className="text-sm leading-sm md:text-left text-center">
+                  <p className="text-sm leading-sm lg:text-left text-center">
                     {content}
                   </p>
                   <p className="text-xs leading-xs text-black-60">
@@ -26,8 +25,8 @@ const Form = ({ title, content }) => {
                   </p>
                 </div>
               </div>
-              <div className="md:col-start-5 col-start-1 md:col-span-6 col-span-10">
-                <div className="flex flex-col gap-24 md:pr-72 md:py-72">
+              <div className="lg:col-start-5 col-start-1 lg:col-span-6 sm:col-span-10 col-span-12">
+                <div className="flex flex-col gap-24 lg:pr-72 lg:py-72 lg:ml-40">
                   <div className="flex gap-24">
                     <TextInput
                       name="first-name"
@@ -68,7 +67,7 @@ const Form = ({ title, content }) => {
                     placeholder="Enquiry*"
                     onChange={() => {}}
                   />
-                  <div className="md:flex contents justify-end mt-24">
+                  <div className="lg:flex contents justify-end mt-24">
                     <Button CTA="Send message" onClick={() => {}} svg />
                   </div>
                 </div>

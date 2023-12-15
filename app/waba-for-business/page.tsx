@@ -8,7 +8,7 @@ import { Form } from "../../components";
 
 const WabaForBusiness = () => {
   return (
-    <div className="md:bg-supplementary-warm-gray">
+    <div className="lg:bg-supplementary-warm-gray">
       <BusinessCareersHero
         image="/waba-for-business-hero-img.png"
         title="WABA for Business"

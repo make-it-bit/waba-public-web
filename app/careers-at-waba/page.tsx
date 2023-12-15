@@ -8,7 +8,7 @@ import { Form } from "../../components";
 
 const CareersAtWaba = () => {
   return (
-    <div className="md:bg-supplementary-warm-gray">
+    <div className="lg:bg-supplementary-warm-gray">
       <BusinessCareersHero
         image="/careers-at-waba-hero-img.png"
         title="Careers at
