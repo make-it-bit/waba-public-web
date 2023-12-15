@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import {
@@ -9,12 +7,11 @@ import {
   Sustainability,
   Trust,
   Difference,
+  LogoBar,
   CTABlock,
   PreFooterCard,
   Footer,
 } from "../../page-components";
-
-import { ScrollingBar } from "../../components";
 
 const AboutUs = () => {
   return (
@@ -40,7 +37,7 @@ const AboutUs = () => {
       />
       <Trust />
       <Difference />
-      <ScrollingBar />
+      <LogoBar />
       <CTABlock />
       <PreFooterCard />
       <Footer />

@@ -2,13 +2,14 @@ export { default as PromoBar } from "./PromoBar";
 export { default as Navbar } from "./Navbar";
 export { default as PreFooterCard } from "./PreFooterCard";
 export { default as Footer } from "./Footer";
+export { default as LogoBar } from "./LogoBar";
 
 export { default as Hero } from "./Index/Hero";
 export { default as Colors } from "./Index/Colors";
 export { default as Foundations } from "./Index/Foundations";
 export { default as Video } from "./Index/Video";
 export { default as Testimonials } from "./Index/Testimonials";
-export { default as CTABlock } from "./Index/CTABlock";
+export { default as CTABlock } from "./CTABlock";
 
 export { default as MainInfo } from "./Product/MainInfo";
 export { default as ProductInfo } from "./Product/ProductInfo";

@@ -3,14 +3,23 @@
 import React from "react";
 import classNames from "classnames";
 
+import styles from "./_productPageNav.module.scss";
+
 const ProductPageNav = ({ pageIndex, navbarItems, handleClick, justify }) => {
   return (
-    <div className={classNames("flex items-center mt-64 mb-32", justify)}>
+    <div
+      className={classNames(
+        "flex items-center mt-64 mb-32 overflow-x-auto whitespace-nowrap",
+        justify,
+        styles.navbar
+      )}
+    >
       {navbarItems.map((item, index) => (
         <p
           key={index}
           className={classNames(
-            "text-sm leading-sm cursor-pointer",
+            "grow-0 shrink-0 basis-0 text-sm leading-sm cursor-pointer",
+            index !== navbarItems.length - 1 ? "md:mr-0 mr-48" : "mr-0",
             pageIndex === 1 && "text-white-100",
             pageIndex === index && "underline"
           )}

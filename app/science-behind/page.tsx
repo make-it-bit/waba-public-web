@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import {
@@ -10,12 +8,11 @@ import {
   Beam,
   TextImage,
   ScienceWarranty,
+  LogoBar,
   CTABlock,
   PreFooterCard,
   Footer,
 } from "../../page-components";
-
-import { ScrollingBar } from "../../components";
 
 const ScienceBehind = () => {
   return (
@@ -37,7 +34,7 @@ const ScienceBehind = () => {
         imageSide="right"
       />
       <ScienceWarranty />
-      <ScrollingBar />
+      <LogoBar />
       <CTABlock />
       <PreFooterCard />
       <Footer />

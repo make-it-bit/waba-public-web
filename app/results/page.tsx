@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export const dynamic = "force-static";
@@ -9,12 +7,11 @@ import {
   Examples,
   ResultsTestimonials,
   ResultsWarranty,
+  LogoBar,
   CTABlock,
   PreFooterCard,
   Footer,
 } from "../../page-components";
-
-import { ScrollingBar } from "../../components";
 
 const Results = () => {
   return (
@@ -23,7 +20,7 @@ const Results = () => {
       <Examples />
       <ResultsTestimonials />
       <ResultsWarranty />
-      <ScrollingBar />
+      <LogoBar />
       <CTABlock />
       <PreFooterCard />
       <Footer />

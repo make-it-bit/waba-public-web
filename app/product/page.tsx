@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export const dynamic = "force-static";
@@ -9,11 +7,10 @@ import {
   ProductInfo,
   Warranty,
   FAQ,
+  LogoBar,
   CTABlock,
   Footer,
 } from "../../page-components";
-
-import { ScrollingBar } from "../../components";
 
 const Product = () => {
   return (
@@ -22,7 +19,7 @@ const Product = () => {
       <ProductInfo />
       <Warranty />
       <FAQ />
-      <ScrollingBar />
+      <LogoBar />
       <CTABlock />
       <Footer small />
     </>

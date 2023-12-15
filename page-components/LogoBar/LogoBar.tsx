@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const ScrollingBar = () => {
+const LogoBar = () => {
   return (
     <div className="bg-black-100 py-32 overflow-hidden">
       <div className="flex justify-center gap-8">
@@ -100,4 +100,4 @@ const ScrollingBar = () => {
   );
 };
 
-export default ScrollingBar;
+export default LogoBar;

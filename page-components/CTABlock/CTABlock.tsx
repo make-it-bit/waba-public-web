@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import { Button } from "../../../gui-components/client";
+import { Button } from "../../gui-components/client";
 
 const CTABlock = () => {
   const router = useRouter();
@@ -19,12 +19,12 @@ const CTABlock = () => {
         className="absolute top-0 left-1/2 translate-x-neg-1/2"
       />
       <div className="grid grid-cols-12">
-        <div className="col-start-3 col-span-8">
-          <div className="flex flex-col justify-center text-center mt-360 mb-80 gap-56">
-            <h1 className="font-rufina text-7xl leading-7xl">
+        <div className="md:col-start-3 col-start-1 md:col-span-8 col-span-12">
+          <div className="flex flex-col gap-56 justify-center text-center mt-360 md:mb-80 mb-72">
+            <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl">
               Begin Your Journey to Flawless Skin
             </h1>
-            <div className="flex justify-center">
+            <div className="md:flex contents justify-center">
               <Button
                 CTA="Shop now"
                 onClick={() => {
@@ -33,17 +33,17 @@ const CTABlock = () => {
                 svg
               />
             </div>
-            <div className="border border-black-100"></div>
-            <div className="flex">
-              <div className="flex flex-col grow-1 gap-8 text-left">
+            <div className="border border-black-20"></div>
+            <div className="flex md:flex-row flex-col gap-y-16">
+              <div className="flex flex-col grow-1 md:text-left text-center gap-8">
                 <p className="font-rufina text-xl leading-xl">
                   Already have another LED device?
                 </p>
-                <p className="text-sm leading-sm">
+                <p className="text-sm leading-sm text-black-80">
                   Apply for a trade-in and save up to $500 on your purchase
                 </p>
               </div>
-              <div className="flex items-center">
+              <div className="md:flex justify-center items-center contents">
                 <Button
                   CTA="Apply now"
                   style="secondary"
