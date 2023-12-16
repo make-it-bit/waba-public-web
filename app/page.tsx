@@ -1,20 +1,14 @@
-import React from "react";
+import React from 'react';
 
-export const dynamic = "force-static";
+import { getPageData } from '../lib/strapi';
 
-import {
-  Hero,
-  Colors,
-  Foundations,
-  Video,
-  Testimonials,
-  LogoBar,
-  CTABlock,
-  PreFooterCard,
-  Footer,
-} from "../page-components";
+export const dynamic = 'force-static';
 
-const Home = () => {
+import { Hero, Colors, Foundations, Video, Testimonials, LogoBar, CTABlock, PreFooterCard, Footer } from '../page-components';
+
+const Home = async () => {
+  const indexPageData = await getPageData('index');
+
   return (
     <>
       <Hero />
