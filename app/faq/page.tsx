@@ -1,16 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import {
-  FaqShipping,
-  LogoBar,
-  CTABlock,
-  PreFooterCard,
-  Footer,
-} from "../../page-components";
+import { FaqShipping, LogoBar, CTABlock, PreFooterCard, Footer } from '../../page-components';
 
-import { ProductPageNav } from "../../components";
+import { ProductPageNav } from '../../components';
 
 const FAQ = () => {
   const navbarPages = [<FaqShipping key={0} />];
@@ -33,14 +27,7 @@ const FAQ = () => {
             <div className="md:col-start-3 col-start-1 md:col-span-8 col-span-12">
               <ProductPageNav
                 pageIndex={pageIndex}
-                navbarItems={[
-                  "Shipping",
-                  "Returns & Refunds",
-                  "Payments",
-                  "Benefits",
-                  "Device technical",
-                  "Safety",
-                ]}
+                navbarItems={['Shipping', 'Returns & Refunds', 'Payments', 'Benefits', 'Device technical', 'Safety']}
                 handleClick={handleClick}
                 justify="justify-between"
               />
