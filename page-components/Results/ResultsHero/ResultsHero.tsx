@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 const ResultsHero = () => {
   return (
@@ -9,24 +9,26 @@ const ResultsHero = () => {
         alt="results hero image"
         width={305}
         height={336}
-        className="absolute top-64 left-0"
+        className="lg:block hidden absolute top-64 left-0"
       />
       <video
         autoPlay
         muted
         loop
-        className="absolute top-416 left-[1172px] w-[306px] h-[322px] object-cover"
+        className="absolute lg:bottom-[93px] bottom-16 lg:right-[-38px] right-[-32px] lg:w-[306px] w-[154px] lg:h-[322px] h-[171px] object-cover"
       >
         <source src="/results-hero-video-6.mp4" type="video/mp4" />
       </video>
-      <div className="absolute top-[661px] left-[732px] w-[196px] h-[218px]">
-        <Image
-          src="/results-hero-img-4.png"
-          alt="results hero image"
-          fill
-          className="object-cover"
-        />
+      <div className="lg:block hidden absolute top-[661px] left-[732px] w-[196px] h-[218px]">
+        <Image src="/results-hero-img-4.png" alt="results hero image" fill className="object-cover" />
       </div>
+      <Image
+        src="/results-hero-img-2.png"
+        alt="results hero image"
+        width={184}
+        height={236}
+        className="lg:hidden block absolute bottom-0 left-[-50px]"
+      />
       <div className="container">
         <div className="relative grid grid-cols-12">
           <Image
@@ -34,7 +36,7 @@ const ResultsHero = () => {
             alt="results hero image"
             width={306}
             height={392}
-            className="absolute bottom-0 left-0"
+            className="lg:block hidden absolute bottom-0 left-0"
           />
           <video
             autoPlay
@@ -48,20 +50,20 @@ const ResultsHero = () => {
             autoPlay
             muted
             loop
-            className="absolute top-64 right-0 w-[196px] h-[239px] object-cover"
+            className="lg:block hidden absolute top-64 right-0 w-[196px] h-[239px] object-cover"
           >
             <source src="/results-hero-video-5.mp4" type="video/mp4" />
           </video>
-          <div className="col-start-4 col-span-6">
+          <div className="lg:col-start-4 col-start-1 lg:col-span-6 col-span-12">
             <div className="flex flex-col gap-32 pt-288 pb-248 text-center">
-              <h1 className="font-rufina text-7xl leading-7xl">
+              <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl">
                 Visible Results in Just 12 Weeks
               </h1>
-              <div className="grid grid-cols-12">
-                <div className="col-start-3 col-span-8">
+              <div className="grid lg:grid-cols-6 grid-cols-12">
+                <div className="lg:col-start-2 col-start-1 lg:col-span-4 col-span-12">
                   <p className="text-base leading-base">
-                    Elevate your skincare with WABA and witness a remarkable
-                    difference. Experience the change, embrace the glow.
+                    Elevate your skincare with WABA and witness a remarkable difference. Experience the change, embrace
+                    the glow.
                   </p>
                 </div>
               </div>

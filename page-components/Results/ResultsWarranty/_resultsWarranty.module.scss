@@ -1,7 +1,7 @@
 .background {
-  background: linear-gradient(
-    270deg,
-    #928785 45.61%,
-    rgba(149, 136, 134, 0) 67.28%
-  );
+  background: linear-gradient(270deg, #928785 45.61%, rgba(149, 136, 134, 0) 67.28%);
+
+  @media (max-width: 768px) {
+    background: linear-gradient(180deg, #928785 50%, rgba(149, 136, 134, 0) 57.53%);
+  }
 }
