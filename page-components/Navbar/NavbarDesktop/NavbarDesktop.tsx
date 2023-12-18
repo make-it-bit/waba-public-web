@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { Button } from "../../../gui-components/client";
+import { Button } from '../../../gui-components/client';
 
 const NavbarDesktop = () => {
   const router = useRouter();
@@ -15,46 +15,30 @@ const NavbarDesktop = () => {
       <div className="container">
         <div className="relative flex justify-between items-center py-32 gap-8">
           <div className="flex items-center xl:gap-64 gap-32">
-            <Link href="/product" className="text-sm leading-sm text-black-100">
+            <Link href="/product" className="text-sm leading-sm">
               Product
             </Link>
-            <Link
-              href="/science-behind"
-              className="text-sm leading-sm text-black-100"
-            >
+            <Link href="/science-behind" className="text-sm leading-sm">
               The Science Behind
             </Link>
-            <Link href="/results" className="text-sm leading-sm text-black-100">
+            <Link href="/results" className="text-sm leading-sm">
               Results
             </Link>
-            <Link
-              href="/about-us"
-              className="text-sm leading-sm text-black-100"
-            >
+            <Link href="/about-us" className="text-sm leading-sm">
               About Us
             </Link>
           </div>
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
-            <Image
-              src="/logos/logo-black.svg"
-              alt="waba logo"
-              width={96}
-              height={24}
-            />
+            <Image src="/logos/logo-black.svg" alt="waba logo" width={96} height={24} />
           </Link>
           <div className="flex items-center gap-64">
-            <Link href="/faq" className="text-sm leading-sm text-black-100">
+            <Link href="/faq" className="text-sm leading-sm">
               FAQ
             </Link>
-            <Link href="#" className="text-sm leading-sm text-black-100">
+            {/* <Link href="#" className="text-sm leading-sm">
               Blog
-            </Link>
-            <Button
-              CTA="Shop now"
-              size="sm"
-              onClick={() => router.push("#")}
-              svg={false}
-            />
+            </Link> */}
+            <Button CTA="Shop now" size="sm" onClick={() => router.push('#')} svg={false} />
           </div>
         </div>
       </div>

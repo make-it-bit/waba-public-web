@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Video = () => {
   return (
@@ -14,9 +14,7 @@ const Video = () => {
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="col-start-5 col-span-4 text-center mt-160 mb-144">
-            <h1 className="font-rufina text-4xl leading-4xl text-black-100">
-              Peek Inside: The Art of Precision
-            </h1>
+            <h1 className="font-rufina text-4xl leading-4xl">Peek Inside: The Art of Precision</h1>
           </div>
         </div>
       </div>

@@ -1,16 +1,8 @@
-import React from "react";
+import React from 'react';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
-import {
-  MainInfo,
-  ProductInfo,
-  Warranty,
-  FAQ,
-  LogoBar,
-  CTABlock,
-  Footer,
-} from "../../page-components";
+import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer } from '../../page-components';
 
 const Product = () => {
   return (
@@ -18,7 +10,7 @@ const Product = () => {
       <MainInfo />
       <ProductInfo />
       <Warranty />
-      <FAQ />
+      <ProductFAQ />
       <LogoBar />
       <CTABlock />
       <Footer small />

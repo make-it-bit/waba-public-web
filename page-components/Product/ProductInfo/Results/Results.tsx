@@ -1,15 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { TestimonialCard } from "../../../../components";
+import { TestimonialCard } from '../../../../components';
 
 const Results = () => {
   return (
     <>
       <div className="grid grid-cols-12 mt-40 mb-64">
         <div className="col-start-5 col-span-4 text-center">
-          <h1 className="font-rufina text-4xl leading-4xl text-black-100">
-            Real people, real stories, real results
-          </h1>
+          <h1 className="font-rufina text-4xl leading-4xl">Real people, real stories, real results</h1>
         </div>
       </div>
       <div className="grid grid-cols-12 gap-24 pb-48">

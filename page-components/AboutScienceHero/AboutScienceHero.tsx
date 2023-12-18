@@ -1,38 +1,22 @@
-import React from "react";
-import Image from "next/image";
-import classNames from "classnames";
+import React from 'react';
+import Image from 'next/image';
+import classNames from 'classnames';
 
-import styles from "./_aboutScienceHero.module.scss";
+import styles from './_aboutScienceHero.module.scss';
 
-const AboutScienceHero = ({
-  title,
-  content,
-  image = null,
-  video = null,
-  background = null,
-}) => {
+const AboutScienceHero = ({ title, content, image = null, video = null, background = null }) => {
   return (
-    <div
-      className={classNames(
-        "relative overflow-hidden",
-        background && background
-      )}
-    >
+    <div className={classNames('relative overflow-hidden', background && background)}>
       {image && (
         <>
           <Image
             src={image}
             alt="waba about image"
             fill
-            className="absolute w-full h-full left-104 object-cover inset-0 z-[-1]"
+            className="absolute w-full h-full object-cover inset-0 z-[-1]"
           />
 
-          <div
-            className={classNames(
-              "absolute w-full h-full top-0 left-0 z-[-1]",
-              styles.background
-            )}
-          ></div>
+          <div className={classNames('absolute w-full h-full top-0 left-0 z-[-1]', styles.background)}></div>
         </>
       )}
       {video && (
@@ -46,15 +30,11 @@ const AboutScienceHero = ({
         </video>
       )}
       <div className="container relative">
-        <div className="grid grid-cols-12 pt-456 pb-104">
-          <div className="col-start-1 col-span-6">
-            <div className="flex flex-col gap-32">
-              <h1 className="font-rufina lg:text-7xl text-5xl lg:leading-7xl leading-5xl text-white-100">
-                {title}
-              </h1>
-              <p className="text-sm leading-sm text-supplementary-warm-gray">
-                {content}
-              </p>
+        <div className="grid grid-cols-12 sm:pt-456 pt-208 sm:pb-104 pb-72">
+          <div className="col-start-1 sm:col-span-6 col-span-12">
+            <div className="flex flex-col gap-32 sm:text-left text-center">
+              <h1 className="font-rufina sm:text-7xl text-5xl sm:leading-7xl leading-5xl text-white-100">{title}</h1>
+              <p className="text-base leading-base sm:text-supplementary-warm-gray text-white-100">{content}</p>
             </div>
           </div>
         </div>

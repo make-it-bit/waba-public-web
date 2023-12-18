@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import classNames from "classnames";
+import React from 'react';
+import Image from 'next/image';
+import classNames from 'classnames';
 
 const FoundationCard = ({
   icon,
@@ -8,14 +8,16 @@ const FoundationCard = ({
   content,
   leftBorder = false,
   rightBorder = false,
-  paddingMargin = "",
+  bottomBorder = false,
+  paddingMargin = '',
 }) => {
   return (
     <div
       className={classNames(
-        "flex flex-col items-center text-center gap-24 text-black-100 h-full",
-        leftBorder && "border-l border-black-100",
-        rightBorder && "border-r border-black-100",
+        'flex flex-col items-center text-center gap-24 h-full',
+        leftBorder && 'lg:border-l lg:border-black-100',
+        rightBorder && 'lg:border-r lg:border-black-100',
+        bottomBorder && 'lg:border-b-0 border-b border-black-100',
         paddingMargin
       )}
     >

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import classNames from "classnames";
+import React, { useState } from 'react';
+import classNames from 'classnames';
 
-import Features from "./Features/Features";
-import Science from "./Science/Science";
-import Included from "./Included/Included";
-import Results from "./Results/Results";
-import Specifications from "./Specifications/Specifications";
+import Features from './Features/Features';
+import Science from './Science/Science';
+import Included from './Included/Included';
+import Results from './Results/Results';
+import Specifications from './Specifications/Specifications';
 
-import { ProductPageNav } from "../../../components";
+import { ScrollableNavbar } from '../../../components';
 
-import styles from "./_productInfo.module.scss";
+import styles from './_productInfo.module.scss';
 
 const ProductInfo = () => {
   const backgrounds = [
@@ -35,19 +35,13 @@ const ProductInfo = () => {
   };
 
   return (
-    <div className={classNames("relative", backgrounds[pageIndex])}>
+    <div className={classNames('relative', backgrounds[pageIndex])}>
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="col-start-3 col-span-8">
-            <ProductPageNav
+            <ScrollableNavbar
               pageIndex={pageIndex}
-              navbarItems={[
-                "Features",
-                "The Science Behind",
-                "What’s included",
-                "Results",
-                "Technical specifications",
-              ]}
+              navbarItems={['Features', 'The Science Behind', 'What’s included', 'Results', 'Technical specifications']}
               handleClick={handleClick}
               justify="justify-evenly"
             />

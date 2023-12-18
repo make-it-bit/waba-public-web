@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import { TestimonialCard } from "../../../components";
+import { TestimonialCard } from '../../../components';
 
-import styles from "./_resultsTestimonials.module.scss";
+import styles from './_resultsTestimonials.module.scss';
 
 const ResultsTestimonials = () => {
   return (
@@ -14,14 +14,12 @@ const ResultsTestimonials = () => {
         <div className="flex flex-col overflow-x-auto">
           <div className="grid grid-cols-12">
             <div className="col-start-4 col-span-6 text-center mt-160 mb-104">
-              <h1 className="font-rufina text-4xl leading-4xl text-black-100">
-                Don’t just take our word on it
-              </h1>
+              <h1 className="font-rufina text-4xl leading-4xl">Don’t just take our word on it</h1>
             </div>
           </div>
           <div
             className={classNames(
-              "grid grid-flow-col auto-cols-[minmax(400px,_4fr)] gap-24 mb-144 overflow-x-auto",
+              'grid grid-flow-col auto-cols-[minmax(400px,_4fr)] gap-24 mb-144 overflow-x-auto',
               styles.cards
             )}
           >

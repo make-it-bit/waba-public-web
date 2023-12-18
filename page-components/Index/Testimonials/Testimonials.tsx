@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { TestimonialCard } from "../../../components";
+import { TestimonialCard } from '../../../components';
 
-import styles from "./_testimonials.module.scss";
+import styles from './_testimonials.module.scss';
 
 const Testimonials = () => {
   return (
@@ -13,9 +13,7 @@ const Testimonials = () => {
         <div className="flex flex-col">
           <div className="grid grid-cols-12">
             <div className="col-start-4 col-span-6 text-center mt-160 mb-128">
-              <h1 className="font-rufina text-4xl leading-4xl text-black-100">
-                Discover Skin Transformation Through User Stories
-              </h1>
+              <h1 className="font-rufina text-4xl leading-4xl">Discover Skin Transformation Through User Stories</h1>
             </div>
           </div>
           <div className="grid grid-cols-12 mb-208 gap-24">
