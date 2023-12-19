@@ -21,7 +21,13 @@ export const getPageData = async (page: Pages) => {
   return data;
 };
 
-export const getFaqs = async () => {
+type Faq = {
+  category: string;
+  question: string;
+  answer: string;
+};
+
+export const getFaqs = async (): Promise<null | Faq[]> => {
   const query = qs.stringify({ populate: '*' });
   const url = `${STRAPI_BASE_URL}/api/faqs?${query}`;
   const response = await fetch(url, {
@@ -29,6 +35,8 @@ export const getFaqs = async () => {
     headers,
     cache: 'no-store',
   });
-  const { data } = await response.json();
-  return data;
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+  return responseData;
 };

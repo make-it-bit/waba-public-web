@@ -36,7 +36,7 @@ const Hero = () => {
               <h2 className="text-base leading-base">It's a gateway to a freer, more confident you.</h2>
             </div>
             <div className="flex lg:mt-48 lg:mb-88 my-40 gap-8">
-              <Button size="smm" CTA="Shop now" onClick={() => router.push('#')} />
+              <Button CTA="Shop now" onClick={() => router.push('#')} />
               <Button CTA="Learn more" style="secondary" onClick={() => router.push('#')} svg={false} />
             </div>
             <div className="flex lg:justify-start justify-center flex-wrap gap-8">

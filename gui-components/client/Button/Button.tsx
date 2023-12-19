@@ -8,7 +8,7 @@ type SizeOptions = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type ButtonProps = {
   CTA: string;
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit';
   style?: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
   size?: 'sm' | 'reg';
   onClick?: () => void;
