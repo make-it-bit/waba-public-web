@@ -1,25 +1,20 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import classNames from "classnames";
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import classNames from 'classnames';
 
-import { Tag } from "../../../components";
+import { Tag } from '../../../components';
 
-import { Button } from "../../../gui-components/client";
+import { Button } from '../../../gui-components/client';
 
-import styles from "./_hero.module.scss";
+import styles from './_hero.module.scss';
 
 const Hero = () => {
   const router = useRouter();
 
   return (
-    <div
-      className={classNames(
-        "relative min-h-screen overflow-hidden",
-        styles.background
-      )}
-    >
+    <div className={classNames('relative min-h-screen overflow-hidden', styles.background)}>
       <video
         autoPlay
         muted
@@ -36,21 +31,13 @@ const Hero = () => {
                 Discover Liberating Beauty
               </h1>
               <h2 className="text-base leading-base">
-                Our innovative light-based device is more than just a skincare
-                solution.
+                Our innovative light-based device is more than just a skincare solution.
               </h2>
-              <h2 className="text-base leading-base">
-                It's a gateway to a freer, more confident you.
-              </h2>
+              <h2 className="text-base leading-base">It's a gateway to a freer, more confident you.</h2>
             </div>
             <div className="flex lg:mt-48 lg:mb-88 my-40 gap-8">
-              <Button CTA="Shop now" onClick={() => router.push("#")} />
-              <Button
-                CTA="Learn more"
-                style="secondary"
-                onClick={() => router.push("#")}
-                svg={false}
-              />
+              <Button size="smm" CTA="Shop now" onClick={() => router.push('#')} />
+              <Button CTA="Learn more" style="secondary" onClick={() => router.push('#')} svg={false} />
             </div>
             <div className="flex lg:justify-start justify-center flex-wrap gap-8">
               <Tag text="Made in EU" svg />
