@@ -1,14 +1,10 @@
-"use client";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-
-import { Button } from "../../gui-components/client";
+import { Button } from '../../gui-components/client';
 
 const CTABlock = () => {
-  const router = useRouter();
-
   return (
     <div className="container relative">
       <Image
@@ -25,33 +21,22 @@ const CTABlock = () => {
               Begin Your Journey to Flawless Skin
             </h1>
             <div className="md:flex contents justify-center">
-              <Button
-                CTA="Shop now"
-                onClick={() => {
-                  router.push("#");
-                }}
-                svg
-              />
+              <Link href="#">
+                <Button CTA="Shop now" svg />
+              </Link>
             </div>
             <div className="border border-black-20"></div>
             <div className="flex md:flex-row flex-col gap-y-16">
               <div className="flex flex-col grow-1 md:text-left text-center gap-8">
-                <p className="font-rufina text-xl leading-xl">
-                  Already have another LED device?
-                </p>
+                <p className="font-rufina text-xl leading-xl">Already have another LED device?</p>
                 <p className="text-sm leading-sm text-black-80">
                   Apply for a trade-in and save up to $500 on your purchase
                 </p>
               </div>
               <div className="md:flex justify-center items-center contents">
-                <Button
-                  CTA="Apply now"
-                  style="secondary"
-                  onClick={() => {
-                    router.push("#");
-                  }}
-                  svg
-                />
+                <Link href="#">
+                  <Button CTA="Apply now" style="secondary" svg />
+                </Link>
               </div>
             </div>
           </div>

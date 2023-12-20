@@ -1,8 +1,6 @@
-'use client';
-
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import classNames from 'classnames';
 
 import { Button } from '../../../gui-components/client';
@@ -10,8 +8,6 @@ import { Button } from '../../../gui-components/client';
 import styles from './_difference.module.scss';
 
 const Difference = () => {
-  const router = useRouter();
-
   return (
     <div className={classNames('relative', styles.background)}>
       <div className="container">
@@ -30,7 +26,9 @@ const Difference = () => {
                 your life with truth, embrace change, and make a positive impact.
               </p>
               <div className="md:flex contents mt-16">
-                <Button CTA="Choose WABA Today" style="tertiary" onClick={() => router.push('#')} svg />
+                <Link href="#">
+                  <Button CTA="Choose WABA Today" style="tertiary" svg />
+                </Link>
               </div>
             </div>
           </div>

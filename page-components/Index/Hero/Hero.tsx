@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import classNames from 'classnames';
 
 import { Tag } from '../../../components';
@@ -11,8 +11,6 @@ import { Button } from '../../../gui-components/client';
 import styles from './_hero.module.scss';
 
 const Hero = () => {
-  const router = useRouter();
-
   return (
     <div className={classNames('relative min-h-screen overflow-hidden', styles.background)}>
       <video
@@ -36,8 +34,12 @@ const Hero = () => {
               <h2 className="text-base leading-base">It's a gateway to a freer, more confident you.</h2>
             </div>
             <div className="flex lg:mt-48 lg:mb-88 my-40 gap-8">
-              <Button CTA="Shop now" onClick={() => router.push('#')} />
-              <Button CTA="Learn more" style="secondary" onClick={() => router.push('#')} svg={false} />
+              <Link href="#">
+                <Button CTA="Shop now" />
+              </Link>
+              <Link href="#">
+                <Button CTA="Learn more" style="secondary" />
+              </Link>
             </div>
             <div className="flex lg:justify-start justify-center flex-wrap gap-8">
               <Tag text="Made in EU" svg />

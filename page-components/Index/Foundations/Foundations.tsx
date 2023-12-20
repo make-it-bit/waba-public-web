@@ -1,16 +1,15 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { FoundationCard } from '../../../components';
 
-import styles from './_foundations.module.scss';
 import { Button } from '../../../gui-components/client';
 
-const Foundations = () => {
-  const router = useRouter();
+import styles from './_foundations.module.scss';
 
+const Foundations = () => {
   return (
     <div className={styles.background}>
       <div className="container">
@@ -49,7 +48,9 @@ const Foundations = () => {
             </div>
           </div>
           <div className="flex justify-center mb-[108px]">
-            <Button CTA="Discover Product" onClick={() => router.push('#')} svg />
+            <Link href="#">
+              <Button CTA="Discover Product" svg />
+            </Link>
           </div>
         </div>
       </div>

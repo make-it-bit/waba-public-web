@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import classNames from 'classnames';
 
 import { Button } from '../../../gui-components/client';
@@ -16,7 +16,6 @@ const Colors = () => {
     Red: styles.textRed,
     Infrared: styles.textInfrared,
   }[activeColor];
-  const router = useRouter();
 
   return (
     <div className="container overflow-hidden">
@@ -78,8 +77,12 @@ const Colors = () => {
             antibacterial properties, making it exceptionally effective in treating acne-prone skin.
           </p>
           <div className="flex flex-col gap-24 w-fit">
-            <Button CTA="See the Science Behind" onClick={() => router.push('#')} svg />
-            <Button style="secondary" CTA={`Studies about ${activeColor} Light`} onClick={() => router.push('#')} svg />
+            <Link href="#">
+              <Button CTA="See the Science Behind" svg />
+            </Link>
+            <Link href="#">
+              <Button style="secondary" CTA={`Studies about ${activeColor} Light`} svg />
+            </Link>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ const headers = {
   Authorization: 'Bearer ' + STRAPI_API_TOKEN,
 };
 
-type Pages = 'index' | 'science-behind';
+type Pages = 'footer' | 'index' | 'science-behind';
 
 export const getPageData = async (page: Pages) => {
   const query = qs.stringify({ populate: '*' });

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +8,6 @@ import { Button } from '../../../gui-components/client';
 
 const NavbarMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -30,7 +28,9 @@ const NavbarMobile = () => {
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
             <Image src="/logos/logo-small-white.svg" alt="waba logo" width={80} height={20} />
           </Link>
-          <Button CTA="Shop now" style="tertiary" size="sm" onClick={() => router.push('#')} svg={false} />
+          <Link href="#">
+            <Button CTA="Shop now" style="tertiary" size="sm" />
+          </Link>
         </div>
         <div className="flex flex-col items-center mt-72 gap-48">
           <Link href="/product" className="font-rufina text-xl leading-xl text-white-100">
@@ -72,7 +72,9 @@ const NavbarMobile = () => {
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
             <Image src="/logos/logo-small-black.svg" alt="waba logo" width={80} height={20} />
           </Link>
-          <Button CTA="Shop now" size="sm" onClick={() => router.push('#')} svg={false} />
+          <Link href="#">
+            <Button CTA="Shop now" size="sm" />
+          </Link>
         </div>
       </div>
     </div>

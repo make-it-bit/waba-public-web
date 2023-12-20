@@ -18,15 +18,18 @@ import {
 
 const Home = async () => {
   const indexPageData = await getPageData('index');
-  const faqs = await getFaqs();
+  console.log('indexPageData: ', indexPageData);
+  const footerPageData = await getPageData('footer');
+  console.log('footerPageData: ', footerPageData);
+  /*  const faqs = await getFaqs(); */
 
   return (
     <>
-      {faqs?.map((faq) => (
+      {/* {faqs?.map((faq) => (
         <>
           <p>{faq.category}</p>
         </>
-      ))}
+      ))} */}
       <Hero />
       <Colors />
       <Foundations />

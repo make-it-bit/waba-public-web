@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { Button } from '../../gui-components/client';
 
 const TestimonialCard = ({ image, name, border = false, content, buttonCTA = null, resultImage = null }) => {
@@ -13,7 +15,9 @@ const TestimonialCard = ({ image, name, border = false, content, buttonCTA = nul
       </div>
       {buttonCTA && (
         <div className="w-fit">
-          <Button CTA={buttonCTA} style="secondary" onClick={() => console.log('midagi')} svg />
+          <Link href="#">
+            <Button CTA={buttonCTA} style="secondary" svg />
+          </Link>
         </div>
       )}
       {resultImage && <Image src={resultImage} alt="result image" width={336} height={240} />}

@@ -1,15 +1,10 @@
-'use client';
-
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '../../../gui-components/client';
 
 const NavbarDesktop = () => {
-  const router = useRouter();
-
   return (
     <div className="bg-white-100 lg:block hidden">
       <div className="container">
@@ -38,7 +33,9 @@ const NavbarDesktop = () => {
             {/* <Link href="#" className="text-sm leading-sm">
               Blog
             </Link> */}
-            <Button CTA="Shop now" size="sm" onClick={() => router.push('#')} svg={false} />
+            <Link href="#">
+              <Button CTA="Shop now" size="sm" />
+            </Link>
           </div>
         </div>
       </div>
