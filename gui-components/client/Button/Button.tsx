@@ -59,21 +59,25 @@ const Button = ({
 
   const sizeMap = { sm: 'px-16 py-[1px]', reg: 'px-24 py-8' }[size];
 
-  const inlineMaxWidthBreakpointMap = {
-    xs: 'btn-inline-block-xs',
-    sm: 'btn-inline-block-sm',
-    md: 'btn-inline-block-md',
-    lg: 'btn-inline-block-lg',
-    xl: 'btn-inline-block-xl',
-  }[inlineMaxWidthBreakpoint];
+  if (inlineMaxWidthBreakpoint) {
+    const inlineMaxWidthBreakpointMap = {
+      xs: 'btn-inline-block-xs',
+      sm: 'btn-inline-block-sm',
+      md: 'btn-inline-block-md',
+      lg: 'btn-inline-block-lg',
+      xl: 'btn-inline-block-xl',
+    }[inlineMaxWidthBreakpoint];
+  }
 
-  const blockMaxWidthBreakpointMap = {
-    xs: 'btn-block-xs',
-    sm: 'btn-block-sm',
-    md: 'btn-block-md',
-    lg: 'btn-block-lg',
-    xl: 'btn-block-xl',
-  }[blockMaxWidthBreakpoint];
+  if (blockMaxWidthBreakpoint) {
+    const blockMaxWidthBreakpointMap = {
+      xs: 'btn-block-xs',
+      sm: 'btn-block-sm',
+      md: 'btn-block-md',
+      lg: 'btn-block-lg',
+      xl: 'btn-block-xl',
+    }[blockMaxWidthBreakpoint];
+  }
 
   return (
     <button
