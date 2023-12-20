@@ -4,7 +4,15 @@ import classNames from 'classnames';
 
 import styles from './_aboutScienceHero.module.scss';
 
-const AboutScienceHero = ({ title, content, image = null, video = null, background = null }) => {
+type AboutScienceHeroProps = {
+  title: string;
+  content: string;
+  image?: string;
+  video?: string;
+  background?: string;
+};
+
+const AboutScienceHero = ({ title, content, image, video, background }: AboutScienceHeroProps) => {
   return (
     <div className={classNames('relative overflow-hidden', background && background)}>
       {image && (

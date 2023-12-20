@@ -1,7 +1,5 @@
 import React from 'react';
 
-/* import { getPageData } from '../../lib/strapi'; */
-
 import {
   AboutScienceHero,
   Skin,
@@ -17,8 +15,6 @@ import {
 } from '../../page-components';
 
 const ScienceBehind = async () => {
-  /* const scienceBehindPageData = await getPageData('science-behind'); */
-
   return (
     <>
       <AboutScienceHero

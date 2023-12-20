@@ -35,7 +35,7 @@ const Hero = () => {
             </div>
             <div className="flex lg:mt-48 lg:mb-88 my-40 gap-8">
               <Link href="#">
-                <Button CTA="Shop now" />
+                <Button CTA="Shop now" svg />
               </Link>
               <Link href="#">
                 <Button CTA="Learn more" style="secondary" />

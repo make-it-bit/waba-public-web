@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   AboutScienceHero,
@@ -11,7 +11,7 @@ import {
   CTABlock,
   PreFooterCard,
   Footer,
-} from "../../page-components";
+} from '../../page-components';
 
 const AboutUs = () => {
   return (

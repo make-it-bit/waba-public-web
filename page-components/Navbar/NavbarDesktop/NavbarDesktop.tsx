@@ -30,9 +30,6 @@ const NavbarDesktop = () => {
             <Link href="/faq" className="text-sm leading-sm">
               FAQ
             </Link>
-            {/* <Link href="#" className="text-sm leading-sm">
-              Blog
-            </Link> */}
             <Link href="#">
               <Button CTA="Shop now" size="sm" />
             </Link>

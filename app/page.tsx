@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getFaqs, getPageData } from '../lib/strapi';
+/* import { getPageData } from '../lib/strapi'; */
 
 export const dynamic = 'force-static';
 
@@ -17,10 +17,9 @@ import {
 } from '../page-components';
 
 const Home = async () => {
-  const indexPageData = await getPageData('index');
-  console.log('indexPageData: ', indexPageData);
-  const footerPageData = await getPageData('footer');
-  console.log('footerPageData: ', footerPageData);
+  /* const indexPageData = await getPageData('index');
+  console.log('indexPageData: ', indexPageData); */
+
   /*  const faqs = await getFaqs(); */
 
   return (

@@ -1,21 +1,22 @@
-import React from "react";
-import { DM_Sans } from "next/font/google";
-import { PromoBar, Navbar } from "../page-components";
+import React from 'react';
+import { DM_Sans } from 'next/font/google';
 
-import "./_globals.scss";
+import { PromoBar, Navbar } from '../page-components';
 
-export const dynamic = "force-static";
+import './_globals.scss';
+
+export const dynamic = 'force-static';
 
 export const metadata = {
-  title: "Waba",
-  description: "Waba",
+  title: 'Waba',
+  description: 'Waba',
 };
 
 const dmSans = DM_Sans({
-  variable: "--dmSans-font",
-  subsets: ["latin"],
-  display: "swap",
-  style: "normal",
+  variable: '--dmSans-font',
+  subsets: ['latin'],
+  display: 'swap',
+  style: 'normal',
 });
 
 export default function RootLayout({ children }) {

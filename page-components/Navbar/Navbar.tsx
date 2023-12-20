@@ -1,13 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import NavbarDesktop from "./NavbarDesktop/NavbarDesktop";
-import NavbarMobile from "./NavbarMobile/NavbarMobile";
+/* import { getLayoutData, getPageLinks } from '../../lib/strapi'; */
 
-const Navbar = () => {
+import NavbarDesktop from './NavbarDesktop/NavbarDesktop';
+import NavbarMobile from './NavbarMobile/NavbarMobile';
+
+const Navbar = async () => {
+  /* const navbarData = await getLayoutData('navbar');
+  const pageLinks = await getPageLinks(); */
+
   return (
     <nav>
-      <NavbarDesktop />
-      <NavbarMobile />
+      <NavbarDesktop /* navbarData={navbarData.attributes} pageLinks={pageLinks} */ />
+      <NavbarMobile /* navbarData={navbarData.attributes} pageLinks={pageLinks} */ />
     </nav>
   );
 };
