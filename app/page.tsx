@@ -1,6 +1,6 @@
 import React from 'react';
 
-/* import { getPageData } from '../lib/strapi'; */
+import { getComponentData, getPageData } from '../lib/strapi';
 
 export const dynamic = 'force-static';
 
@@ -17,27 +17,20 @@ import {
 } from '../page-components';
 
 const Home = async () => {
-  /* const indexPageData = await getPageData('index');
-  console.log('indexPageData: ', indexPageData); */
-
-  /*  const faqs = await getFaqs(); */
+  const indexPageData = await getPageData('index');
+  const footerData = await getComponentData('footer');
 
   return (
     <>
-      {/* {faqs?.map((faq) => (
-        <>
-          <p>{faq.category}</p>
-        </>
-      ))} */}
-      <Hero />
-      <Colors />
-      <Foundations />
-      <Video />
-      <Testimonials />
+      <Hero heroData={indexPageData.attributes.hero} />
+      <Colors colorsData={indexPageData.attributes.color} />
+      <Foundations foundationsData={indexPageData.attributes.foundation} />
+      <Video videoData={indexPageData.attributes.peek_inside} />
+      <Testimonials testimonialsData={indexPageData.attributes.testimonial} />
       <LogoBar />
       <CTABlock />
       <PreFooterCard />
-      <Footer />
+      <Footer footerData={footerData.attributes} />
     </>
   );
 };

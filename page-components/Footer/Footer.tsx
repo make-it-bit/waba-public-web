@@ -5,11 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
+import { getImageFullUrl } from '../../lib/strapi';
+
 import { TextInput, Button } from '../../gui-components/client';
 
 import styles from './_footer.module.scss';
 
-const Footer = ({ small = false }) => {
+const Footer = ({ footerData, small = false }) => {
   return (
     <div className={styles.background}>
       <div className="container">
@@ -23,62 +25,53 @@ const Footer = ({ small = false }) => {
             <div className="md:col-start-5 col-start-2 md:col-span-4 col-span-10 md:mb-184 mb-48">
               <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
                 <Image src="/icons/email-white.svg" alt="email" width={56} height={56} />
-                <h1 className="font-rufina text-4xl leading-4xl">Keep up with the latest news from WABA</h1>
-                <p className="text-sm leading-sm">No-SPAM Guarantee. Just useful insights on your skincare.</p>
+                <h1 className="font-rufina text-4xl leading-4xl">{footerData.footer_top.title}</h1>
+                <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>
               <div className="flex md:flex-row flex-col md:gap-8 gap-16">
                 <TextInput
                   theme="light"
                   name="footer-email"
                   value=""
-                  placeholder="Enter your email"
+                  placeholder={footerData.footer_top.input_placeholder}
                   onChange={() => {}}
                 />
-                <Button CTA="Subscribe" style="tertiary" onClick={() => {}} svg />
+                <Button CTA={footerData.footer_top.input_button.href_text} style="tertiary" onClick={() => {}} svg />
               </div>
             </div>
           )}
           <div className="col-start-2 col-span-10">
             <div className="flex flex-col md:gap-32 gap-48">
               {!small && <div className="md:hidden block border border-white-100"></div>}
-              <div className="flex md:flex-row flex-col lg:justify-evenly md:justify-between items-center md:gap-0 gap-8 text-center">
-                <Link href="/product" className="text-sm leading-sm text-white-100">
-                  Product
-                </Link>
-                <Link href="/science-behind" className="text-sm leading-sm text-white-100">
-                  The Science Behind
-                </Link>
-                <Link href="/results" className="text-sm leading-sm text-white-100">
-                  Results
-                </Link>
-                <Link href="/about-us" className="text-sm leading-sm text-white-100">
-                  About Us
-                </Link>
-                {/* <Link href="#" className="text-sm leading-sm text-white-100">
-                  Blog
-                </Link> */}
-                <Link href="/careers-at-waba" className="text-sm leading-sm text-white-100">
-                  Careers
-                </Link>
-                <Link href="/waba-for-business" className="text-sm leading-sm text-white-100">
-                  WABA for Business
-                </Link>
+              <div className="flex md:flex-row flex-col lg:justify-evenly md:justify-between items-center md:gap-0 gap-8 text-center text-white-100">
+                {footerData.page_links.data.map((link, index) => (
+                  <Link key={index} href={link.attributes.page_link_data.href_src} className="text-sm leading-sm">
+                    {link.attributes.page_link_data.href_text}
+                  </Link>
+                ))}
               </div>
               <div className="border border-white-100"></div>
               <div className="relative flex md:flex-row flex-col md:justify-end justify-center items-center gap-y-48">
                 <div className="md:absolute top-0 left-1/2 md:translate-x-neg-1/2">
                   <div className="flex gap-40">
-                    <Image src="/logos/instagram.svg" alt="instagram" width={16} height={16} />
-                    <Image src="/logos/x.svg" alt="x" width={16} height={16} />
-                    <Image src="/logos/facebook.svg" alt="facebook" width={16} height={16} />
+                    {footerData.social_media_links.data.map((link, index) => (
+                      <Link key={index} href={link.attributes.href} target={link.attributes.target}>
+                        <Image
+                          src={getImageFullUrl(link.attributes.icon.data)}
+                          alt={link.attributes.name}
+                          width={16}
+                          height={16}
+                        />
+                      </Link>
+                    ))}
                   </div>
                 </div>
                 <div className="flex gap-40">
-                  <Link href="#" className="text-xs leading-xs text-white-100">
-                    Shipping Policy
+                  <Link href={footerData.shipping_policy.href_src} className="text-xs leading-xs text-white-100">
+                    {footerData.shipping_policy.href_text}
                   </Link>
-                  <Link href="#" className="text-xs leading-xs text-white-100">
-                    Privacy Policy
+                  <Link href={footerData.privacy_policy.href_src} className="text-xs leading-xs text-white-100">
+                    {footerData.privacy_policy.href_text}
                   </Link>
                 </div>
               </div>
