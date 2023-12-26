@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getComponentData } from '../../lib/strapi';
+
 import {
   AboutScienceHero,
   Origins,
@@ -13,7 +15,9 @@ import {
   Footer,
 } from '../../page-components';
 
-const AboutUs = () => {
+const AboutUs = async () => {
+  const footerData = await getComponentData('footer');
+
   return (
     <>
       <AboutScienceHero
@@ -40,7 +44,7 @@ const AboutUs = () => {
       <LogoBar />
       <CTABlock />
       <PreFooterCard />
-      <Footer />
+      <Footer footerData={footerData.attributes} />
     </>
   );
 };

@@ -1,14 +1,16 @@
 import React from 'react';
 
-export const dynamic = 'force-static';
-
+import { getComponentData } from '../../lib/strapi';
 import { getProductById, createCheckout } from '../../lib/shopify';
+
+export const dynamic = 'force-static';
 
 import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer } from '../../page-components';
 
 const Product = async () => {
-  const data = await getProductById('gid://shopify/Product/8668620783962');
+  const footerData = await getComponentData('footer');
 
+  const data = await getProductById('gid://shopify/Product/8668620783962');
   const checkout = await createCheckout([
     {
       variantId: data.product.variants.edges[0].node.id,
@@ -24,7 +26,7 @@ const Product = async () => {
       <ProductFAQ />
       <LogoBar />
       <CTABlock />
-      <Footer small />
+      <Footer footerData={footerData.attributes} small />
     </>
   );
 };

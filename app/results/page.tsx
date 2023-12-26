@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react';
 
-export const dynamic = "force-static";
+import { getComponentData } from '../../lib/strapi';
+
+export const dynamic = 'force-static';
 
 import {
   ResultsHero,
@@ -11,9 +13,11 @@ import {
   CTABlock,
   PreFooterCard,
   Footer,
-} from "../../page-components";
+} from '../../page-components';
 
-const Results = () => {
+const Results = async () => {
+  const footerData = await getComponentData('footer');
+
   return (
     <>
       <ResultsHero />
@@ -23,7 +27,7 @@ const Results = () => {
       <LogoBar />
       <CTABlock />
       <PreFooterCard />
-      <Footer />
+      <Footer footerData={footerData.attributes} />
     </>
   );
 };
