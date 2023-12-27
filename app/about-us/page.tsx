@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { getComponentData } from '../../lib/strapi';
+import { getImageFullUrl } from '../../lib/strapi';
+
+import { getPageData, getComponentData } from '../../lib/strapi';
 
 import {
   AboutScienceHero,
@@ -16,34 +18,37 @@ import {
 } from '../../page-components';
 
 const AboutUs = async () => {
+  const aboutPageData = await getPageData('about-us');
+  const ctaBlockData = await getComponentData('cta-block');
+  const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
   return (
     <>
       <AboutScienceHero
-        title="The Story of WABA"
-        content="Our brand was born from the vision of diverse minds encompassing science, engineering, and design. We noticed a void in the beauty industry—a discrepancy between extravagant claims and the actual capabilities of products, fuelled by a web of misleading information and promises. With an unwavering passion for truth, we set out to bridge this gap and provide you with products that deliver real results."
-        image="/about-us-hero-img.png"
+        title={aboutPageData.attributes.hero.title}
+        content={aboutPageData.attributes.hero.description}
+        image={getImageFullUrl(aboutPageData.attributes.hero.background_image.data)}
       />
-      <Origins />
+      <Origins originData={aboutPageData.attributes.origin} />
       <TextImage
-        title="Bringing Truth and Clarity to the Market"
-        content="In an industry rife with exaggerated claims and misleading information, we take pride in being the torchbearers of the truth. Our dedication to transparency is exemplified by our willingness to share every detail about our products, from technology to proven benefits. Through rigorous development and testing, conducted in collaboration with pioneering experts, we ensure the effectiveness and safety of WABA's devices. We continuously strive to improve and introduce new solutions to the market."
-        image="/about-us-img.png"
+        title={aboutPageData.attributes.text_image_1.title}
+        content={aboutPageData.attributes.text_image_1.description}
+        image={getImageFullUrl(aboutPageData.attributes.text_image_1.image.data)}
         imageSide="right"
       />
-      <Sustainability />
+      <Sustainability sustainabilityData={aboutPageData.attributes.sustainability} />
       <TextImage
-        title="People from Different Countries, United by a Purpose"
-        content="Our diverse team hails from various backgrounds, cultures, and expertise, all united by a common goal—to offer you the best devices on the market. This international collaboration empowers us to blend knowledge and skills from around the world, leading to products that embody true global innovation."
-        image="/careers-at-waba-hero-img.png"
+        title={aboutPageData.attributes.text_image_2.title}
+        content={aboutPageData.attributes.text_image_2.description}
+        image={getImageFullUrl(aboutPageData.attributes.text_image_2.image.data)}
         imageSide="left"
       />
-      <Trust />
-      <Difference />
+      <Trust trustData={aboutPageData.attributes.trust} />
+      <Difference differenceData={aboutPageData.attributes.difference} />
       <LogoBar />
-      <CTABlock />
-      <PreFooterCard />
+      <CTABlock ctaBlockData={ctaBlockData.attributes} />
+      <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
       <Footer footerData={footerData.attributes} />
     </>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import { DM_Sans } from 'next/font/google';
 
+import { getComponentData } from '../lib/strapi';
+
 import { PromoBar, Navbar } from '../page-components';
 
 import './_globals.scss';
@@ -19,13 +21,16 @@ const dmSans = DM_Sans({
   style: 'normal',
 });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const promobarData = await getComponentData('promobar');
+  const navbarData = await getComponentData('navbar');
+
   return (
     <html lang="en">
       <body className={dmSans.className}>
         <div className="sticky top-0 z-50">
-          <PromoBar />
-          <Navbar />
+          <PromoBar promobarData={promobarData.attributes} />
+          <Navbar navbarData={navbarData.attributes} />
         </div>
         {children}
       </body>

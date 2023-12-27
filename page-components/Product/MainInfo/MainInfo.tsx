@@ -1,16 +1,19 @@
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
-import classNames from "classnames";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import classNames from 'classnames';
 
-import { Button } from "../../../gui-components/client";
+import { getImageFullUrl } from '../../../lib/strapi';
 
-import { Tag } from "../../../components";
+import { Button } from '../../../gui-components/client';
 
-import styles from "./_mainInfo.module.scss";
+import { Tag } from '../../../components';
 
-const MainInfo = () => {
+import styles from './_mainInfo.module.scss';
+
+const MainInfo = ({ mainInfoData }) => {
   return (
     <div className="container mt-64 mb-72">
       <div className="grid grid-cols-12 gap-y-24">
@@ -32,28 +35,18 @@ const MainInfo = () => {
               <Tag text="CE Certified" />
               <Tag text="2-year warranty" />
             </div>
-            <h1 className="font-rufina text-4xl leading-4xl">WABA Eclatia</h1>
-            <h2 className="text-2xl leading-2xl">1195€</h2>
-            <p className="text-sm leading-sm mt-32 mb-40">
-              WABA Eclactia is designed to unlock the secrets to a flawless
-              complexion. Meticulously crafted to harness the power of light
-              therapy, it stands at the intersection of science and beauty,
-              offering a non-invasive, gentle yet potent treatment that caters
-              to a diverse array of skin concerns. With each use, you'll
-              experience the meticulous care of advanced technology working to
-              rejuvenate, restore, and revitalize your skin, unveiling a
-              healthier, more radiant you. Whether you're looking to smooth out
-              fine lines, even out your skin tone, or give your skin the deep
-              nourishment it craves, WABA Eclactia is your partner in achieving
-              the luminous skin you deserve.
-            </p>
-            <div className={classNames("flex flex-wrap gap-16", styles.button)}>
+            <h1 className="font-rufina text-4xl leading-4xl">{mainInfoData.title}</h1>
+            <h2 className="text-2xl leading-2xl">{mainInfoData.price}</h2>
+            <p className="text-sm leading-sm mt-32 mb-40">{mainInfoData.description}</p>
+            <div className={classNames('flex flex-wrap gap-16', styles.button)}>
               <div className="flex flex-col items-center gap-8 lg:w-auto w-full">
-                <Button CTA="Checkout now" onClick={() => {}} svg />
+                <Link href={mainInfoData.button_1.href_src}>
+                  <Button CTA={mainInfoData.button_1.href_text} svg />
+                </Link>
                 <div className="flex gap-2">
                   <p className="text-xs leading-xs">powered by</p>
                   <Image
-                    src="/logos/stripe.svg"
+                    src={getImageFullUrl(mainInfoData.powered_by_logos.data[0])}
                     width={35}
                     height={21}
                     alt="stripe"
@@ -61,16 +54,13 @@ const MainInfo = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-8 lg:w-auto w-full">
-                <Button
-                  CTA="Buy Now Pay Later"
-                  style="tertiary"
-                  onClick={() => {}}
-                  svg
-                />
+                <Link href={mainInfoData.button_2.href_src}>
+                  <Button CTA={mainInfoData.button_2.href_text} style="tertiary" svg />
+                </Link>
                 <div className="flex gap-2">
                   <p className="text-xs leading-xs">powered by</p>
                   <Image
-                    src="/logos/klarna.svg"
+                    src={getImageFullUrl(mainInfoData.powered_by_logos.data[1])}
                     width={45}
                     height={13}
                     alt="klarna"

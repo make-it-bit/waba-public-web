@@ -28,56 +28,19 @@ const ExampleBlock = ({ title, image, contentArray }) => {
   );
 };
 
-const Examples = () => {
+const Examples = ({ examplesData }) => {
   return (
     <div className="md:py-160 py-72">
       <div className="container">
         <div className="grid grid-cols-12 md:gap-y-160 gap-y-72">
-          <ExampleBlock
-            title="Anti-aging"
-            image="/example-img-1.png"
-            contentArray={[
-              'We currently offer shipping to select countries and are actively expanding our shipping destinations. Join our notification list to stay informed about new countries added to our shipping list.',
-              '45 minutes daily for 3 months. Results can take up to 6 months dependent on skin condition.',
-              'Reduced jowl and mouth wrinkles, improved overall skin tone and skin elasticity, brighter complexion.',
-            ]}
-          />
-          <ExampleBlock
-            title="Anti-aging"
-            image="/example-img-1.png"
-            contentArray={[
-              'We currently offer shipping to select countries and are actively expanding our shipping destinations. Join our notification list to stay informed about new countries added to our shipping list.',
-              '45 minutes daily for 3 months. Results can take up to 6 months dependent on skin condition.',
-              'Reduced jowl and mouth wrinkles, improved overall skin tone and skin elasticity, brighter complexion.',
-            ]}
-          />
-          <ExampleBlock
-            title="Anti-aging"
-            image="/example-img-1.png"
-            contentArray={[
-              'We currently offer shipping to select countries and are actively expanding our shipping destinations. Join our notification list to stay informed about new countries added to our shipping list.',
-              '45 minutes daily for 3 months. Results can take up to 6 months dependent on skin condition.',
-              'Reduced jowl and mouth wrinkles, improved overall skin tone and skin elasticity, brighter complexion.',
-            ]}
-          />
-          <ExampleBlock
-            title="Anti-aging"
-            image="/example-img-1.png"
-            contentArray={[
-              'We currently offer shipping to select countries and are actively expanding our shipping destinations. Join our notification list to stay informed about new countries added to our shipping list.',
-              '45 minutes daily for 3 months. Results can take up to 6 months dependent on skin condition.',
-              'Reduced jowl and mouth wrinkles, improved overall skin tone and skin elasticity, brighter complexion.',
-            ]}
-          />
-          <ExampleBlock
-            title="Anti-aging"
-            image="/example-img-1.png"
-            contentArray={[
-              'We currently offer shipping to select countries and are actively expanding our shipping destinations. Join our notification list to stay informed about new countries added to our shipping list.',
-              '45 minutes daily for 3 months. Results can take up to 6 months dependent on skin condition.',
-              'Reduced jowl and mouth wrinkles, improved overall skin tone and skin elasticity, brighter complexion.',
-            ]}
-          />
+          {examplesData.examples.map((example, index) => (
+            <ExampleBlock
+              key={index}
+              title={example.title}
+              image="/example-img-1.png"
+              contentArray={[example.target_text, example.protocol_text, example.result_text]}
+            />
+          ))}
         </div>
       </div>
     </div>

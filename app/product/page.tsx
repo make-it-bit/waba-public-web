@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getComponentData } from '../../lib/strapi';
+import { getPageData, getComponentData } from '../../lib/strapi';
 import { getProductById, createCheckout } from '../../lib/shopify';
 
 export const dynamic = 'force-static';
@@ -8,6 +8,8 @@ export const dynamic = 'force-static';
 import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer } from '../../page-components';
 
 const Product = async () => {
+  const productPageData = await getPageData('product');
+  const ctaBlockData = await getComponentData('cta-block');
   const footerData = await getComponentData('footer');
 
   const data = await getProductById('gid://shopify/Product/8668620783962');
@@ -20,12 +22,12 @@ const Product = async () => {
 
   return (
     <>
-      <MainInfo />
-      <ProductInfo />
-      <Warranty />
-      <ProductFAQ />
+      <MainInfo mainInfoData={productPageData.attributes.hero} />
+      <ProductInfo productInfoData={productPageData.attributes.product_info} />
+      <Warranty warrantyData={productPageData.attributes.warranty} />
+      <ProductFAQ productFaqData={productPageData.attributes.faq} />
       <LogoBar />
-      <CTABlock />
+      <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <Footer footerData={footerData.attributes} small />
     </>
   );

@@ -7,6 +7,21 @@ const headers = {
   Authorization: 'Bearer ' + STRAPI_API_TOKEN,
 };
 
+const navbarNestedComponents = [
+  'waba_logos',
+  'menu_icons',
+  'leftside_links.page_link_data',
+  'rightside_links.page_link_data',
+  'button',
+];
+
+const preFooterCardNestedComponents = [
+  'pre_footer_card_1.background_image',
+  'pre_footer_card_1.button',
+  'pre_footer_card_2.background_image',
+  'pre_footer_card_2.button',
+];
+
 const footerNestedComponents = [
   'footer_top.input_button',
   'page_links.page_link_data',
@@ -17,9 +32,9 @@ const footerNestedComponents = [
 
 const populateComponent = {
   promobar: '*',
-  navbar: '*',
+  navbar: navbarNestedComponents,
   'cta-block': '*',
-  'pre-footer-card': '*',
+  'pre-footer-card': preFooterCardNestedComponents,
   footer: footerNestedComponents,
 };
 
@@ -58,14 +73,54 @@ const indexPageNestedComponents = [
   'testimonial.user_stories.button',
 ];
 
-type Pages = 'index' | 'product' | 'science-behind' | 'results' | 'about-us' | 'faq';
+const productPageNestedComponents = [
+  'hero.images',
+  'hero.button_1',
+  'hero.button_2',
+  'hero.powered_by_logos',
+  'product_info.feature_cards',
+  'product_info.photobiomodulation',
+  'product_info.included',
+  'product_info.stories',
+  'product_info.specifications',
+  'warranty.background_image',
+  'warranty.icon',
+  'faq.faq_elements',
+];
+
+const sciencePageNestedComponents = [
+  'hero',
+  'skin.skins',
+  'photobiomodulation',
+  'wavelength',
+  'beam',
+  'text_image.image',
+  'warranty',
+];
+
+const resultPageNestedComponents = ['hero', 'example.examples', 'testimonial.user_stories.image', 'warranty'];
+
+const aboutPageNestedComponents = [
+  'hero.background_image',
+  'origin',
+  'text_image_1.image',
+  'sustainability',
+  'text_image_2.image',
+  'trust.reason_1.icon',
+  'trust.reason_2.icon',
+  'trust.reason_3.icon',
+  'trust.reason_4.icon',
+  'difference.button',
+];
+
+type Pages = 'index' | 'product' | 'science-behind' | 'result' | 'about-us' | 'faq';
 
 const populatePage = {
   index: indexPageNestedComponents,
-  product: '*',
-  'science-behind': '*',
-  results: '*',
-  'about-us': '*',
+  product: productPageNestedComponents,
+  'science-behind': sciencePageNestedComponents,
+  result: resultPageNestedComponents,
+  'about-us': aboutPageNestedComponents,
   faq: '*',
 };
 
@@ -90,74 +145,15 @@ export const getImageFullUrl = (image) => {
   }
 };
 
-/* type PageLink = {
-  href_text: string;
-  href_src: string;
-};
-
-export const getPageLinks = async (): Promise<null | PageLink[]> => {
-  const query = qs.stringify({ populate: '*' });
-  const url = `${STRAPI_BASE_URL}/api/page-links?${query}`;
-  const response = await fetch(url, {
-    method: 'GET',
-    headers,
-    cache: 'no-store',
-  });
-  const data = await response.json();
-  const responseData = data.data as any[];
-  if (responseData.length === 0) return null;
-  return responseData;
-};
-
-type Tag = {
-  logo: any;
-  text: string;
-};
-
-export const getTags = async (): Promise<null | Tag[]> => {
-  const query = qs.stringify({ populate: '*' });
-  const url = `${STRAPI_BASE_URL}/api/tags?${query}`;
-  const response = await fetch(url, {
-    method: 'GET',
-    headers,
-    cache: 'no-store',
-  });
-  const data = await response.json();
-  const responseData = data.data as any[];
-  if (responseData.length === 0) return null;
-  return responseData;
-};
-
-type SocialMediaLink = {
-  name: string;
-  href: string;
-  target: string;
-  icon: any;
-};
-
-export const getSocialMediaLinks = async (): Promise<null | SocialMediaLink[]> => {
-  const query = qs.stringify({ populate: '*' });
-  const url = `${STRAPI_BASE_URL}/api/social-media-links?${query}`;
-  const response = await fetch(url, {
-    method: 'GET',
-    headers,
-    cache: 'no-store',
-  });
-  const data = await response.json();
-  const responseData = data.data as any[];
-  if (responseData.length === 0) return null;
-  return responseData;
-};
-
-type Faq = {
+type FaqElement = {
   category: string;
-  question: string;
-  answer: string;
+  title: string;
+  description: string;
 };
 
-export const getFaqs = async (): Promise<null | Faq[]> => {
+export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const query = qs.stringify({ populate: '*' });
-  const url = `${STRAPI_BASE_URL}/api/faqs?${query}`;
+  const url = `${STRAPI_BASE_URL}/api/faq-elements?${query}`;
   const response = await fetch(url, {
     method: 'GET',
     headers,
@@ -167,4 +163,4 @@ export const getFaqs = async (): Promise<null | Faq[]> => {
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
   return responseData;
-}; */
+};

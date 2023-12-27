@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const ResultsHero = () => {
+const ResultsHero = ({ resultsHeroData }) => {
   return (
     <div className="relative bg-supplementary-warm-gray overflow-hidden">
       <Image
@@ -56,15 +56,10 @@ const ResultsHero = () => {
           </video>
           <div className="lg:col-start-4 col-start-1 lg:col-span-6 col-span-12">
             <div className="flex flex-col gap-32 pt-288 pb-248 text-center">
-              <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl">
-                Visible Results in Just 12 Weeks
-              </h1>
+              <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl">{resultsHeroData.title}</h1>
               <div className="grid lg:grid-cols-6 grid-cols-12">
                 <div className="lg:col-start-2 col-start-1 lg:col-span-4 col-span-12">
-                  <p className="text-base leading-base">
-                    Elevate your skincare with WABA and witness a remarkable difference. Experience the change, embrace
-                    the glow.
-                  </p>
+                  <p className="text-base leading-base">{resultsHeroData.description}</p>
                 </div>
               </div>
             </div>

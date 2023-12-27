@@ -1,30 +1,19 @@
-import React from "react";
-import Image from "next/image";
-import classNames from "classnames";
+import React from 'react';
+import Image from 'next/image';
+import classNames from 'classnames';
 
-import styles from "./_beam.module.scss";
+import styles from './_beam.module.scss';
 
-const Beam = () => {
+const Beam = ({ beamData }) => {
   return (
     <>
-      <div className={classNames("relative", styles.background)}>
+      <div className={classNames('relative', styles.background)}>
         <div className="container">
           <div className="grid grid-cols-12">
             <div className="col-start-7 col-span-5">
               <div className="flex flex-col gap-32 text-right my-288">
-                <h1 className="font-rufina text-5xl leading-5xl text-white-100">
-                  Beam shaping
-                </h1>
-                <p className="text-sm leading-sm text-supplementary-warm-gray">
-                  Unlike traditional LED devices, our innovation lies in
-                  shifting the diffuser's position from the LED directly to the
-                  lens. This advanced method not only optimizes the distribution
-                  of light across the skin but also maximizes energy efficiency
-                  by eliminating waste. With precision engineering, we deliver a
-                  targeted treatment, ensuring every photon counts towards your
-                  skin's health and vitality. Welcome to the future of light
-                  therapy, where every detail is designed for perfection.
-                </p>
+                <h1 className="font-rufina text-5xl leading-5xl text-white-100">{beamData.title}</h1>
+                <p className="text-sm leading-sm text-supplementary-warm-gray">{beamData.description}</p>
               </div>
             </div>
           </div>

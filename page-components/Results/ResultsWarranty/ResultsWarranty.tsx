@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './_resultsWarranty.module.scss';
 
-const ResultsWarranty = () => {
+const ResultsWarranty = ({ warrantyData }) => {
   return (
     <div className="sm:py-72 pb-72 sm:mx-0 mx-16">
       <div className="container">
@@ -28,11 +28,9 @@ const ResultsWarranty = () => {
                 <div className="md:col-start-7 col-start-1 md:col-span-5 col-span-12">
                   <div className="flex flex-col gap-16 md:px-0 px-24 md:pt-0 pt-32">
                     <h1 className="font-rufina sm:text-3xl text-2xl md:leading-3xl leading-2xl text-white-100">
-                      "Six months with WABA and I've rediscovered my reflection, finding freedom in my skin. Each
-                      session is a step toward liberation, leaving me and my reflection in a love that grows deeper
-                      every day."
+                      {warrantyData.quote_text}
                     </h1>
-                    <p className="text-sm leading-sm text-white-100">- Sarah, 62</p>
+                    <p className="text-sm leading-sm text-white-100">{warrantyData.quote_author}</p>
                   </div>
                 </div>
               </div>

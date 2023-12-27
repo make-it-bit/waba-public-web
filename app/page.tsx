@@ -18,6 +18,8 @@ import {
 
 const Home = async () => {
   const indexPageData = await getPageData('index');
+  const ctaBlockData = await getComponentData('cta-block');
+  const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
   return (
@@ -28,8 +30,8 @@ const Home = async () => {
       <Video videoData={indexPageData.attributes.peek_inside} />
       <Testimonials testimonialsData={indexPageData.attributes.testimonial} />
       <LogoBar />
-      <CTABlock />
-      <PreFooterCard />
+      <CTABlock ctaBlockData={ctaBlockData.attributes} />
+      <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
       <Footer footerData={footerData.attributes} />
     </>
   );

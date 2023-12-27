@@ -1,14 +1,12 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import styles from "./_promoBar.module.scss";
+import styles from './_promoBar.module.scss';
 
-const PromoBar = () => {
+const PromoBar = ({ promobarData }) => {
   return (
-    <div className={classNames("bg-black-100 text-center", styles.padding)}>
-      <p className="text-xs leading-xs text-white-100">
-        Black Friday - up to 30% off. VERY limited availability.
-      </p>
+    <div className={classNames('bg-black-100 text-center', styles.padding)}>
+      <p className="text-xs leading-xs text-white-100">{promobarData.text}</p>
     </div>
   );
 };

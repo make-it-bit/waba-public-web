@@ -9,7 +9,7 @@ import { ScrollableNavbar } from '../../../components';
 
 import styles from './_productFAQ.module.scss';
 
-const ProductFAQ = () => {
+const ProductFAQ = ({ productFaqData }) => {
   const backgrounds = [styles.background0];
   const navbarPages = [<Shipping key={0} />];
   const [pageIndex, setPageIndex] = useState(0);
@@ -23,7 +23,7 @@ const ProductFAQ = () => {
       <div className="container pt-160">
         <div className="grid grid-cols-12">
           <div className="col-start-3 col-span-8">
-            <h1 className="font-rufina text-4xl leading-4xl text-center">Questions Are Welcome</h1>
+            <h1 className="font-rufina text-4xl leading-4xl text-center">{productFaqData.title}</h1>
             <ScrollableNavbar
               pageIndex={pageIndex}
               navbarItems={['Shipping', 'Returns & Refunds', 'Payments', 'Benefits', 'Device technical', 'Safety']}

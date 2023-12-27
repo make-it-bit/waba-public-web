@@ -13,7 +13,7 @@ import { ScrollableNavbar } from '../../../components';
 
 import styles from './_productInfo.module.scss';
 
-const ProductInfo = () => {
+const ProductInfo = ({ productInfoData }) => {
   const backgrounds = [
     styles.background0,
     styles.background1,
