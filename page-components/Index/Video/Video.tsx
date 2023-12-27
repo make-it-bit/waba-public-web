@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useRef, useEffect, use } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const Video = ({ videoData }) => {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const boundRef = useRef(null);
 
-  const videoIsVisibleInViewport = (video) => {
+  const videoIsVisibleInViewport = (video: HTMLVideoElement) => {
     const { top, bottom } = video.getBoundingClientRect();
     const { innerHeight } = window;
     return top >= 0 && bottom <= innerHeight;
@@ -15,10 +15,10 @@ const Video = ({ videoData }) => {
   useEffect(() => {
     const handleScroll = () => {
       const video = videoRef.current;
-      if (videoIsVisibleInViewport(boundRef.current)) {
-        video.play();
+      if (boundRef.current && videoIsVisibleInViewport(boundRef.current)) {
+        video?.play();
       } else {
-        video.pause();
+        video?.pause();
       }
     };
 
