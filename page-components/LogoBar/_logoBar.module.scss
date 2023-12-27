@@ -1,0 +1,13 @@
+.slider {
+  animation: scroll 20s linear infinite;
+  width: calc(104px * 36);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-104px * 18));
+  }
+}

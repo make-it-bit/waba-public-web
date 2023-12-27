@@ -23,9 +23,9 @@ const Skin = () => {
         handleClick={handleClick}
         justify="justify-center gap-64"
       />
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 items-center my-80">
         <div className="col-start-2 col-span-5">
-          <div className="flex flex-col justify-center gap-48 h-full">
+          <div className="flex flex-col justify-center gap-48">
             <h1 className="font-rufina text-5xl leading-5xl">Our Skin Ages in Two Ways</h1>
             <div className="flex flex-col gap-40">
               <div className="flex flex-col gap-16">
@@ -49,8 +49,8 @@ const Skin = () => {
             </div>
           </div>
         </div>
-        <div className="col-start-8 col-span-5 my-80">
-          <div className="relative w-[526px] h-[554px]">
+        <div className="col-start-8 col-span-5">
+          <div className="relative w-full h-[554px]">
             <Image src="/ageing-img.png" alt="ageing image" fill className="absolute object-cover" />
           </div>
         </div>

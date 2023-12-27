@@ -1,8 +1,18 @@
 .background {
-  background: radial-gradient(
-      29.92% 85.25% at 27.48% 50%,
-      rgba(151, 71, 255, 0.2) 0%,
-      rgba(220, 197, 245, 0) 100%
-    ),
+  background: radial-gradient(29.92% 85.25% at 27.48% 50%, rgba(151, 71, 255, 0.2) 0%, rgba(220, 197, 245, 0) 100%),
     linear-gradient(180deg, #ebe1f2 11.66%, rgba(235, 225, 242, 0) 100%);
+}
+
+.slider {
+  animation: scroll 20s linear infinite;
+  width: calc(428px * 6);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-428px * 3));
+  }
 }

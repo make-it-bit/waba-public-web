@@ -19,16 +19,18 @@ const Colors = ({ colorsData }) => {
   }[activeColor];
 
   return (
-    <div className="container overflow-hidden">
-      <div className="grid grid-cols-12 mb-216">
-        <div className="col-start-5 col-span-4 text-center mt-160 mb-144">
-          <h1 className="font-rufina text-4xl leading-4xl">{colorsData.title}</h1>
+    <div className="container md:mb-216 mb-72 overflow-hidden">
+      <div className="grid grid-cols-12">
+        <div className="md:col-start-5 col-start-2 md:col-span-4 col-span-10 text-center md:mt-160 mt-72 md:mb-144 mb-88">
+          <h1 className="font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl">{colorsData.title}</h1>
         </div>
-        <div className="col-start-1 col-span-4 flex flex-col justify-between">
+      </div>
+      <div className="md:grid md:grid-cols-12 flex flex-col">
+        <div className="grid md:col-start-1 md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(300px,_4fr)] md:gap-48 gap-16 overflow-x-auto">
           {deviceHeads.map((deviceHead) => (
             <div
               key={deviceHead.id}
-              className="mb-48 cursor-pointer"
+              className="cursor-pointer"
               onClick={() => setActiveColor(deviceHead.title.split(' ')[0])}
             >
               <p className="text-sm leading-sm">{deviceHead.title}</p>
@@ -37,7 +39,7 @@ const Colors = ({ colorsData }) => {
           ))}
         </div>
         <div className="relative col-start-5 col-span-4 flex justify-center text-center">
-          <p className={classNames('text-8xl leading-8xl mt-56', colorMap)}>{`${activeColor} head`}</p>
+          <p className={classNames('text-8xl leading-8xl md:mt-56 mt-80', colorMap)}>{`${activeColor} head`}</p>
           <Image
             src={`/${activeColor.toLowerCase()}-lights.svg`}
             alt="lights"
@@ -50,28 +52,28 @@ const Colors = ({ colorsData }) => {
             alt="device's blue head"
             width={109}
             height={78}
-            className="absolute top-[139px] left-1/2 translate-x-neg-1/2"
+            className="absolute md:top-[139px] top-152 left-1/2 translate-x-neg-1/2"
           />
           <Image
             src="/green-light.svg"
             alt="device's green light"
             width={109}
             height={10}
-            className="absolute top-[185px] left-1/2 translate-x-neg-1/2"
+            className="md:block hidden absolute top-[185px] left-1/2 translate-x-neg-1/2"
           />
           <Image
             src="/device-body.png"
             alt="device's body"
             width={90}
             height={407.24}
-            className="absolute top-[196px] left-1/2 translate-x-neg-1/2"
+            className="md:block hidden absolute top-[196px] left-1/2 translate-x-neg-1/2"
           />
         </div>
         <div className="col-start-9 col-span-4 flex flex-col justify-between">
-          <p className="text-sm leading-sm mb-56">
+          <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-64 mb-56">
             {colorsData[`device_head_${activeColor.toLowerCase()}`].long_description}
           </p>
-          <div className="flex flex-col gap-24 w-fit">
+          <div className="flex flex-col md:items-start items-center gap-24 md:w-fit">
             <Link href={colorsData[`device_head_${activeColor.toLowerCase()}`].button_1_href}>
               <Button CTA={colorsData[`device_head_${activeColor.toLowerCase()}`].button_1_text} svg />
             </Link>

@@ -14,16 +14,16 @@ import styles from './_hero.module.scss';
 
 const Hero = ({ heroData }) => {
   return (
-    <div className={classNames('relative min-h-screen overflow-hidden', styles.background)}>
+    <div className={classNames('relative lg:block flex flex-col lg:min-h-screen overflow-hidden', styles.background)}>
       <video
         autoPlay
         muted
         loop
-        className="absolute lg:top-0 top-144 lg:left-248 left-0 w-full h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1]"
+        className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1] order-2"
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
-      <div className="container">
+      <div className="container relative order-1">
         <div className="lg:grid grid-cols-12">
           <div className="col-start-1 xl:col-span-6 col-span-4 flex flex-col lg:items-start items-center lg:text-left text-center lg:mt-248 mt-56 lg:mb-104">
             <div>

@@ -9,7 +9,6 @@ import { FoundationCard } from '../../../components';
 import styles from './_trust.module.scss';
 
 const Trust = ({ trustData }) => {
-  console.log('trustData: ', trustData.reason_1);
   return (
     <div className={styles.background}>
       <div className="container">
