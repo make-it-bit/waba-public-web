@@ -137,7 +137,7 @@ export const getPageData = async (page: Pages) => {
   return data;
 };
 
-export const getImageFullUrl = (image) => NEXT_PUBLIC_STRAPI_BASE_URL + image.attributes.url;
+export const getImageFullUrl = (image) => NEXT_PUBLIC_STRAPI_BASE_URL + image?.attributes?.url;
 
 type FaqElement = {
   category: string;
