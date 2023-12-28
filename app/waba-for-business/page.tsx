@@ -1,15 +1,15 @@
-/* 'use client'; */
+'use client';
 
 import React from 'react';
 
-import { getComponentData } from '../../lib/strapi';
+/* import { getComponentData } from '../../lib/strapi'; */
 
 import { BusinessCareersHero, Footer } from '../../page-components';
 
-/* import { Form } from '../../components'; */
+import { Form } from '../../components';
 
-const WabaForBusiness = async () => {
-  const footerData = await getComponentData('footer');
+const WabaForBusiness = () => {
+  /* const footerData = await getComponentData('footer'); */
 
   return (
     <div className="lg:bg-supplementary-warm-gray">
@@ -21,11 +21,11 @@ const WabaForBusiness = async () => {
                 We are eager to engage in conversations that explore how we can
                 support your goals with our groundbreaking products."
       />
-      {/* <Form
+      <Form
         title="Get in touch"
         content="If you have any questions, please complete the contact form. A member of our concierge team will get back to you as soon as possible."
-      /> */}
-      <Footer footerData={footerData.attributes} small />
+      />
+      {/* <Footer footerData={footerData.attributes} small /> */}
     </div>
   );
 };

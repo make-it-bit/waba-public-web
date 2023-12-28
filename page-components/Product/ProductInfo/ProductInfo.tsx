@@ -14,7 +14,6 @@ import { ScrollableNavbar } from '../../../components';
 import styles from './_productInfo.module.scss';
 
 const ProductInfo = ({ productInfoData }) => {
-  //console.log('productInfoData: ', productInfoData);
   const backgrounds = [
     styles.background0,
     styles.background1,
@@ -25,9 +24,13 @@ const ProductInfo = ({ productInfoData }) => {
   const navbarPages = [
     <Features key={0} featuresData={productInfoData.feature_cards} />,
     <Science key={1} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
-    <Included key={2} />,
-    <Results key={3} />,
-    <Specifications key={4} />,
+    <Included key={2} title={productInfoData.included_title} includedData={productInfoData.included} />,
+    <Results key={3} title={productInfoData.results_title} resultsData={productInfoData.stories} />,
+    <Specifications
+      key={4}
+      title={productInfoData.specifications_title}
+      specificationsData={productInfoData.specifications}
+    />,
   ];
   const [pageIndex, setPageIndex] = useState(0);
 

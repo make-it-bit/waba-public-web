@@ -22,13 +22,13 @@ const ProductFAQ = ({ productFaqData }) => {
     <div className={classNames('relative', backgrounds[pageIndex])}>
       <div className="container pt-160">
         <div className="grid grid-cols-12">
-          <div className="col-start-3 col-span-8">
+          <div className="lg:col-start-3 lg:col-span-8 col-span-12">
             <h1 className="font-rufina text-4xl leading-4xl text-center">{productFaqData.title}</h1>
             <ScrollableNavbar
               pageIndex={pageIndex}
               navbarItems={['Shipping', 'Returns & Refunds', 'Payments', 'Benefits', 'Device technical', 'Safety']}
               handleClick={handleClick}
-              justify="justify-evenly"
+              justify="justify-between"
             />
           </div>
         </div>
