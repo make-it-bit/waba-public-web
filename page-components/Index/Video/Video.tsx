@@ -1,9 +1,9 @@
-'use client';
+/* 'use client'; */
 
-import React, { useRef, useEffect } from 'react';
+import React /* , { useRef, useEffect } */ from 'react';
 
 const Video = ({ videoData }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  /* const videoRef = useRef<HTMLVideoElement>(null);
   const boundRef = useRef(null);
 
   const videoIsVisibleInViewport = (video: HTMLVideoElement) => {
@@ -26,18 +26,23 @@ const Video = ({ videoData }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, []); */
 
   return (
     <div className="relative">
-      <div ref={boundRef} className="container absolute md:top-96 top-56 left-1/2 translate-x-neg-1/2 z-10">
+      <div /* ref={boundRef} */ className="md:block hidden container absolute top-96 left-1/2 translate-x-neg-1/2 z-10">
         <div className="grid grid-cols-12">
           <div className="col-start-5 col-span-4 text-center">
             <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
           </div>
         </div>
       </div>
-      <video ref={videoRef} muted loop className="w-full h-full object-cover mix-blend-luminosity z-[-1]">
+      <video
+        /* ref={videoRef} */ muted
+        autoPlay
+        loop
+        className="w-full h-full object-cover mix-blend-luminosity z-[-1]"
+      >
         <source src="/scrollable-video.mp4" type="video/mp4" />
       </video>
     </div>

@@ -16,7 +16,7 @@ const CTABlock = ({ ctaBlockData }) => {
       />
       <div className="grid grid-cols-12">
         <div className="md:col-start-3 col-start-1 md:col-span-8 col-span-12">
-          <div className="flex flex-col gap-56 justify-center text-center mt-360 md:mb-80 mb-72">
+          <div className="flex flex-col gap-56 justify-center md:items-center text-center mt-360 md:mb-80 mb-72">
             <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl">{ctaBlockData.title}</h1>
             <Link href={ctaBlockData.button_1.href_src} className="md:flex contents justify-center">
               <Button CTA={ctaBlockData.button_1.href_text} svg />

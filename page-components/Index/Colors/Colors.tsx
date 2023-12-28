@@ -41,7 +41,7 @@ const Colors = ({ colorsData }) => {
         </div>
         <div className="relative col-start-5 col-span-4 flex justify-center text-center">
           <p
-            className={classNames('md:text-5xl text-8xl md:leading-5xl leading-8xl md:mt-56 mt-80', colorMap)}
+            className={classNames('md:text-5xl text-7xl md:leading-5xl leading-7xl md:mt-56 mt-80', colorMap)}
           >{`${activeColor} head`}</p>
           <Image
             src={`/${activeColor.toLowerCase()}-lights.svg`}

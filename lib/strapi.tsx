@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-const { NEXT_PUBLIC_STRAPI_BASE_URL, STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
+const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
 
 const headers = {
   Accept: '*/*',
@@ -137,7 +137,7 @@ export const getPageData = async (page: Pages) => {
   return data;
 };
 
-export const getImageFullUrl = (image) => NEXT_PUBLIC_STRAPI_BASE_URL + image?.attributes?.url;
+export const getImageFullUrl = (image) => process.env.NEXT_PUBLIC_STRAPI_BASE_URL + image?.attributes?.url;
 
 type FaqElement = {
   category: string;

@@ -19,7 +19,7 @@ const Hero = ({ heroData }) => {
         autoPlay
         muted
         loop
-        className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1] order-2"
+        className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1] order-2 lg:mt-0 mt-32"
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
@@ -46,7 +46,11 @@ const Hero = ({ heroData }) => {
             </div>
             <div className="flex lg:justify-start justify-center flex-wrap gap-8">
               {heroData.tags.data.map((tag, index) => (
-                <Tag key={index} text={tag.attributes.text} svg={getImageFullUrl(tag.attributes.logo.data)} />
+                <Tag
+                  key={index}
+                  text={tag.attributes.text}
+                  svg={tag.attributes.logo.data && getImageFullUrl(tag.attributes.logo.data)}
+                />
               ))}
             </div>
           </div>
