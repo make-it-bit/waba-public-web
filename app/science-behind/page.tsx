@@ -41,6 +41,7 @@ const ScienceBehind = async () => {
         content={sciencePageData.attributes.text_image.description}
         image={getImageFullUrl(sciencePageData.attributes.text_image.image.data)}
         imageSide="right"
+        animation
       />
       <ScienceWarranty warrantyData={sciencePageData.attributes.warranty} />
       <LogoBar />

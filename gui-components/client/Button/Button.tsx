@@ -33,13 +33,13 @@ const Button = ({
 }: ButtonProps) => {
   const styleMap = {
     primary:
-      'text-white-100 bg-black-100 hover:bg-deep-purple-100 active:bg-deep-purple-80 disabled:bg-black-60 focus:bg-black-100 focus:outline focus:outline-offset-2 focus:outline-2 focus:outline-black-100',
+      'text-white-100 bg-black-100 hover:bg-deep-purple-100 active:bg-deep-purple-80 disabled:bg-black-60 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-black-100',
     secondary:
-      'text-black-100 disabled:text-black-60 bg-transparent hover:bg-black-10 active:bg-black-5 disabled:bg-transparent focus:bg-transparent focus:outline focus:outline-2 focus:outline-black-100',
+      'text-black-100 disabled:text-black-60 bg-transparent hover:bg-black-10 active:bg-black-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black-100',
     tertiary:
-      'text-white-100 bg-deep-purple-100 hover:bg-deep-purple-80 active:bg-deep-purple-60 disabled:bg-deep-purple-40 focus:bg-deep-purple-100 focus:outline focus:outline-offset-2 focus:outline-2 focus:outline-black-100',
+      'text-white-100 bg-deep-purple-100 hover:bg-deep-purple-80 active:bg-deep-purple-60 disabled:bg-deep-purple-40 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-black-100',
     quaternary:
-      'text-white-100 disabled:text-white-60 bg-transparent hover:bg-white-10 active:bg-white-5 disabled:bg-transparent focus:bg-transparent focus:outline focus:outline-2 focus:outline-white-100',
+      'text-white-100 disabled:text-white-60 bg-transparent hover:bg-white-10 active:bg-white-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white-100',
   }[style];
 
   let buttonCaret = '';

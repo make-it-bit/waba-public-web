@@ -4,8 +4,11 @@
 }
 
 .slider {
-  animation: scroll 20s linear infinite;
-  width: calc(428px * 6);
+  @media (min-width: 768px) {
+    margin: 0 auto;
+    animation: scroll 20s linear infinite;
+    width: calc(428px * 6);
+  }
 }
 
 @keyframes scroll {

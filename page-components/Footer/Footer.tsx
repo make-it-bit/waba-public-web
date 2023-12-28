@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -12,6 +12,12 @@ import { TextInput, Button } from '../../gui-components/client';
 import styles from './_footer.module.scss';
 
 const Footer = ({ footerData, small = false }) => {
+  const [email, setEmail] = useState('');
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <div className={styles.background}>
       <div className="container">
@@ -32,9 +38,9 @@ const Footer = ({ footerData, small = false }) => {
                 <TextInput
                   theme="light"
                   name="footer-email"
-                  value=""
+                  value={email}
                   placeholder={footerData.footer_top.input_placeholder}
-                  onChange={() => {}}
+                  onChange={handleChange}
                 />
                 <Button CTA={footerData.footer_top.input_button.href_text} style="tertiary" onClick={() => {}} svg />
               </div>

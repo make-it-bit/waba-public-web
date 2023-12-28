@@ -1,7 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
 
-const TextImage = ({ title, content, image, imageSide }) => {
+import styles from './_textImage.module.scss';
+
+const TextImage = ({ title, content, image, imageSide, animation = false }) => {
   return (
     <div className="container my-72">
       <div className="grid grid-cols-12">
@@ -14,8 +17,43 @@ const TextImage = ({ title, content, image, imageSide }) => {
               </div>
             </div>
             <div className="sm:col-start-8 col-start-1 sm:col-span-5 col-span-12 sm:my-80 mt-64">
-              <div className="relative w-auto h-[670px]">
-                <Image src={image} alt="about image" fill className="absolute object-cover" />
+              <div className="relative w-auto h-[670px] bg-supplementary-warm-gray">
+                {animation ? (
+                  <>
+                    <Image
+                      src="/changeable-head.png"
+                      alt="changeable head"
+                      width={145}
+                      height={212}
+                      className={classNames(
+                        'absolute top-1/4 translate-y-neg-1/4 left-1/2 translate-x-neg-1/2 overflow-hidden',
+                        styles.image
+                      )}
+                    />
+                    <Image
+                      src="/changeable-head.png"
+                      alt="changeable head"
+                      width={145}
+                      height={212}
+                      className={classNames(
+                        'absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 overflow-hidden',
+                        styles.image
+                      )}
+                    />
+                    <Image
+                      src="/changeable-head.png"
+                      alt="changeable head"
+                      width={145}
+                      height={212}
+                      className={classNames(
+                        'absolute top-3/4 translate-y-neg-3/4 left-1/2 translate-x-neg-1/2 overflow-hidden',
+                        styles.image
+                      )}
+                    />
+                  </>
+                ) : (
+                  <Image src={image} alt="about image" fill className="absolute object-cover" />
+                )}
               </div>
             </div>
           </>

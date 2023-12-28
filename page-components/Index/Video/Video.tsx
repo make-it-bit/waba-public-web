@@ -29,22 +29,17 @@ const Video = ({ videoData }) => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div ref={boundRef} className="container">
+    <div className="relative">
+      <div ref={boundRef} className="container absolute md:top-96 top-56 left-1/2 translate-x-neg-1/2 z-10">
         <div className="grid grid-cols-12">
-          <div className="col-start-5 col-span-4 text-center mt-160 mb-144">
-            <h1 className="font-rufina text-4xl leading-4xl">{videoData.title}</h1>
+          <div className="col-start-5 col-span-4 text-center">
+            <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
           </div>
         </div>
-        <video
-          ref={videoRef}
-          muted
-          loop
-          className="absolute top-0 left-0 w-full h-full object-cover mix-blend-luminosity z-[-1]"
-        >
-          <source src="/scrollable-video.mp4" type="video/mp4" />
-        </video>
       </div>
+      <video ref={videoRef} muted loop className="w-full h-full object-cover mix-blend-luminosity z-[-1]">
+        <source src="/scrollable-video.mp4" type="video/mp4" />
+      </video>
     </div>
   );
 };

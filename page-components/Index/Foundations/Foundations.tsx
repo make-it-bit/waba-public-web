@@ -14,7 +14,7 @@ import styles from './_foundations.module.scss';
 const Foundations = ({ foundationsData }) => {
   return (
     <div className={styles.background}>
-      <div className="container">
+      <div className="container pb-[108px]">
         <div className="flex flex-col">
           <div className="grid grid-cols-12">
             <div className="md:col-start-5 col-start-2 md:col-span-4 col-span-10 text-center md:mt-160 mt-72 md:mb-144 mb-40">
@@ -51,7 +51,7 @@ const Foundations = ({ foundationsData }) => {
               />
             </div>
           </div>
-          <Link href={foundationsData.button.href_src} className="md:flex contents justify-center mb-[108px]">
+          <Link href={foundationsData.button.href_src} className="md:flex contents justify-center">
             <Button CTA={foundationsData.button.href_text} svg />
           </Link>
         </div>

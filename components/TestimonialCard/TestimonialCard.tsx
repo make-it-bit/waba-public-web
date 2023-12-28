@@ -24,7 +24,7 @@ const TestimonialCard = ({
   resultImage = null,
 }: TestimonialCardProps) => {
   return (
-    <div className="bg-white-100 flex flex-col justify-between px-40 py-32 gap-24 w-416">
+    <div className="bg-white-100 flex flex-col justify-between px-40 py-32 gap-24 md:w-416">
       <Image src={image} alt="image" width={64} height={64} />
       <h1 className="font-rufina text-xl leading-xl">{name}</h1>
       {border && <div className="border border-black-20"></div>}

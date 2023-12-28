@@ -28,7 +28,7 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="absolute bg-[#f3ecee] w-full h-full top-0 left-0 z-[-1]"></div>
           </div>
         </div>
-        <div className="col-start-7 col-span-5">
+        <div className="col-start-7 col-span-5 sticky top-[201px]">
           <div className="flex flex-col">
             <div className="flex gap-8 mb-48">
               <Tag text="Made in EU" svg />
