@@ -137,13 +137,7 @@ export const getPageData = async (page: Pages) => {
   return data;
 };
 
-export const getImageFullUrl = (image) => {
-  try {
-    return STRAPI_BASE_URL + image.attributes.url;
-  } catch (error) {
-    console.error('Image not found.');
-  }
-};
+export const getImageFullUrl = (image) => STRAPI_BASE_URL + image.attributes.url;
 
 type FaqElement = {
   category: string;
