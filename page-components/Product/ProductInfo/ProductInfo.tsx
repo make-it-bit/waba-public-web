@@ -14,6 +14,7 @@ import { ScrollableNavbar } from '../../../components';
 import styles from './_productInfo.module.scss';
 
 const ProductInfo = ({ productInfoData }) => {
+  //console.log('productInfoData: ', productInfoData);
   const backgrounds = [
     styles.background0,
     styles.background1,
@@ -22,8 +23,8 @@ const ProductInfo = ({ productInfoData }) => {
     styles.background4,
   ];
   const navbarPages = [
-    <Features key={0} />,
-    <Science key={1} background={styles.background1} />,
+    <Features key={0} featuresData={productInfoData.feature_cards} />,
+    <Science key={1} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
     <Included key={2} />,
     <Results key={3} />,
     <Specifications key={4} />,
@@ -38,12 +39,12 @@ const ProductInfo = ({ productInfoData }) => {
     <div className={classNames('relative', backgrounds[pageIndex])}>
       <div className="container">
         <div className="grid grid-cols-12">
-          <div className="col-start-3 col-span-8">
+          <div className="lg:col-start-3 lg:col-span-8 col-span-12">
             <ScrollableNavbar
               pageIndex={pageIndex}
               navbarItems={['Features', 'The Science Behind', 'What’s included', 'Results', 'Technical specifications']}
               handleClick={handleClick}
-              justify="justify-evenly"
+              justify="justify-between"
             />
           </div>
         </div>

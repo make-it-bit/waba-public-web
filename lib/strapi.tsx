@@ -56,7 +56,6 @@ export const getComponentData = async (component: Component) => {
 const indexPageNestedComponents = [
   'hero.button_1',
   'hero.button_2',
-  'hero.tags',
   'hero.tags.logo',
   'color.device_head_blue',
   'color.device_head_red',
@@ -75,10 +74,11 @@ const indexPageNestedComponents = [
 
 const productPageNestedComponents = [
   'hero.images',
+  'hero.tags.logo',
   'hero.button_1',
   'hero.button_2',
   'hero.powered_by_logos',
-  'product_info.feature_cards',
+  'product_info.feature_cards.icon',
   'product_info.photobiomodulation',
   'product_info.included',
   'product_info.stories',

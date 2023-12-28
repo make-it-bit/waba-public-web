@@ -25,7 +25,7 @@ const FAQ = ({ faqPageData }) => {
                 {faqPageData.hero_title}
               </h1>
             </div>
-            <div className="md:col-start-3 col-start-1 md:col-span-8 col-span-12">
+            <div className="lg:col-start-3 lg:col-span-8 col-span-12">
               <ScrollableNavbar
                 pageIndex={pageIndex}
                 navbarItems={['Shipping', 'Returns & Refunds', 'Payments', 'Benefits', 'Device technical', 'Safety']}
