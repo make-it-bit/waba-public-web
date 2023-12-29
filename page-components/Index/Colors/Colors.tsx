@@ -26,7 +26,7 @@ const Colors = ({ colorsData }) => {
         </div>
       </div>
       <div className="md:grid md:grid-cols-12 flex flex-col">
-        <div className="grid md:col-start-1 md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(300px,_4fr)] md:gap-48 gap-16 overflow-x-auto">
+        <div className="grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(300px,_4fr)] md:gap-48 gap-16 overflow-x-auto">
           {deviceHeads.map((deviceHead) => (
             <div
               key={deviceHead.id}
@@ -39,7 +39,7 @@ const Colors = ({ colorsData }) => {
             </div>
           ))}
         </div>
-        <div className="relative col-start-5 col-span-4 flex justify-center text-center">
+        <div className="relative col-span-4 flex justify-center text-center">
           <p
             className={classNames('md:text-5xl text-7xl md:leading-5xl leading-7xl md:mt-56 mt-80', colorMap)}
           >{`${activeColor} head`}</p>
@@ -75,7 +75,7 @@ const Colors = ({ colorsData }) => {
             className="md:block hidden absolute xl:top-[196px] lg:top-[237px] md:top-[348px] left-1/2 translate-x-neg-1/2"
           />
         </div>
-        <div className="col-start-9 col-span-4 flex flex-col justify-between">
+        <div className="col-span-4 flex flex-col justify-between">
           <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-64 mb-56">
             {colorsData[`device_head_${activeColor.toLowerCase()}`].long_description}
           </p>

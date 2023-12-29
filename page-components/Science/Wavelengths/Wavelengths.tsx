@@ -6,7 +6,7 @@ import styles from './_wavelenghts.module.scss';
 
 const Wavelengths = ({ wavelengthsData }) => {
   return (
-    <div className="container">
+    <div className="container overflow-hidden">
       <div className="grid grid-cols-12 items-center my-272">
         <div className="col-start-2 col-span-5">
           <div className="flex flex-col gap-32">
@@ -21,21 +21,21 @@ const Wavelengths = ({ wavelengthsData }) => {
               alt="wavelength"
               width={408}
               height={171}
-              className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2 overflow-hidden', styles.blueWave)}
+              className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.blueWave)}
             />
             <Image
               src="/wavelength-orange.svg"
               alt="wavelength"
               width={403}
               height={171}
-              className="absolute bottom-0 left-1/2 translate-x-neg-1/2 overflow-hidden"
+              className="absolute bottom-0 left-1/2 translate-x-neg-1/2"
             />
             <Image
               src="/wavelength-pink.svg"
               alt="wavelength"
               width={408}
               height={171}
-              className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2 overflow-hidden', styles.redWave)}
+              className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.redWave)}
             />
           </div>
         </div>

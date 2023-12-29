@@ -1,8 +1,15 @@
 .background {
-  background: linear-gradient(
-      86.57deg,
-      rgba(243, 236, 238, 0.3) 23.67%,
-      rgba(243, 236, 238, 0) 64.84%
-    ),
-    #908785;
+  background: linear-gradient(86.57deg, rgba(243, 236, 238, 0.3) 23.67%, rgba(243, 236, 238, 0) 64.84%), #908785;
+}
+
+.imageTop {
+  @media (max-width: 640px) {
+    top: 40px;
+  }
+  @media (max-width: 600px) {
+    top: 96px;
+  }
+  @media (max-width: 465px) {
+    top: 200px;
+  }
 }

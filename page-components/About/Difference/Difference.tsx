@@ -22,11 +22,9 @@ const Difference = ({ differenceData }) => {
                   {paragraph}
                 </p>
               ))}
-              <div className="md:flex contents mt-16">
-                <Link href={differenceData.button.href_src}>
-                  <Button CTA={differenceData.button.href_text} style="tertiary" svg />
-                </Link>
-              </div>
+              <Link href={differenceData.button.href_src} className="md:flex contents mt-16 w-fit">
+                <Button CTA={differenceData.button.href_text} style="tertiary" svg />
+              </Link>
             </div>
           </div>
         </div>

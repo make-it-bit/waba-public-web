@@ -32,7 +32,7 @@ const ScienceBehind = async () => {
         video="/science-behind-video.mp4"
         background="bg-black-100"
       />
-      <Skin />
+      <Skin skinData={sciencePageData.attributes.skin.skins.data} />
       <Photobiomodulation photobiomodulationData={sciencePageData.attributes.photobiomodulation} />
       <Wavelengths wavelengthsData={sciencePageData.attributes.wavelength} />
       <Beam beamData={sciencePageData.attributes.beam} />

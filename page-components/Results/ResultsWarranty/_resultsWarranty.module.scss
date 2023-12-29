@@ -5,3 +5,9 @@
     background: linear-gradient(180deg, #928785 50%, rgba(149, 136, 134, 0) 57.53%);
   }
 }
+
+.videoMargin {
+  @media (max-width: 640px) {
+    margin-bottom: 124px;
+  }
+}

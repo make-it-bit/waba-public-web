@@ -1,15 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { getImageFullUrl } from '../../../lib/strapi';
+
 const ExampleBlock = ({ title, image, contentArray }) => {
   const subtitles = ['Target', 'Protocol', 'Result'];
 
   return (
     <div className="lg:col-start-2 col-start-1 lg:col-span-10 col-span-12">
-      <p className="font-rufina text-4xl leading-4xl text-center md:mb-64 mb-40">{title}</p>
+      <p className="font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl text-center md:mb-64 mb-40">{title}</p>
       <div className="grid lg:grid-cols-10 grid-cols-12">
         <div className="col-start-1 lg:col-span-4 md:col-span-5 col-span-12">
-          <div className="relative w-auto md:h-auto h-[272px] mb:mb-0 mb-72">
+          <div className="relative w-auto md:h-full h-[272px] md:mb-0 mb-64">
             <Image src={image} alt="example image" fill className="absolute object-cover" />
           </div>
         </div>
@@ -37,7 +39,7 @@ const Examples = ({ examplesData }) => {
             <ExampleBlock
               key={index}
               title={example.title}
-              image="/example-img-1.png"
+              image={getImageFullUrl(example.image.data)}
               contentArray={[example.target_text, example.protocol_text, example.result_text]}
             />
           ))}

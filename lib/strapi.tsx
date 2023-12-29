@@ -92,7 +92,7 @@ const productPageNestedComponents = [
 
 const sciencePageNestedComponents = [
   'hero',
-  'skin.skins',
+  'skin.skins.image',
   'photobiomodulation',
   'wavelength',
   'beam',
@@ -100,7 +100,7 @@ const sciencePageNestedComponents = [
   'warranty',
 ];
 
-const resultPageNestedComponents = ['hero', 'example.examples', 'testimonial.user_stories.image', 'warranty'];
+const resultPageNestedComponents = ['hero', 'example.examples.image', 'testimonial.user_stories.image', 'warranty'];
 
 const aboutPageNestedComponents = [
   'hero.background_image',

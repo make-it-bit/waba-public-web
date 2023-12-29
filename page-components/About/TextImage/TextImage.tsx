@@ -6,7 +6,7 @@ import styles from './_textImage.module.scss';
 
 const TextImage = ({ title, content, image, imageSide, animation = false }) => {
   return (
-    <div className="container my-72">
+    <div className="container my-72 overflow-hidden">
       <div className="grid grid-cols-12">
         {imageSide === 'right' ? (
           <>
@@ -26,7 +26,7 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       width={145}
                       height={212}
                       className={classNames(
-                        'absolute top-1/4 translate-y-neg-1/4 left-1/2 translate-x-neg-1/2 overflow-hidden',
+                        'absolute top-1/4 translate-y-neg-1/4 left-1/2 translate-x-neg-1/2',
                         styles.image
                       )}
                     />
@@ -36,7 +36,7 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       width={145}
                       height={212}
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 overflow-hidden',
+                        'absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2',
                         styles.image
                       )}
                     />
@@ -46,7 +46,7 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       width={145}
                       height={212}
                       className={classNames(
-                        'absolute top-3/4 translate-y-neg-3/4 left-1/2 translate-x-neg-1/2 overflow-hidden',
+                        'absolute top-3/4 translate-y-neg-3/4 left-1/2 translate-x-neg-1/2',
                         styles.image
                       )}
                     />

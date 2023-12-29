@@ -3,58 +3,76 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
+import { getImageFullUrl } from '../../../lib/strapi';
+
 import { ScrollableNavbar } from '../../../components';
 
-import Ageing from './Ageing/Ageing';
-
-const Skin = () => {
-  const navbarPages = [<Ageing key={0} />];
+const Skin = ({ skinData }) => {
+  const categorizedElements = skinData.reduce((acc, element) => {
+    const category = element.attributes.category;
+    acc[category] = acc[category] ? [...acc[category], element] : [element];
+    return acc;
+  }, {});
+  const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const handleClick = (index) => {
-    setPageIndex(0);
+  const handleClick = (pageIndex) => {
+    setPageIndex(pageIndex);
   };
 
   return (
     <div className="container">
       <ScrollableNavbar
         pageIndex={pageIndex}
-        navbarItems={['Ageing', 'Acne', 'Redness', 'Dark spots']}
+        navbarItems={navbarItems}
         handleClick={handleClick}
-        justify="justify-center gap-64"
+        justify="md:justify-evenly justify-between"
       />
-      <div className="grid grid-cols-12 items-center my-80">
-        <div className="col-start-2 col-span-5">
-          <div className="flex flex-col justify-center gap-48">
-            <h1 className="font-rufina text-5xl leading-5xl">Our Skin Ages in Two Ways</h1>
-            <div className="flex flex-col gap-40">
-              <div className="flex flex-col gap-16">
-                <p className="font-rufina text-2xl leading-2xl">Intrinsic Factors</p>
-                <p className="text-sm leading-sm">
-                  Intrinsic aging is influenced by genetic and biological processes that dictate inherent
-                  characteristics of the skin, including thickness and elasticity. As individuals age, the production of
-                  essential proteins like collagen and elastin decreases, leading to a loss of skin firmness and the
-                  emergence of wrinkles.
-                </p>
-              </div>
-              <div className="border border-black-100"></div>
-              <div className="flex flex-col gap-16">
-                <p className="font-rufina text-2xl leading-2xl">Extrinsic Factors</p>
-                <p className="text-sm leading-sm">
-                  External factors, known as extrinsic aging factors, notably impact skin aging. Prolonged sun exposure,
-                  especially to UV radiation, leads to photoaging with wrinkles and sunspots. Poor nutrition, inadequate
-                  hydration, and repetitive facial expressions further contribute to extrinsic aging.
-                </p>
+      {categorizedElements[navbarItems[pageIndex]].map((element, index) => (
+        <div key={index} className="grid grid-cols-12 items-center my-80">
+          <div className="md:col-start-2 md:col-span-5 col-span-12 md:order-1 order-2">
+            <div className="flex flex-col justify-center gap-48">
+              <h1 className="font-rufina text-5xl leading-5xl md:mt-0 mt-56">{element.attributes.title}</h1>
+              <div className="flex flex-col gap-40">
+                <div className="flex flex-col gap-16">
+                  {pageIndex === 0
+                    ? element.attributes.description.split('\n').map((description, index) =>
+                        index % 2 === 0 ? (
+                          <p key={index} className="font-rufina text-2xl leading-2xl">
+                            {description}
+                          </p>
+                        ) : (
+                          <>
+                            <p key={index} className="text-sm leading-sm">
+                              {description}
+                            </p>
+                            {index !== element.attributes.description.split('\n').length - 1 && (
+                              <div className="border border-black-100 my-8"></div>
+                            )}
+                          </>
+                        )
+                      )
+                    : element.attributes.description.split('\n').map((description, index) => (
+                        <p key={index} className="text-sm leading-sm">
+                          {description}
+                        </p>
+                      ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-start-8 col-span-5">
-          <div className="relative w-full h-[554px]">
-            <Image src="/ageing-img.png" alt="ageing image" fill className="absolute object-cover" />
+          <div className="md:col-start-8 md:col-span-5 col-span-12 md:order-2 order-1">
+            <div className="relative w-full md:h-[554px] h-[352px]">
+              <Image
+                src={getImageFullUrl(element.attributes.image.data)}
+                alt="ageing image"
+                fill
+                className="absolute object-cover"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

@@ -19,27 +19,21 @@ const ResultsTestimonials = ({ testimonialsData }) => {
           </div>
         </div>
       </div>
-      <div className={classNames('flex gap-24 mb-144', styles.slider)}>
-        {testimonialsData.user_stories.data.map((userStory, index) => (
-          <TestimonialCard
-            key={index}
-            image="/testimonial-img-1.png"
-            /* image={getImageFullUrl(userStory.attributes.image.data)} */
-            name={userStory.attributes.name}
-            border
-            content={userStory.attributes.story}
-          />
-        ))}
-        {testimonialsData.user_stories.data.map((userStory, index) => (
-          <TestimonialCard
-            key={index}
-            image="/testimonial-img-1.png"
-            /* image={getImageFullUrl(userStory.attributes.image.data)} */
-            name={userStory.attributes.name}
-            border
-            content={userStory.attributes.story}
-          />
-        ))}
+      <div className="container md:mb-208 mb-72">
+        <div className="grid grid-cols-12">
+          <div className={classNames('md:flex grid col-span-12 md:gap-24 gap-16', styles.slider)}>
+            {testimonialsData.user_stories.data.map((userStory, index) => (
+              <TestimonialCard
+                key={index}
+                image={getImageFullUrl(userStory.attributes.image.data)}
+                name={userStory.attributes.name}
+                border
+                content={userStory.attributes.story}
+                fixedWidth
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
