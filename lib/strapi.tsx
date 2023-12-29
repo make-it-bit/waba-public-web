@@ -115,7 +115,17 @@ const aboutPageNestedComponents = [
   'difference.button',
 ];
 
-type Pages = 'index' | 'product' | 'science-behind' | 'result' | 'about-us' | 'faq';
+const careersBusinessPageNestedComponents = ['hero_background_image', 'form.button'];
+
+type Pages =
+  | 'index'
+  | 'product'
+  | 'science-behind'
+  | 'result'
+  | 'about-us'
+  | 'faq'
+  | 'careers-at-waba'
+  | 'waba-for-business';
 
 const populatePage = {
   index: indexPageNestedComponents,
@@ -124,6 +134,8 @@ const populatePage = {
   result: resultPageNestedComponents,
   'about-us': aboutPageNestedComponents,
   faq: '*',
+  'careers-at-waba': careersBusinessPageNestedComponents,
+  'waba-for-business': careersBusinessPageNestedComponents,
 };
 
 export const getPageData = async (page: Pages) => {
