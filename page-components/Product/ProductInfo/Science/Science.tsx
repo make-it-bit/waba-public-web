@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import classNames from 'classnames';
 
 const Science = ({ background, scienceData }) => {
@@ -9,9 +10,36 @@ const Science = ({ background, scienceData }) => {
           <source src="/chest-video.mp4" type="video/mp4" />
         </video>
         <div className={classNames('absolute w-full h-full inset-0 z-[-1]', background)}></div>
-        <div className="lg:col-start-2 lg:col-span-4 col-span-12 text-white-100 lg:text-left text-center">
-          <h1 className="font-rufina text-4xl leading-4xl mb-32">{scienceData.title}</h1>
-          <p className="text-sm leading-sm">{scienceData.description}</p>
+        <div className="col-span-12">
+          <h1 className="lg:hidden block font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl text-white-100 text-center mb-48">
+            {scienceData.title}
+          </h1>
+        </div>
+        <div className="lg:col-start-2 lg:col-span-4 col-span-12 text-white-100 lg:order-1 order-2">
+          <div className="flex flex-col justify-center gap-32 h-full">
+            <h1 className="lg:block hidden font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl">
+              {scienceData.title}
+            </h1>
+            <p className="text-sm leading-sm lg:text-left text-center lg:mt-0 mt-48">{scienceData.description}</p>
+          </div>
+        </div>
+        <div className="lg:col-start-6 lg:col-span-6 col-span-12 lg:order-2 order-1">
+          <div className="flex justify-center items-center h-full">
+            <Image
+              src="/photobiomodulation-white.png"
+              alt="photobiomodulation graph"
+              width={635}
+              height={396}
+              className="lg:block hidden"
+            />
+            <Image
+              src="/photobiomodulation-white.svg"
+              alt="photobiomodulation graph"
+              width={635}
+              height={396}
+              className="lg:hidden block"
+            />
+          </div>
         </div>
         <div className="col-start-6 col-span-6"></div>
       </div>
