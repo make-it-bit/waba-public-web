@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 import { Button, TextInput, Textarea } from '../../gui-components/client';
 
@@ -13,6 +14,19 @@ const Form = ({ formData }) => {
     subject: '',
     enquiry: '',
   });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = () => {
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      number: '',
+      subject: '',
+      enquiry: '',
+    });
+    setSubmitted(true);
+  };
 
   return (
     <div className="relative lg:pb-400 z-20">
@@ -69,9 +83,16 @@ const Form = ({ formData }) => {
                     placeholder={formData.enquiry_placeholder}
                     onChange={(e) => setForm({ ...form, enquiry: e.target.value })}
                   />
-                  <div className="lg:flex contents justify-end mt-24">
-                    <Button CTA={formData.button.href_text} onClick={() => {}} svg />
-                  </div>
+                  {submitted ? (
+                    <div className="bg-signal-green-10 flex justify-center items-center gap-8 py-12">
+                      <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                      <p className="text-xs leading-xs text-signal-green-100">Thank you. You submitted successfully!</p>
+                    </div>
+                  ) : (
+                    <div className="lg:flex contents justify-end mt-24">
+                      <Button CTA={formData.button.href_text} onClick={handleSubmit} svg />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
