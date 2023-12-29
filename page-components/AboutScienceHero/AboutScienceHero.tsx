@@ -23,7 +23,6 @@ const AboutScienceHero = ({ title, content, image, video, background }: AboutSci
             fill
             className="absolute w-full h-full object-cover inset-0 z-[-1]"
           />
-
           <div className={classNames('absolute w-full h-full top-0 left-0 z-[-1]', styles.background)}></div>
         </>
       )}

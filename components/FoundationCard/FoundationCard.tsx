@@ -22,7 +22,7 @@ const FoundationCard = ({
       )}
     >
       <Image src={icon} alt="icon" width={56} height={56} />
-      <h1 className="font-rufina text-3xl leading-3xl">{title}</h1>
+      <h1 className="font-rufina md:text-3xl text-2xl md:leading-3xl leading-2xl">{title}</h1>
       <p className="text-sm leading-sm">{content}</p>
     </div>
   );

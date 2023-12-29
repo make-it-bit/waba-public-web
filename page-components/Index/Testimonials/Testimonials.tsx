@@ -15,7 +15,7 @@ const Testimonials = ({ testimonialsData }) => {
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="md:col-start-4 col-start-1 md:col-span-6 col-span-12 text-center md:mt-160 md:mb-128 my-72">
-            <h1 className="font-rufina text-4xl leading-4xl">{testimonialsData.title}</h1>
+            <h1 className="font-rufina sm:text-4xl text-3xl sm:leading-4xl leading-3xl">{testimonialsData.title}</h1>
           </div>
         </div>
         <div className="grid grid-cols-12 md:pb-208 pb-72 gap-24">

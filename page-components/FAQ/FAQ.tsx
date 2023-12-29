@@ -2,17 +2,19 @@
 
 import React, { useState } from 'react';
 
-import { FaqShipping } from '../../page-components';
-
 import { ScrollableNavbar } from '../../components';
 
 const FAQ = ({ faqPageData }) => {
-  //console.log('faqPageData: ', faqPageData);
-  const navbarPages = [<FaqShipping key={0} />];
+  const categorizedElements = faqPageData.faq_elements.data.reduce((acc, element) => {
+    const category = element.attributes.category;
+    acc[category] = acc[category] ? [...acc[category], element] : [element];
+    return acc;
+  }, {});
+  const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const handleClick = (index) => {
-    setPageIndex(0);
+  const handleClick = (pageIndex) => {
+    setPageIndex(pageIndex);
   };
 
   return (
@@ -28,7 +30,7 @@ const FAQ = ({ faqPageData }) => {
             <div className="lg:col-start-3 lg:col-span-8 col-span-12">
               <ScrollableNavbar
                 pageIndex={pageIndex}
-                navbarItems={['Shipping', 'Returns & Refunds', 'Payments', 'Benefits', 'Device technical', 'Safety']}
+                navbarItems={navbarItems}
                 handleClick={handleClick}
                 justify="justify-between"
               />
@@ -37,7 +39,18 @@ const FAQ = ({ faqPageData }) => {
         </div>
       </div>
       <div className="container">
-        <div className="grid grid-cols-12">{navbarPages[pageIndex]}</div>
+        <div className="grid grid-cols-12">
+          <div className="md:col-start-3 col-start-1 md:col-span-8 col-span-12 md:mt-48 md:mb-40 mb-16">
+            <div className="flex flex-col">
+              {categorizedElements[navbarItems[pageIndex]].map((element, index) => (
+                <div key={index} className="flex flex-col gap-16 border-b border-black-100 px-16 py-32">
+                  <p className="text-base leading-base">{element.attributes.question}</p>
+                  <p className="text-xs leading-xs">{element.attributes.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
