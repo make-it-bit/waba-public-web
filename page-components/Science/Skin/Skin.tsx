@@ -42,14 +42,12 @@ const Skin = ({ skinData }) => {
                             {description}
                           </p>
                         ) : (
-                          <>
-                            <p key={index} className="text-sm leading-sm">
-                              {description}
-                            </p>
+                          <React.Fragment key={index}>
+                            <p className="text-sm leading-sm">{description}</p>
                             {index !== element.attributes.description.split('\n').length - 1 && (
                               <div className="border border-black-100 my-8"></div>
                             )}
-                          </>
+                          </React.Fragment>
                         )
                       )
                     : element.attributes.description.split('\n').map((description, index) => (

@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { getImageFullUrl } from '../../../lib/strapi';
+
 const Photobiomodulation = ({ photobiomodulationData }) => {
   return (
     <div className="bg-supplementary-warm-gray">
@@ -24,14 +26,14 @@ const Photobiomodulation = ({ photobiomodulationData }) => {
           <div className="lg:col-start-6 lg:col-span-6 col-span-12 lg:order-2 order-1">
             <div className="flex justify-center items-center h-full">
               <Image
-                src="/photobiomodulation.png"
+                src={getImageFullUrl(photobiomodulationData.image.data[0])}
                 alt="photobiomodulation graph"
                 width={635}
                 height={396}
                 className="lg:block hidden"
               />
               <Image
-                src="/photobiomodulation.svg"
+                src={getImageFullUrl(photobiomodulationData.image.data[1])}
                 alt="photobiomodulation graph"
                 width={635}
                 height={396}

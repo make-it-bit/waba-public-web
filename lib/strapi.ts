@@ -79,7 +79,7 @@ const productPageNestedComponents = [
   'hero.button_2',
   'hero.powered_by_logos',
   'product_info.feature_cards.icon',
-  'product_info.photobiomodulation',
+  'product_info.photobiomodulation.image',
   'product_info.included',
   'product_info.stories.image',
   'product_info.stories.button',
@@ -93,7 +93,7 @@ const productPageNestedComponents = [
 const sciencePageNestedComponents = [
   'hero',
   'skin.skins.image',
-  'photobiomodulation',
+  'photobiomodulation.image',
   'wavelength',
   'beam',
   'text_image.image',
