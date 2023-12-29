@@ -39,7 +39,11 @@ const Hero = ({ heroData }) => {
                 <Button CTA={heroData.button_1.href_text} svg />
               </Link>
               {heroData.button_2.map((button, index) => (
-                <Link key={index} href={button.href_src}>
+                <Link
+                  key={index}
+                  href={button.href_src}
+                  onClick={() => window.scrollTo({ top: 1133, behavior: 'smooth' })}
+                >
                   <Button CTA={button.href_text} style="secondary" />
                 </Link>
               ))}

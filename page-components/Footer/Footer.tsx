@@ -13,9 +13,15 @@ import styles from './_footer.module.scss';
 
 const Footer = ({ footerData, small = false }) => {
   const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
+  };
+
+  const handleSubscribe = () => {
+    setEmail('');
+    setSubscribed(true);
   };
 
   return (
@@ -24,7 +30,7 @@ const Footer = ({ footerData, small = false }) => {
         <div
           className={classNames(
             'grid grid-cols-12',
-            small ? 'pt-48 pb-72' : 'md:pt-224 pt-120 md:pb-32 pb-72 md:mt-456 mt-1000'
+            small ? 'pt-48 pb-72' : 'md:pt-224 pt-128 md:pb-32 pb-72 md:mt-456 mt-1000'
           )}
         >
           {!small && (
@@ -34,16 +40,28 @@ const Footer = ({ footerData, small = false }) => {
                 <h1 className="font-rufina text-4xl leading-4xl">{footerData.footer_top.title}</h1>
                 <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>
-              <div className="flex md:flex-row flex-col md:gap-8 gap-16">
-                <TextInput
-                  theme="light"
-                  name="footer-email"
-                  value={email}
-                  placeholder={footerData.footer_top.input_placeholder}
-                  onChange={handleChange}
-                />
-                <Button CTA={footerData.footer_top.input_button.href_text} style="tertiary" onClick={() => {}} svg />
-              </div>
+              {subscribed ? (
+                <div className="bg-signal-green-10 flex justify-center items-center gap-8 py-12">
+                  <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                  <p className="text-xs leading-xs text-signal-green-100">Thank you. You subscribed successfully!</p>
+                </div>
+              ) : (
+                <div className="flex md:flex-row flex-col md:gap-8 gap-16">
+                  <TextInput
+                    theme="light"
+                    name="footer-email"
+                    value={email}
+                    placeholder={footerData.footer_top.input_placeholder}
+                    onChange={handleChange}
+                  />
+                  <Button
+                    CTA={footerData.footer_top.input_button.href_text}
+                    style="tertiary"
+                    onClick={handleSubscribe}
+                    svg
+                  />
+                </div>
+              )}
             </div>
           )}
           <div className="col-start-2 col-span-10">

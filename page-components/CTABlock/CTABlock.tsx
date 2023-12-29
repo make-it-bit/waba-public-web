@@ -21,8 +21,8 @@ const CTABlock = ({ ctaBlockData }) => {
             <Link href={ctaBlockData.button_1.href_src} className="md:flex contents justify-center">
               <Button CTA={ctaBlockData.button_1.href_text} svg />
             </Link>
-            <div className="border border-black-20"></div>
-            <div className="flex md:flex-row flex-col gap-y-16">
+            <div className="border border-black-20 w-full"></div>
+            <div className="flex md:flex-row flex-col gap-y-16 w-full">
               <div className="flex flex-col grow-1 md:text-left text-center gap-8">
                 <p className="font-rufina text-xl leading-xl">{ctaBlockData.trade_in_line_1}</p>
                 <p className="text-sm leading-sm text-black-80">{ctaBlockData.trade_in_line_2}</p>

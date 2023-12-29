@@ -18,7 +18,7 @@ const NavbarDesktop = ({ navbarData }) => {
               </Link>
             ))}
           </div>
-          <div className="flex flex-1 justify-center">
+          <div className="flex flex-0 justify-center">
             <Link href="/">
               <Image src={getImageFullUrl(navbarData.waba_logos.data[0])} alt="waba logo" width={96} height={24} />
             </Link>

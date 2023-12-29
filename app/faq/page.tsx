@@ -5,9 +5,6 @@ import { getFaqElements, getPageData, getComponentData } from '../../lib/strapi'
 import { FAQ, LogoBar, CTABlock, PreFooterCard, Footer } from '../../page-components';
 
 const FAQPage = async () => {
-  /* const faqElements = await getFaqElements();
-  console.log('faqElements: ', faqElements); */
-
   const faqPageData = await getPageData('faq');
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');

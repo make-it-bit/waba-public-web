@@ -1,12 +1,18 @@
 'use client';
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 import { Button, TextInput, Textarea } from '../../gui-components/client';
 
 const Form = ({ formData }) => {
-  const router = useRouter();
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    number: '',
+    subject: '',
+    enquiry: '',
+  });
 
   return (
     <div className="relative lg:pb-400 z-20">
@@ -26,23 +32,43 @@ const Form = ({ formData }) => {
                   <div className="flex gap-24">
                     <TextInput
                       name="first-name"
-                      value=""
+                      value={form.firstName}
                       placeholder={formData.first_name_placeholder}
-                      onChange={() => {}}
+                      onChange={(e) => setForm({ ...form, firstName: e.target.value })}
                     />
                     <TextInput
                       name="last-name"
-                      value=""
+                      value={form.lastName}
                       placeholder={formData.last_name_placeholder}
-                      onChange={() => {}}
+                      onChange={(e) => setForm({ ...form, lastName: e.target.value })}
                     />
                   </div>
                   <div className="flex gap-24">
-                    <TextInput name="email" value="" placeholder={formData.email_placeholder} onChange={() => {}} />
-                    <TextInput name="number" value="" placeholder={formData.number_placeholder} onChange={() => {}} />
+                    <TextInput
+                      name="email"
+                      value={form.email}
+                      placeholder={formData.email_placeholder}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    />
+                    <TextInput
+                      name="number"
+                      value={form.number}
+                      placeholder={formData.number_placeholder}
+                      onChange={(e) => setForm({ ...form, number: e.target.value })}
+                    />
                   </div>
-                  <TextInput name="subject" value="" placeholder={formData.subject_placeholder} onChange={() => {}} />
-                  <Textarea name="enquiry" value="" placeholder={formData.enquiry_placeholder} onChange={() => {}} />
+                  <TextInput
+                    name="subject"
+                    value={form.subject}
+                    placeholder={formData.subject_placeholder}
+                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  />
+                  <Textarea
+                    name="enquiry"
+                    value={form.enquiry}
+                    placeholder={formData.enquiry_placeholder}
+                    onChange={(e) => setForm({ ...form, enquiry: e.target.value })}
+                  />
                   <div className="lg:flex contents justify-end mt-24">
                     <Button CTA={formData.button.href_text} onClick={() => {}} svg />
                   </div>
