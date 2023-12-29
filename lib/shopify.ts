@@ -83,7 +83,6 @@ export const createCheckout = async (lineItems: LineItem[]): Promise<CheckoutCre
     `;
     const input: CheckoutCreateInput = { lineItems };
     const response = await graphQLClient.request<CheckoutCreateResponse>(QUERY, { input });
-    console.log('checkout:', response);
     return response;
   } catch (error) {
     console.log('error: ', error);
