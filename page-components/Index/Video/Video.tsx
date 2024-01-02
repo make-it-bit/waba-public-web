@@ -5,9 +5,11 @@ import React, { useRef, useEffect } from 'react';
 
 import styles from './_video.module.scss';
 
+// TUTORIAL: https://codepen.io/Maltsbier/pen/dyYmGGq
+
 const Video = ({ videoData }) => {
+  const boundRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const boundRef = useRef(null);
 
   useEffect(() => {
     const scrollVideo = () => {
