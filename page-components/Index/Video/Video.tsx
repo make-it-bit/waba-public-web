@@ -1,36 +1,32 @@
-/* 'use client'; */
+'use client';
 
-import React /* , { useRef, useEffect } */ from 'react';
+import classNames from 'classnames';
+import React, { useRef, useEffect } from 'react';
+
+import { videoWrapper } from './_video.module.scss';
 
 const Video = ({ videoData }) => {
-  /* const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const boundRef = useRef(null);
 
-  const videoIsVisibleInViewport = (video: HTMLVideoElement) => {
-    const { top, bottom } = video.getBoundingClientRect();
-    const { innerHeight } = window;
-    return top >= 0 && bottom <= innerHeight;
-  };
-
   useEffect(() => {
-    const handleScroll = () => {
+    const scrollVideo = () => {
       const video = videoRef.current;
-      if (boundRef.current && videoIsVisibleInViewport(boundRef.current)) {
-        video?.play();
-      } else {
-        video?.pause();
+      const bound = boundRef.current;
+      if (video && video.duration && bound) {
+        const distanceFromTop = window.scrollY + bound.getBoundingClientRect().top;
+        const rawPercentScrolled = (window.scrollY - distanceFromTop) / (bound.scrollHeight - window.innerHeight);
+        const percentScrolled = Math.min(Math.max(rawPercentScrolled, 0), 1);
+        video.currentTime = video.duration * percentScrolled;
       }
+      requestAnimationFrame(scrollVideo);
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []); */
+    requestAnimationFrame(scrollVideo);
+  }, []);
 
   return (
-    <div className="relative">
-      <div /* ref={boundRef} */ className="md:block hidden container absolute top-96 left-1/2 translate-x-neg-1/2 z-10">
+    <div ref={boundRef} className={classNames('relative', videoWrapper)}>
+      <div className="md:block hidden container absolute top-96 left-1/2 translate-x-neg-1/2 z-10">
         <div className="grid grid-cols-12">
           <div className="col-start-5 col-span-4 text-center">
             <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
@@ -38,10 +34,12 @@ const Video = ({ videoData }) => {
         </div>
       </div>
       <video
-        /* ref={videoRef} */ muted
+        ref={videoRef}
+        muted
         autoPlay
         loop
-        className="w-full h-full object-cover mix-blend-luminosity z-[-1]"
+        className="w-full h-screen z-[-1] sticky top-0 flex flex-col justify-center items-center"
+        // object-cover mix-blend-luminosity
       >
         <source src="/scrollable-video.mp4" type="video/mp4" />
       </video>
