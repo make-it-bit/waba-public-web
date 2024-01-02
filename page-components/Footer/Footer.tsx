@@ -87,13 +87,24 @@ const Footer = ({ footerData, small = false }) => {
                       placeholder={footerData.footer_top.input_placeholder}
                       onChange={handleChange}
                     />
-                    <Button
-                      CTA={footerData.footer_top.input_button.href_text}
-                      style="tertiary"
-                      onClick={handleSubscribe}
-                      disabled={subscribed}
-                      svg
-                    />
+                    {subscribed && message === '' ? (
+                      <div className="bg-deep-purple-20 flex justify-center items-center px-24 py-8">
+                        <div
+                          className={classNames(
+                            'w-24 h-24 border-2 border-purple-100 border-b-transparent rounded-[50%]',
+                            styles.loader
+                          )}
+                        ></div>
+                      </div>
+                    ) : (
+                      <Button
+                        CTA={footerData.footer_top.input_button.href_text}
+                        style="tertiary"
+                        onClick={handleSubscribe}
+                        disabled={subscribed}
+                        svg
+                      />
+                    )}
                   </div>
                   {message !== '' && (
                     <div className="bg-signal-red-10 flex justify-center items-center gap-8 py-12 mt-8">
