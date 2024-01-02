@@ -16,7 +16,7 @@ const NavbarMobile = ({ navbarData }) => {
   };
 
   return isOpen ? (
-    <div className="lg:hidden block fixed bg-black-100 w-full h-screen z-20">
+    <div className="lg:hidden block fixed bg-black-100 w-full h-screen z-[500]">
       <div className="container">
         <div className="relative flex justify-between items-center py-12 gap-8">
           <Image
