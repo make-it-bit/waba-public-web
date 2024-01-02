@@ -41,7 +41,7 @@ const Video = ({ videoData }) => {
         autoPlay
         loop
         className="w-full h-screen z-[-1] sticky top-0 flex flex-col justify-center items-center"
-        // object-cover mix-blend-luminosity
+        // mix-blend-luminosity
       >
         <source src="/scrollable-video.mp4" type="video/mp4" />
       </video>
