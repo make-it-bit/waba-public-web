@@ -4,11 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { Tag } from '../../../components';
+import { Tag } from '@/components';
 
-import { Button } from '../../../gui-components/client';
+import { Button } from '@/gui-components/client';
 
 import styles from './_hero.module.scss';
 

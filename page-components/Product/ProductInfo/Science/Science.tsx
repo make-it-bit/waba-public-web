@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '../../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
 const Science = ({ background, scienceData }) => {
   return (

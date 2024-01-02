@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 
-import { ScrollableNavbar } from '../../../components';
+import { ScrollableNavbar } from '@/components';
 
 import styles from './_productFAQ.module.scss';
 

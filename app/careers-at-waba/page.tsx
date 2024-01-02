@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { getPageData, getComponentData, getImageFullUrl } from '../../lib/strapi';
+import { getPageData, getComponentData, getImageFullUrl } from '@/lib/strapi';
 
-import { BusinessCareersHero, CareersAtWaba, Footer } from '../../page-components';
+import { BusinessCareersHero, CareersAtWaba, Footer } from '@/page-components';
 
 const CareersAtWABA = async () => {
   const careersPageData = await getPageData('careers-at-waba');

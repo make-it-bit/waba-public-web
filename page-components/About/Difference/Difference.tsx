@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { Button } from '../../../gui-components/client';
+import { Button } from '@/gui-components/client';
 
 import styles from './_difference.module.scss';
 

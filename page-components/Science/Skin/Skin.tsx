@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { ScrollableNavbar } from '../../../components';
+import { ScrollableNavbar } from '@/components';
 
 const Skin = ({ skinData }) => {
   const categorizedElements = skinData.reduce((acc, element) => {

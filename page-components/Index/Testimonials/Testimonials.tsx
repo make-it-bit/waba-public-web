@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import classNames from 'classnames';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { TestimonialCard } from '../../../components';
+import { TestimonialCard } from '@/components';
 
 import styles from './_testimonials.module.scss';
 

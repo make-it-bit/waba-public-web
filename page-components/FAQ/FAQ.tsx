@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 
-import { ScrollableNavbar } from '../../components';
+import { ScrollableNavbar } from '@/components';
 
 const FAQ = ({ faqPageData }) => {
   const categorizedElements = faqPageData.faq_elements.data.reduce((acc, element) => {

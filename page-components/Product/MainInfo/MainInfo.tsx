@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { Button } from '../../../gui-components/client';
+import { Button } from '@/gui-components/client';
 
-import { Tag } from '../../../components';
+import { Tag } from '@/components';
 
 import styles from './_mainInfo.module.scss';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
 const ExampleBlock = ({ title, image, contentArray }) => {
   const subtitles = ['Target', 'Protocol', 'Result'];

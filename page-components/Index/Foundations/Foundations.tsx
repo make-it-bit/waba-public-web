@@ -3,11 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { FoundationCard } from '../../../components';
+import { FoundationCard } from '@/components';
 
-import { Button } from '../../../gui-components/client';
+import { Button } from '@/gui-components/client';
 
 import styles from './_foundations.module.scss';
 

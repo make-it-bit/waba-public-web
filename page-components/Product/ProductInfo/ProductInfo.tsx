@@ -9,7 +9,7 @@ import Included from './Included/Included';
 import Results from './Results/Results';
 import Specifications from './Specifications/Specifications';
 
-import { ScrollableNavbar } from '../../../components';
+import { ScrollableNavbar } from '@/components';
 
 import styles from './_productInfo.module.scss';
 

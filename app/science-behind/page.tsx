@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { getImageFullUrl } from '../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { getPageData, getComponentData } from '../../lib/strapi';
+import { getPageData, getComponentData } from '@/lib/strapi';
 
 import {
   AboutScienceHero,
@@ -16,7 +16,7 @@ import {
   CTABlock,
   PreFooterCard,
   Footer,
-} from '../../page-components';
+} from '@/page-components';
 
 const ScienceBehind = async () => {
   const sciencePageData = await getPageData('science-behind');

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@shopify/shopify-api": "^8.1.1",
     "classnames": "^2.3.2",
     "fetch-to-curl": "^0.6.0",

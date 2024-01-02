@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { getImageFullUrl } from '../../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { TestimonialCard } from '../../../../components';
+import { TestimonialCard } from '@/components';
 
 const Results = ({ title, resultsData }) => {
   return (

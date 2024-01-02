@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { Button, TextInput, Textarea } from '../../gui-components/client';
+import { Button, TextInput, Textarea } from '@/gui-components/client';
 
 const Form = ({ formData }) => {
   const [form, setForm] = useState({

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { getFaqElements, getPageData, getComponentData } from '../../lib/strapi';
+import { getPageData, getComponentData } from '@/lib/strapi';
 
-import { FAQ, LogoBar, CTABlock, PreFooterCard, Footer } from '../../page-components';
+import { FAQ, LogoBar, CTABlock, PreFooterCard, Footer } from '@/page-components';
 
 const FAQPage = async () => {
   const faqPageData = await getPageData('faq');

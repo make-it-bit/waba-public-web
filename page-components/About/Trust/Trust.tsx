@@ -2,9 +2,9 @@
 
 import React from 'react';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { FoundationCard } from '../../../components';
+import { FoundationCard } from '@/components';
 
 import styles from './_trust.module.scss';
 

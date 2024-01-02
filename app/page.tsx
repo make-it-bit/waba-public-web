@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { getComponentData, getPageData } from '../lib/strapi';
-
-export const dynamic = 'force-static';
+import { getComponentData, getPageData } from '@/lib/strapi';
 
 import {
   Hero,
@@ -14,7 +12,9 @@ import {
   CTABlock,
   PreFooterCard,
   Footer,
-} from '../page-components';
+} from '@/page-components';
+
+export const dynamic = 'force-static';
 
 const Home = async () => {
   const indexPageData = await getPageData('index');

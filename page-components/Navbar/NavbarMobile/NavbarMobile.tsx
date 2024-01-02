@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getImageFullUrl } from '../../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { Button } from '../../../gui-components/client';
+import { Button } from '@/gui-components/client';
 
 const NavbarMobile = ({ navbarData }) => {
   const [isOpen, setIsOpen] = useState(false);

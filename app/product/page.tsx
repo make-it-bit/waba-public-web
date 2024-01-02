@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { getPageData, getComponentData } from '../../lib/strapi';
-import { getProductById, createCheckout } from '../../lib/shopify';
+import { getPageData, getComponentData } from '@/lib/strapi';
+import { getProductById, createCheckout } from '@/lib/shopify';
+
+import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer } from '@/page-components';
 
 export const dynamic = 'force-static';
-
-import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer } from '../../page-components';
 
 const Product = async () => {
   const productPageData = await getPageData('product');

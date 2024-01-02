@@ -5,23 +5,55 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '../../lib/strapi';
+import { getImageFullUrl } from '@/lib/strapi';
 
-import { TextInput, Button } from '../../gui-components/client';
+import { TextInput, Button } from '@/gui-components/client';
 
 import styles from './_footer.module.scss';
 
 const Footer = ({ footerData, small = false }) => {
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+
+  const messageMap = (message) =>
+    ({
+      MEMBER_EXISTS: 'This email has already been added.',
+      INVALID_RESOURCE: 'Please enter a valid email address.',
+      UNKNOWN_ERROR: 'An unknown error occurred.',
+      SUCCESS: 'Thank you. You subscribed successfully!',
+    }[message]);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const handleSubscribe = () => {
-    setEmail('');
-    setSubscribed(true);
+  const handleSubscribe = async () => {
+    try {
+      setMessage('');
+      setSubscribed(true);
+      const response = await fetch('api/mailchimp/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      let answer;
+      if (response.ok) {
+        answer = 'SUCCESS';
+      } else {
+        const { message } = await response.json();
+        answer = message;
+        setEmail('');
+        setSubscribed(false);
+      }
+      setMessage(messageMap(answer));
+    } catch (error) {
+      setEmail('');
+      setMessage(messageMap(error.message));
+      setSubscribed(false);
+    }
   };
 
   return (
@@ -40,27 +72,35 @@ const Footer = ({ footerData, small = false }) => {
                 <h1 className="font-rufina text-4xl leading-4xl">{footerData.footer_top.title}</h1>
                 <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>
-              {subscribed ? (
+              {message === 'SUCCESS' ? (
                 <div className="bg-signal-green-10 flex justify-center items-center gap-8 py-12">
                   <Image src="/icons/check.svg" alt="check" width={16} height={16} />
-                  <p className="text-xs leading-xs text-signal-green-100">Thank you. You subscribed successfully!</p>
+                  <p className="text-xs leading-xs text-signal-green-100">{message}</p>
                 </div>
               ) : (
-                <div className="flex md:flex-row flex-col md:gap-8 gap-16">
-                  <TextInput
-                    theme="light"
-                    name="footer-email"
-                    value={email}
-                    placeholder={footerData.footer_top.input_placeholder}
-                    onChange={handleChange}
-                  />
-                  <Button
-                    CTA={footerData.footer_top.input_button.href_text}
-                    style="tertiary"
-                    onClick={handleSubscribe}
-                    svg
-                  />
-                </div>
+                <>
+                  <div className="flex md:flex-row flex-col md:gap-8 gap-16">
+                    <TextInput
+                      theme="light"
+                      name="footer-email"
+                      value={email}
+                      placeholder={footerData.footer_top.input_placeholder}
+                      onChange={handleChange}
+                    />
+                    <Button
+                      CTA={footerData.footer_top.input_button.href_text}
+                      style="tertiary"
+                      onClick={handleSubscribe}
+                      disabled={subscribed}
+                      svg
+                    />
+                  </div>
+                  {message !== '' && (
+                    <div className="bg-signal-red-10 flex justify-center items-center gap-8 py-12 mt-8">
+                      <p className="text-xs leading-xs text-signal-red-100">{message}</p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}

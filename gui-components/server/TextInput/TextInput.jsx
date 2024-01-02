@@ -34,7 +34,7 @@ const TextInput = ({
           className={classNames(
             /* sizes, */
             themes,
-            errorMessage && 'border-signal-red text-black-60',
+            errorMessage && 'border-signal-red-100 text-black-60',
             'w-100 px-16',
             padding
           )}

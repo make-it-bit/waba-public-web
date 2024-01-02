@@ -33,7 +33,7 @@ const Textarea = ({
         className={classNames(
           /* sizes, */
           themes,
-          /* errorMessage && "border-signal-red text-black-60", */
+          /* errorMessage && "border-signal-red-100 text-black-60", */
           'w-full px-16 py-8 text-sm leading-sm'
         )}
         id={name}
