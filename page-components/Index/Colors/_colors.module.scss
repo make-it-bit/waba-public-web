@@ -1,31 +1,19 @@
 .textBlue {
-  background: radial-gradient(
-    51.56% 188.16% at 50% 50%,
-    #3aacff 0%,
-    #ede4f3 100%
-  );
+  background: radial-gradient(51.56% 188.16% at 50% 50%, #3aacff 0%, #ede4f3 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .textRed {
-  background: radial-gradient(
-    64.33% 188.16% at 50% 50%,
-    #e82d04 0%,
-    rgba(237, 228, 243, 0) 100%
-  );
+  background: radial-gradient(64.33% 188.16% at 50% 50%, #e82d04 0%, rgba(237, 228, 243, 0) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .textInfrared {
-  background: radial-gradient(
-    64.33% 188.16% at 50% 50%,
-    #ff135a 0%,
-    rgba(237, 228, 243, 0) 100%
-  );
+  background: radial-gradient(64.33% 188.16% at 50% 50%, #ff135a 0%, rgba(237, 228, 243, 0) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
