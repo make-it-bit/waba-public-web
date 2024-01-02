@@ -21,7 +21,7 @@ const Features = ({ featuresData }) => {
       {featuresData.map((feature, index) => (
         <FeatureCard
           key={index}
-          icon={getImageFullUrl(feature.icon.data)}
+          icon={getImageFullUrl(feature.icon.data[0])}
           title={feature.title}
           description={feature.description}
         />
