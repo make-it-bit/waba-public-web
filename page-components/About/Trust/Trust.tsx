@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { getImageFullUrl } from '@/lib/strapi';
-
 import { FoundationCard } from '@/components';
 
 import styles from './_trust.module.scss';
@@ -23,19 +21,11 @@ const Trust = ({ trustData }) => {
           </div>
           <div className="grid grid-cols-12 lg:mb-80 mb-32">
             <div className="col-start-1 lg:col-span-3 col-span-12">
-              <FoundationCard
-                icon={getImageFullUrl(trustData.reason_1.icon.data)}
-                title={trustData.reason_1.title}
-                content={trustData.reason_1.description}
-                bottomBorder
-                paddingMargin="px-48 pt-56 pb-40"
-              />
+              <FoundationCard foundationCardData={trustData.reason_1} bottomBorder paddingMargin="px-48 pt-56 pb-40" />
             </div>
             <div className="lg:col-start-4 col-start-1 lg:col-span-3 col-span-12">
               <FoundationCard
-                icon={getImageFullUrl(trustData.reason_2.icon.data)}
-                title={trustData.reason_2.title}
-                content={trustData.reason_2.description}
+                foundationCardData={trustData.reason_2}
                 leftBorder
                 rightBorder
                 bottomBorder
@@ -44,21 +34,14 @@ const Trust = ({ trustData }) => {
             </div>
             <div className="lg:col-start-7 col-start-1 lg:col-span-3 col-span-12">
               <FoundationCard
-                icon={getImageFullUrl(trustData.reason_3.icon.data)}
-                title={trustData.reason_3.title}
-                content={trustData.reason_3.description}
+                foundationCardData={trustData.reason_3}
                 rightBorder
                 bottomBorder
                 paddingMargin="px-48 pt-56 pb-40"
               />
             </div>
             <div className="lg:col-start-10 col-start-1 lg:col-span-3 col-span-12">
-              <FoundationCard
-                icon={getImageFullUrl(trustData.reason_4.icon.data)}
-                title={trustData.reason_4.title}
-                content={trustData.reason_4.description}
-                paddingMargin="px-48 pt-56 pb-40"
-              />
+              <FoundationCard foundationCardData={trustData.reason_4} paddingMargin="px-48 pt-56 pb-40" />
             </div>
           </div>
         </div>

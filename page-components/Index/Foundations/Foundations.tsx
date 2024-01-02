@@ -3,8 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { getImageFullUrl } from '@/lib/strapi';
-
 import { FoundationCard } from '@/components';
 
 import { Button } from '@/gui-components/client';
@@ -24,30 +22,27 @@ const Foundations = ({ foundationsData }) => {
           <div className="grid grid-cols-12 md:mb-80 mb-40">
             <div className="col-start-1 md:col-span-4 col-span-12">
               <FoundationCard
-                icon={getImageFullUrl(foundationsData.foundation_card_1.icon.data)}
-                title={foundationsData.foundation_card_1.title}
-                content={foundationsData.foundation_card_1.description}
+                foundationCardData={foundationsData.foundation_card_1}
                 bottomBorder
                 paddingMargin="md:px-80 px-16 md:py-48 py-40"
+                transition
               />
             </div>
             <div className="md:col-start-5 col-start-1 md:col-span-4 col-span-12">
               <FoundationCard
-                icon="/icons/effective.svg"
-                title={foundationsData.foundation_card_2.title}
-                content={foundationsData.foundation_card_2.description}
+                foundationCardData={foundationsData.foundation_card_2}
                 leftBorder
                 rightBorder
                 bottomBorder
                 paddingMargin="md:px-80 px-16 md:py-48 py-40"
+                transition
               />
             </div>
             <div className="md:col-start-9 col-start-1 md:col-span-4 col-span-12">
               <FoundationCard
-                icon="/icons/safe.svg"
-                title={foundationsData.foundation_card_3.title}
-                content={foundationsData.foundation_card_3.description}
+                foundationCardData={foundationsData.foundation_card_3}
                 paddingMargin="md:px-80 px-16 md:py-48 py-40"
+                transition
               />
             </div>
           </div>

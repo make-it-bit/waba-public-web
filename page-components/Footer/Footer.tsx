@@ -16,14 +16,6 @@ const Footer = ({ footerData, small = false }) => {
   const [message, setMessage] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const messageMap = (message) =>
-    ({
-      MEMBER_EXISTS: 'This email has already been added.',
-      INVALID_RESOURCE: 'Please enter a valid email address.',
-      UNKNOWN_ERROR: 'An unknown error occurred.',
-      SUCCESS: 'Thank you. You subscribed successfully!',
-    }[message]);
-
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
@@ -45,13 +37,12 @@ const Footer = ({ footerData, small = false }) => {
       } else {
         const { message } = await response.json();
         answer = message;
-        setEmail('');
         setSubscribed(false);
       }
-      setMessage(messageMap(answer));
+      setMessage(footerData.footer_top[answer]);
     } catch (error) {
       setEmail('');
-      setMessage(messageMap(error.message));
+      setMessage(footerData.footer_top['UNKNOWN_ERROR']);
       setSubscribed(false);
     }
   };

@@ -39,7 +39,7 @@ const Form = ({ formData }) => {
         });
         if (response.status === 200) {
           setMessageStatus('success');
-          setMessage("Thank you. You've submitted the form successfully!");
+          setMessage(formData['SUCCESS']);
           setForm({
             firstName: '',
             lastName: '',
@@ -51,12 +51,12 @@ const Form = ({ formData }) => {
           setSubmitted(false);
         } else {
           setMessageStatus('error');
-          setMessage('Sorry, an error occurred while submitting the form. Please try again later.');
+          setMessage(formData['UNKNOWN_ERROR']);
           setSubmitted(false);
         }
       } catch (error) {
         setMessageStatus('error');
-        setMessage('Sorry, an error occurred while submitting the form. Please try again later.');
+        setMessage(formData['UNKNOWN_ERROR']);
         setSubmitted(false);
       }
     }

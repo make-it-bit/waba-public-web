@@ -20,7 +20,7 @@ const TextInput = ({
   const themes = {
     dark: 'bg-transparent border border-black-100 hover:border-black-40 focus-visible:border-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-purple-100 focus-visible:drop-shadow-text-input disabled:border-black-20 placeholder-black-60 hover:placeholder-black-80 focus-visible:text-black-100 disabled:placeholder-black-40',
     light:
-      'bg-transparent border border-white-100 hover:border-white-40 focus-visible:border-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-purple-100 focus-visible:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus-visible:text-white-100 disabled:placeholder-white-40',
+      'bg-transparent text-white-100 border border-white-100 hover:border-white-40 focus-visible:border-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-purple-100 focus-visible:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus-visible:text-white-100 active:text-white-100 disabled:placeholder-white-40',
   }[theme];
 
   /* const sizes = {

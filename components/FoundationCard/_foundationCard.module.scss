@@ -1,0 +1,39 @@
+.image {
+  opacity: 0;
+
+  .foundationCard:hover & {
+    opacity: 1;
+  }
+}
+
+.gradient {
+  background: linear-gradient(0deg, rgba(7, 0, 14, 0.6) 36.85%, rgba(7, 0, 14, 0) 100%);
+  opacity: 0;
+
+  .foundationCard:hover & {
+    opacity: 1;
+  }
+}
+
+.icon1 {
+  transform: rotate(0deg) scale(1);
+
+  .foundationCard:hover & {
+    transform: rotate(-90deg) scale(0);
+  }
+}
+
+.icon2 {
+  transform: rotate(0deg) scale(0);
+
+  .foundationCard:hover & {
+    transform: rotate(-90deg) scale(1);
+  }
+}
+
+.image,
+.gradient,
+.icon1,
+.icon2 {
+  transition: all 0.3s ease-in-out;
+}
