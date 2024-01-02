@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { useRef, useEffect } from 'react';
 
-import { videoWrapper } from './_video.module.scss';
+import styles from './_video.module.scss';
 
 const Video = ({ videoData }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,7 +25,7 @@ const Video = ({ videoData }) => {
   }, []);
 
   return (
-    <div ref={boundRef} className={classNames('relative', videoWrapper)}>
+    <div ref={boundRef} className={classNames('relative', styles.videoWrapper)}>
       <div className="md:block hidden container absolute top-96 left-1/2 translate-x-neg-1/2 z-10">
         <div className="grid grid-cols-12">
           <div className="col-start-5 col-span-4 text-center">
