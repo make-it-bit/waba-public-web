@@ -73,7 +73,7 @@ const Footer = ({ footerData, small = false }) => {
                 <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>
               {message === 'SUCCESS' ? (
-                <div className="bg-signal-green-10 flex justify-center items-center gap-8 py-12">
+                <div className="bg-signal-green-10 flex justify-center items-center text-center gap-8 px-16 py-12">
                   <Image src="/icons/check.svg" alt="check" width={16} height={16} />
                   <p className="text-xs leading-xs text-signal-green-100">{message}</p>
                 </div>
@@ -107,7 +107,7 @@ const Footer = ({ footerData, small = false }) => {
                     )}
                   </div>
                   {message !== '' && (
-                    <div className="bg-signal-red-10 flex justify-center items-center gap-8 py-12 mt-8">
+                    <div className="bg-signal-red-10 flex justify-center items-center text-center gap-8 px-16 py-12 mt-8">
                       <p className="text-xs leading-xs text-signal-red-100">{message}</p>
                     </div>
                   )}

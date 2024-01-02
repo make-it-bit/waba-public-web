@@ -2,8 +2,13 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
+
+import { formValidation } from '@/utils/formValidation';
 
 import { Button, TextInput, Textarea } from '@/gui-components/client';
+
+import styles from './_form.module.scss';
 
 const Form = ({ formData }) => {
   const [form, setForm] = useState({
@@ -14,18 +19,48 @@ const Form = ({ formData }) => {
     subject: '',
     enquiry: '',
   });
+  const [message, setMessage] = useState('');
+  const [messageStatus, setMessageStatus] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    setForm({
-      firstName: '',
-      lastName: '',
-      email: '',
-      number: '',
-      subject: '',
-      enquiry: '',
-    });
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    const formCheck = formValidation(form, setMessage);
+    if (formCheck) {
+      try {
+        setSubmitted(true);
+        const response = await fetch('/api/spreadsheets', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            form,
+          }),
+        });
+        if (response.status === 200) {
+          setMessageStatus('success');
+          setMessage("Thank you. You've submitted the form successfully!");
+          setForm({
+            firstName: '',
+            lastName: '',
+            email: '',
+            number: '',
+            subject: '',
+            enquiry: '',
+          });
+          setSubmitted(false);
+        } else {
+          setMessageStatus('error');
+          setMessage('Sorry, an error occurred while submitting the form. Please try again later.');
+          setSubmitted(false);
+        }
+      } catch (error) {
+        setMessageStatus('error');
+        setMessage('Sorry, an error occurred while submitting the form. Please try again later.');
+        setSubmitted(false);
+      }
+    }
+    setMessageStatus('error');
   };
 
   return (
@@ -48,13 +83,19 @@ const Form = ({ formData }) => {
                       name="first-name"
                       value={form.firstName}
                       placeholder={formData.first_name_placeholder}
-                      onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                      onChange={(e) => {
+                        setMessage('');
+                        setForm({ ...form, firstName: e.target.value });
+                      }}
                     />
                     <TextInput
                       name="last-name"
                       value={form.lastName}
                       placeholder={formData.last_name_placeholder}
-                      onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                      onChange={(e) => {
+                        setMessage('');
+                        setForm({ ...form, lastName: e.target.value });
+                      }}
                     />
                   </div>
                   <div className="flex gap-24">
@@ -62,35 +103,73 @@ const Form = ({ formData }) => {
                       name="email"
                       value={form.email}
                       placeholder={formData.email_placeholder}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      onChange={(e) => {
+                        setMessage('');
+                        setForm({ ...form, email: e.target.value });
+                      }}
                     />
                     <TextInput
                       name="number"
                       value={form.number}
                       placeholder={formData.number_placeholder}
-                      onChange={(e) => setForm({ ...form, number: e.target.value })}
+                      onChange={(e) => {
+                        setMessage('');
+                        setForm({ ...form, number: e.target.value });
+                      }}
                     />
                   </div>
                   <TextInput
                     name="subject"
                     value={form.subject}
                     placeholder={formData.subject_placeholder}
-                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                    onChange={(e) => {
+                      setMessage('');
+                      setForm({ ...form, subject: e.target.value });
+                    }}
                   />
                   <Textarea
                     name="enquiry"
                     value={form.enquiry}
                     placeholder={formData.enquiry_placeholder}
-                    onChange={(e) => setForm({ ...form, enquiry: e.target.value })}
+                    onChange={(e) => {
+                      setMessage('');
+                      setForm({ ...form, enquiry: e.target.value });
+                    }}
                   />
-                  {submitted ? (
-                    <div className="bg-signal-green-10 flex justify-center items-center gap-8 py-12">
-                      <Image src="/icons/check.svg" alt="check" width={16} height={16} />
-                      <p className="text-xs leading-xs text-signal-green-100">Thank you. You submitted successfully!</p>
+                  {submitted && message === '' ? (
+                    <div className="lg:flex contents justify-end mt-24">
+                      <div className="bg-black-20 flex justify-center items-center w-fit px-24 py-8">
+                        <div
+                          className={classNames(
+                            'w-24 h-24 border-2 border-white-100 border-b-transparent rounded-[50%]',
+                            styles.loader
+                          )}
+                        ></div>
+                      </div>
                     </div>
                   ) : (
                     <div className="lg:flex contents justify-end mt-24">
-                      <Button CTA={formData.button.href_text} onClick={handleSubmit} svg />
+                      <Button CTA={formData.button.href_text} onClick={handleSubmit} disabled={submitted} svg />
+                    </div>
+                  )}
+                  {message !== '' && (
+                    <div
+                      className={classNames(
+                        'flex justify-center items-center text-center gap-8 px-16 py-12',
+                        messageStatus === 'success' ? 'bg-signal-green-10' : 'bg-signal-red-10'
+                      )}
+                    >
+                      {messageStatus === 'success' && (
+                        <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                      )}
+                      <p
+                        className={classNames(
+                          'text-xs leading-xs',
+                          messageStatus === 'success' ? 'text-signal-green-100' : 'text-signal-red-100'
+                        )}
+                      >
+                        {message}
+                      </p>
                     </div>
                   )}
                 </div>
