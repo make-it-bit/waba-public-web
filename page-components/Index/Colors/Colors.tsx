@@ -43,6 +43,7 @@ const Colors = ({ colorsData }) => {
           } else {
             setProgressBarHeight(0);
             const nextId = activeId === 3 ? 1 : activeId + 1;
+            setActiveColor(deviceHeads[nextId].title.split(' ')[0]);
             setActiveId(nextId);
             const nextElement = refMap[nextId].current;
             const scrollPosition = nextElement.offsetLeft - 16;
