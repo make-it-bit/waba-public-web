@@ -18,3 +18,12 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.headInfrared {
+  @media (max-width: 470px) {
+    top: 238px;
+  }
+  @media (width: 470px) {
+    top: 152px;
+  }
+}

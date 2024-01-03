@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -10,7 +10,6 @@ import { Button } from '@/gui-components/client';
 import styles from './_colors.module.scss';
 
 const Colors = ({ colorsData }) => {
-  const [isIntervalRunning, setIsIntervalRunning] = useState(true);
   const deviceHeadsListRef = useRef<HTMLDivElement>(null);
   const blueHeadRef = useRef<HTMLDivElement>(null);
   const redHeadRef = useRef<HTMLDivElement>(null);
@@ -23,15 +22,19 @@ const Colors = ({ colorsData }) => {
     }),
     []
   );
+  const [isIntervalRunning, setIsIntervalRunning] = useState(true);
   const [activeId, setActiveId] = useState(1);
   const [progressBarHeight, setProgressBarHeight] = useState(0);
-  const [activeColor, setActiveColor] = useState('Blue');
-  const deviceHeads = ['device_head_blue', 'device_head_red', 'device_head_infrared'].map((key) => colorsData[key]);
+
+  const [activeColor, setActiveColor] = useState('blue');
   const colorMap = {
-    Blue: styles.textBlue,
-    Red: styles.textRed,
-    Infrared: styles.textInfrared,
+    blue: styles.textBlue,
+    red: styles.textRed,
+    infrared: styles.textInfrared,
   }[activeColor];
+
+  // puts the device heads in the order they should be displayed (strapi gives them in a wrong order)
+  const deviceHeads = ['device_head_blue', 'device_head_red', 'device_head_infrared'].map((key) => colorsData[key]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -43,7 +46,7 @@ const Colors = ({ colorsData }) => {
           } else {
             setProgressBarHeight(0);
             const nextId = activeId === 3 ? 1 : activeId + 1;
-            setActiveColor(deviceHeads[nextId].title.split(' ')[0]);
+            setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
             setActiveId(nextId);
             const nextElement = refMap[nextId].current;
             const scrollPosition = nextElement.offsetLeft - 16;
@@ -56,7 +59,7 @@ const Colors = ({ colorsData }) => {
       }, 100);
     }
     return () => interval && clearInterval(interval);
-  }, [progressBarHeight, activeId, refMap, isIntervalRunning]);
+  }, [isIntervalRunning, progressBarHeight, refMap, activeId, deviceHeads]);
 
   return (
     <div className="container md:pb-216 pb-72 overflow-hidden">
@@ -68,7 +71,7 @@ const Colors = ({ colorsData }) => {
       <div className="md:grid md:grid-cols-12 flex flex-col">
         <div
           ref={deviceHeadsListRef}
-          className="grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(300px,_4fr)] md:gap-48 gap-16 overflow-x-auto"
+          className="grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(196px,_6fr)] md:gap-48 gap-16 overflow-x-auto"
         >
           {deviceHeads.map((deviceHead) => (
             <div
@@ -76,7 +79,7 @@ const Colors = ({ colorsData }) => {
               ref={refMap[deviceHead.id]}
               className={classNames('cursor-pointer relative', activeId === deviceHead.id && styles.active)}
               onClick={() => {
-                setActiveColor(deviceHead.title.split(' ')[0]);
+                setActiveColor(deviceHead.title.split(' ')[0].toLowerCase());
                 setActiveId(deviceHead.id);
                 setProgressBarHeight(0);
               }}
@@ -100,24 +103,24 @@ const Colors = ({ colorsData }) => {
           ))}
         </div>
         <div className="relative col-span-4 flex justify-center text-center">
-          <p
-            className={classNames('md:text-5xl text-7xl md:leading-5xl leading-7xl md:mt-56 mt-80', colorMap)}
-          >{`${activeColor} head`}</p>
+          <p className={classNames('md:text-5xl text-7xl md:leading-5xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
+            activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
+          } head`}</p>
           <Image
-            src={`/${activeColor.toLowerCase()}-lights.svg`}
+            src={`/${activeColor}-lights.svg`}
             alt="lights"
             width={287}
             height={574}
             className="absolute top-0 left-1/2 translate-x-neg-1/2"
           />
           <Image
-            src={`/device-head-${activeColor.toLowerCase()}.png`}
+            src={`/device-head-${activeColor}.png`}
             alt="device's head"
             width={109}
             height={78}
             className={classNames(
-              'absolute xl:top-[138px] lg:top-[179px] md:top-[290px] left-1/2 translate-x-neg-1/2',
-              activeColor.toLowerCase() === 'infrared' ? 'top-288' : 'top-152'
+              'absolute xl:top-[138px] lg:top-[179px] md:top-[290px] top-152 left-1/2 translate-x-neg-1/2',
+              activeColor === 'infrared' && styles.headInfrared
             )}
           />
           <Image
@@ -137,18 +140,14 @@ const Colors = ({ colorsData }) => {
         </div>
         <div className="col-span-4 flex flex-col justify-between">
           <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-64 mb-56">
-            {colorsData[`device_head_${activeColor.toLowerCase()}`].long_description}
+            {colorsData[`device_head_${activeColor}`].long_description}
           </p>
           <div className="flex flex-col md:items-start items-center gap-24">
-            <Link href={colorsData[`device_head_${activeColor.toLowerCase()}`].button_1_href}>
-              <Button CTA={colorsData[`device_head_${activeColor.toLowerCase()}`].button_1_text} svg />
+            <Link href={colorsData[`device_head_${activeColor}`].button_1_href}>
+              <Button CTA={colorsData[`device_head_${activeColor}`].button_1_text} svg />
             </Link>
-            <Link href={colorsData[`device_head_${activeColor.toLowerCase()}`].button_2_href}>
-              <Button
-                style="secondary"
-                CTA={colorsData[`device_head_${activeColor.toLowerCase()}`].button_2_text}
-                svg
-              />
+            <Link href={colorsData[`device_head_${activeColor}`].button_2_href}>
+              <Button style="secondary" CTA={colorsData[`device_head_${activeColor}`].button_2_text} svg />
             </Link>
           </div>
         </div>

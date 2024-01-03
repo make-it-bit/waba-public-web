@@ -13,7 +13,7 @@ import { Tag } from '@/components';
 
 import styles from './_mainInfo.module.scss';
 
-const MainInfo = ({ mainInfoData }) => {
+const MainInfo = ({ mainInfoData, checkoutUrl }) => {
   return (
     <div className="container md:mt-64 mt-24 md:mb-72 mb-64">
       <div className="grid grid-cols-12 md:gap-y-24 gap-y-32">
@@ -59,7 +59,7 @@ const MainInfo = ({ mainInfoData }) => {
             <p className="text-sm leading-sm md:mt-32 mt-16 md:mb-40 mb-32">{mainInfoData.description}</p>
             <div className={classNames('flex flex-wrap gap-16', styles.button)}>
               <div className="flex flex-col items-center gap-8 md:w-auto w-full">
-                <Link href={mainInfoData.button_1.href_src} className="md:w-auto w-full">
+                <Link href={checkoutUrl} className="md:w-auto w-full">
                   <Button CTA={mainInfoData.button_1.href_text} svg />
                 </Link>
                 <div className="flex lg:justify-center md:justify-start justify-center gap-2 lg:w-auto w-full">
@@ -73,7 +73,7 @@ const MainInfo = ({ mainInfoData }) => {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-8 md:w-auto w-full">
-                <Link href={mainInfoData.button_2.href_src} className="md:w-auto w-full">
+                <Link href={checkoutUrl} className="md:w-auto w-full">
                   <Button CTA={mainInfoData.button_2.href_text} style="tertiary" svg />
                 </Link>
                 <div className="flex lg:justify-center md:justify-start justify-center gap-2 lg:w-auto w-full">
