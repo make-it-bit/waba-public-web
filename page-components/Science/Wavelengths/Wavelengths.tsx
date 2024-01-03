@@ -7,8 +7,8 @@ import classNames from 'classnames';
 import styles from './_wavelenghts.module.scss';
 
 const Wavelengths = ({ wavelengthsData }) => {
-  const blueWave = useRef(null);
-  const pinkWave = useRef(null);
+  const blueWave = useRef<HTMLDivElement>(null);
+  const pinkWave = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
