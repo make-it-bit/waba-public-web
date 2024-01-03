@@ -26,8 +26,8 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       width={145}
                       height={212}
                       className={classNames(
-                        'absolute top-1/4 translate-y-neg-1/4 left-1/2 translate-x-neg-1/2',
-                        styles.image
+                        'absolute top-1/4 translate-y-neg-1/4 left-1/2 translate-x-neg-1/2'
+                        /* styles.image */
                       )}
                     />
                     <Image
@@ -36,8 +36,8 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       width={145}
                       height={212}
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2',
-                        styles.image
+                        'absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2'
+                        /* styles.image */
                       )}
                     />
                     <Image
@@ -46,8 +46,8 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       width={145}
                       height={212}
                       className={classNames(
-                        'absolute top-3/4 translate-y-neg-3/4 left-1/2 translate-x-neg-1/2',
-                        styles.image
+                        'absolute top-3/4 translate-y-neg-3/4 left-1/2 translate-x-neg-1/2'
+                        /* styles.image */
                       )}
                     />
                   </>
