@@ -1,41 +1,10 @@
-'use client';
-
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
 import styles from './_textImage.module.scss';
 
 const TextImage = ({ title, content, image, imageSide, animation = false }) => {
-  const topHead = useRef<HTMLImageElement>(null);
-  const middleHead = useRef<HTMLImageElement>(null);
-  const bottomHead = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      /* if (topHead.current) {
-        const topHeadPosition = topHead.current.getBoundingClientRect();
-        const isTopHeadVisible = topHeadPosition.top <= window.innerHeight && topHeadPosition.top >= 0;
-        if (isTopHeadVisible) topHead.current.style.transform = `translateX(${window.scrollY / 3}px)`;
-      }
-
-      if (middleHead.current) {
-        const middleHeadPosition = middleHead.current.getBoundingClientRect();
-        const isMiddleHeadVisible = middleHeadPosition.top <= window.innerHeight && middleHeadPosition.top >= 0;
-        if (isMiddleHeadVisible) middleHead.current.style.transform = `translateX(${window.scrollY / 2}px)`;
-      }
-
-      if (bottomHead.current) {
-        const bottomHeadPosition = bottomHead.current.getBoundingClientRect();
-        const isBottomHeadVisible = bottomHeadPosition.top <= window.innerHeight && bottomHeadPosition.top >= 0;
-        if (isBottomHeadVisible) bottomHead.current.style.transform = `translateX(${window.scrollY / 1.5}px)`;
-      } */
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="container my-72">
       <div className="grid grid-cols-12">
@@ -52,7 +21,6 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                 {animation ? (
                   <>
                     <Image
-                      ref={topHead}
                       src="/changeable-head.png"
                       alt="changeable head"
                       width={145}
@@ -63,7 +31,6 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       )}
                     />
                     <Image
-                      ref={middleHead}
                       src="/changeable-head.png"
                       alt="changeable head"
                       width={145}
@@ -74,7 +41,6 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                       )}
                     />
                     <Image
-                      ref={bottomHead}
                       src="/changeable-head.png"
                       alt="changeable head"
                       width={145}
