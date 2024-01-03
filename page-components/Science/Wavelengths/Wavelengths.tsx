@@ -7,85 +7,62 @@ import classNames from 'classnames';
 import styles from './_wavelenghts.module.scss';
 
 const Wavelengths = ({ wavelengthsData }) => {
+  const blueWave = useRef(null);
   const pinkWave = useRef(null);
 
-  // determine whether pinkWave is in viewport when scrolling in useEffect. if is in viewport, console log
   useEffect(() => {
     const handleScroll = () => {
-      const pinkWavePosition = pinkWave.current.getBoundingClientRect();
-      const pinkWaveTop = pinkWavePosition.top;
-      const pinkWaveBottom = pinkWavePosition.bottom;
-      const isPinkWaveVisible = pinkWaveTop >= 0 && pinkWaveBottom <= window.innerHeight;
-      if (isPinkWaveVisible) {
-        // change transform of pinkWave by 40px to the left based on scroll
-        const scrollPosition = window.scrollY;
-        const pinkWaveTransform = `translateX(-${scrollPosition / 40}px)`;
-        pinkWave.current.style.transform = pinkWaveTransform;
+      if (blueWave.current) {
+        const blueWavePosition = blueWave.current.getBoundingClientRect();
+        const isBlueWaveVisible = blueWavePosition.top <= window.innerHeight && blueWavePosition.top >= 0;
+        if (isBlueWaveVisible) {
+          const scrollPosition = window.scrollY;
+          blueWave.current.style.transform = `translateX(${-50 - scrollPosition / 150}%)`;
+        }
+      }
+
+      if (pinkWave.current) {
+        const pinkWavePosition = pinkWave.current.getBoundingClientRect();
+        const isPinkWaveVisible = pinkWavePosition.top <= window.innerHeight && pinkWavePosition.top >= 0;
+        if (isPinkWaveVisible) {
+          const scrollPosition = window.scrollY;
+          pinkWave.current.style.transform = `translateX(${-50 + scrollPosition / 150}%)`;
+        }
       }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="container overflow-hidden">
-      <div className="grid grid-cols-12 items-center my-272">
+      <div className="grid grid-cols-12 items-center xl:my-272 md:my-156 my-72">
         <div className="col-span-12 xl:col-start-2 xl:col-span-5">
-          <div className="flex flex-col gap-32">
+          <div className="flex flex-col gap-32 xl:text-left text-center">
             <h1 className="font-rufina text-5xl leading-5xl">{wavelengthsData.title}</h1>
-            <p className="text-sm leading-sm">{wavelengthsData.description}</p>
+            <p className="xl:block hidden text-sm leading-sm">{wavelengthsData.description}</p>
           </div>
         </div>
-        <div className="col-span-12 xl:col-start-8 xl:col-span-5">
-          <div className={classNames('absolute', styles.wavelengthImageWrapper)}>
-            <div className="relative">
-              <Image
-                src="/wavelength-blue.svg"
-                alt="wavelength"
-                width={408}
-                height={171}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                }}
-                // className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.blueWave)}
-              />
-            </div>
+        <div className="relative col-span-12 xl:col-start-8 xl:col-span-5 xl:h-full h-144 xl:my-0 my-48">
+          <div
+            ref={blueWave}
+            className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}
+          >
+            <Image src="/wavelength-blue.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
-          <div className={classNames('absolute', styles.wavelengthImageWrapper)}>
-            <div className="relative">
-              <Image
-                src="/wavelength-orange.svg"
-                alt="wavelength"
-                width={403}
-                height={171}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                }}
-                // className="absolute bottom-0 left-1/2 translate-x-neg-1/2"
-              />
-            </div>
+          <div className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}>
+            <Image src="/wavelength-orange.svg" alt="wavelength" width={403} height={171} className="w-full h-auto" />
           </div>
           <div
             ref={pinkWave}
-            className={classNames('absolute', styles.wavelengthImageWrapper)}
-            style={{ left: '20px' }}
+            className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}
           >
-            <div className="relative">
-              <Image
-                src="/wavelength-pink.svg"
-                alt="wavelength"
-                width={408}
-                height={171}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                }}
-                // className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.redWave)}
-              />
-            </div>
+            <Image src="/wavelength-pink.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
+        </div>
+        <div className="col-span-12">
+          <p className="xl:hidden text-sm leading-sm text-center">{wavelengthsData.description}</p>
         </div>
       </div>
     </div>

@@ -1,39 +1,8 @@
-// @keyframes slideToLeft {
-//   to {
-//     left: -5%;
-//     transform: translateX(-5%);
-//     opacity: 1;
-//   }
-// }
-
-// @keyframes slideToRight {
-//   to {
-//     left: 25%;
-//     transform: translateX(25%);
-//     opacity: 1;
-//   }
-// }
-
-// .blueWave {
-//   opacity: 0;
-//   animation: slideToLeft linear forwards;
-//   animation-timeline: view();
-//   animation-range: 0px 100px;
-// }
-
-// .redWave {
-//   opacity: 0;
-//   animation: slideToRight linear forwards;
-//   animation-timeline: view();
-//   animation-range: 0px 100px;
-// }
-
 .wavelengthImageWrapper {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: auto;
 
-  @media only screen and (max-width: 600px) {
-    width: 200px;
-    height: 200px;
+  @media only screen and (max-width: 1280px) {
+    width: 300px;
   }
 }
