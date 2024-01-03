@@ -1,20 +1,24 @@
 import { NextResponse } from 'next/server';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+import { JWT } from 'google-auth-library';
 
-const { SPREADSHEET_ID, SPREADSHEET_CLIENT_EMAIL, SPREADSHEET_PRIVATE_KEY, SHEET_ID } = process.env;
+const { SPREADSHEET_ID, SPREADSHEET_CLIENT_EMAIL, SPREADSHEET_PRIVATE_KEY, CAREERS_SHEET_ID, BUSINESS_SHEET_ID } =
+  process.env;
 
 export const maxDuration = 180;
 
 export async function POST(req) {
   try {
-    const { form } = await req.json();
-
-    const doc = new GoogleSpreadsheet(SPREADSHEET_ID, {
-      client_email: SPREADSHEET_CLIENT_EMAIL,
-      private_key: SPREADSHEET_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    const { form, pathname } = await req.json();
+    const jwt = new JWT({
+      email: SPREADSHEET_CLIENT_EMAIL,
+      key: SPREADSHEET_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      scopes: ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file'],
     });
+
+    const doc = new GoogleSpreadsheet(SPREADSHEET_ID, jwt);
     await doc.loadInfo();
-    const sheet = doc.sheetsById[SHEET_ID];
+    const sheet = doc.sheetsById[pathname === '/careers-at-waba' ? CAREERS_SHEET_ID : BUSINESS_SHEET_ID];
     const row = {
       'First Name': form.firstName,
       'Last Name': form.lastName,

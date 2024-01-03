@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import classNames from 'classnames';
 
@@ -11,6 +12,7 @@ import { Button, TextInput, Textarea } from '@/gui-components/client';
 import styles from './_form.module.scss';
 
 const Form = ({ formData }) => {
+  const pathname = usePathname();
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -35,6 +37,7 @@ const Form = ({ formData }) => {
           },
           body: JSON.stringify({
             form,
+            pathname,
           }),
         });
         if (response.status === 200) {
@@ -59,8 +62,9 @@ const Form = ({ formData }) => {
         setMessage(formData['UNKNOWN_ERROR']);
         setSubmitted(false);
       }
+    } else {
+      setMessageStatus('error');
     }
-    setMessageStatus('error');
   };
 
   return (
