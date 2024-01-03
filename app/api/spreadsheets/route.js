@@ -23,7 +23,7 @@ export async function POST(req) {
       'First Name': form.firstName,
       'Last Name': form.lastName,
       Email: form.email,
-      'Phone Number': form.phone,
+      'Phone Number': form.number,
       Subject: form.subject,
       Enquiry: form.enquiry,
     };
