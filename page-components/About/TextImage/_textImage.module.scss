@@ -1,14 +1,12 @@
 @keyframes slideInFromRight {
   to {
     left: 50%;
-    transform: translateX(-50%);
     opacity: 1;
   }
 }
 
 .image {
   left: 100%;
-  transform: translateX(100%);
   opacity: 0;
   animation: slideInFromRight linear forwards;
   animation-timeline: view();

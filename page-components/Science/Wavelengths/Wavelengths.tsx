@@ -15,19 +15,13 @@ const Wavelengths = ({ wavelengthsData }) => {
       if (blueWave.current) {
         const blueWavePosition = blueWave.current.getBoundingClientRect();
         const isBlueWaveVisible = blueWavePosition.top <= window.innerHeight && blueWavePosition.top >= 0;
-        if (isBlueWaveVisible) {
-          const scrollPosition = window.scrollY;
-          blueWave.current.style.transform = `translateX(${-50 - scrollPosition / 150}%)`;
-        }
+        if (isBlueWaveVisible) blueWave.current.style.transform = `translateX(${-50 - window.scrollY / 150}%)`;
       }
 
       if (pinkWave.current) {
         const pinkWavePosition = pinkWave.current.getBoundingClientRect();
         const isPinkWaveVisible = pinkWavePosition.top <= window.innerHeight && pinkWavePosition.top >= 0;
-        if (isPinkWaveVisible) {
-          const scrollPosition = window.scrollY;
-          pinkWave.current.style.transform = `translateX(${-50 + scrollPosition / 150}%)`;
-        }
+        if (isPinkWaveVisible) pinkWave.current.style.transform = `translateX(${-50 + window.scrollY / 150}%)`;
       }
     };
 
