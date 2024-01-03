@@ -1,12 +1,72 @@
-import React from 'react';
+'use client';
+
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
 import styles from './_textImage.module.scss';
 
 const TextImage = ({ title, content, image, imageSide, animation = false }) => {
+  const topHead = useRef<HTMLImageElement>(null);
+  const middleHead = useRef<HTMLImageElement>(null);
+  const bottomHead = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const startAnimationOffset = 500;
+
+      if (topHead.current) {
+        const topHeadPosition = topHead.current.getBoundingClientRect();
+        const isTopHeadVisible =
+          topHeadPosition.top - startAnimationOffset <= window.innerHeight && topHeadPosition.top >= 0;
+        if (isTopHeadVisible) {
+          if (topHeadPosition.top - startAnimationOffset <= 0) {
+            topHead.current.style.left = `50%`;
+          } else {
+            const newPosition =
+              150 - (1 - Math.abs(topHeadPosition.top - startAnimationOffset) / window.innerHeight) * 100;
+            topHead.current.style.left = `${newPosition}%`;
+          }
+        }
+      }
+
+      if (middleHead.current) {
+        const middleHeadPosition = middleHead.current.getBoundingClientRect();
+        const isMiddleHeadVisible =
+          middleHeadPosition.top - startAnimationOffset <= window.innerHeight && middleHeadPosition.top >= 0;
+        if (isMiddleHeadVisible) {
+          if (middleHeadPosition.top - startAnimationOffset <= 0) {
+            middleHead.current.style.left = `50%`;
+          } else {
+            const newPosition =
+              150 - (1 - Math.abs(middleHeadPosition.top - startAnimationOffset) / window.innerHeight) * 100;
+            middleHead.current.style.left = `${newPosition}%`;
+          }
+        }
+      }
+
+      if (bottomHead.current) {
+        const bottomHeadPosition = bottomHead.current.getBoundingClientRect();
+        const isBottomHeadVisible =
+          bottomHeadPosition.top - startAnimationOffset <= window.innerHeight && bottomHeadPosition.top >= 0;
+        if (isBottomHeadVisible) {
+          if (bottomHeadPosition.top - startAnimationOffset <= 0) {
+            bottomHead.current.style.left = `50%`;
+          } else {
+            const newPosition =
+              150 - (1 - Math.abs(bottomHeadPosition.top - startAnimationOffset) / window.innerHeight) * 100;
+            bottomHead.current.style.left = `${newPosition}%`;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="container my-72">
+    <div className="container my-72 overflow-hidden">
       <div className="grid grid-cols-12">
         {imageSide === 'right' ? (
           <>
@@ -21,34 +81,28 @@ const TextImage = ({ title, content, image, imageSide, animation = false }) => {
                 {animation ? (
                   <>
                     <Image
+                      ref={topHead}
                       src="/changeable-head.png"
                       alt="changeable head"
                       width={145}
                       height={212}
-                      className={classNames(
-                        'absolute top-1/4 translate-y-neg-1/4 left-1/2 translate-x-neg-1/2'
-                        /* styles.image */
-                      )}
+                      className="absolute top-1/4 translate-y-neg-1/4 translate-x-neg-1/2"
                     />
                     <Image
+                      ref={middleHead}
                       src="/changeable-head.png"
                       alt="changeable head"
                       width={145}
                       height={212}
-                      className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2'
-                        /* styles.image */
-                      )}
+                      className="absolute top-1/2 translate-y-neg-1/2 translate-x-neg-1/2"
                     />
                     <Image
+                      ref={bottomHead}
                       src="/changeable-head.png"
                       alt="changeable head"
                       width={145}
                       height={212}
-                      className={classNames(
-                        'absolute top-3/4 translate-y-neg-3/4 left-1/2 translate-x-neg-1/2'
-                        /* styles.image */
-                      )}
+                      className="absolute top-3/4 translate-y-neg-3/4 translate-x-neg-1/2"
                     />
                   </>
                 ) : (
