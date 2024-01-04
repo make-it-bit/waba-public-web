@@ -10,7 +10,6 @@ import styles from './_video.module.scss';
 // TUTORIAL: https://codepen.io/Maltsbier/pen/dyYmGGq
 
 const Video = ({ videoData }) => {
-  console.log('videoData: ', videoData);
   const boundRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
