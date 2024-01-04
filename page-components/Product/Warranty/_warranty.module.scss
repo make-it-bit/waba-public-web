@@ -5,3 +5,19 @@
     background: linear-gradient(0deg, rgba(7, 0, 14, 0.6) 36.85%, rgba(7, 0, 14, 0) 100%);
   }
 }
+
+.iconSpin {
+  animation-name: spin;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

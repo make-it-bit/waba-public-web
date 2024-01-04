@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import classNames from "classnames";
-import { ReactSVG } from "react-svg";
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { ReactSVG } from 'react-svg';
 
 /* import {
   caretDownSm,
@@ -12,20 +12,20 @@ import { ReactSVG } from "react-svg";
 } from "./_selectInput.module.scss"; */
 
 const SelectInput = ({
-  name,
   id = undefined,
+  name,
   options,
   onChange,
   value,
   label,
-  size = "reg",
+  size = 'reg',
   disabled = false,
-  placeholder = "",
+  placeholder = '',
 }) => {
   const sizes = {
-    sm: "selectInput-sm",
-    reg: "selectInput-reg",
-    lg: "selectInput-lg",
+    sm: 'selectInput-sm',
+    reg: 'selectInput-reg',
+    lg: 'selectInput-lg',
   }[size];
 
   /* const svgSizes = {
@@ -37,10 +37,10 @@ const SelectInput = ({
   const [selectOptions, setSelectOptions] = useState([]);
 
   useEffect(() => {
-    if (placeholder === "") {
-      setSelectOptions([{ value: "", label: "Select an option" }, ...options]);
+    if (placeholder === '') {
+      setSelectOptions([{ value: '', label: 'Select an option' }, ...options]);
     } else {
-      setSelectOptions([{ value: "", label: placeholder }, ...options]);
+      setSelectOptions([{ value: '', label: placeholder }, ...options]);
     }
   }, [options, placeholder]);
 
@@ -59,9 +59,9 @@ const SelectInput = ({
           disabled={disabled}
           value={value}
           className={classNames(
-            "selectInput pr-40 cursor-pointer text-black",
-            !value && "selectInput--placeholder",
-            disabled && "selectInput--disabled",
+            'selectInput pr-40 cursor-pointer text-black',
+            !value && 'selectInput--placeholder',
+            disabled && 'selectInput--disabled',
             sizes
           )}
         >
@@ -75,11 +75,11 @@ const SelectInput = ({
           className={classNames(
             /* svgSizes,
             caretDown, */
-            "flex justify-center items-center"
+            'flex justify-center items-center'
           )}
           src="/caret-down.svg"
           beforeInjection={(svg) => {
-            svg.classList.add("block");
+            svg.classList.add('block');
           }}
         />
       </div>

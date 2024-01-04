@@ -22,7 +22,11 @@ const Product = async () => {
 
   return (
     <>
-      <MainInfo mainInfoData={productPageData.attributes.hero} checkoutUrl={checkout.checkoutCreate.checkout.webUrl} />
+      <MainInfo
+        mainInfoData={productPageData.attributes.hero}
+        checkoutData={data}
+        initialCheckoutUrl={checkout.checkoutCreate.checkout.webUrl}
+      />
       <ProductInfo productInfoData={productPageData.attributes.product_info} />
       <Warranty warrantyData={productPageData.attributes.warranty} />
       <ProductFAQ productFaqData={productPageData.attributes.faq} />

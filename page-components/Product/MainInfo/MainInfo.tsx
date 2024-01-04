@@ -1,19 +1,41 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
 import { getImageFullUrl } from '@/lib/strapi';
+import { createCheckout } from '@/lib/shopify';
 
-import { Button } from '@/gui-components/client';
+import { Button, NumberInput } from '@/gui-components/client';
 
 import { Tag } from '@/components';
 
 import styles from './_mainInfo.module.scss';
 
-const MainInfo = ({ mainInfoData, checkoutUrl }) => {
+const MainInfo = ({ mainInfoData, checkoutData, initialCheckoutUrl }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [checkoutUrl, setCheckoutUrl] = useState(initialCheckoutUrl);
+
+  const handleChange = (e) => {
+    setQuantity(parseInt(e.target.value));
+  };
+
+  useEffect(() => {
+    const createCheckoutUrl = async () => {
+      const checkout = await createCheckout([
+        {
+          variantId: checkoutData.product.variants.edges[0].node.id,
+          quantity: quantity,
+        },
+      ]);
+      setCheckoutUrl(checkout.checkoutCreate.checkout.webUrl);
+    };
+
+    createCheckoutUrl();
+  }, [checkoutData, quantity]);
+
   return (
     <div className="container md:mt-64 mt-24 md:mb-72 mb-64">
       <div className="grid grid-cols-12 md:gap-y-24 gap-y-32">
@@ -55,11 +77,12 @@ const MainInfo = ({ mainInfoData, checkoutUrl }) => {
               ))}
             </div>
             <h1 className="font-rufina text-4xl leading-4xl">{mainInfoData.title}</h1>
-            <h2 className="text-2xl leading-2xl md:mt-8 mt-16">{mainInfoData.price}</h2>
+            <h2 className="text-2xl leading-2xl md:my-8 my-16">{mainInfoData.price}</h2>
+            <NumberInput name="product-quantity" value={quantity} minValue={0} onChange={handleChange} />
             <p className="text-sm leading-sm md:mt-32 mt-16 md:mb-40 mb-32">{mainInfoData.description}</p>
             <div className={classNames('flex flex-wrap gap-16', styles.button)}>
               <div className="flex flex-col items-center gap-8 md:w-auto w-full">
-                <Link href={checkoutUrl} className="md:w-auto w-full">
+                <Link href={checkoutUrl} target="_blank" className="md:w-auto w-full">
                   <Button CTA={mainInfoData.button_1.href_text} svg />
                 </Link>
                 <div className="flex lg:justify-center md:justify-start justify-center gap-2 lg:w-auto w-full">
@@ -73,7 +96,7 @@ const MainInfo = ({ mainInfoData, checkoutUrl }) => {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-8 md:w-auto w-full">
-                <Link href={checkoutUrl} className="md:w-auto w-full">
+                <Link href={checkoutUrl} target="_blank" className="md:w-auto w-full">
                   <Button CTA={mainInfoData.button_2.href_text} style="tertiary" svg />
                 </Link>
                 <div className="flex lg:justify-center md:justify-start justify-center gap-2 lg:w-auto w-full">

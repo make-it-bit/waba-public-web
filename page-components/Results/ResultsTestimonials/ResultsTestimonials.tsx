@@ -19,8 +19,8 @@ const ResultsTestimonials = ({ testimonialsData }) => {
           </div>
         </div>
       </div>
-      <div className="container md:mb-208 mb-72">
-        <div className="grid grid-cols-12">
+      <div className="container md:mb-208 mb-72 md:p-0 md:m-0">
+        <div className="md:flex grid grid-cols-12">
           <div className={classNames('md:flex grid col-span-12 md:gap-24 gap-16', styles.slider)}>
             {testimonialsData.user_stories.data.map((userStory, index) => (
               <TestimonialCard

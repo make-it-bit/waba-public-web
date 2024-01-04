@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
 
 import { getImageFullUrl } from '@/lib/strapi';
 
@@ -18,7 +19,10 @@ const ExampleBlock = ({ title, image, contentArray }) => {
         <div className="lg:col-start-5 md:col-start-6 col-start-1 lg:col-span-6 md:col-span-7 col-span-12">
           <div className="flex-flex-col md:ml-48">
             {contentArray.map((content, index) => (
-              <div key={index} className="p-16 border-b border-black-100">
+              <div
+                key={index}
+                className={classNames('p-16 border-black-100', index !== contentArray.length - 1 && 'border-b')}
+              >
                 <p className="text-base leading-base">{subtitles[index]}</p>
                 <p className="text-xs leading-xs">{content}</p>
               </div>

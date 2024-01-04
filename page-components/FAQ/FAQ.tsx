@@ -52,11 +52,10 @@ const FAQ = ({ faqPageData }) => {
           </div>
         </div>
       </div>
-      <div className="border border-white-100"></div>
       <div className={classNames('bg-supplementary-warm-gray', isSticky && 'sticky top-[137px] z-[100]')}>
-        <div className="container">
+        <div className="container md:px-12 px-0">
           <div className="grid grid-cols-12">
-            <div className="lg:col-start-3 lg:col-span-8 col-span-12">
+            <div className="md:col-start-3 md:col-span-8 col-span-12">
               <ScrollableNavbar
                 pageIndex={pageIndex}
                 navbarItems={navbarItems}

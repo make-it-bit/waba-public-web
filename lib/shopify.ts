@@ -1,14 +1,12 @@
 import { gql, GraphQLClient } from 'graphql-request';
 
-const { SHOPIFY_STOREFRONT_API_DOMAIN, SHOPIFY_STOREFRONT_API_TOKEN } = process.env;
-
-if (!SHOPIFY_STOREFRONT_API_DOMAIN || !SHOPIFY_STOREFRONT_API_TOKEN) {
+if (!process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN) {
   throw new Error('Missing Shopify env variables');
 }
 
-const graphQLClient = new GraphQLClient(SHOPIFY_STOREFRONT_API_DOMAIN, {
+const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_DOMAIN, {
   headers: {
-    'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_API_TOKEN,
+    'X-Shopify-Storefront-Access-Token': process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN,
   },
 });
 

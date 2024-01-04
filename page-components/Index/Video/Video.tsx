@@ -3,11 +3,14 @@
 import classNames from 'classnames';
 import React, { useRef, useEffect } from 'react';
 
+import { getImageFullUrl } from '@/lib/strapi';
+
 import styles from './_video.module.scss';
 
 // TUTORIAL: https://codepen.io/Maltsbier/pen/dyYmGGq
 
 const Video = ({ videoData }) => {
+  console.log('videoData: ', videoData);
   const boundRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -43,7 +46,7 @@ const Video = ({ videoData }) => {
         className="w-full h-screen z-[-1] sticky top-0 flex flex-col justify-center items-center"
         // mix-blend-luminosity
       >
-        <source src="/scrollable-video.mp4" type="video/mp4" />
+        <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
       </video>
     </div>
   );

@@ -67,7 +67,9 @@ const indexPageNestedComponents = [
   'foundation.foundation_card_3.icon',
   'foundation.foundation_card_3.background_image',
   'foundation.button',
-  'peek_inside',
+  'peek_inside.title',
+  'peek_inside.desktop_video',
+  'peek_inside.mobile_images',
   'testimonial.user_stories.image',
   'testimonial.user_stories.button',
 ];
