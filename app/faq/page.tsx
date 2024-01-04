@@ -4,6 +4,8 @@ import { getPageData, getComponentData } from '@/lib/strapi';
 
 import { FAQ, LogoBar, CTABlock, PreFooterCard, Footer } from '@/page-components';
 
+export const dynamic = 'force-static';
+
 const FAQPage = async () => {
   const faqPageData = await getPageData('faq');
   const ctaBlockData = await getComponentData('cta-block');

@@ -1,3 +1,7 @@
+.scrollBar::-webkit-scrollbar {
+  display: none;
+}
+
 .textBlue {
   background: radial-gradient(51.56% 188.16% at 50% 50%, #3aacff 0%, #ede4f3 100%);
   -webkit-background-clip: text;
@@ -17,6 +21,21 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.headBlue {
+  @media (max-width: 352px) {
+    top: 238px;
+  }
+  @media (width: 352px) {
+    top: 152px;
+  }
+}
+
+.headRed {
+  @media (max-width: 337px) {
+    top: 238px;
+  }
 }
 
 .headInfrared {

@@ -18,6 +18,8 @@ import {
   Footer,
 } from '@/page-components';
 
+export const dynamic = 'force-static';
+
 const ScienceBehind = async () => {
   const sciencePageData = await getPageData('science-behind');
   const ctaBlockData = await getComponentData('cta-block');

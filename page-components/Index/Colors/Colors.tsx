@@ -25,6 +25,7 @@ const Colors = ({ colorsData }) => {
   const [isIntervalRunning, setIsIntervalRunning] = useState(true);
   const [activeId, setActiveId] = useState(1);
   const [progressBarHeight, setProgressBarHeight] = useState(0);
+  const [progressBarWidth, setProgressBarWidth] = useState(0);
 
   const [activeColor, setActiveColor] = useState('blue');
   const colorMap = {
@@ -41,25 +42,42 @@ const Colors = ({ colorsData }) => {
     if (isIntervalRunning) {
       interval = setInterval(() => {
         if (deviceHeadsListRef.current && refMap[activeId].current) {
-          if (progressBarHeight < refMap[activeId].current.offsetHeight) {
-            setProgressBarHeight((prev) => prev + 1);
+          if (window.innerWidth >= 768) {
+            if (progressBarHeight < refMap[activeId].current.offsetHeight) {
+              setProgressBarHeight((prev) => prev + 1);
+            } else {
+              setProgressBarHeight(0);
+              const nextId = activeId === 3 ? 1 : activeId + 1;
+              setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
+              setActiveId(nextId);
+              const nextElement = refMap[nextId].current;
+              const scrollPosition = nextElement.offsetLeft - 16;
+              deviceHeadsListRef.current.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth',
+              });
+            }
           } else {
-            setProgressBarHeight(0);
-            const nextId = activeId === 3 ? 1 : activeId + 1;
-            setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
-            setActiveId(nextId);
-            const nextElement = refMap[nextId].current;
-            const scrollPosition = nextElement.offsetLeft - 16;
-            deviceHeadsListRef.current.scrollTo({
-              left: scrollPosition,
-              behavior: 'smooth',
-            });
+            if (progressBarWidth < refMap[activeId].current.offsetWidth) {
+              setProgressBarWidth((prev) => prev + 2);
+            } else {
+              setProgressBarWidth(0);
+              const nextId = activeId === 3 ? 1 : activeId + 1;
+              setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
+              setActiveId(nextId);
+              const nextElement = refMap[nextId].current;
+              const scrollPosition = nextElement.offsetLeft - 16;
+              deviceHeadsListRef.current.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth',
+              });
+            }
           }
         }
       }, 100);
     }
     return () => interval && clearInterval(interval);
-  }, [isIntervalRunning, progressBarHeight, refMap, activeId, deviceHeads]);
+  }, [isIntervalRunning, progressBarHeight, progressBarWidth, refMap, activeId, deviceHeads]);
 
   return (
     <div className="container md:pb-216 pb-72 overflow-hidden">
@@ -71,7 +89,10 @@ const Colors = ({ colorsData }) => {
       <div className="md:grid md:grid-cols-12 flex flex-col">
         <div
           ref={deviceHeadsListRef}
-          className="grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(196px,_6fr)] md:gap-48 gap-16 overflow-x-auto"
+          className={classNames(
+            'grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(196px,_6fr)] md:gap-48 gap-16 overflow-x-auto md:border-l border-black-60',
+            styles.scrollBar
+          )}
         >
           {deviceHeads.map((deviceHead) => (
             <div
@@ -87,14 +108,27 @@ const Colors = ({ colorsData }) => {
               onMouseLeave={() => setIsIntervalRunning(true)}
             >
               {activeId === deviceHead.id && (
-                <div
-                  className={classNames('absolute w-4 bg-black-100', styles.progressBar)}
-                  style={{
-                    height: `${progressBarHeight}px`,
-                  }}
-                />
+                <>
+                  <div
+                    className={classNames('md:block hidden absolute w-4 bg-black-100')}
+                    style={{
+                      height: `${progressBarHeight}px`,
+                    }}
+                  />
+                  <div
+                    className={classNames('md:hidden block absolute h-4 bottom-0 bg-black-100')}
+                    style={{
+                      width: `${progressBarWidth}px`,
+                    }}
+                  />
+                </>
               )}
-              <div className="ml-6">
+              <div
+                className={classNames(
+                  'md:ml-56 md:mr-48 md:mb-0 mb-16',
+                  activeId === deviceHead.id ? 'text-black-100' : 'text-black-30'
+                )}
+              >
                 <p className="text-sm leading-sm">{deviceHead.title}</p>
                 <p className="md:block hidden font-rufina text-xl leading-xl">{deviceHead.short_description}</p>
                 <p className="md:hidden block font-rufina text-xl leading-xl">{deviceHead.short_mobile_description}</p>
@@ -103,7 +137,7 @@ const Colors = ({ colorsData }) => {
           ))}
         </div>
         <div className="relative col-span-4 flex justify-center text-center">
-          <p className={classNames('md:text-5xl text-7xl md:leading-5xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
+          <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
             activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
           } head`}</p>
           <Image
@@ -119,8 +153,12 @@ const Colors = ({ colorsData }) => {
             width={109}
             height={78}
             className={classNames(
-              'absolute xl:top-[138px] lg:top-[179px] md:top-[290px] top-152 left-1/2 translate-x-neg-1/2',
-              activeColor === 'infrared' && styles.headInfrared
+              'absolute md:top-[290px] top-152 left-1/2 translate-x-neg-1/2',
+              activeColor === 'blue' && styles.headBlue,
+              activeColor === 'red' && styles.headRed,
+              activeColor === 'infrared'
+                ? classNames('xl:top-[229px] lg:top-[270px]', styles.headInfrared)
+                : 'xl:top-[138px] lg:top-[179px]'
             )}
           />
           <Image
@@ -128,14 +166,20 @@ const Colors = ({ colorsData }) => {
             alt="device's green light"
             width={109}
             height={10}
-            className="md:block hidden absolute xl:top-[185px] lg:top-[226px] md:top-[337px] left-1/2 translate-x-neg-1/2"
+            className={classNames(
+              'md:block hidden absolute md:top-[337px] left-1/2 translate-x-neg-1/2',
+              activeColor === 'infrared' ? 'xl:top-[276px] lg:top-[317px]' : 'xl:top-[185px] lg:top-[226px]'
+            )}
           />
           <Image
             src="/device-body.png"
             alt="device's body"
             width={90}
             height={407.24}
-            className="md:block hidden absolute xl:top-[196px] lg:top-[237px] md:top-[348px] left-1/2 translate-x-neg-1/2"
+            className={classNames(
+              'md:block hidden absolute md:top-[348px] left-1/2 translate-x-neg-1/2',
+              activeColor === 'infrared' ? 'xl:top-[287px] lg:top-[328px]' : 'xl:top-[196px] lg:top-[237px]'
+            )}
           />
         </div>
         <div className="col-span-4 flex flex-col justify-between">

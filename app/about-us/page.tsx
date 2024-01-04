@@ -17,6 +17,8 @@ import {
   Footer,
 } from '@/page-components';
 
+export const dynamic = 'force-static';
+
 const AboutUs = async () => {
   const aboutPageData = await getPageData('about-us');
   const ctaBlockData = await getComponentData('cta-block');

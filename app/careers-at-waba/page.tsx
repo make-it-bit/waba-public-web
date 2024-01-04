@@ -4,6 +4,8 @@ import { getPageData, getComponentData, getImageFullUrl } from '@/lib/strapi';
 
 import { BusinessCareersHero, CareersAtWaba, Footer } from '@/page-components';
 
+export const dynamic = 'force-static';
+
 const CareersAtWABA = async () => {
   const careersPageData = await getPageData('careers-at-waba');
   const footerData = await getComponentData('footer');
