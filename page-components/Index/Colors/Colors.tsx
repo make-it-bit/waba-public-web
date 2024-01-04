@@ -90,7 +90,7 @@ const Colors = ({ colorsData }) => {
         <div
           ref={deviceHeadsListRef}
           className={classNames(
-            'grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(196px,_6fr)] md:gap-48 gap-16 overflow-x-auto md:border-l border-black-60',
+            'grid md:col-span-4 md:grid-flow-row grid-flow-col md:auto-cols-auto auto-cols-[minmax(196px,_6fr)] md:gap-48 gap-16 overflow-x-auto overflow-y-hidden md:border-l border-black-60',
             styles.scrollBar
           )}
         >
