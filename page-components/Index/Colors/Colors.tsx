@@ -140,44 +140,38 @@ const Colors = ({ colorsData }) => {
           <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
             activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
           } head`}</p>
-          <Image
-            src={`/${activeColor}-lights.svg`}
-            alt="lights"
-            width={287}
-            height={574}
-            className="absolute top-0 left-1/2 translate-x-neg-1/2"
-          />
+          <Image src={`/${activeColor}-lights.svg`} alt="lights" width={287} height={574} className="absolute top-0" />
           <Image
             src={`/device-head-${activeColor}.png`}
             alt="device's head"
             width={109}
             height={78}
             className={classNames(
-              'absolute md:top-[290px] top-152 left-1/2 translate-x-neg-1/2',
+              'absolute md:top-[291px] top-152',
               activeColor === 'blue' && styles.headBlue,
               activeColor === 'red' && styles.headRed,
               activeColor === 'infrared'
-                ? classNames('xl:top-[229px] lg:top-[270px]', styles.headInfrared)
-                : 'xl:top-[138px] lg:top-[179px]'
+                ? classNames('xl:top-[230px] lg:top-[271px]', styles.headInfrared)
+                : 'xl:top-[139px] lg:top-[180px]'
             )}
           />
           <Image
-            src="/green-light.svg"
+            src="/device-green-light.svg"
             alt="device's green light"
             width={109}
-            height={10}
+            height={29.3}
             className={classNames(
-              'md:block hidden absolute md:top-[337px] left-1/2 translate-x-neg-1/2',
-              activeColor === 'infrared' ? 'xl:top-[276px] lg:top-[317px]' : 'xl:top-[185px] lg:top-[226px]'
+              'md:block hidden absolute md:top-[338px] z-10',
+              activeColor === 'infrared' ? 'xl:top-[277px] lg:top-[318px]' : 'xl:top-[186px] lg:top-[227px]'
             )}
           />
           <Image
-            src="/device-body.png"
+            src="/device-body.svg"
             alt="device's body"
-            width={90}
+            width={96.98}
             height={407.24}
             className={classNames(
-              'md:block hidden absolute md:top-[348px] left-1/2 translate-x-neg-1/2',
+              'md:block hidden absolute md:top-[348px]',
               activeColor === 'infrared' ? 'xl:top-[287px] lg:top-[328px]' : 'xl:top-[196px] lg:top-[237px]'
             )}
           />

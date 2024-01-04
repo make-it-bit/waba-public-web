@@ -125,7 +125,9 @@ type Pages =
   | 'about-us'
   | 'faq'
   | 'careers-at-waba'
-  | 'waba-for-business';
+  | 'waba-for-business'
+  | 'shipping-policy'
+  | 'privacy-policy';
 
 const populatePage = {
   index: indexPageNestedComponents,
@@ -136,6 +138,8 @@ const populatePage = {
   faq: '*',
   'careers-at-waba': careersBusinessPageNestedComponents,
   'waba-for-business': careersBusinessPageNestedComponents,
+  'shipping-policy': '*',
+  'privacy-policy': '*',
 };
 
 export const getPageData = async (page: Pages) => {

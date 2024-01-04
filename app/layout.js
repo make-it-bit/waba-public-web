@@ -1,5 +1,6 @@
 import React from 'react';
 import { DM_Sans } from 'next/font/google';
+import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
 
@@ -27,7 +28,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={dmSans.className}>
+      <body className={classNames('min-h-screen flex flex-col', dmSans.className)}>
         <div className="sticky top-0 z-[500]">
           <PromoBar promobarData={promobarData.attributes} />
           <Navbar navbarData={navbarData.attributes} />

@@ -14,6 +14,7 @@ import styles from './_footer.module.scss';
 const Footer = ({ footerData, small = false }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [messageStatus, setMessageStatus] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
   const handleChange = (e) => {
@@ -31,39 +32,34 @@ const Footer = ({ footerData, small = false }) => {
           'Content-Type': 'application/json',
         },
       });
-      let answer;
       if (response.ok) {
-        answer = 'SUCCESS';
+        setMessageStatus('success');
+        setMessage(footerData.footer_top['SUCCESS']);
       } else {
+        setMessageStatus('error');
         const { message } = await response.json();
-        answer = message;
+        setMessage(footerData.footer_top[message]);
         setSubscribed(false);
       }
-      setMessage(footerData.footer_top[answer]);
     } catch (error) {
-      setEmail('');
+      setMessageStatus('error');
       setMessage(footerData.footer_top['UNKNOWN_ERROR']);
       setSubscribed(false);
     }
   };
 
   return (
-    <div className={styles.background}>
+    <div className={classNames('mt-auto', styles.background)}>
       <div className="container">
-        <div
-          className={classNames(
-            'grid grid-cols-12',
-            small ? 'pt-48 pb-72' : 'md:pt-224 pt-128 md:pb-32 pb-72 md:mt-456 mt-1000'
-          )}
-        >
+        <div className={classNames('grid grid-cols-12', small ? 'pt-48 pb-72' : 'md:pt-224 pt-120 md:pb-32 pb-72')}>
           {!small && (
-            <div className="md:col-start-5 col-start-2 md:col-span-4 col-span-10 md:mb-184 mb-48">
+            <div className="xl:col-start-5 lg:col-start-4 md:col-start-3 col-start-2 xl:col-span-4 lg:col-span-6 md:col-span-8 col-span-10 md:mb-184 mb-48">
               <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
                 <Image src="/icons/email-white.svg" alt="email" width={56} height={56} />
                 <h1 className="font-rufina text-4xl leading-4xl">{footerData.footer_top.title}</h1>
                 <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>
-              {message === 'SUCCESS' ? (
+              {messageStatus === 'success' ? (
                 <div className="bg-signal-green-10 flex justify-center items-center text-center gap-8 px-16 py-12">
                   <Image src="/icons/check.svg" alt="check" width={16} height={16} />
                   <p className="text-xs leading-xs text-signal-green-100">{message}</p>

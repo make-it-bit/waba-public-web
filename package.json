@@ -20,7 +20,9 @@
     "qs": "^6.11.2",
     "react": "^18",
     "react-dom": "^18",
-    "react-svg": "^16.1.31"
+    "react-markdown": "^9.0.1",
+    "react-svg": "^16.1.31",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "20.10.3",
