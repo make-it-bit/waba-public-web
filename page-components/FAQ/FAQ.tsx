@@ -24,8 +24,6 @@ const FAQ = ({ faqPageData }) => {
     const handleScroll = () => {
       if (faqContainerRef.current) {
         const height = faqContainerRef.current.clientHeight;
-        //console.log('window.scrollY: ', window.scrollY);
-        //console.log('height: ', height);
         if (window.scrollY > height) {
           setIsSticky(false);
         } else {
