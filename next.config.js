@@ -6,6 +6,17 @@ module.exports = {
     includePaths: [path.join(__dirname, 'app')],
   },
   images: {
-    domains: ['127.0.0.1', 'waba-strapi.fly.dev'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'waba-strapi.fly.dev',
+        pathname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        pathname: '**',
+      },
+    ],
   },
 };
