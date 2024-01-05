@@ -22,7 +22,7 @@ const Checkout = ({ mainInfoData }) => {
           <CheckoutButton
             setInitCheckoutError={setInitCheckoutError}
             quantity={quantity}
-            CTA={mainInfoData.button_2.href_text}
+            CTA={mainInfoData.button_1.href_text}
           />
           <div className="flex justify-center items-center justify-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>
