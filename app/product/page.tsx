@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { getPageData, getComponentData } from '@/lib/strapi';
-import { getProductById, createCheckout } from '@/lib/shopify';
 
 import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer } from '@/page-components';
 
@@ -12,21 +11,9 @@ const Product = async () => {
   const ctaBlockData = await getComponentData('cta-block');
   const footerData = await getComponentData('footer');
 
-  const data = await getProductById('gid://shopify/Product/8668620783962');
-  const checkout = await createCheckout([
-    {
-      variantId: data.product.variants.edges[0].node.id,
-      quantity: 1,
-    },
-  ]);
-
   return (
     <>
-      <MainInfo
-        mainInfoData={productPageData.attributes.hero}
-        checkoutData={data}
-        initialCheckoutUrl={checkout.checkoutCreate.checkout.webUrl}
-      />
+      <MainInfo mainInfoData={productPageData.attributes.hero} />
       <ProductInfo productInfoData={productPageData.attributes.product_info} />
       <Warranty warrantyData={productPageData.attributes.warranty} />
       <ProductFAQ productFaqData={productPageData.attributes.faq} />

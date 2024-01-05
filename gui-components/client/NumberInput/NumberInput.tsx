@@ -3,7 +3,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { padding } from './_numberInput.module.scss';
+import styles from './_numberInput.module.scss';
 
 const NumberInput = ({
   type = 'number',
@@ -13,7 +13,7 @@ const NumberInput = ({
   minValue,
   maxValue = undefined,
   /* size = "reg", */
-  label = undefined,
+  label,
   placeholder = '',
   disabled = false,
   onChange,
@@ -41,7 +41,7 @@ const NumberInput = ({
             themes,
             errorMessage && 'border-signal-red-100 text-black-60',
             'w-full px-16 text-sm leading-sm',
-            padding
+            styles.padding
           )}
           type={type}
           id={name}

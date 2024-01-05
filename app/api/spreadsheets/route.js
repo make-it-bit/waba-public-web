@@ -9,6 +9,10 @@ export const maxDuration = 180;
 
 export async function POST(req) {
   try {
+    if (!CAREERS_SHEET_ID || !BUSINESS_SHEET_ID || !SPREADSHEET_PRIVATE_KEY || !SPREADSHEET_ID) {
+      throw new Error('Missing ENV vars');
+    }
+
     const { form, pathname } = await req.json();
     const jwt = new JWT({
       email: SPREADSHEET_CLIENT_EMAIL,

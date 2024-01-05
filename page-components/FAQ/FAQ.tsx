@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import classNames from 'classnames';
+import React, { useState } from 'react';
 
 import { ScrollableNavbar } from '@/components';
 
@@ -13,29 +12,6 @@ const FAQ = ({ faqPageData }) => {
   }, {});
   const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
-  const [isSticky, setIsSticky] = useState(false);
-  const faqContainerRef = useRef(null);
-
-  const handleClick = (pageIndex) => {
-    setPageIndex(pageIndex);
-  };
-
-  /* useEffect(() => {
-    const handleScroll = () => {
-      if (faqContainerRef.current) {
-        const height = faqContainerRef.current.clientHeight;
-        if (window.scrollY > height) {
-          setIsSticky(false);
-        } else {
-          setIsSticky(true);
-        }
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []); */
 
   return (
     <>
@@ -50,21 +26,21 @@ const FAQ = ({ faqPageData }) => {
           </div>
         </div>
       </div>
-      <div className={classNames('bg-supplementary-warm-gray', isSticky && 'sticky top-[137px] z-[100]')}>
-        <div className="container md:px-12 px-0">
-          <div className="grid grid-cols-12">
-            <div className="md:col-start-3 md:col-span-8 col-span-12">
-              <ScrollableNavbar
-                pageIndex={pageIndex}
-                navbarItems={navbarItems}
-                handleClick={handleClick}
-                justify="justify-between"
-              />
+      <div>
+        <div className="bg-supplementary-warm-gray sticky top-[137px]">
+          <div className="container md:px-12 px-0">
+            <div className="grid grid-cols-12">
+              <div className="md:col-start-3 md:col-span-8 col-span-12">
+                <ScrollableNavbar
+                  pageIndex={pageIndex}
+                  navbarItems={navbarItems}
+                  handleClick={setPageIndex}
+                  justify="justify-between"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div ref={faqContainerRef} className="container">
         <div className="grid grid-cols-12">
           <div className="md:col-start-3 col-start-1 md:col-span-8 col-span-12 md:mt-48 md:mb-40 mb-16">
             <div className="flex flex-col">

@@ -1,12 +1,12 @@
 import { gql, GraphQLClient } from 'graphql-request';
 
-if (!process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN) {
+if (!process.env.SHOPIFY_STOREFRONT_API_DOMAIN || !process.env.SHOPIFY_STOREFRONT_API_TOKEN) {
   throw new Error('Missing Shopify env variables');
 }
 
-const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_DOMAIN, {
+const graphQLClient = new GraphQLClient(process.env.SHOPIFY_STOREFRONT_API_DOMAIN, {
   headers: {
-    'X-Shopify-Storefront-Access-Token': process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN,
+    'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_STOREFRONT_API_TOKEN,
   },
 });
 
@@ -84,6 +84,6 @@ export const createCheckout = async (lineItems: LineItem[]): Promise<CheckoutCre
     return response;
   } catch (error) {
     console.log('error: ', error);
-    throw error; // Re-throw the error for upstream error handling
+    throw error;
   }
 };
