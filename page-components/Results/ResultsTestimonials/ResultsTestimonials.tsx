@@ -21,8 +21,15 @@ const ResultsTestimonials = ({ testimonialsData }) => {
       </div>
       <div className="container md:mb-208 mb-72 md:p-0 md:m-0">
         <div className="md:flex grid grid-cols-12">
-          <div className={classNames('md:flex grid col-span-12 md:gap-24 gap-16', styles.slider)}>
-            {testimonialsData.user_stories.data.map((userStory, index) => (
+          <div
+            style={{ '--len': `${testimonialsData.user_stories.data.length}` }}
+            className={classNames('md:flex grid col-span-12 md:gap-24 gap-16', styles.slider)}
+          >
+            {[
+              ...testimonialsData.user_stories.data,
+              ...testimonialsData.user_stories.data,
+              ...testimonialsData.user_stories.data,
+            ].map((userStory, index) => (
               <TestimonialCard
                 key={index}
                 image={getImageFullUrl(userStory.attributes.image.data)}

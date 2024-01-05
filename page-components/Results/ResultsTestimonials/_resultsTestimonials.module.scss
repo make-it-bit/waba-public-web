@@ -6,7 +6,7 @@
 .slider {
   @media (min-width: 768px) {
     animation: scroll 20s linear infinite;
-    width: calc(428px * 6);
+    width: calc(428px * var(--len) * 2);
   }
 }
 
@@ -15,6 +15,6 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-428px * 3));
+    transform: translateX(calc(-428px * var(--len)));
   }
 }
