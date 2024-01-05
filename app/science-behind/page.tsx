@@ -31,7 +31,7 @@ const ScienceBehind = async () => {
       <AboutScienceHero
         title={sciencePageData.attributes.hero.title}
         content={sciencePageData.attributes.hero.description}
-        // video="/science-behind-video.mp4"
+        video="/science-behind-video.mp4"
         background="bg-black-100"
       />
       <Skin skinData={sciencePageData.attributes.skin.skins.data} />

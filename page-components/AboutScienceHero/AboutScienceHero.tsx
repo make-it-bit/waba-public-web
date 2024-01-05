@@ -27,17 +27,15 @@ const AboutScienceHero = ({ title, content, image, video, background }: AboutSci
         </>
       )}
       {video && (
-        <video
-          autoPlay
-          muted
-          loop
-          className="absolute lg:top-0 top-[-112px] lg:right-[-184px] right-0 w-full h-full object-cover mix-blend-difference lg:rotate-[75deg] rotate-180"
-        >
-          <source src={video} type="video/mp4" />
-        </video>
+        <div className="absolute w-[1920px] h-[1080px] lg:rotate-[75deg] rotate-180 left-[-1000px] md:left-[-600px] lg:left-[-400px] xl:left-[-200px] xl:left-0 top-[-420px]">
+          <video autoPlay muted loop className="w-full h-full object-cover mix-blend-difference">
+            <source src={video} type="video/mp4" />
+          </video>
+          <div className={classNames(styles.videoOverlay, 'top-0 left-0 w-full h-full absolute')} />
+        </div>
       )}
       <div className="container relative">
-        <div className="grid grid-cols-12 md:pt-456 pt-208 md:pb-104 pb-72">
+        <div className="grid grid-cols-12 md:pt-456 pt-256 md:pb-104 pb-72">
           <div className="col-start-1 md:col-span-6 col-span-12">
             <div className="flex flex-col gap-32 md:text-left text-center">
               <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl text-white-100">{title}</h1>

@@ -3,9 +3,9 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/strapi';
-
 import { TestimonialCard } from '@/components';
+
+import { getImageFullUrl } from '@/lib/strapi';
 
 import styles from './_resultsTestimonials.module.scss';
 
