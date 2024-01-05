@@ -1,7 +1,8 @@
 'use client';
 
-import classNames from 'classnames';
 import React, { useRef, useEffect } from 'react';
+import Image from 'next/image';
+import classNames from 'classnames';
 
 import { getImageFullUrl } from '@/lib/strapi';
 
@@ -29,24 +30,40 @@ const Video = ({ videoData }) => {
   }, []);
 
   return (
-    <div ref={boundRef} className={classNames('relative', styles.videoWrapper)}>
-      <div className="md:block hidden container absolute top-96 left-1/2 translate-x-neg-1/2 z-10">
-        <div className="grid grid-cols-12">
-          <div className="col-start-5 col-span-4 text-center">
-            <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
+    <div className="container">
+      <div ref={boundRef} className={classNames('hidden lg:block relative', styles.videoWrapper)}>
+        <div className="absolute top-96 z-10">
+          <div className="grid grid-cols-12">
+            <div className="col-start-5 col-span-4 text-center">
+              <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
+            </div>
           </div>
         </div>
+        <video
+          ref={videoRef}
+          muted
+          autoPlay
+          loop
+          className={classNames(
+            'w-full h-screen sticky top-0 flex flex-col justify-center items-center',
+            styles.videoWrapper__video
+          )}
+        >
+          <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
+        </video>
       </div>
-      <video
-        ref={videoRef}
-        muted
-        autoPlay
-        loop
-        className="w-full h-screen z-[-1] sticky top-0 flex flex-col justify-center items-center"
-        // mix-blend-luminosity
-      >
-        <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
-      </video>
+      <div className="block lg:hidden">
+        {videoData.mobile_images.data.map((image, index) => (
+          <div className="relative" key={index}>
+            <Image
+              alt={image.attributes.alternativeText}
+              src={getImageFullUrl(image)}
+              width={image.attributes.width}
+              height={image.attributes.height}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
