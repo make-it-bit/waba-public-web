@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
 import styles from './_wavelenghts.module.scss';
 
 const Wavelengths = ({ wavelengthsData }) => {
+  const [triggerBlueWaveAnimation, setTriggerBlueWaveAnimation] = useState(false);
+  const [triggerPinkWaveAnimation, setTriggerPinkWaveAnimation] = useState(false);
   const blueWave = useRef<HTMLDivElement>(null);
   const pinkWave = useRef<HTMLDivElement>(null);
   const bgImage2 = useRef<HTMLImageElement>(null);
@@ -15,19 +17,22 @@ const Wavelengths = ({ wavelengthsData }) => {
     const handleScroll = () => {
       if (blueWave.current) {
         const blueWavePosition = blueWave.current.getBoundingClientRect();
-        const isBlueWaveVisible = blueWavePosition.top <= window.innerHeight && blueWavePosition.top >= 0;
-        if (isBlueWaveVisible) {
-          const newPosition = -50 - (1 - Math.abs(blueWavePosition.top) / window.innerHeight) * 50;
-          blueWave.current.style.transform = `translateX(${newPosition}%)`;
+        // blue wave is in the center of the screen
+        const blueWaveIsCentered = blueWavePosition.top <= window.innerHeight / 2 && blueWavePosition.top >= 0;
+        if (blueWaveIsCentered && !triggerBlueWaveAnimation) {
+          setTriggerBlueWaveAnimation(true);
+          // const newPosition = -50 - (1 - Math.abs(blueWavePosition.top) / window.innerHeight) * 50;
+          // blueWave.current.style.transform = `translateX(${newPosition}%)`;
         }
       }
 
       if (pinkWave.current) {
         const pinkWavePosition = pinkWave.current.getBoundingClientRect();
-        const isPinkWaveVisible = pinkWavePosition.top <= window.innerHeight && pinkWavePosition.top >= 0;
-        if (isPinkWaveVisible) {
-          const newPosition = -50 + (1 - Math.abs(pinkWavePosition.top) / window.innerHeight) * 50;
-          pinkWave.current.style.transform = `translateX(${newPosition}%)`;
+        const pinkWaveIsCentered = pinkWavePosition.top <= window.innerHeight / 2 && pinkWavePosition.top >= 0;
+        if (pinkWaveIsCentered && !triggerPinkWaveAnimation) {
+          setTriggerPinkWaveAnimation(true);
+          // const newPosition = -50 + (1 - Math.abs(pinkWavePosition.top) / window.innerHeight) * 50;
+          // pinkWave.current.style.transform = `translateX(${newPosition}%)`;
         }
       }
     };
@@ -64,23 +69,31 @@ const Wavelengths = ({ wavelengthsData }) => {
         <div className="relative col-span-12 xl:col-start-8 xl:col-span-5 xl:h-full h-144 xl:my-0 my-48">
           <div
             ref={blueWave}
-            className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}
+            className={classNames(
+              'absolute bottom-0 left-1/2 translate-x-neg-1/2',
+              styles.wavelengthImageWrapper,
+              triggerBlueWaveAnimation && styles.blueWaveAnimation
+            )}
           >
             <Image src="/wavelength-blue.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
           <div
             ref={pinkWave}
-            className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}
+            className={classNames(
+              'absolute bottom-0 left-1/2 translate-x-neg-1/2',
+              styles.wavelengthImageWrapper,
+              triggerPinkWaveAnimation && styles.pinkWaveAnimation
+            )}
           >
             <Image src="/wavelength-pink.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
           <div className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}>
-            <Image src="/wavelength-orange.svg" alt="wavelength" width={403} height={171} className="w-full h-auto" />
+            <Image src="/wavelength-orange.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
           <Image
             src="/wavelengths-bg-1.png"
             alt="wavelengths"
-            width={526}
+            width={525}
             height={219}
             className="absolute bottom-0 left-1/2 translate-x-neg-1/2 xl:w-full w-auto xl:h-auto h-144"
           />
@@ -88,13 +101,13 @@ const Wavelengths = ({ wavelengthsData }) => {
             ref={bgImage2}
             src="/wavelengths-bg-2.png"
             alt="wavelengths"
-            width={526}
+            width={525}
             height={219}
             className="absolute bottom-0 left-1/2 translate-x-neg-1/2 xl:w-full w-auto xl:h-auto h-144"
           />
         </div>
-        <div className="col-span-12">
-          <p className="xl:hidden text-sm leading-sm text-center">{wavelengthsData.description}</p>
+        <div className="col-span-12 xl:hidden">
+          <p className="text-sm leading-sm text-center">{wavelengthsData.description}</p>
         </div>
       </div>
     </div>

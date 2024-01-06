@@ -1,8 +1,17 @@
 .wavelengthImageWrapper {
   width: 350px;
   height: auto;
+  transition: all 0.5s ease-in-out;
 
   @media only screen and (max-width: 1280px) {
     width: 300px;
   }
+}
+
+.blueWaveAnimation {
+  transform: translateX(-260px);
+}
+
+.pinkWaveAnimation {
+  transform: translateX(-70px);
 }

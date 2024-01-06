@@ -1,14 +1,14 @@
-<svg width="403" height="168" viewBox="0 0 403 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="408" height="171" viewBox="0 0 408 171" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g style="mix-blend-mode:plus-darker">
-<path d="M371.175 170.5H13.397C53.5427 164.46 85.8165 131.714 91.1238 90.0517C98.4732 32.3582 143.708 2.03672 188.97 0.556892C234.225 -0.922718 279.436 26.4292 286.783 84.1051C292.541 129.307 327.583 164.246 371.175 170.5Z" fill="url(#paint0_radial_384_2708)" fill-opacity="0.5"/>
-<path d="M371.175 170.5H13.397C53.5427 164.46 85.8165 131.714 91.1238 90.0517C98.4732 32.3582 143.708 2.03672 188.97 0.556892C234.225 -0.922718 279.436 26.4292 286.783 84.1051C292.541 129.307 327.583 164.246 371.175 170.5Z" stroke="url(#paint1_linear_384_2708)"/>
+<path d="M375.782 170.5H13.5619C54.1995 164.461 86.8745 131.719 92.2481 90.0524C99.6882 32.3629 145.483 2.03697 191.314 0.556897C237.139 -0.922975 282.91 26.4341 290.347 84.1059C296.177 129.311 331.655 164.246 375.782 170.5Z" fill="url(#paint0_radial_829_5081)" fill-opacity="0.5"/>
+<path d="M375.782 170.5H13.5619C54.1995 164.461 86.8745 131.719 92.2481 90.0524C99.6882 32.3629 145.483 2.03697 191.314 0.556897C237.139 -0.922975 282.91 26.4341 290.347 84.1059C296.177 129.311 331.655 164.246 375.782 170.5Z" stroke="url(#paint1_linear_829_5081)"/>
 </g>
 <defs>
-<radialGradient id="paint0_radial_384_2708" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(201.5 171) rotate(-90) scale(240.203 186.293)">
+<radialGradient id="paint0_radial_829_5081" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(204 171) rotate(-90) scale(240.203 188.604)">
 <stop stop-color="#E82D04"/>
 <stop offset="1" stop-color="#EDE4F3" stop-opacity="0"/>
 </radialGradient>
-<linearGradient id="paint1_linear_384_2708" x1="201.5" y1="19.6113" x2="201.5" y2="171" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint1_linear_829_5081" x1="204" y1="19.6113" x2="204" y2="171" gradientUnits="userSpaceOnUse">
 <stop stop-color="#E82D04"/>
 <stop offset="1" stop-color="#E82D04" stop-opacity="0"/>
 </linearGradient>
