@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+import BeamVideo from '../BeamVideo';
+
 import styles from './_beam.module.scss';
 
 const Beam = ({ beamData }) => {
@@ -17,20 +19,27 @@ const Beam = ({ beamData }) => {
           </div>
         </div>
       </div>
-      <video
-        autoPlay
-        muted
-        loop
-        className="absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 max-md:left-1/2 max-md:transform max-md:-translate-x-[960px] md:left-[-750px] lg:left-[-650px] xl:left-[-550px] 2xl:left-[-450px]"
-      >
-        <source src="/device-beam.mp4" type="video/mp4" />
-      </video>
+      <BeamVideo />
       <Image
         src="/beam-device.png"
         alt="device"
         width={221}
         height={407}
-        className="absolute bottom-[-120px] max-md:right-0 max-md:m-auto left-0 md:left-[90px] lg:left-[190px] xl:left-[280px] 2xl:left-[390px]"
+        className="absolute bottom-[-121px] max-md:right-0 max-md:m-auto left-0 md:left-[90px] lg:left-[190px] xl:left-[290px] 2xl:left-[390px]"
+      />
+      <Image
+        src="/beam-green-light.png"
+        alt="device"
+        width={243}
+        height={45}
+        className="absolute bottom-[80px] max-md:right-0 max-md:m-auto left-0 md:left-[80px] lg:left-[180px] xl:left-[280px] 2xl:left-[380px]"
+      />
+      <Image
+        src="/beam-top-light.png"
+        alt="device"
+        width={303}
+        height={123}
+        className="absolute bottom-[150px] max-md:right-0 max-md:m-auto left-0 md:left-[50px] lg:left-[150px] xl:left-[250px] 2xl:left-[350px]"
       />
     </div>
   );
