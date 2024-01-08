@@ -10,7 +10,7 @@ const Beam = ({ beamData }) => {
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="col-span-12 md:col-start-7 md:col-span-5">
-            <div className="flex flex-col gap-32 text-center md:text-right mb-288 mt-72 md:mt-288">
+            <div className="relative flex flex-col gap-32 text-center md:text-right mb-288 mt-72 md:mt-288">
               <h1 className="font-rufina text-5xl leading-5xl text-white-100">{beamData.title}</h1>
               <p className="text-sm leading-sm text-supplementary-warm-gray">{beamData.description}</p>
             </div>
@@ -21,7 +21,7 @@ const Beam = ({ beamData }) => {
         autoPlay
         muted
         loop
-        className="absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 left-1/2 transform -translate-x-[960px]"
+        className="absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 max-md:left-1/2 max-md:transform max-md:-translate-x-[960px] md:left-[-750px] lg:left-[-650px] xl:left-[-550px] 2xl:left-[-450px]"
       >
         <source src="/device-beam.mp4" type="video/mp4" />
       </video>
