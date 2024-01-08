@@ -3,6 +3,17 @@
   opacity: 0.2;
 
   &__animation {
+    opacity: 0.8;
+  }
+}
+
+.beamRays {
+  transition: all 2.5s ease-in-out;
+  opacity: 0.2;
+  bottom: 0;
+
+  &__animation {
     opacity: 1;
+    bottom: 170px;
   }
 }

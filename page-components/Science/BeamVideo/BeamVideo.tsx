@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import classNames from 'classnames';
 
 import styles from './_beamVideo.module.scss';
@@ -13,9 +14,8 @@ const BeamVideo = () => {
     const handleScroll = () => {
       if (beamVideo.current) {
         const beamVideoPosition = beamVideo.current.getBoundingClientRect();
-        const beamVideoInTopThirdOfScreen =
-          beamVideoPosition.top <= window.innerHeight / 3 && beamVideoPosition.top >= 0;
-        if (beamVideoInTopThirdOfScreen && !triggerBeamVideoAnimation) setTriggerBeamVideoAnimation(true);
+        const beamVideoInPosition = beamVideoPosition.top <= window.innerHeight / 6 && beamVideoPosition.top >= 0;
+        if (beamVideoInPosition && !triggerBeamVideoAnimation) setTriggerBeamVideoAnimation(true);
       }
     };
 
@@ -24,19 +24,61 @@ const BeamVideo = () => {
   }, [triggerBeamVideoAnimation]);
 
   return (
-    <video
-      ref={beamVideo}
-      autoPlay
-      muted
-      loop
-      className={classNames(
-        'absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 max-md:left-1/2 max-md:transform max-md:-translate-x-[960px] md:left-[-750px] lg:left-[-650px] xl:left-[-550px] 2xl:left-[-450px]',
-        styles.beamVideo,
-        triggerBeamVideoAnimation && styles.beamVideo__animation
-      )}
-    >
-      <source src="/device-beam.mp4" type="video/mp4" />
-    </video>
+    <>
+      <video
+        ref={beamVideo}
+        autoPlay
+        muted
+        loop
+        className={classNames(
+          'absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 max-md:left-1/2 max-md:transform max-md:-translate-x-[960px] md:left-[-750px] lg:left-[-650px] xl:left-[-550px] 2xl:left-[-450px]',
+          styles.beamVideo,
+          triggerBeamVideoAnimation && styles.beamVideo__animation
+        )}
+      >
+        <source src="/device-beam.mp4" type="video/mp4" />
+      </video>
+      <Image
+        src="/beam-rays.png"
+        alt="device"
+        width={232.5}
+        height={459}
+        className={classNames(
+          'absolute max-md:right-0 max-md:m-auto left-0 md:left-[85px] lg:left-[185px] xl:left-[283px] 2xl:left-[390px]',
+          styles.beamRays,
+          triggerBeamVideoAnimation && styles.beamRays__animation
+        )}
+      />
+      <Image
+        src="/beam-device.png"
+        alt="device"
+        width={221}
+        height={407}
+        className="absolute bottom-[-121px] max-md:right-0 max-md:m-auto left-0 md:left-[90px] lg:left-[190px] xl:left-[290px] 2xl:left-[395px]"
+      />
+      <Image
+        src="/beam-green-light.png"
+        alt="device"
+        width={243}
+        height={45}
+        className={classNames(
+          'absolute bottom-[80px] max-md:right-0 max-md:m-auto left-0 md:left-[80px] lg:left-[180px] xl:left-[280px] 2xl:left-[385px]',
+          styles.beamVideo,
+          triggerBeamVideoAnimation && styles.beamVideo__animation
+        )}
+      />
+      <Image
+        src="/beam-top-light.png"
+        alt="device"
+        width={303}
+        height={123}
+        className={classNames(
+          'absolute bottom-[150px] max-md:right-0 max-md:m-auto left-0 md:left-[50px] lg:left-[150px] xl:left-[250px] 2xl:left-[355px]',
+          styles.beamVideo,
+          triggerBeamVideoAnimation && styles.beamVideo__animation
+        )}
+      />
+    </>
   );
 };
 
