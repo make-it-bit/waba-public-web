@@ -1,5 +1,5 @@
 .beamVideo {
-  transition: all 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   opacity: 0.2;
 
   &__animation {
@@ -8,7 +8,7 @@
 }
 
 .beamRays {
-  transition: all 2.5s ease-in-out;
+  transition: opacity 2.5s ease-in-out, bottom 2.5s ease-in-out;
   opacity: 0.2;
   bottom: 0;
 
