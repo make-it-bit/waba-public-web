@@ -1,17 +1,49 @@
 .wavelengthImageWrapper {
-  width: 350px;
+  width: 450px;
   height: auto;
   transition: all 0.5s ease-in-out;
 
+  @media only screen and (max-width: 1536px) {
+    width: 380px;
+  }
+
   @media only screen and (max-width: 1280px) {
-    width: 300px;
+    width: 250px;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    width: 250px;
   }
 }
 
 .blueWaveAnimation {
-  transform: translateX(-260px);
+  transform: translateX(-90px);
+
+  @media only screen and (max-width: 1536px) {
+    transform: translateX(-80px);
+  }
+
+  @media only screen and (max-width: 1280px) {
+    transform: translateX(-55px);
+  }
+
+  @media only screen and (max-width: 1024px) {
+    transform: translateX(-55px);
+  }
 }
 
 .pinkWaveAnimation {
-  transform: translateX(-70px);
+  transform: translateX(-330px);
+
+  @media only screen and (max-width: 1536px) {
+    transform: translateX(-280px);
+  }
+
+  @media only screen and (max-width: 1280px) {
+    transform: translateX(-185px);
+  }
+
+  @media only screen and (max-width: 1024px) {
+    transform: translateX(-185px);
+  }
 }

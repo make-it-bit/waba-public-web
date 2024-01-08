@@ -17,29 +17,20 @@ const Wavelengths = ({ wavelengthsData }) => {
     const handleScroll = () => {
       if (blueWave.current) {
         const blueWavePosition = blueWave.current.getBoundingClientRect();
-        // blue wave is in the center of the screen
         const blueWaveIsCentered = blueWavePosition.top <= window.innerHeight / 2 && blueWavePosition.top >= 0;
-        if (blueWaveIsCentered && !triggerBlueWaveAnimation) {
-          setTriggerBlueWaveAnimation(true);
-          // const newPosition = -50 - (1 - Math.abs(blueWavePosition.top) / window.innerHeight) * 50;
-          // blueWave.current.style.transform = `translateX(${newPosition}%)`;
-        }
+        if (blueWaveIsCentered && !triggerBlueWaveAnimation) setTriggerBlueWaveAnimation(true);
       }
 
       if (pinkWave.current) {
         const pinkWavePosition = pinkWave.current.getBoundingClientRect();
         const pinkWaveIsCentered = pinkWavePosition.top <= window.innerHeight / 2 && pinkWavePosition.top >= 0;
-        if (pinkWaveIsCentered && !triggerPinkWaveAnimation) {
-          setTriggerPinkWaveAnimation(true);
-          // const newPosition = -50 + (1 - Math.abs(pinkWavePosition.top) / window.innerHeight) * 50;
-          // pinkWave.current.style.transform = `translateX(${newPosition}%)`;
-        }
+        if (pinkWaveIsCentered && !triggerPinkWaveAnimation) setTriggerPinkWaveAnimation(true);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [triggerBlueWaveAnimation, triggerPinkWaveAnimation]);
 
   useEffect(() => {
     const handleScroll = () => {
