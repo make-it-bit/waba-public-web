@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
@@ -11,10 +11,12 @@ import styles from './_video.module.scss';
 // TUTORIAL: https://codepen.io/Maltsbier/pen/dyYmGGq
 
 const Video = ({ videoData }) => {
+  const [video, setVideo] = useState(false);
   const boundRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    setVideo(true);
     const scrollVideo = () => {
       const video = videoRef.current;
       const bound = boundRef.current;
@@ -39,18 +41,20 @@ const Video = ({ videoData }) => {
             </div>
           </div>
         </div>
-        <video
-          ref={videoRef}
-          muted
-          autoPlay
-          loop
-          className={classNames(
-            'w-full h-screen sticky top-0 flex flex-col justify-center items-center',
-            styles.videoWrapper__video
-          )}
-        >
-          <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
-        </video>
+        {video && (
+          <video
+            ref={videoRef}
+            muted
+            autoPlay
+            loop
+            className={classNames(
+              'w-full h-screen sticky top-0 flex flex-col justify-center items-center',
+              styles.videoWrapper__video
+            )}
+          >
+            <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
+          </video>
+        )}
       </div>
       <div className="block lg:hidden">
         {videoData.mobile_images.data.map((image, index) => (
