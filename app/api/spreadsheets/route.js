@@ -17,8 +17,7 @@ const {
 export const maxDuration = 180;
 
 const sharedEmailSettings = {
-  // to: 'mart.lakspere@wabaskin.com',
-  to: 'sebastianpikand@gmail.com',
+  to: 'mart.lakspere@wabaskin.com',
   from: 'mart.lakspere@wabaskin.com',
 };
 
