@@ -17,10 +17,18 @@ import {
 export const dynamic = 'force-static';
 
 const Home = async () => {
+  console.log('started getting index page data');
   const indexPageData = await getPageData('index');
+  console.log('finished getting index page data');
+  console.log('started getting cta block data');
   const ctaBlockData = await getComponentData('cta-block');
+  console.log('finished getting cta block data');
+  console.log('started getting pre footer card data');
   const preFooterCardData = await getComponentData('pre-footer-card');
+  console.log('finished getting pre footer card data');
+  console.log('started getting footer data');
   const footerData = await getComponentData('footer');
+  console.log('finished getting footer data');
 
   return (
     <>
