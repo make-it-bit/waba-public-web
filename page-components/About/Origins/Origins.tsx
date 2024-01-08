@@ -15,10 +15,10 @@ const Origins = ({ originData }) => {
         </div>
       </div>
       <Image
-        src="/about-us-device-img-1.png"
+        src="/about-us-device.png"
         alt="device"
-        width={1440}
-        height={830}
+        width={879}
+        height={144}
         className="absolute bottom-0 left-1/2 !translate-x-neg-1/2"
       />
     </div>

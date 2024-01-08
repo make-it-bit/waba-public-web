@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import { LazyLoadVideo } from '@/components';
+
 import styles from './_resultsWarranty.module.scss';
 
 const ResultsWarranty = ({ warrantyData }) => {
@@ -15,14 +17,11 @@ const ResultsWarranty = ({ warrantyData }) => {
                 styles.background
               )}
             >
-              <video
-                autoPlay
-                muted
-                loop
+              <LazyLoadVideo
                 className="md:absolute md:bottom-0 lg:left-[-400px] md:left-[-280px] w-full md:h-full md:object-cover object-contain md:mix-blend-lighten md:z-[-1] order-2"
-              >
-                <source src="/warranty-video.mp4" type="video/mp4" />
-              </video>
+                src="/warranty-video.mp4"
+              />
+
               <div className="grid grid-cols-12 order-1">
                 <div className="md:col-start-7 md:col-span-5 col-span-12">
                   <div className="flex flex-col gap-16 md:px-0 px-24 md:pt-0 pt-32 md:my-152">

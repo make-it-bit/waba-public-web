@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import styles from './_beamVideo.module.scss';
 
 const BeamVideo = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const [triggerBeamVideoAnimation, setTriggerBeamVideoAnimation] = useState(false);
   const beamVideo = useRef<HTMLVideoElement>(null);
 
@@ -23,21 +24,27 @@ const BeamVideo = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [triggerBeamVideoAnimation]);
 
+  useEffect(() => {
+    setVideoLoaded(true);
+  }, []);
+
   return (
     <>
-      <video
-        ref={beamVideo}
-        autoPlay
-        muted
-        loop
-        className={classNames(
-          'absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 max-md:left-1/2 max-md:transform max-md:-translate-x-[960px] md:left-[-750px] lg:left-[-650px] xl:left-[-550px] 2xl:left-[-450px]',
-          styles.beamVideo,
-          triggerBeamVideoAnimation && styles.beamVideo__animation
-        )}
-      >
-        <source src="/device-beam.mp4" type="video/mp4" />
-      </video>
+      {videoLoaded && (
+        <video
+          ref={beamVideo}
+          autoPlay
+          muted
+          loop
+          className={classNames(
+            'absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 max-md:left-1/2 max-md:transform max-md:-translate-x-[960px] md:left-[-750px] lg:left-[-650px] xl:left-[-550px] 2xl:left-[-450px]',
+            styles.beamVideo,
+            triggerBeamVideoAnimation && styles.beamVideo__animation
+          )}
+        >
+          <source src="/device-beam.mp4" type="video/mp4" />
+        </video>
+      )}
       <Image
         src="/beam-rays.png"
         alt="device"

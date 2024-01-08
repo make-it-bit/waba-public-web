@@ -1,14 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import SustainabilityVideo from '../SustainabilityVideo';
+
 import styles from './_sustainability.module.scss';
 
 const Sustainability = ({ sustainabilityData }) => {
   return (
     <div className="relative overflow-hidden">
-      <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover z-[-1]">
-        <source src="/about-us-sustainability-video.mp4" type="video/mp4" />
-      </video>
+      <SustainabilityVideo />
       <div className={classNames('absolute top-0 left-0 w-full h-full z-[-1]', styles.background)}></div>
       <div className="container">
         <div className="grid grid-cols-12">
