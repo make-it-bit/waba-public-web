@@ -2,16 +2,33 @@ import { NextResponse } from 'next/server';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 
-const { SPREADSHEET_ID, SPREADSHEET_CLIENT_EMAIL, SPREADSHEET_PRIVATE_KEY, CAREERS_SHEET_ID, BUSINESS_SHEET_ID } =
-  process.env;
+// https://github.com/sendgrid/sendgrid-nodejs/tree/main/packages/mail
+import sgMail from '@sendgrid/mail';
+
+const {
+  SPREADSHEET_ID,
+  SPREADSHEET_CLIENT_EMAIL,
+  SPREADSHEET_PRIVATE_KEY,
+  CAREERS_SHEET_ID,
+  BUSINESS_SHEET_ID,
+  SENDGRID_API_KEY,
+} = process.env;
 
 export const maxDuration = 180;
 
+const sharedEmailSettings = {
+  // to: 'mart.lakspere@wabaskin.com',
+  to: 'sebastianpikand@gmail.com',
+  from: 'mart.lakspere@wabaskin.com',
+};
+
 export async function POST(req) {
   try {
-    if (!CAREERS_SHEET_ID || !BUSINESS_SHEET_ID || !SPREADSHEET_PRIVATE_KEY || !SPREADSHEET_ID) {
+    if (!CAREERS_SHEET_ID || !BUSINESS_SHEET_ID || !SPREADSHEET_PRIVATE_KEY || !SPREADSHEET_ID || !SENDGRID_API_KEY) {
       throw new Error('Missing ENV vars');
     }
+
+    sgMail.setApiKey(SENDGRID_API_KEY);
 
     const { form, pathname } = await req.json();
     const jwt = new JWT({
@@ -32,9 +49,21 @@ export async function POST(req) {
       Enquiry: form.enquiry,
     };
     await sheet.addRow(row);
+
+    await sgMail.send({
+      ...sharedEmailSettings,
+      subject: 'NEW WABA ENQUIRY',
+      text: 'check google sheets...',
+    });
+
     return NextResponse.json({ message: 'success' }, { status: 200 });
   } catch (e) {
     console.error(e);
+    await sgMail.send({
+      ...sharedEmailSettings,
+      subject: 'failed to submit enquiry',
+      text: 'Please report to Sebastian',
+    });
     return NextResponse.json({ message: 'fail' }, { status: 400 });
   }
 }
