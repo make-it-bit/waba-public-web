@@ -30,7 +30,7 @@ const Beam = ({ beamData }) => {
         alt="device"
         width={221}
         height={407}
-        className="absolute bottom-[-120px] left-0 max-md:right-0 md:right-unset max-md:m-auto"
+        className="absolute bottom-[-120px] max-md:right-0 max-md:m-auto left-0 md:left-[90px] lg:left-[190px] xl:left-[280px] 2xl:left-[390px]"
       />
     </div>
   );
