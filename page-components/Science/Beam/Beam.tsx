@@ -21,7 +21,7 @@ const Beam = ({ beamData }) => {
         autoPlay
         muted
         loop
-        className="absolute top-0 left-[-320px] mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px]"
+        className="absolute bottom-0 mix-blend-lighten h-[1080px] w-[1920px] max-w-[1920px] rotate-180 left-1/2 transform -translate-x-[960px]"
       >
         <source src="/device-beam.mp4" type="video/mp4" />
       </video>
