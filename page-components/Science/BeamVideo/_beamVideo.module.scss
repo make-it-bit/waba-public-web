@@ -1,0 +1,8 @@
+.beamVideo {
+  transition: all 0.3s ease-in-out;
+  opacity: 0.2;
+
+  &__animation {
+    opacity: 1;
+  }
+}
