@@ -52,7 +52,11 @@ const Video = ({ videoData }) => {
               styles.videoWrapper__video
             )}
           >
-            <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
+            <source
+              // src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4"
+              src="https://cdn.ananaspizza.de/file/malte-image-store/v9-webm.webm"
+              type="video/webm"
+            />
           </video>
         )}
       </div>
