@@ -19,7 +19,7 @@ const ScrollableNavbar = ({ pageIndex, navbarItems, handleClick, justify }) => {
           key={index}
           className={classNames(
             'grow-0 shrink-0 basis-0 text-sm leading-sm cursor-pointer',
-            pageIndex === 1 && navbarItems.includes('The Science Behind') && 'text-white-100',
+            pageIndex === 1 && navbarItems.includes('The Science Behind') && 'text-white-100 border-neutral-100',
             pageIndex === index && 'border-b border-black-100'
           )}
           onClick={() => handleClick(index)}
