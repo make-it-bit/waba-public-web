@@ -49,7 +49,10 @@ const Video = ({ videoData }) => {
               styles.videoWrapper__video
             )}
           >
-            <source src={getImageFullUrl(videoData.desktop_video.data)} type="video/mp4" />
+            <source
+              src={getImageFullUrl(videoData.desktop_video.data)}
+              type={videoData.desktop_video.data.attributes.mime}
+            />
           </video>
         )}
       </div>
