@@ -66,7 +66,7 @@ const Wavelengths = ({ wavelengthsData }) => {
               triggerBlueWaveAnimation && styles.blueWaveAnimation
             )}
           >
-            <Image src="/wavelength-blue.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
+            <Image src="/wavelength-pink.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
           <div
             ref={pinkWave}
@@ -76,7 +76,7 @@ const Wavelengths = ({ wavelengthsData }) => {
               triggerPinkWaveAnimation && styles.pinkWaveAnimation
             )}
           >
-            <Image src="/wavelength-pink.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
+            <Image src="/wavelength-blue.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
           </div>
           <div className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}>
             <Image src="/wavelength-orange.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
