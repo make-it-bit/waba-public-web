@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -26,9 +25,9 @@ const Video = ({ videoData }) => {
         const percentScrolled = Math.min(Math.max(rawPercentScrolled, 0), 1);
         video.currentTime = video.duration * percentScrolled;
       }
-      requestAnimationFrame(scrollVideo);
     };
-    requestAnimationFrame(scrollVideo);
+    window.addEventListener('scroll', scrollVideo);
+    return () => window.removeEventListener('scroll', scrollVideo);
   }, []);
 
   return (
@@ -45,8 +44,6 @@ const Video = ({ videoData }) => {
           <video
             ref={videoRef}
             muted
-            autoPlay
-            loop
             className={classNames(
               'w-full h-screen sticky top-0 flex flex-col justify-center items-center',
               styles.videoWrapper__video
