@@ -1,8 +1,19 @@
-import { Button } from '@/gui-components/client';
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+import { Button } from '@/gui-components/client';
+
 const CookieConsent = () => {
+  const [useHasAgreedToCookies, setHasAgreedToCookies] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('hasAgreedToCookies')) setHasAgreedToCookies(true);
+  }, []);
+
+  if (useHasAgreedToCookies) return;
+
   return (
     <div className="w-full flex items-center justify-center fixed bottom-0 m-auto bg-black-100">
       <div className="container">
@@ -13,7 +24,14 @@ const CookieConsent = () => {
               Privacy Policy
             </Link>
           </p>
-          <Button CTA="OK" style="tertiary" />
+          <Button
+            CTA="OK"
+            style="tertiary"
+            onClick={() => {
+              localStorage.setItem('hasAgreedToCookies', 'true');
+              setHasAgreedToCookies(true);
+            }}
+          />
         </div>
       </div>
     </div>
