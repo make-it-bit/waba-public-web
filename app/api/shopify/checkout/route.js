@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { createCheckout, getProductById } from '../../../../lib/shopify';
 
 export const maxDuration = 180;
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   try {
