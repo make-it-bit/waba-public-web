@@ -5,3 +5,4 @@ export { default as ScrollableNavbar } from './ScrollableNavbar';
 export { default as Form } from './Form';
 export { default as CheckoutButton } from './CheckoutButton';
 export { default as LazyLoadVideo } from './LazyLoadVideo';
+export { default as CookieConsent } from './CookieConsent';
