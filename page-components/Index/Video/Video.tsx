@@ -44,6 +44,7 @@ const Video = ({ videoData }) => {
           <video
             ref={videoRef}
             muted
+            preload="auto"
             className={classNames(
               'w-full h-screen sticky top-0 flex flex-col justify-center items-center',
               styles.videoWrapper__video
