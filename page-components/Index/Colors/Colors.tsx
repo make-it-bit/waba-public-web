@@ -195,9 +195,11 @@ const Colors = ({ colorsData }) => {
             <Link href={colorsData[`device_head_${activeColor}`].button_1_href}>
               <Button CTA={colorsData[`device_head_${activeColor}`].button_1_text} svg />
             </Link>
-            <Link href={colorsData[`device_head_${activeColor}`].button_2_href}>
-              <Button style="secondary" CTA={colorsData[`device_head_${activeColor}`].button_2_text} svg />
-            </Link>
+            {colorsData[`device_head_${activeColor}`].button_2_href && (
+              <Link href={colorsData[`device_head_${activeColor}`].button_2_href}>
+                <Button style="secondary" CTA={colorsData[`device_head_${activeColor}`].button_2_text} svg />
+              </Link>
+            )}
           </div>
         </div>
       </div>
