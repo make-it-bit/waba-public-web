@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
+// client because the higher order component is a client component
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const FeatureCard = ({ icon, title, description }) => {
   return (
@@ -21,7 +22,7 @@ const Features = ({ featuresData }) => {
       {featuresData.map((feature, index) => (
         <FeatureCard
           key={index}
-          icon={getImageFullUrl_server(feature.icon.data[0])}
+          icon={getImageFullUrl_client(feature.icon.data[0])}
           title={feature.title}
           description={feature.description}
         />

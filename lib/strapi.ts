@@ -47,9 +47,9 @@ export const getComponentData = async (component: Component) => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    // cache: 'no-store',
-    // next: { revalidate: 3600 },
+    next: { tags: [component] },
   });
+  revalidateTag(component);
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
   return data;
@@ -155,13 +155,9 @@ export const getPageData = async (page: Pages) => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    // cache: 'no-store',
-    next: {
-      // revalidate: 3600
-      tags: ['pageData'],
-    },
+    next: { tags: [page] },
   });
-  revalidateTag('pageData');
+  revalidateTag(page);
   if (!response.ok) throw new Error('Failed to fetch page data.');
   const { data } = await response.json();
   return data;
@@ -179,9 +175,9 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    // cache: 'no-store',
-    // next: { revalidate: 3600 },
+    next: { tags: ['faqElements'] },
   });
+  revalidateTag('faqElements');
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
+// client because the higher order component is a client component
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { TestimonialCard } from '@/components';
 
@@ -16,11 +17,11 @@ const Results = ({ title, resultsData }) => {
         {resultsData.data.map((result, index) => (
           <TestimonialCard
             key={index}
-            image={getImageFullUrl_server(result.attributes.image.data)}
+            image={getImageFullUrl_client(result.attributes.image.data)}
             name={result.attributes.name}
             border
             content={result.attributes.story}
-            resultImage={getImageFullUrl_server(result.attributes.result_image.data)}
+            resultImage={getImageFullUrl_client(result.attributes.result_image.data)}
           />
         ))}
       </div>
