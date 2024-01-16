@@ -16,8 +16,20 @@ import {
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata({ params: { locale } }) {
+  const indexPageData = await getPageData('index');
+  return {
+    title: indexPageData.attributes.seo.title,
+    description: indexPageData.attributes.seo.description,
+    // alternates: {
+    //   canonical: locale === 'en' ? ' ' : `${locale}`,
+    // },
+  };
+}
+
 const Home = async () => {
   const indexPageData = await getPageData('index');
+
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');

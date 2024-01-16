@@ -47,6 +47,7 @@ export const getComponentData = async (component: Component) => {
     method: 'GET',
     headers,
     // cache: 'no-store',
+    // next: { revalidate: 3600 },
   });
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
@@ -54,6 +55,7 @@ export const getComponentData = async (component: Component) => {
 };
 
 const indexPageNestedComponents = [
+  'seo',
   'hero.button_1',
   'hero.button_2',
   'hero.tags.logo',
@@ -153,6 +155,7 @@ export const getPageData = async (page: Pages) => {
     method: 'GET',
     headers,
     // cache: 'no-store',
+    // next: { revalidate: 3600 },
   });
   if (!response.ok) throw new Error('Failed to fetch page data.');
   const { data } = await response.json();
@@ -172,6 +175,7 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
     method: 'GET',
     headers,
     // cache: 'no-store',
+    // next: { revalidate: 3600 },
   });
   const data = await response.json();
   const responseData = data.data as any[];
