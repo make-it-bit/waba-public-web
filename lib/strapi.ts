@@ -46,7 +46,7 @@ export const getComponentData = async (component: Component) => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    cache: 'no-store',
+    // cache: 'no-store',
   });
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
@@ -152,7 +152,7 @@ export const getPageData = async (page: Pages) => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    cache: 'no-store',
+    // cache: 'no-store',
   });
   if (!response.ok) throw new Error('Failed to fetch page data.');
   const { data } = await response.json();
@@ -171,7 +171,7 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    cache: 'no-store',
+    // cache: 'no-store',
   });
   const data = await response.json();
   const responseData = data.data as any[];
