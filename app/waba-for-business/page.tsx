@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { getPageData, getComponentData, getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getPageData, getComponentData } from '@/lib/strapi';
 
 import { BusinessCareersHero, WabaForBusiness, Footer } from '@/page-components';
 

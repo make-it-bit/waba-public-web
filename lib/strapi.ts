@@ -1,5 +1,3 @@
-'use server';
-
 import qs from 'qs';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
