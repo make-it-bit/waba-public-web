@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getPageData, getComponentData } from '@/lib/strapi';
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 import { BusinessCareersHero, CareersAtWaba, Footer } from '@/page-components';
 
@@ -14,7 +14,7 @@ const CareersAtWABA = async () => {
   return (
     <div className="lg:bg-supplementary-warm-gray">
       <BusinessCareersHero
-        image={getImageFullUrl(careersPageData.attributes.hero_background_image.data)}
+        image={getImageFullUrl_server(careersPageData.attributes.hero_background_image.data)}
         title={careersPageData.attributes.hero_title}
         content={careersPageData.attributes.hero_description}
       />

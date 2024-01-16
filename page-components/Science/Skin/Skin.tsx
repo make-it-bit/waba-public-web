@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { ScrollableNavbar } from '@/components';
 
@@ -62,7 +62,7 @@ const Skin = ({ skinData }) => {
           <div className="md:col-start-8 md:col-span-5 col-span-12 md:order-2 order-1">
             <div className="relative w-full md:h-[554px] h-[352px]">
               <Image
-                src={getImageFullUrl(element.attributes.image.data)}
+                src={getImageFullUrl_client(element.attributes.image.data)}
                 alt="ageing image"
                 fill
                 className="absolute object-cover"

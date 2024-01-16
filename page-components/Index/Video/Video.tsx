@@ -1,9 +1,10 @@
 'use client';
+
 import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import styles from './_video.module.scss';
 
@@ -51,7 +52,7 @@ const Video = ({ videoData }) => {
             )}
           >
             <source
-              src={getImageFullUrl(videoData.desktop_video.data)}
+              src={getImageFullUrl_client(videoData.desktop_video.data)}
               type={videoData.desktop_video.data.attributes.mime}
             />
           </video>
@@ -62,7 +63,7 @@ const Video = ({ videoData }) => {
           <div className="relative" key={index}>
             <Image
               alt={image.attributes.alternativeText}
-              src={getImageFullUrl(image)}
+              src={getImageFullUrl_client(image)}
               width={image.attributes.width}
               height={image.attributes.height}
             />

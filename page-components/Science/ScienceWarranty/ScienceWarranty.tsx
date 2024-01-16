@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 import styles from './_scienceWarranty.module.scss';
 
@@ -19,7 +19,7 @@ const ScienceWarranty = ({ warrantyData }) => {
               )}
             >
               <Image
-                src={getImageFullUrl(warrantyData.quote_image.data)}
+                src={getImageFullUrl_server(warrantyData.quote_image.data)}
                 alt="doctor"
                 width={878}
                 height={1228}

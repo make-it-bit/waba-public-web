@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const ExampleBlock = ({ title, image, contentArray }) => {
   const subtitles = ['Target', 'Protocol', 'Result'];
@@ -43,7 +43,7 @@ const Examples = ({ examplesData }) => {
             <ExampleBlock
               key={index}
               title={example.title}
-              image={getImageFullUrl(example.image.data)}
+              image={getImageFullUrl_server(example.image.data)}
               contentArray={[example.target_text, example.protocol_text, example.result_text]}
             />
           ))}

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 
@@ -19,7 +19,7 @@ const PreFooterCard = ({ preFooterCardData }) => {
           <div className="flex h-full">
             <div className="relative flex flex-col justify-end w-full min-h-[522px] p-64">
               <Image
-                src={getImageFullUrl(pre_footer_card_1.background_image.data)}
+                src={getImageFullUrl_server(pre_footer_card_1.background_image.data)}
                 fill
                 className="absolute w-full h-full object-cover object-right inset-0 z-[-1]"
                 alt="pre-footer image"
@@ -39,7 +39,7 @@ const PreFooterCard = ({ preFooterCardData }) => {
           <div className="flex h-full">
             <div className="relative flex flex-col justify-end w-full min-h-[522px] p-64">
               <Image
-                src={getImageFullUrl(pre_footer_card_2.background_image.data)}
+                src={getImageFullUrl_server(pre_footer_card_2.background_image.data)}
                 fill
                 className="absolute w-full h-full object-cover inset-0 z-[-1]"
                 alt="pre-footer image"

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const Photobiomodulation = ({ photobiomodulationData }) => {
   return (
@@ -26,14 +26,14 @@ const Photobiomodulation = ({ photobiomodulationData }) => {
           <div className="lg:col-start-6 lg:col-span-6 col-span-12 lg:order-2 order-1">
             <div className="flex justify-center items-center h-full">
               <Image
-                src={getImageFullUrl(photobiomodulationData.image.data[0])}
+                src={getImageFullUrl_server(photobiomodulationData.image.data[0])}
                 alt="photobiomodulation graph"
                 width={635}
                 height={396}
                 className="lg:block hidden"
               />
               <Image
-                src={getImageFullUrl(photobiomodulationData.image.data[1])}
+                src={getImageFullUrl_server(photobiomodulationData.image.data[1])}
                 alt="photobiomodulation graph"
                 width={635}
                 height={396}

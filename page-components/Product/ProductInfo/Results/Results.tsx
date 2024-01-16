@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 import { TestimonialCard } from '@/components';
 
@@ -16,11 +16,11 @@ const Results = ({ title, resultsData }) => {
         {resultsData.data.map((result, index) => (
           <TestimonialCard
             key={index}
-            image={getImageFullUrl(result.attributes.image.data)}
+            image={getImageFullUrl_server(result.attributes.image.data)}
             name={result.attributes.name}
             border
             content={result.attributes.story}
-            resultImage={getImageFullUrl(result.attributes.result_image.data)}
+            resultImage={getImageFullUrl_server(result.attributes.result_image.data)}
           />
         ))}
       </div>

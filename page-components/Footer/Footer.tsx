@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { TextInput, Button } from '@/gui-components/client';
 
@@ -119,7 +119,7 @@ const Footer = ({ footerData, small = false }) => {
                     {footerData.social_media_links.data.map((link, index) => (
                       <Link key={index} href={link.attributes.href} target={link.attributes.target}>
                         <Image
-                          src={getImageFullUrl(link.attributes.icon.data)}
+                          src={getImageFullUrl_client(link.attributes.icon.data)}
                           alt={link.attributes.name}
                           width={16}
                           height={16}

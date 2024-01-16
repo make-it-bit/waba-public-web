@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { NumberInput } from '@/gui-components/client';
 import { CheckoutButton } from '@/components';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const Checkout = ({ mainInfoData }) => {
   const [quantity, setQuantity] = useState(1);
@@ -26,7 +26,12 @@ const Checkout = ({ mainInfoData }) => {
           />
           <div className="flex justify-center items-center justify-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>
-            <Image src={getImageFullUrl(mainInfoData.powered_by_logos.data[0])} width={35} height={21} alt="stripe" />
+            <Image
+              src={getImageFullUrl_client(mainInfoData.powered_by_logos.data[0])}
+              width={35}
+              height={21}
+              alt="stripe"
+            />
           </div>
         </div>
         <div className="flex flex-col items-center gap-8 grow-1">
@@ -38,7 +43,12 @@ const Checkout = ({ mainInfoData }) => {
           />
           <div className="flex justify-center items-center justify-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>
-            <Image src={getImageFullUrl(mainInfoData.powered_by_logos.data[1])} width={45} height={13} alt="klarna" />
+            <Image
+              src={getImageFullUrl_client(mainInfoData.powered_by_logos.data[1])}
+              width={45}
+              height={13}
+              alt="klarna"
+            />
           </div>
         </div>
       </div>

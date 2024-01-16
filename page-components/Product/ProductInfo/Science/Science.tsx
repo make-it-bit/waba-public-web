@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const Science = ({ background, scienceData }) => {
   return (
@@ -28,14 +28,14 @@ const Science = ({ background, scienceData }) => {
         <div className="lg:col-start-6 lg:col-span-6 col-span-12 lg:order-2 order-1">
           <div className="flex justify-center items-center h-full">
             <Image
-              src={getImageFullUrl(scienceData.image.data[0])}
+              src={getImageFullUrl_server(scienceData.image.data[0])}
               alt="photobiomodulation graph"
               width={635}
               height={396}
               className="lg:block hidden"
             />
             <Image
-              src={getImageFullUrl(scienceData.image.data[1])}
+              src={getImageFullUrl_server(scienceData.image.data[1])}
               alt="photobiomodulation graph"
               width={635}
               height={396}

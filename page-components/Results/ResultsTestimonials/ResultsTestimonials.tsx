@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { TestimonialCard } from '@/components';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import styles from './_resultsTestimonials.module.scss';
 
@@ -31,7 +31,7 @@ const ResultsTestimonials = ({ testimonialsData }) => {
             ].map((userStory, index) => (
               <TestimonialCard
                 key={index}
-                image={getImageFullUrl(userStory.attributes.image.data)}
+                image={getImageFullUrl_client(userStory.attributes.image.data)}
                 name={userStory.attributes.name}
                 border
                 content={userStory.attributes.story}

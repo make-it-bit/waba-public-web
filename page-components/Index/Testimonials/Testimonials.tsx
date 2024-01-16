@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { TestimonialCard } from '@/components';
 
@@ -21,7 +21,7 @@ const Testimonials = ({ testimonialsData }) => {
           {testimonialsData.user_stories.data.map((userStory, index) => (
             <TestimonialCard
               key={index}
-              image={getImageFullUrl(userStory.attributes.image.data)}
+              image={getImageFullUrl_client(userStory.attributes.image.data)}
               name={userStory.attributes.name}
               content={userStory.attributes.story}
               buttonCTA={userStory.attributes.button.href_text}

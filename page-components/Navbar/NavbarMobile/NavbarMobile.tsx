@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 
@@ -20,7 +20,7 @@ const NavbarMobile = ({ navbarData }) => {
       <div className="container">
         <div className="relative flex justify-between items-center py-12 gap-8">
           <Image
-            src={getImageFullUrl(navbarData.menu_icons.data[1])}
+            src={getImageFullUrl_client(navbarData.menu_icons.data[1])}
             width={32}
             height={32}
             alt="mobile menu close"
@@ -28,7 +28,7 @@ const NavbarMobile = ({ navbarData }) => {
             onClick={handleClick}
           />
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2" onClick={handleClick}>
-            <Image src={getImageFullUrl(navbarData.waba_logos.data[3])} alt="waba logo" width={80} height={20} />
+            <Image src={getImageFullUrl_client(navbarData.waba_logos.data[3])} alt="waba logo" width={80} height={20} />
           </Link>
           <Link href={navbarData.button.href_src} onClick={handleClick}>
             <Button CTA={navbarData.button.href_text} style="tertiary" size="sm" />
@@ -63,7 +63,7 @@ const NavbarMobile = ({ navbarData }) => {
       <div className="container">
         <div className="relative flex justify-between items-center py-12 gap-8">
           <Image
-            src={getImageFullUrl(navbarData.menu_icons.data[0])}
+            src={getImageFullUrl_client(navbarData.menu_icons.data[0])}
             width={32}
             height={32}
             alt="mobile menu open"
@@ -71,7 +71,7 @@ const NavbarMobile = ({ navbarData }) => {
             onClick={handleClick}
           />
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
-            <Image src={getImageFullUrl(navbarData.waba_logos.data[2])} alt="waba logo" width={80} height={20} />
+            <Image src={getImageFullUrl_client(navbarData.waba_logos.data[2])} alt="waba logo" width={80} height={20} />
           </Link>
           <Link href={navbarData.button.href_src}>
             <Button CTA={navbarData.button.href_text} size="sm" />

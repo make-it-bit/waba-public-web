@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import styles from './_foundationCard.module.scss';
 
@@ -35,7 +35,7 @@ const FoundationCard = ({
       {transition && (
         <>
           <Image
-            src={getImageFullUrl(foundationCardData.background_image.data)}
+            src={getImageFullUrl_client(foundationCardData.background_image.data)}
             alt="foundation transition image"
             fill
             className={classNames('absolute w-full h-full object-cover inset-0', styles.image)}
@@ -45,7 +45,7 @@ const FoundationCard = ({
       )}
       {transition && isHovered ? (
         <Image
-          src={getImageFullUrl(foundationCardData.icon.data[1])}
+          src={getImageFullUrl_client(foundationCardData.icon.data[1])}
           alt="icon"
           width={56}
           height={56}
@@ -53,7 +53,7 @@ const FoundationCard = ({
         />
       ) : (
         <Image
-          src={getImageFullUrl(foundationCardData.icon.data[0])}
+          src={getImageFullUrl_client(foundationCardData.icon.data[0])}
           alt="icon"
           width={56}
           height={56}

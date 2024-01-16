@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const FeatureCard = ({ icon, title, description }) => {
   return (
@@ -21,7 +21,7 @@ const Features = ({ featuresData }) => {
       {featuresData.map((feature, index) => (
         <FeatureCard
           key={index}
-          icon={getImageFullUrl(feature.icon.data[0])}
+          icon={getImageFullUrl_server(feature.icon.data[0])}
           title={feature.title}
           description={feature.description}
         />

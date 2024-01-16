@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 
@@ -33,7 +33,12 @@ const NavbarDesktop = ({ navbarData }) => {
           </div>
           <div className="flex flex-0 justify-center">
             <Link href="/">
-              <Image src={getImageFullUrl(navbarData.waba_logos.data[0])} alt="waba logo" width={96} height={24} />
+              <Image
+                src={getImageFullUrl_client(navbarData.waba_logos.data[0])}
+                alt="waba logo"
+                width={96}
+                height={24}
+              />
             </Link>
           </div>
           <div className="flex flex-1 justify-end items-center 2xl:gap-64 xl:gap-32 gap-16">

@@ -5,7 +5,7 @@ import { Tag } from '@/components';
 
 import { Checkout } from '@/page-components';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const MainInfo = ({ mainInfoData }) => {
   return (
@@ -17,7 +17,7 @@ const MainInfo = ({ mainInfoData }) => {
             {mainInfoData.images.data.map((image, index) => (
               <div key={index} className="relative min-w-[260px] h-[260px]">
                 <Image
-                  src={getImageFullUrl(image)}
+                  src={getImageFullUrl_server(image)}
                   fill
                   className="absolute w-full h-full object-cover"
                   alt="product main info image"
@@ -32,7 +32,7 @@ const MainInfo = ({ mainInfoData }) => {
           <div className="lg:block hidden col-start-1 col-span-5">
             <div className="relative w-full h-full min-h-[526px]">
               <Image
-                src={getImageFullUrl(mainInfoData.images.data[0])}
+                src={getImageFullUrl_server(mainInfoData.images.data[0])}
                 fill
                 className="absolute w-full h-full object-cover"
                 alt="device"
@@ -49,7 +49,7 @@ const MainInfo = ({ mainInfoData }) => {
                 <Tag
                   key={index}
                   text={tag.attributes.text}
-                  svg={tag.attributes.logo.data && getImageFullUrl(tag.attributes.logo.data)}
+                  svg={tag.attributes.logo.data && getImageFullUrl_server(tag.attributes.logo.data)}
                 />
               ))}
             </div>
@@ -65,7 +65,7 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="col-start-1 col-span-3 row-span-2">
               <div className="relative w-full h-full min-h-[416px]">
                 <Image
-                  src={getImageFullUrl(mainInfoData.images.data[1])}
+                  src={getImageFullUrl_server(mainInfoData.images.data[1])}
                   fill
                   className="absolute w-full h-full object-cover"
                   alt="product main info image"
@@ -75,7 +75,7 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
                 <Image
-                  src={getImageFullUrl(mainInfoData.images.data[2])}
+                  src={getImageFullUrl_server(mainInfoData.images.data[2])}
                   fill
                   className="absolute w-full h-full object-cover"
                   alt="product main info image"
@@ -85,7 +85,7 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
                 <Image
-                  src={getImageFullUrl(mainInfoData.images.data[3])}
+                  src={getImageFullUrl_server(mainInfoData.images.data[3])}
                   fill
                   className="absolute w-full h-full object-cover"
                   alt="product main info image"
@@ -98,7 +98,7 @@ const MainInfo = ({ mainInfoData }) => {
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[217px]">
             <Image
-              src={getImageFullUrl(mainInfoData.images.data[4])}
+              src={getImageFullUrl_server(mainInfoData.images.data[4])}
               fill
               className="absolute w-full h-full object-cover"
               alt="device"

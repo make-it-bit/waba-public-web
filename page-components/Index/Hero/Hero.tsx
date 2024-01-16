@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/getImgFullUrl';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Tag } from '@/components';
 
@@ -61,7 +61,7 @@ const Hero = ({ heroData }) => {
                 <Tag
                   key={index}
                   text={tag.attributes.text}
-                  svg={tag.attributes.logo.data && getImageFullUrl(tag.attributes.logo.data)}
+                  svg={tag.attributes.logo.data && getImageFullUrl_client(tag.attributes.logo.data)}
                 />
               ))}
             </div>
