@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { NumberInput } from '@/gui-components/client';
 import { CheckoutButton } from '@/components';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 const Checkout = ({ mainInfoData }) => {
   const [quantity, setQuantity] = useState(1);

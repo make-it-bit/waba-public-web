@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 import { ScrollableNavbar } from '@/components';
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 import { TestimonialCard } from '@/components';
 

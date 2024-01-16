@@ -5,7 +5,7 @@ import { Tag } from '@/components';
 
 import { Checkout } from '@/page-components';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 const MainInfo = ({ mainInfoData }) => {
   return (

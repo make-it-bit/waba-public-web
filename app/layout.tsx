@@ -21,6 +21,7 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
   style: 'normal',
+  weight: ['400', '500', '700'],
 });
 
 export default async function RootLayout({ children }) {

@@ -1,3 +1,5 @@
+'use server';
+
 import qs from 'qs';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
@@ -158,8 +160,6 @@ export const getPageData = async (page: Pages) => {
   const { data } = await response.json();
   return data;
 };
-
-export const getImageFullUrl = (image) => process.env.NEXT_PUBLIC_STRAPI_BASE_URL + image?.attributes?.url;
 
 type FaqElement = {
   category: string;

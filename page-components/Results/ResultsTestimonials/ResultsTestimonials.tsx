@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { TestimonialCard } from '@/components';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 import styles from './_resultsTestimonials.module.scss';
 

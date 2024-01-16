@@ -5,6 +5,9 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'app')],
   },
+  experimental: {
+    serverActions: true,
+  },
   images: {
     remotePatterns: [
       {

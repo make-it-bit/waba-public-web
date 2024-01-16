@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 import styles from './_foundationCard.module.scss';
 

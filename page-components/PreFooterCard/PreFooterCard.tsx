@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getImageFullUrl } from '@/lib/strapi';
+import { getImageFullUrl } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 
