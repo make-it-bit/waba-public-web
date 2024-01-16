@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 const TextImage = ({
   title,
@@ -12,9 +13,9 @@ const TextImage = ({
 }: {
   title: string;
   content: string;
-  image?: string;
+  image?: string | StaticImport;
   imageSide: string;
-  animation: boolean;
+  animation?: boolean;
 }) => {
   const topHead = useRef<HTMLImageElement>(null);
   const middleHead = useRef<HTMLImageElement>(null);
@@ -87,7 +88,7 @@ const TextImage = ({
             </div>
             <div className="sm:col-start-8 col-start-1 sm:col-span-5 col-span-12 sm:my-80 mt-64">
               <div className="relative w-auto h-[670px] bg-supplementary-warm-gray">
-                {animation ? (
+                {animation && (
                   <>
                     <Image
                       ref={topHead}
@@ -114,19 +115,20 @@ const TextImage = ({
                       className="absolute top-3/4 translate-y-neg-3/4 translate-x-neg-1/2"
                     />
                   </>
-                ) : (
-                  <Image src={image} alt="about image" fill className="absolute object-cover" />
                 )}
+                {image && <Image src={image} alt="about image" fill className="absolute object-cover" />}
               </div>
             </div>
           </>
         ) : (
           <>
-            <div className="col-start-1 sm:col-span-5 col-span-12 sm:order-1 order-2 sm:my-80 mt-112">
-              <div className="relative w-auto h-[670px]">
-                <Image src={image} alt="about image" fill className="absolute object-cover" />
+            {image && (
+              <div className="col-start-1 sm:col-span-5 col-span-12 sm:order-1 order-2 sm:my-80 mt-112">
+                <div className="relative w-auto h-[670px]">
+                  <Image src={image} alt="about image" fill className="absolute object-cover" />
+                </div>
               </div>
-            </div>
+            )}
             <div className="sm:col-start-7 col-start-1 sm:col-span-5 col-span-12 sm:order-2 order-1">
               <div className="flex flex-col justify-center sm:text-left text-center gap-32 h-full sm:mt-0 mt-48">
                 <h1 className="font-rufina md:text-5xl text-3xl md:leading-5xl leading-3xl">{title}</h1>
