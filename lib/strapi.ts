@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 import qs from 'qs';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
@@ -155,8 +156,12 @@ export const getPageData = async (page: Pages) => {
     method: 'GET',
     headers,
     // cache: 'no-store',
-    // next: { revalidate: 3600 },
+    next: {
+      // revalidate: 3600
+      tags: ['pageData'],
+    },
   });
+  revalidateTag('pageData');
   if (!response.ok) throw new Error('Failed to fetch page data.');
   const { data } = await response.json();
   return data;
