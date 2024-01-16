@@ -38,6 +38,21 @@ const populateComponent = {
   footer: footerNestedComponents,
 };
 
+type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer';
+
+export const getComponentData = async (component: Component) => {
+  const query = qs.stringify({ populate: populateComponent[component] });
+  const url = `${STRAPI_BASE_URL}/api/${component}?${query}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    cache: 'no-store',
+  });
+  if (!response.ok) throw new Error('Failed to fetch component data.');
+  const { data } = await response.json();
+  return data;
+};
+
 const indexPageNestedComponents = [
   'hero.button_1',
   'hero.button_2',
@@ -106,6 +121,18 @@ const aboutPageNestedComponents = [
 
 const careersBusinessPageNestedComponents = ['hero_background_image', 'form.button'];
 
+type Pages =
+  | 'index'
+  | 'product'
+  | 'science-behind'
+  | 'result'
+  | 'about-us'
+  | 'faq'
+  | 'careers-at-waba'
+  | 'waba-for-business'
+  | 'shipping-policy'
+  | 'privacy-policy';
+
 const populatePage = {
   index: indexPageNestedComponents,
   product: productPageNestedComponents,
@@ -119,40 +146,13 @@ const populatePage = {
   'privacy-policy': '*',
 };
 
-type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer';
-
-type Pages =
-  | 'index'
-  | 'product'
-  | 'science-behind'
-  | 'result'
-  | 'about-us'
-  | 'faq'
-  | 'careers-at-waba'
-  | 'waba-for-business'
-  | 'shipping-policy'
-  | 'privacy-policy';
-
-export const getComponentData = async (component: Component) => {
-  const query = qs.stringify({ populate: populateComponent[component] });
-  const url = `${STRAPI_BASE_URL}/api/${component}?${query}`;
-  const response = await fetch(url, {
-    method: 'GET',
-    headers,
-    // cache: 'no-store',
-  });
-  if (!response.ok) throw new Error('Failed to fetch component data.');
-  const { data } = await response.json();
-  return data;
-};
-
 export const getPageData = async (page: Pages) => {
   const query = qs.stringify({ populate: populatePage[page] });
   const url = `${STRAPI_BASE_URL}/api/${page}?${query}`;
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    // cache: 'no-store',
+    cache: 'no-store',
   });
   if (!response.ok) throw new Error('Failed to fetch page data.');
   const { data } = await response.json();
@@ -171,7 +171,7 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const response = await fetch(url, {
     method: 'GET',
     headers,
-    // cache: 'no-store',
+    cache: 'no-store',
   });
   const data = await response.json();
   const responseData = data.data as any[];
