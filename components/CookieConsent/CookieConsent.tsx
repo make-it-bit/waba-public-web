@@ -15,7 +15,7 @@ const CookieConsent = () => {
   if (useHasAgreedToCookies) return;
 
   return (
-    <div className="w-full flex items-center justify-center fixed bottom-0 m-auto bg-black-100">
+    <div className="w-full flex items-center justify-center fixed bottom-0 m-auto bg-black-100 z-[420]">
       <div className="container">
         <div className="flex justify-between items-center py-12">
           <p className="text-neutral-100 m-0">

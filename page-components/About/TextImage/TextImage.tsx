@@ -3,14 +3,26 @@
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
-const TextImage = ({ title, content, image, imageSide, animation = false }) => {
+const TextImage = ({
+  title,
+  content,
+  image,
+  imageSide,
+  animation = false,
+}: {
+  title: string;
+  content: string;
+  image?: string;
+  imageSide: string;
+  animation: boolean;
+}) => {
   const topHead = useRef<HTMLImageElement>(null);
   const middleHead = useRef<HTMLImageElement>(null);
   const bottomHead = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const startAnimationOffset = 650;
+      const startAnimationOffset = 750;
 
       if (topHead.current) {
         const topHeadPosition = topHead.current.getBoundingClientRect();

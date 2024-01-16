@@ -99,7 +99,9 @@ const sciencePageNestedComponents = [
   'wavelength',
   'beam',
   'text_image.image',
-  'warranty',
+  'warranty.quote_author',
+  'warranty.quote_text',
+  'warranty.quote_image',
 ];
 
 const resultPageNestedComponents = ['hero', 'example.examples.image', 'testimonial.user_stories.image', 'warranty'];

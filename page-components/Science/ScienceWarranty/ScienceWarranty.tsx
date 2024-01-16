@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+import { getImageFullUrl } from '@/lib/strapi';
+
 import styles from './_scienceWarranty.module.scss';
 
 const ScienceWarranty = ({ warrantyData }) => {
@@ -17,7 +19,7 @@ const ScienceWarranty = ({ warrantyData }) => {
               )}
             >
               <Image
-                src="/science-behind-doctor-img.png"
+                src={getImageFullUrl(warrantyData.quote_image.data)}
                 alt="doctor"
                 width={878}
                 height={1228}

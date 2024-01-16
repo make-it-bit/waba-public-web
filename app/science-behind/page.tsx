@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { getImageFullUrl } from '@/lib/strapi';
-
 import { getPageData, getComponentData } from '@/lib/strapi';
 
 import {
@@ -41,7 +39,6 @@ const ScienceBehind = async () => {
       <TextImage
         title={sciencePageData.attributes.text_image.title}
         content={sciencePageData.attributes.text_image.description}
-        image={getImageFullUrl(sciencePageData.attributes.text_image.image.data)}
         imageSide="right"
         animation
       />
