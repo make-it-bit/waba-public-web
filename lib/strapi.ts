@@ -44,12 +44,12 @@ type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'foot
 export const getComponentData = async (component: Component) => {
   const query = qs.stringify({ populate: populateComponent[component] });
   const url = `${STRAPI_BASE_URL}/api/${component}?${query}`;
+  revalidateTag(component);
   const response = await fetch(url, {
     method: 'GET',
     headers,
     next: { tags: [component] },
   });
-  revalidateTag(component);
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
   return data;
@@ -152,12 +152,12 @@ const populatePage = {
 export const getPageData = async (page: Pages) => {
   const query = qs.stringify({ populate: populatePage[page] });
   const url = `${STRAPI_BASE_URL}/api/${page}?${query}`;
+  revalidateTag(page);
   const response = await fetch(url, {
     method: 'GET',
     headers,
     next: { tags: [page] },
   });
-  revalidateTag(page);
   if (!response.ok) throw new Error('Failed to fetch page data.');
   const { data } = await response.json();
   return data;
@@ -172,12 +172,12 @@ type FaqElement = {
 export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const query = qs.stringify({ populate: '*' });
   const url = `${STRAPI_BASE_URL}/api/faq-elements?${query}`;
+  revalidateTag('faqElements');
   const response = await fetch(url, {
     method: 'GET',
     headers,
     next: { tags: ['faqElements'] },
   });
-  revalidateTag('faqElements');
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
