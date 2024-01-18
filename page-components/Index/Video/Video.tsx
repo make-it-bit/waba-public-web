@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import styles from './_video.module.scss';
 
-const HeroLightpass = () => {
+const HeroLightpass = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
