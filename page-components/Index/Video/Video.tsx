@@ -32,6 +32,7 @@ const HeroLightpass = ({ videoData }) => {
     }[width];
   };
 
+  // set up canvas and images when page is loaded
   useEffect(() => {
     // preload images
     const preloadImages = () => {
@@ -52,6 +53,7 @@ const HeroLightpass = ({ videoData }) => {
     canvas.height = correctHeight;
   }, []);
 
+  // handle image change and canvas resize when screen size changes
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas === null) return;
