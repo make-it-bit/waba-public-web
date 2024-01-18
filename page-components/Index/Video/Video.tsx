@@ -1,77 +1,104 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-
-import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import styles from './_video.module.scss';
 
-// TUTORIAL: https://codepen.io/Maltsbier/pen/dyYmGGq
+const HeroLightpass = () => {
+  const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-const Video = ({ videoData }) => {
-  const [video, setVideo] = useState(false);
-  const boundRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const frameCount = 31;
+  const currentFrame = (index) => `/device-animation/WABA.159.180.199.${index}.jpg`;
+
+  // const currentFrame = (index) => {
+  //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
+  //   return url;
+  // };
+
+  const getCorrectCavasWidth = () => {
+    if (window.innerWidth > 1535) return 1504;
+    if (window.innerWidth > 1279) return 1248;
+    if (window.innerWidth > 1023) return 994;
+    return null;
+  };
+
+  const getCorrectCanvasHeight = (width) => {
+    return {
+      1504: 844,
+      1248: 700,
+      994: 556,
+    }[width];
+  };
 
   useEffect(() => {
-    setVideo(true);
-    const scrollVideo = () => {
-      const video = videoRef.current;
-      const bound = boundRef.current;
-      if (video && video.duration && bound) {
-        const distanceFromTop = window.scrollY + bound.getBoundingClientRect().top;
-        const rawPercentScrolled = (window.scrollY - distanceFromTop) / (bound.scrollHeight - window.innerHeight);
-        const percentScrolled = Math.min(Math.max(rawPercentScrolled, 0), 1);
-        video.currentTime = video.duration * percentScrolled;
+    // preload images
+    const preloadImages = () => {
+      for (let i = 1; i < frameCount; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
       }
     };
-    window.addEventListener('scroll', scrollVideo);
-    return () => window.removeEventListener('scroll', scrollVideo);
+    preloadImages();
+    // set canvas width
+    const canvas = canvasRef.current;
+    if (canvas === null) return;
+    const correctWidth = getCorrectCavasWidth();
+    if (correctWidth === null) return;
+    canvas.width = correctWidth;
+    setCurrentCanvasWidth(correctWidth);
+    const correctHeight = getCorrectCanvasHeight(correctWidth);
+    canvas.height = correctHeight;
   }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas === null) return;
+
+    const updateImage = (index) => {
+      const canvas = canvasRef.current;
+      if (canvas === null) return;
+      const context = canvas.getContext('2d');
+      if (context === null) return;
+      const img = new Image();
+      img.src = currentFrame(index);
+      img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+    };
+    const handleCanvasResize = () => {
+      const correctWidth = getCorrectCavasWidth();
+      if (correctWidth === null || correctWidth === currentCanvasWidth) return;
+      canvas.width = correctWidth;
+      setCurrentCanvasWidth(correctWidth);
+      const correctHeight = getCorrectCanvasHeight(correctWidth);
+      canvas.height = correctHeight;
+    };
+    const handleScroll = () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollFraction = scrollTop / maxScrollTop;
+      const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
+      requestAnimationFrame(() => updateImage(frameIndex + 1));
+    };
+
+    handleScroll(); // set the correct image to canvas when page is loaded
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleCanvasResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleCanvasResize);
+    };
+  }, [currentCanvasWidth]);
 
   return (
     <div className="container">
-      <div ref={boundRef} className={classNames('hidden lg:block relative', styles.videoWrapper)}>
-        <div className="absolute top-96 z-10">
-          <div className="grid grid-cols-12">
-            <div className="col-start-5 col-span-4 text-center">
-              <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
-            </div>
-          </div>
-        </div>
-        {video && (
-          <video
-            ref={videoRef}
-            muted
-            preload="auto"
-            className={classNames(
-              'w-full h-screen sticky top-0 flex flex-col justify-center items-center',
-              styles.videoWrapper__video
-            )}
-          >
-            <source
-              src={getImageFullUrl_client(videoData.desktop_video.data)}
-              type={videoData.desktop_video.data.attributes.mime}
-            />
-          </video>
-        )}
-      </div>
-      <div className="block lg:hidden">
-        {videoData.mobile_images.data.map((image, index) => (
-          <div className="relative" key={index}>
-            <Image
-              alt={image.attributes.alternativeText}
-              src={getImageFullUrl_client(image)}
-              width={image.attributes.width}
-              height={image.attributes.height}
-            />
-          </div>
-        ))}
+      <div className={classNames('hidden lg:block', styles.videoWrapper)}>
+        <canvas className="sticky top-[137px]" ref={canvasRef} />
       </div>
     </div>
   );
 };
 
-export default Video;
+export default HeroLightpass;

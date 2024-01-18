@@ -21,9 +21,6 @@ export async function generateMetadata({ params: { locale } }) {
   return {
     title: indexPageData.attributes.seo.title,
     description: indexPageData.attributes.seo.description,
-    // alternates: {
-    //   canonical: locale === 'en' ? ' ' : `${locale}`,
-    // },
   };
 }
 
