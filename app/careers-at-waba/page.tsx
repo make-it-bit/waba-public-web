@@ -16,7 +16,7 @@ export async function generateMetadata() {
       canonical: '/careers-at-waba',
     },
     openGraph: {
-      //images: [seo_component.og_image || null],
+      images: ['/api/og' || null],
     },
   };
 }

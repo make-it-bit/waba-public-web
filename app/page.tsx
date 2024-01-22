@@ -25,7 +25,7 @@ export async function generateMetadata() {
       canonical: ' ',
     },
     openGraph: {
-      //images: [seo_component.og_image || null],
+      images: ['/api/og' || null],
     },
   };
 }
