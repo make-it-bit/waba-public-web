@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={classNames('min-h-screen flex flex-col', dmSans.className)}>
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
         <div className="sticky top-0 z-[500]">
           <PromoBar promobarData={promobarData.attributes} />
           <Navbar navbarData={navbarData.attributes} />
