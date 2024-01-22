@@ -9,13 +9,6 @@ import { getComponentData } from '@/lib/strapi';
 
 import './_globals.scss';
 
-export const dynamic = 'force-static';
-
-export const metadata = {
-  title: 'Waba',
-  description: 'Waba',
-};
-
 const dmSans = DM_Sans({
   variable: '--dmSans-font',
   subsets: ['latin'],
@@ -23,6 +16,14 @@ const dmSans = DM_Sans({
   style: 'normal',
   weight: ['400', '500', '700'],
 });
+
+export const dynamic = 'force-static';
+
+export const metadata = {
+  title: 'Waba Tech',
+  description: 'Waba Technologies',
+  metadataBase: new URL(`https://${process.env.NEXT_PUBLIC_BASE_URL}/`),
+};
 
 export default async function RootLayout({ children }) {
   const promobarData = await getComponentData('promobar');

@@ -7,6 +7,20 @@ import { BusinessCareersHero, CareersAtWaba, Footer } from '@/page-components';
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata() {
+  const careersPageData = await getPageData('careers-at-waba');
+  return {
+    title: careersPageData.attributes.seo.title,
+    description: careersPageData.attributes.seo.description,
+    alternates: {
+      canonical: '/careers-at-waba',
+    },
+    openGraph: {
+      //images: [seo_component.og_image || null],
+    },
+  };
+}
+
 const CareersAtWABA = async () => {
   const careersPageData = await getPageData('careers-at-waba');
   const footerData = await getComponentData('footer');

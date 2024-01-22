@@ -9,12 +9,12 @@ import { Footer } from '@/page-components';
 export const dynamic = 'force-static';
 
 export async function generateMetadata() {
-  const privacyPageData = await getPageData('privacy-policy');
+  const termPageData = await getPageData('term');
   return {
-    title: privacyPageData.attributes.seo.title,
-    description: privacyPageData.attributes.seo.description,
+    title: termPageData.attributes.seo.title,
+    description: termPageData.attributes.seo.description,
     alternates: {
-      canonical: '/privacy-policy',
+      canonical: '/terms',
     },
     openGraph: {
       //images: [seo_component.og_image || null],
@@ -22,14 +22,14 @@ export async function generateMetadata() {
   };
 }
 
-const PrivacyPolicy = async () => {
-  const privacyPageData = await getPageData('privacy-policy');
+const Terms = async () => {
+  const termPageData = await getPageData('term');
   const footerData = await getComponentData('footer');
 
   return (
     <>
       <div className="container my-64">
-        {privacyPageData.attributes.content.split('\n').map((line, index) => (
+        {termPageData.attributes.content.split('\n').map((line, index) => (
           <div key={index} className="text-base leading-base text-justify my-8">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{line}</ReactMarkdown>
           </div>
@@ -40,4 +40,4 @@ const PrivacyPolicy = async () => {
   );
 };
 
-export default PrivacyPolicy;
+export default Terms;

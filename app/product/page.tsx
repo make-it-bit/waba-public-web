@@ -6,6 +6,20 @@ import { MainInfo, ProductInfo, Warranty, ProductFAQ, LogoBar, CTABlock, Footer 
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata() {
+  const productPageData = await getPageData('product');
+  return {
+    title: productPageData.attributes.seo.title,
+    description: productPageData.attributes.seo.description,
+    alternates: {
+      canonical: '/product',
+    },
+    openGraph: {
+      //images: [seo_component.og_image || null],
+    },
+  };
+}
+
 const Product = async () => {
   const productPageData = await getPageData('product');
   const ctaBlockData = await getComponentData('cta-block');

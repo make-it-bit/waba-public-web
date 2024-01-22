@@ -16,11 +16,17 @@ import {
 
 export const dynamic = 'force-static';
 
-export async function generateMetadata({ params: { locale } }) {
+export async function generateMetadata() {
   const indexPageData = await getPageData('index');
   return {
     title: indexPageData.attributes.seo.title,
     description: indexPageData.attributes.seo.description,
+    alternates: {
+      canonical: ' ',
+    },
+    openGraph: {
+      //images: [seo_component.og_image || null],
+    },
   };
 }
 

@@ -129,6 +129,12 @@ const Footer = ({ footerData, small = false }) => {
                   </div>
                 </div>
                 <div className="flex gap-40">
+                  <Link href={footerData.terms.href_src} className="text-xs leading-xs text-white-100">
+                    {footerData.terms.href_text}
+                  </Link>
+                  <Link href={footerData.returns.href_src} className="text-xs leading-xs text-white-100">
+                    {footerData.returns.href_text}
+                  </Link>
                   <Link href={footerData.shipping_policy.href_src} className="text-xs leading-xs text-white-100">
                     {footerData.shipping_policy.href_text}
                   </Link>
