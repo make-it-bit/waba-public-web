@@ -9,8 +9,8 @@ const HeroLightpass = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const frameCount = 31;
-  const currentFrame = (index) => `/device-animation/WABA.159.180.199.${index}.jpg`;
+  const frameCount = 121;
+  const currentFrame = (index) => `/device-animation/WABA.${index}.jpg`;
 
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
