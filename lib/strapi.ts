@@ -81,7 +81,7 @@ const indexPageNestedComponents = [
 
 const productPageNestedComponents = [
   'seo',
-  'hero.images',
+  'hero.hero_images.image',
   'hero.tags.logo',
   'hero.button_1',
   'hero.button_2',

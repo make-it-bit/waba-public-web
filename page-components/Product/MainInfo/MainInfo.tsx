@@ -14,12 +14,12 @@ const MainInfo = ({ mainInfoData }) => {
         {/* mobile images */}
         <div className="lg:hidden block col-span-12">
           <div className="flex gap-24 overflow-x-auto">
-            {mainInfoData.images.data.map((image, index) => (
+            {mainInfoData.hero_images.map((imageData, index) => (
               <div key={index} className="relative min-w-[260px] h-[260px]">
                 <Image
-                  src={getImageFullUrl_server(image)}
+                  src={getImageFullUrl_server(imageData.image.data)}
                   fill
-                  className="absolute w-full h-full object-cover"
+                  className={`absolute w-full h-full object-${imageData.object_fit}`}
                   alt="product main info image"
                 />
               </div>
@@ -28,13 +28,13 @@ const MainInfo = ({ mainInfoData }) => {
         </div>
 
         {/* desktop first image */}
-        {mainInfoData?.images?.data?.[0] && (
+        {mainInfoData?.hero_images?.[0].image?.data && (
           <div className="lg:block hidden col-start-1 col-span-5">
             <div className="relative w-full h-full min-h-[526px]">
               <Image
-                src={getImageFullUrl_server(mainInfoData.images.data[0])}
+                src={getImageFullUrl_server(mainInfoData?.hero_images?.[0].image?.data)}
                 fill
-                className="absolute w-full h-full object-cover"
+                className={`absolute w-full h-full object-${mainInfoData?.hero_images?.[0].object_fit}`}
                 alt="device"
               />
               <div className="absolute bg-[#f3ecee] w-full h-full top-0 left-0 z-[-1]"></div>
@@ -65,9 +65,9 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="col-start-1 col-span-3 row-span-2">
               <div className="relative w-full h-full min-h-[416px]">
                 <Image
-                  src={getImageFullUrl_server(mainInfoData.images.data[1])}
+                  src={getImageFullUrl_server(mainInfoData.hero_images[1].image.data)}
                   fill
-                  className="absolute w-full h-full object-cover"
+                  className={`absolute w-full h-full object-${mainInfoData?.hero_images?.[1].object_fit}`}
                   alt="product main info image"
                 />
               </div>
@@ -75,9 +75,9 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
                 <Image
-                  src={getImageFullUrl_server(mainInfoData.images.data[2])}
+                  src={getImageFullUrl_server(mainInfoData.hero_images[2].image.data)}
                   fill
-                  className="absolute w-full h-full object-cover"
+                  className={`absolute w-full h-full object-${mainInfoData?.hero_images?.[2].object_fit}`}
                   alt="product main info image"
                 />
               </div>
@@ -85,9 +85,9 @@ const MainInfo = ({ mainInfoData }) => {
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
                 <Image
-                  src={getImageFullUrl_server(mainInfoData.images.data[3])}
+                  src={getImageFullUrl_server(mainInfoData.hero_images[3].image.data)}
                   fill
-                  className="absolute w-full h-full object-cover"
+                  className={`absolute w-full h-full object-${mainInfoData?.hero_images?.[3].object_fit}`}
                   alt="product main info image"
                 />
               </div>
@@ -98,9 +98,9 @@ const MainInfo = ({ mainInfoData }) => {
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[217px]">
             <Image
-              src={getImageFullUrl_server(mainInfoData.images.data[4])}
+              src={getImageFullUrl_server(mainInfoData.hero_images[4].image.data)}
               fill
-              className="absolute w-full h-full object-cover"
+              className={`absolute w-full h-full object-${mainInfoData?.hero_images?.[4].object_fit}`}
               alt="device"
             />
           </div>
