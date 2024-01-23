@@ -89,6 +89,7 @@ const productPageNestedComponents = [
   'product_info.feature_cards.icon',
   'product_info.photobiomodulation.image',
   'product_info.included',
+  'product_info.included_image',
   'product_info.stories.image',
   'product_info.stories.button',
   'product_info.stories.result_image',

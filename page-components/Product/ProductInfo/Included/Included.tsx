@@ -1,8 +1,11 @@
 import React from 'react';
+import Image from 'next/image';
 
-const Included = ({ title, includedData }) => {
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
+const Included = ({ title, includedData, includedImage }) => {
   return (
-    <div className="grid grid-cols-12 mt-40 pb-112">
+    <div className="grid grid-cols-12 mt-40 lg:pb-112 pb-64">
       <div className="lg:col-start-2 lg:col-span-4 col-span-12">
         <h1 className="font-rufina text-4xl leading-4xl mb-48 lg:text-left text-center">{title}</h1>
         {includedData.map((item, index) => {
@@ -21,7 +24,16 @@ const Included = ({ title, includedData }) => {
             </div>
           );
         })}
-        <div className="col-start-7 col-span-5"></div>
+      </div>
+      <div className="lg:col-start-7 lg:col-span-5 col-span-12 lg:mt-0 mt-48">
+        <div className="relative w-auto lg:h-full h-400">
+          <Image
+            src={getImageFullUrl_client(includedImage.data)}
+            alt="inlcuded image"
+            fill
+            className="lg:absolute object-contain"
+          />
+        </div>
       </div>
     </div>
   );

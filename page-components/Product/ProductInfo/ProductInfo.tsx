@@ -24,7 +24,12 @@ const ProductInfo = ({ productInfoData }) => {
   const navbarPages = [
     <Features key={0} featuresData={productInfoData.feature_cards} />,
     <Science key={1} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
-    <Included key={2} title={productInfoData.included_title} includedData={productInfoData.included} />,
+    <Included
+      key={2}
+      title={productInfoData.included_title}
+      includedData={productInfoData.included}
+      includedImage={productInfoData.included_image}
+    />,
     <Results key={3} title={productInfoData.results_title} resultsData={productInfoData.stories} />,
     <Specifications
       key={4}
