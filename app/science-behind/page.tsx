@@ -18,6 +18,20 @@ import {
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata() {
+  const sciencePageData = await getPageData('science-behind');
+  return {
+    title: sciencePageData.attributes.seo.title,
+    description: sciencePageData.attributes.seo.description,
+    alternates: {
+      canonical: '/science-behind',
+    },
+    openGraph: {
+      images: ['/api/og' || null],
+    },
+  };
+}
+
 const ScienceBehind = async () => {
   const sciencePageData = await getPageData('science-behind');
   const ctaBlockData = await getComponentData('cta-block');

@@ -6,6 +6,20 @@ import { FAQ, LogoBar, CTABlock, PreFooterCard, Footer } from '@/page-components
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata() {
+  const faqPageData = await getPageData('faq');
+  return {
+    title: faqPageData.attributes.seo.title,
+    description: faqPageData.attributes.seo.description,
+    alternates: {
+      canonical: '/faq',
+    },
+    openGraph: {
+      images: ['/api/og' || null],
+    },
+  };
+}
+
 const FAQPage = async () => {
   const faqPageData = await getPageData('faq');
   const ctaBlockData = await getComponentData('cta-block');

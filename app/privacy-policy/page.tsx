@@ -8,6 +8,20 @@ import { Footer } from '@/page-components';
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata() {
+  const privacyPageData = await getPageData('privacy-policy');
+  return {
+    title: privacyPageData.attributes.seo.title,
+    description: privacyPageData.attributes.seo.description,
+    alternates: {
+      canonical: '/privacy-policy',
+    },
+    openGraph: {
+      images: ['/api/og' || null],
+    },
+  };
+}
+
 const PrivacyPolicy = async () => {
   const privacyPageData = await getPageData('privacy-policy');
   const footerData = await getComponentData('footer');

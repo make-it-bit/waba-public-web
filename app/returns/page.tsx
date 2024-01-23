@@ -9,12 +9,12 @@ import { Footer } from '@/page-components';
 export const dynamic = 'force-static';
 
 export async function generateMetadata() {
-  const shippingPageData = await getPageData('shipping-policy');
+  const returnPageData = await getPageData('return');
   return {
-    title: shippingPageData.attributes.seo.title,
-    description: shippingPageData.attributes.seo.description,
+    title: returnPageData.attributes.seo.title,
+    description: returnPageData.attributes.seo.description,
     alternates: {
-      canonical: '/shipping-policy',
+      canonical: '/returns',
     },
     openGraph: {
       images: ['/api/og' || null],
@@ -22,14 +22,14 @@ export async function generateMetadata() {
   };
 }
 
-const ShippingPolicy = async () => {
-  const shippingPageData = await getPageData('shipping-policy');
+const Returns = async () => {
+  const returnPageData = await getPageData('return');
   const footerData = await getComponentData('footer');
 
   return (
     <>
       <div className="container my-64">
-        {shippingPageData.attributes.content.split('\n').map((line, index) => (
+        {returnPageData.attributes.content.split('\n').map((line, index) => (
           <div key={index} className="text-base leading-base text-justify my-8">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{line}</ReactMarkdown>
           </div>
@@ -40,4 +40,4 @@ const ShippingPolicy = async () => {
   );
 };
 
-export default ShippingPolicy;
+export default Returns;

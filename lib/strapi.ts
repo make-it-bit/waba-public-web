@@ -27,6 +27,8 @@ const footerNestedComponents = [
   'footer_top.input_button',
   'page_links.page_link_data',
   'social_media_links.icon',
+  'terms',
+  'returns',
   'shipping_policy',
   'privacy_policy',
 ];
@@ -78,6 +80,7 @@ const indexPageNestedComponents = [
 ];
 
 const productPageNestedComponents = [
+  'seo',
   'hero.images',
   'hero.tags.logo',
   'hero.button_1',
@@ -96,6 +99,7 @@ const productPageNestedComponents = [
 ];
 
 const sciencePageNestedComponents = [
+  'seo',
   'hero',
   'skin.skins.image',
   'photobiomodulation.image',
@@ -107,9 +111,16 @@ const sciencePageNestedComponents = [
   'warranty.quote_image',
 ];
 
-const resultPageNestedComponents = ['hero', 'example.examples.image', 'testimonial.user_stories.image', 'warranty'];
+const resultPageNestedComponents = [
+  'seo',
+  'hero',
+  'example.examples.image',
+  'testimonial.user_stories.image',
+  'warranty',
+];
 
 const aboutPageNestedComponents = [
+  'seo',
   'hero.background_image',
   'origin',
   'text_image_1.image',
@@ -122,7 +133,9 @@ const aboutPageNestedComponents = [
   'difference.button',
 ];
 
-const careersBusinessPageNestedComponents = ['hero_background_image', 'form.button'];
+const faqPageNestedComponents = ['seo', 'hero_title', 'faq_elements'];
+
+const careersBusinessPageNestedComponents = ['seo', 'hero_background_image', 'form.button'];
 
 type Pages =
   | 'index'
@@ -133,6 +146,8 @@ type Pages =
   | 'faq'
   | 'careers-at-waba'
   | 'waba-for-business'
+  | 'term'
+  | 'return'
   | 'shipping-policy'
   | 'privacy-policy';
 
@@ -142,9 +157,11 @@ const populatePage = {
   'science-behind': sciencePageNestedComponents,
   result: resultPageNestedComponents,
   'about-us': aboutPageNestedComponents,
-  faq: '*',
+  faq: faqPageNestedComponents,
   'careers-at-waba': careersBusinessPageNestedComponents,
   'waba-for-business': careersBusinessPageNestedComponents,
+  term: '*',
+  return: '*',
   'shipping-policy': '*',
   'privacy-policy': '*',
 };

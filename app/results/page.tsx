@@ -15,6 +15,20 @@ import {
 
 export const dynamic = 'force-static';
 
+export async function generateMetadata() {
+  const resultsPageData = await getPageData('result');
+  return {
+    title: resultsPageData.attributes.seo.title,
+    description: resultsPageData.attributes.seo.description,
+    alternates: {
+      canonical: '/results',
+    },
+    openGraph: {
+      images: ['/api/og' || null],
+    },
+  };
+}
+
 const Results = async () => {
   const resultsPageData = await getPageData('result');
   const ctaBlockData = await getComponentData('cta-block');
