@@ -15,7 +15,9 @@ export async function generateMetadata() {
       canonical: '/faq',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${faqPageData.attributes.seo.title}&desc=${faqPageData.attributes.seo.description}` || null,
+      ],
     },
   };
 }

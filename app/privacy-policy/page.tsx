@@ -17,7 +17,10 @@ export async function generateMetadata() {
       canonical: '/privacy-policy',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${privacyPageData.attributes.seo.title}&desc=${privacyPageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }

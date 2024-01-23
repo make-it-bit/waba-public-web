@@ -3,10 +3,10 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { DM_Sans } from 'next/font/google';
 import classNames from 'classnames';
 
+import { getComponentData } from '@/lib/strapi';
+
 import { CookieConsent } from '@/components';
 import { PromoBar, Navbar } from '@/page-components';
-
-import { getComponentData } from '@/lib/strapi';
 
 import './_globals.scss';
 
@@ -21,8 +21,8 @@ const dmSans = DM_Sans({
 export const dynamic = 'force-static';
 
 export const metadata = {
-  title: 'Waba Tech',
-  description: 'Waba Technologies',
+  title: 'Discover Liberating Beauty',
+  description: 'Innovative light-based device that is more than just a skincare.',
   metadataBase: new URL(`https://${process.env.NEXT_PUBLIC_BASE_URL}/`),
 };
 

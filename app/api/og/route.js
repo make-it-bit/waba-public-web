@@ -1,17 +1,25 @@
+import React from 'react';
+
 import { NextResponse } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 
-import OGLogo from '@/components/OGElements/OGLogo/OGLogo';
-import OGEllipseSmaller from '@/components/OGElements/OGEllipseSmaller/OGEllipseSmaller';
-import OGEllipseBigger from '@/components/OGElements/OGEllipseBigger/OGEllipseBigger';
-import OGDeviceBlueLight from '@/components/OGElements/OGDeviceBlueLight/OGDeviceBlueLight';
-import OGDeviceGreenLight from '@/components/OGElements/OGDeviceGreenLight/OGDeviceGreenLight';
+import {
+  OGLogo,
+  OGEllipseSmaller,
+  OGEllipseBigger,
+  OGDeviceBlueLight,
+  OGDeviceGreenLight,
+} from '../../../components/OGElements';
 
 export const runtime = 'edge';
 export const maxDuration = 180;
 
 export async function GET(request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const title = searchParams.get('title') || 'Discover Liberating Beauty';
+    const description = searchParams.get('desc') || 'Innovative light-based device that is more than just a skincare.';
+
     const rufina = await fetch(new URL('../../../public/fonts/Rufina.ttf', import.meta.url)).then((res) =>
       res.arrayBuffer()
     );
@@ -62,7 +70,7 @@ export async function GET(request) {
                 marginBottom: '0px',
               }}
             >
-              Discover Liberating Beauty
+              {title}
             </p>
             <p
               style={{
@@ -74,7 +82,7 @@ export async function GET(request) {
                 marginBottom: '0px',
               }}
             >
-              Innovative light-based device that is more than just a skincare.
+              {description}
             </p>
           </div>
           <img

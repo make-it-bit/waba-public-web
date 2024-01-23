@@ -27,7 +27,10 @@ export async function generateMetadata() {
       canonical: '/science-behind',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${sciencePageData.attributes.seo.title}&desc=${sciencePageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }

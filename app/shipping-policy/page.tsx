@@ -17,7 +17,10 @@ export async function generateMetadata() {
       canonical: '/shipping-policy',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${shippingPageData.attributes.seo.title}&desc=${shippingPageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }

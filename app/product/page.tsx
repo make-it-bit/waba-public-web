@@ -15,7 +15,10 @@ export async function generateMetadata() {
       canonical: '/product',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${productPageData.attributes.seo.title}&desc=${productPageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }

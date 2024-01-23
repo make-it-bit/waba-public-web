@@ -17,7 +17,10 @@ export async function generateMetadata() {
       canonical: '/returns',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${returnPageData.attributes.seo.title}&desc=${returnPageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }

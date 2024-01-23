@@ -22,10 +22,12 @@ export async function generateMetadata() {
     title: indexPageData.attributes.seo.title,
     description: indexPageData.attributes.seo.description,
     alternates: {
-      canonical: ' ',
+      canonical: '/',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${indexPageData.attributes.seo.title}&desc=${indexPageData.attributes.seo.description}` || null,
+      ],
     },
   };
 }

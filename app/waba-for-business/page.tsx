@@ -16,7 +16,10 @@ export async function generateMetadata() {
       canonical: '/waba-for-business',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${businessPageData.attributes.seo.title}&desc=${businessPageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }

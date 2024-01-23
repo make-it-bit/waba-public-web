@@ -16,7 +16,10 @@ export async function generateMetadata() {
       canonical: '/careers-at-waba',
     },
     openGraph: {
-      images: ['/api/og' || null],
+      images: [
+        `/api/og?title=${careersPageData.attributes.seo.title}&desc=${careersPageData.attributes.seo.description}` ||
+          null,
+      ],
     },
   };
 }
