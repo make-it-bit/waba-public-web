@@ -7,9 +7,10 @@ import styles from './_video.module.scss';
 
 const HeroLightpass = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const frameCount = 121;
+  const frameCount = 390;
   const currentFrame = (index) => `/device-animation/WABA.${index}.jpg`;
 
   // const currentFrame = (index) => {
@@ -36,9 +37,9 @@ const HeroLightpass = ({ videoData }) => {
   useEffect(() => {
     // preload images
     const preloadImages = () => {
-      for (let i = 1; i < frameCount; i++) {
+      for (let i = 0; i < frameCount; i++) {
         const img = new Image();
-        img.src = currentFrame(i);
+        img.src = currentFrame(String(i).padStart(4, '0'));
       }
     };
     preloadImages();
@@ -64,7 +65,7 @@ const HeroLightpass = ({ videoData }) => {
       const context = canvas.getContext('2d');
       if (context === null) return;
       const img = new Image();
-      img.src = currentFrame(index);
+      img.src = currentFrame(String(index).padStart(4, '0'));
       img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
@@ -76,11 +77,21 @@ const HeroLightpass = ({ videoData }) => {
       canvas.height = correctHeight;
     };
     const handleScroll = () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollFraction = scrollTop / maxScrollTop;
-      const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
-      requestAnimationFrame(() => updateImage(frameIndex + 1));
+      if (containerRef.current) {
+        const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop;
+        const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+
+        // start the animation when the container is in the viewport
+        if (containerScrollTop + 500 >= 0) {
+          const scrollFraction = (containerScrollTop + 500) / (maxScrollTop * 0.45);
+          const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
+          requestAnimationFrame(() => {
+            if (frameIndex + 1 < frameCount) {
+              updateImage(frameIndex + 1);
+            }
+          });
+        }
+      }
     };
 
     handleScroll(); // set the correct image to canvas when page is loaded
@@ -95,7 +106,7 @@ const HeroLightpass = ({ videoData }) => {
   }, [currentCanvasWidth]);
 
   return (
-    <div className="container">
+    <div ref={containerRef} className="container">
       <div className={classNames('hidden lg:block', styles.videoWrapper)}>
         <canvas className="sticky top-[137px]" ref={canvasRef} />
       </div>
