@@ -9,7 +9,13 @@ const Science = ({ background, scienceData }) => {
   return (
     <>
       <div className="grid grid-cols-12 lg:mt-152 mt-72 lg:pb-288 pb-64">
-        <video autoPlay muted loop className="absolute w-full h-full object-cover mix-blend-luminosity inset-0 z-[-1]">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute w-full h-full object-cover mix-blend-luminosity inset-0 z-[-1]"
+        >
           <source src="/chest-video.mp4" type="video/mp4" />
         </video>
         <div className={classNames('absolute w-full h-full inset-0 z-[-1]', background)}></div>

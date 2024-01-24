@@ -9,6 +9,7 @@ const LazyLoadVideo = ({
   autoPlay = true,
   muted = true,
   loop = true,
+  playsInline = true,
 }: {
   className: string;
   src: string;
@@ -16,6 +17,7 @@ const LazyLoadVideo = ({
   autoPlay?: boolean;
   muted?: boolean;
   loop?: boolean;
+  playsInline?: boolean;
 }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -26,7 +28,7 @@ const LazyLoadVideo = ({
   return (
     <>
       {videoLoaded && (
-        <video autoPlay={autoPlay} muted={muted} loop={loop} className={className}>
+        <video autoPlay={autoPlay} muted={muted} loop={loop} playsInline={playsInline} className={className}>
           <source src={src} type={type} />
         </video>
       )}

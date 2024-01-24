@@ -15,7 +15,7 @@ const AboutScienceHeroVideo = ({ video }: { video: string }) => {
   return (
     <div className="absolute w-[1920px] h-[1080px] lg:rotate-[75deg] rotate-180 left-[-1000px] md:left-[-600px] lg:left-[-400px] xl:left-0 2xl:left-256 top-[-420px]">
       {videoLoaded && (
-        <video autoPlay muted loop className="w-full h-full object-cover mix-blend-difference">
+        <video autoPlay muted loop playsInline className="w-full h-full object-cover mix-blend-difference">
           <source src={video} type="video/mp4" />
         </video>
       )}

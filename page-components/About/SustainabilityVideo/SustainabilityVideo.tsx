@@ -12,7 +12,7 @@ const SustainabilityVideo = () => {
   return (
     <>
       {videoLoaded && (
-        <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover z-[-1]">
+        <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-[-1]">
           <source src="/about-us-sustainability-video.mp4" type="video/mp4" />
         </video>
       )}
