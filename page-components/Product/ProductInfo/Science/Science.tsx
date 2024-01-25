@@ -16,7 +16,10 @@ const Science = ({ background, scienceData }) => {
           playsInline
           className="absolute w-full h-full object-cover mix-blend-luminosity inset-0 z-[-1]"
         >
-          <source src="/chest-video.mp4" type="video/mp4" />
+          <source
+            src={getImageFullUrl_client(scienceData.background_video.data)}
+            type={scienceData.background_video.data.attributes.mime}
+          />
         </video>
         <div className={classNames('absolute w-full h-full inset-0 z-[-1]', background)}></div>
         <div className="col-span-12">

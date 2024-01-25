@@ -55,7 +55,12 @@ const Footer = ({ footerData, small = false }) => {
           {!small && (
             <div className="xl:col-start-5 lg:col-start-4 md:col-start-3 col-start-2 xl:col-span-4 lg:col-span-6 md:col-span-8 col-span-10 md:mb-184 mb-48">
               <div className="flex flex-col items-center mb-64 gap-16 text-center text-white-100">
-                <Image src="/icons/email-white.svg" alt="email" width={56} height={56} />
+                <Image
+                  src={getImageFullUrl_client(footerData.footer_top.icon.data)}
+                  alt="email"
+                  width={56}
+                  height={56}
+                />
                 <h1 className="font-rufina text-4xl leading-4xl">{footerData.footer_top.title}</h1>
                 <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>

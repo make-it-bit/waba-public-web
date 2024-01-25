@@ -18,7 +18,7 @@ const Beam = ({ beamData }) => {
           </div>
         </div>
       </div>
-      <BeamVideo />
+      <BeamVideo video={beamData.beam_video} beamImage={beamData.beam_image} deviceImages={beamData.device_images} />
     </div>
   );
 };

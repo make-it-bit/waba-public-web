@@ -1,17 +1,16 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
 
-import styles from './_video.module.scss';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const HeroLightpass = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const frameCount = 390;
-  const currentFrame = (index) => `/device-animation/WABA.${index}.jpg`;
+  const frameCount = videoData.total_images;
+  const currentFrame = (index) => getImageFullUrl_client(videoData.images.data[index]);
 
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
@@ -39,7 +38,7 @@ const HeroLightpass = ({ videoData }) => {
     const preloadImages = () => {
       for (let i = 0; i < frameCount; i++) {
         const img = new Image();
-        img.src = currentFrame(String(i).padStart(4, '0'));
+        img.src = currentFrame(i);
       }
     };
     preloadImages();
@@ -65,7 +64,7 @@ const HeroLightpass = ({ videoData }) => {
       const context = canvas.getContext('2d');
       if (context === null) return;
       const img = new Image();
-      img.src = currentFrame(String(index).padStart(4, '0'));
+      img.src = currentFrame(index);
       img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
@@ -107,7 +106,7 @@ const HeroLightpass = ({ videoData }) => {
 
   return (
     <div ref={containerRef} className="container">
-      <div className={classNames('hidden lg:block', styles.videoWrapper)}>
+      <div className="hidden lg:block h-[600vh]">
         <canvas className="sticky top-[137px]" ref={canvasRef} />
       </div>
     </div>

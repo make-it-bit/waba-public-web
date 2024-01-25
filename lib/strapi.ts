@@ -24,6 +24,7 @@ const preFooterCardNestedComponents = [
 ];
 
 const footerNestedComponents = [
+  'footer_top.icon',
   'footer_top.input_button',
   'page_links.page_link_data',
   'social_media_links.icon',
@@ -62,9 +63,15 @@ const indexPageNestedComponents = [
   'hero.button_1',
   'hero.button_2',
   'hero.tags.logo',
-  'color.device_head_blue',
-  'color.device_head_red',
-  'color.device_head_infrared',
+  'hero.background_video',
+  'color.device_head_blue.light_image',
+  'color.device_head_blue.head_image',
+  'color.device_head_red.light_image',
+  'color.device_head_red.head_image',
+  'color.device_head_infrared.light_image',
+  'color.device_head_infrared.head_image',
+  'color.device_green_light',
+  'color.device_body',
   'foundation.foundation_card_1.icon',
   'foundation.foundation_card_1.background_image',
   'foundation.foundation_card_2.icon',
@@ -72,9 +79,7 @@ const indexPageNestedComponents = [
   'foundation.foundation_card_3.icon',
   'foundation.foundation_card_3.background_image',
   'foundation.button',
-  'peek_inside.title',
-  'peek_inside.desktop_video',
-  'peek_inside.mobile_images',
+  'peek_inside.images',
   'testimonial.user_stories.image',
   'testimonial.user_stories.button',
 ];
@@ -88,6 +93,7 @@ const productPageNestedComponents = [
   'hero.powered_by_logos',
   'product_info.feature_cards.icon',
   'product_info.photobiomodulation.image',
+  'product_info.photobiomodulation.background_video',
   'product_info.included',
   'product_info.included_image',
   'product_info.stories.image',
@@ -101,12 +107,15 @@ const productPageNestedComponents = [
 
 const sciencePageNestedComponents = [
   'seo',
-  'hero',
+  'hero.background_video',
   'skin.skins.image',
   'photobiomodulation.image',
-  'wavelength',
-  'beam',
+  'wavelength.wavelength_images',
+  'beam.beam_video',
+  'beam.beam_image',
+  'beam.device_images',
   'text_image.image',
+  'text_image.animation_image',
   'warranty.quote_author',
   'warranty.quote_text',
   'warranty.quote_image',
@@ -114,24 +123,25 @@ const sciencePageNestedComponents = [
 
 const resultPageNestedComponents = [
   'seo',
-  'hero',
+  'hero.background_media',
   'example.examples.image',
   'testimonial.user_stories.image',
-  'warranty',
+  'warranty.video',
 ];
 
 const aboutPageNestedComponents = [
   'seo',
   'hero.background_image',
-  'origin',
+  'origin.device_image',
   'text_image_1.image',
-  'sustainability',
+  'sustainability.background_video',
   'text_image_2.image',
   'trust.reason_1.icon',
   'trust.reason_2.icon',
   'trust.reason_3.icon',
   'trust.reason_4.icon',
   'difference.button',
+  'difference.device_image',
 ];
 
 const faqPageNestedComponents = ['seo', 'hero_title', 'faq_elements'];

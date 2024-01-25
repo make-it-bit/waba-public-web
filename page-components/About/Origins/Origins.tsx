@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
+
 const Origins = ({ originData }) => {
   return (
     <div className="relative bg-supplementary-warm-gray overflow-hidden">
@@ -15,7 +17,7 @@ const Origins = ({ originData }) => {
         </div>
       </div>
       <Image
-        src="/about-us-device.png"
+        src={getImageFullUrl_server(originData.device_image.data)}
         alt="device"
         width={879}
         height={144}

@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 
-const SustainabilityVideo = () => {
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
+const SustainabilityVideo = ({ video }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
@@ -13,7 +15,7 @@ const SustainabilityVideo = () => {
     <>
       {videoLoaded && (
         <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-[-1]">
-          <source src="/about-us-sustainability-video.mp4" type="video/mp4" />
+          <source src={getImageFullUrl_client(video)} type={video.attributes.mime} />
         </video>
       )}
     </>

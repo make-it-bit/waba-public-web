@@ -1,13 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
+
 import { LazyLoadVideo } from '@/components';
 
 const ResultsHero = ({ resultsHeroData }) => {
   return (
     <div className="relative bg-supplementary-warm-gray overflow-hidden">
       <Image
-        src="/results-hero-img-1.png"
+        src={getImageFullUrl_server(resultsHeroData.background_media.data[0])}
         alt="results hero image"
         width={305}
         height={336}
@@ -15,13 +17,18 @@ const ResultsHero = ({ resultsHeroData }) => {
       />
       <LazyLoadVideo
         className="absolute lg:bottom-[93px] bottom-16 lg:right-[-38px] right-[-32px] lg:w-[306px] w-[154px] lg:h-[322px] h-[171px] object-cover"
-        src="/results-hero-video-6.mp4"
+        src={resultsHeroData.background_media.data[5]}
       />
       <div className="lg:block hidden absolute top-[661px] left-[732px] w-[196px] h-[218px]">
-        <Image src="/results-hero-img-4.png" alt="results hero image" fill className="object-cover" />
+        <Image
+          src={getImageFullUrl_server(resultsHeroData.background_media.data[3])}
+          alt="results hero image"
+          fill
+          className="object-cover"
+        />
       </div>
       <Image
-        src="/results-hero-img-2.png"
+        src={getImageFullUrl_server(resultsHeroData.background_media.data[1])}
         alt="results hero image"
         width={184}
         height={236}
@@ -30,7 +37,7 @@ const ResultsHero = ({ resultsHeroData }) => {
       <div className="container">
         <div className="relative grid grid-cols-12">
           <Image
-            src="/results-hero-img-2.png"
+            src={getImageFullUrl_server(resultsHeroData.background_media.data[1])}
             alt="results hero image"
             width={306}
             height={392}
@@ -38,11 +45,11 @@ const ResultsHero = ({ resultsHeroData }) => {
           />
           <LazyLoadVideo
             className="absolute top-64 left-1/2 translate-x-neg-1/2 w-[416px] h-[161px] object-cover"
-            src="/chest-video.mp4"
+            src={resultsHeroData.background_media.data[2]}
           />
           <LazyLoadVideo
             className="lg:block hidden absolute top-64 right-0 w-[196px] h-[239px] object-cover"
-            src="/results-hero-video-5.mp4"
+            src={resultsHeroData.background_media.data[4]}
           />
           <div className="lg:col-start-4 col-start-1 lg:col-span-6 col-span-12">
             <div className="flex flex-col gap-32 pt-288 pb-248 text-center">

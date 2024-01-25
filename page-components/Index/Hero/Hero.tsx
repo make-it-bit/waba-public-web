@@ -29,7 +29,10 @@ const Hero = ({ heroData }) => {
           playsInline
           className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1] order-2 lg:mt-0 mt-32"
         >
-          <source src="/hero-video.mp4" type="video/mp4" />
+          <source
+            src={getImageFullUrl_client(heroData.background_video.data)}
+            type={heroData.background_video.data.attributes.mime}
+          />
         </video>
       )}
       <div className="container relative order-1">

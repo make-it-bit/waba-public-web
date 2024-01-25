@@ -19,7 +19,7 @@ const ResultsWarranty = ({ warrantyData }) => {
             >
               <LazyLoadVideo
                 className="md:absolute md:bottom-0 lg:left-[-400px] md:left-[-280px] w-full md:h-full md:object-cover object-contain md:mix-blend-lighten md:z-[-1] order-2"
-                src="/warranty-video.mp4"
+                src={warrantyData.video.data}
               />
 
               <div className="grid grid-cols-12 order-1">

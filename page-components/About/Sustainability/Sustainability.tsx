@@ -8,7 +8,7 @@ import styles from './_sustainability.module.scss';
 const Sustainability = ({ sustainabilityData }) => {
   return (
     <div className="relative overflow-hidden">
-      <SustainabilityVideo />
+      <SustainabilityVideo video={sustainabilityData.background_video.data} />
       <div className={classNames('absolute top-0 left-0 w-full h-full z-[-1]', styles.background)}></div>
       <div className="container">
         <div className="grid grid-cols-12">

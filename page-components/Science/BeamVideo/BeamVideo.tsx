@@ -4,9 +4,11 @@ import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
 import styles from './_beamVideo.module.scss';
 
-const BeamVideo = () => {
+const BeamVideo = ({ video, beamImage, deviceImages }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [triggerBeamVideoAnimation, setTriggerBeamVideoAnimation] = useState(false);
   const beamVideo = useRef<HTMLVideoElement>(null);
@@ -43,11 +45,11 @@ const BeamVideo = () => {
             triggerBeamVideoAnimation && styles.beamVideo__animation
           )}
         >
-          <source src="/device-beam.mp4" type="video/mp4" />
+          <source src={getImageFullUrl_client(video.data)} type={video.data.attributes.mime} />
         </video>
       )}
       <Image
-        src="/beam-rays.png"
+        src={getImageFullUrl_client(beamImage.data)}
         alt="device"
         width={232.5}
         height={459}
@@ -58,14 +60,14 @@ const BeamVideo = () => {
         )}
       />
       <Image
-        src="/beam-device.png"
+        src={getImageFullUrl_client(deviceImages.data[2])}
         alt="device"
         width={221}
         height={407}
         className="absolute bottom-[-121px] max-md:right-0 max-md:m-auto left-0 md:left-[90px] lg:left-[190px] xl:left-[290px] 2xl:left-[395px]"
       />
       <Image
-        src="/beam-green-light.png"
+        src={getImageFullUrl_client(deviceImages.data[1])}
         alt="device"
         width={243}
         height={45}
@@ -76,7 +78,7 @@ const BeamVideo = () => {
         )}
       />
       <Image
-        src="/beam-top-light.png"
+        src={getImageFullUrl_client(deviceImages.data[0])}
         alt="device"
         width={303}
         height={123}

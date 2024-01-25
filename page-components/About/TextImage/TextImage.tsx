@@ -2,20 +2,22 @@
 
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
+
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const TextImage = ({
   title,
   content,
   image,
   imageSide,
-  animation = false,
+  animationImage,
 }: {
   title: string;
   content: string;
   image?: string | StaticImport;
   imageSide: string;
-  animation?: boolean;
+  animationImage?: { data: { [key: string]: any } };
 }) => {
   const topHead = useRef<HTMLImageElement>(null);
   const middleHead = useRef<HTMLImageElement>(null);
@@ -88,11 +90,11 @@ const TextImage = ({
             </div>
             <div className="sm:col-start-8 col-start-1 sm:col-span-5 col-span-12 sm:my-80 mt-64">
               <div className="relative w-auto h-[670px] bg-supplementary-warm-gray">
-                {animation && (
+                {animationImage && (
                   <>
                     <Image
                       ref={topHead}
-                      src="/changeable-head.png"
+                      src={getImageFullUrl_client(animationImage.data)}
                       alt="changeable head"
                       width={145}
                       height={212}
@@ -100,7 +102,7 @@ const TextImage = ({
                     />
                     <Image
                       ref={middleHead}
-                      src="/changeable-head.png"
+                      src={getImageFullUrl_client(animationImage.data)}
                       alt="changeable head"
                       width={145}
                       height={212}
@@ -108,7 +110,7 @@ const TextImage = ({
                     />
                     <Image
                       ref={bottomHead}
-                      src="/changeable-head.png"
+                      src={getImageFullUrl_client(animationImage.data)}
                       alt="changeable head"
                       width={145}
                       height={212}

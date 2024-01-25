@@ -4,6 +4,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
 import styles from './_wavelenghts.module.scss';
 
 const Wavelengths = ({ wavelengthsData }) => {
@@ -66,7 +68,13 @@ const Wavelengths = ({ wavelengthsData }) => {
               triggerBlueWaveAnimation && styles.blueWaveAnimation
             )}
           >
-            <Image src="/wavelength-pink.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
+            <Image
+              src={getImageFullUrl_client(wavelengthsData.wavelength_images.data[2])}
+              alt="pink wavelength"
+              width={408}
+              height={171}
+              className="w-full h-auto"
+            />
           </div>
           <div
             ref={pinkWave}
@@ -76,22 +84,34 @@ const Wavelengths = ({ wavelengthsData }) => {
               triggerPinkWaveAnimation && styles.pinkWaveAnimation
             )}
           >
-            <Image src="/wavelength-blue.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
+            <Image
+              src={getImageFullUrl_client(wavelengthsData.wavelength_images.data[3])}
+              alt="blue wavelength"
+              width={408}
+              height={171}
+              className="w-full h-auto"
+            />
           </div>
           <div className={classNames('absolute bottom-0 left-1/2 translate-x-neg-1/2', styles.wavelengthImageWrapper)}>
-            <Image src="/wavelength-orange.svg" alt="wavelength" width={408} height={171} className="w-full h-auto" />
+            <Image
+              src={getImageFullUrl_client(wavelengthsData.wavelength_images.data[4])}
+              alt="orange wavelength"
+              width={408}
+              height={171}
+              className="w-full h-auto"
+            />
           </div>
           <Image
-            src="/wavelengths-bg-1.png"
-            alt="wavelengths"
+            src={getImageFullUrl_client(wavelengthsData.wavelength_images.data[0])}
+            alt="wavelength first background"
             width={525}
             height={219}
             className="absolute bottom-0 left-1/2 translate-x-neg-1/2 xl:w-full w-auto xl:h-auto h-144"
           />
           <Image
             ref={bgImage2}
-            src="/wavelengths-bg-2.png"
-            alt="wavelengths"
+            src={getImageFullUrl_client(wavelengthsData.wavelength_images.data[1])}
+            alt="wavelength second background"
             width={525}
             height={219}
             className="absolute bottom-0 left-1/2 translate-x-neg-1/2 xl:w-full w-auto xl:h-auto h-144"

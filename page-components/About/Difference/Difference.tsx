@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
+
 import { Button } from '@/gui-components/client';
 
 import styles from './_difference.module.scss';
@@ -29,7 +31,13 @@ const Difference = ({ differenceData }) => {
           </div>
         </div>
       </div>
-      <Image src="/about-us-device-img.png" alt="device" width={1038} height={585} className="absolute top-0 right-0" />
+      <Image
+        src={getImageFullUrl_server(differenceData.device_image.data)}
+        alt="device"
+        width={1038}
+        height={585}
+        className="absolute top-0 right-0"
+      />
     </div>
   );
 };

@@ -10,7 +10,7 @@ type AboutScienceHeroProps = {
   title: string;
   content: string;
   image?: string;
-  video?: string;
+  video?: { attributes: { [key: string]: any } };
   background?: string;
 };
 
@@ -28,7 +28,7 @@ const AboutScienceHero = ({ title, content, image, video, background }: AboutSci
           <div className={classNames('absolute w-full h-full top-0 left-0 z-[-1]', styles.background)}></div>
         </>
       )}
-      {video && <AboutScienceHeroVideo video={video} />}
+      {video && <AboutScienceHeroVideo video={video} type={video.attributes.mime} />}
       <div className="container relative">
         <div className="grid grid-cols-12 md:pt-456 pt-256 md:pb-104 pb-72">
           <div className="col-start-1 md:col-span-6 col-span-12">

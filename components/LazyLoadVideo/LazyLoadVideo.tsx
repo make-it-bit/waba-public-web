@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
 const LazyLoadVideo = ({
   className,
   src,
@@ -12,7 +14,7 @@ const LazyLoadVideo = ({
   playsInline = true,
 }: {
   className: string;
-  src: string;
+  src: { attributes: { [key: string]: any } };
   type?: string;
   autoPlay?: boolean;
   muted?: boolean;
@@ -29,7 +31,7 @@ const LazyLoadVideo = ({
     <>
       {videoLoaded && (
         <video autoPlay={autoPlay} muted={muted} loop={loop} playsInline={playsInline} className={className}>
-          <source src={src} type={type} />
+          <source src={getImageFullUrl_client(src)} type={type} />
         </video>
       )}
     </>

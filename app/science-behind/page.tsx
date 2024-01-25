@@ -46,7 +46,7 @@ const ScienceBehind = async () => {
       <AboutScienceHero
         title={sciencePageData.attributes.hero.title}
         content={sciencePageData.attributes.hero.description}
-        video="/science-behind-video.mp4"
+        video={sciencePageData.attributes.hero.background_video.data}
         background="bg-black-100"
       />
       <Skin skinData={sciencePageData.attributes.skin.skins.data} />
@@ -57,7 +57,7 @@ const ScienceBehind = async () => {
         title={sciencePageData.attributes.text_image.title}
         content={sciencePageData.attributes.text_image.description}
         imageSide="right"
-        animation
+        animationImage={sciencePageData.attributes.text_image.animation_image}
       />
       <ScienceWarranty warrantyData={sciencePageData.attributes.warranty} />
       <LogoBar />

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
 import { Button } from '@/gui-components/client';
 
 import styles from './_colors.module.scss';
@@ -141,15 +143,15 @@ const Colors = ({ colorsData }) => {
             activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
           } head`}</p>
           <Image
-            src={`/${activeColor}-lights.svg`}
-            alt="lights"
+            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].light_image.data)}
+            alt="device lights"
             width={287}
             height={574}
             className="absolute top-0 left-1/2 translate-x-neg-1/2"
           />
           <Image
-            src={`/device-head-${activeColor}.png`}
-            alt="device's head"
+            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
+            alt="device head"
             width={109}
             height={78}
             className={classNames(
@@ -163,8 +165,8 @@ const Colors = ({ colorsData }) => {
             )}
           />
           <Image
-            src="/green-light.svg"
-            alt="device's green light"
+            src={getImageFullUrl_client(colorsData.device_green_light.data)}
+            alt="device green light"
             width={109}
             height={10}
             className={classNames(
@@ -175,8 +177,8 @@ const Colors = ({ colorsData }) => {
             )}
           />
           <Image
-            src="/device-body.png"
-            alt="device's body"
+            src={getImageFullUrl_client(colorsData.device_body.data)}
+            alt="device body"
             width={90}
             height={407.24}
             className={classNames(
