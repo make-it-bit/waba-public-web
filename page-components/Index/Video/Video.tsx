@@ -106,7 +106,14 @@ const HeroLightpass = ({ videoData }) => {
 
   return (
     <div ref={containerRef} className="container">
-      <div className="hidden lg:block h-[600vh]">
+      <div className="relative hidden lg:block h-[600vh]">
+        <div className="absolute top-96 z-10">
+          <div className="grid grid-cols-12">
+            <div className="col-start-5 col-span-4 text-center">
+              <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
+            </div>
+          </div>
+        </div>
         <canvas className="sticky top-[137px]" ref={canvasRef} />
       </div>
     </div>
