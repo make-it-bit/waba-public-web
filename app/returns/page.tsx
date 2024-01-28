@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 import { getPageData, getComponentData } from '@/lib/strapi';
 
@@ -32,11 +32,9 @@ const Returns = async () => {
   return (
     <>
       <div className="container my-64">
-        {returnPageData.attributes.content.split('\n').map((line, index) => (
-          <div key={index} className="text-base leading-base text-justify my-8">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{line}</ReactMarkdown>
-          </div>
-        ))}
+        <div className="text-base leading-base text-justify">
+          <ReactMarkdown rehypePlugins={[rehypeRaw]}>{returnPageData.attributes.content}</ReactMarkdown>
+        </div>
       </div>
       <Footer footerData={footerData.attributes} small />
     </>

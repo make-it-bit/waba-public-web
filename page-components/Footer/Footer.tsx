@@ -119,8 +119,8 @@ const Footer = ({ footerData, small = false }) => {
               </div>
               <div className="border border-white-100"></div>
               <div className="relative flex md:flex-row flex-col md:justify-end justify-center items-center gap-y-48">
-                <div className="md:absolute top-0 left-1/2 md:translate-x-neg-1/2">
-                  <div className="flex gap-40">
+                <div className="md:absolute top-0 lg:left-1/2 left-0 lg:translate-x-neg-1/2">
+                  <div className="flex xl:gap-40 lg:gap-16 gap-40">
                     {footerData.social_media_links.data.map((link, index) => (
                       <Link key={index} href={link.attributes.href} target={link.attributes.target}>
                         <Image
@@ -133,7 +133,7 @@ const Footer = ({ footerData, small = false }) => {
                     ))}
                   </div>
                 </div>
-                <div className="flex gap-40">
+                <div className="flex flex-wrap sm:justify-normal justify-center xl:gap-40 lg:gap-16 sm:gap-40 gap-16">
                   <Link href={footerData.terms.href_src} className="text-xs leading-xs text-white-100">
                     {footerData.terms.href_text}
                   </Link>
