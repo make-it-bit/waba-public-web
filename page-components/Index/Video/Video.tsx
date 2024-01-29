@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
@@ -10,7 +11,7 @@ const HeroLightpass = ({ videoData }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const frameCount = videoData.total_images;
-  const currentFrame = (index) => getImageFullUrl_client(videoData.images.data[index]);
+  const currentFrame = (index) => getImageFullUrl_client(videoData.desktop_images.data[index]);
 
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
@@ -110,11 +111,28 @@ const HeroLightpass = ({ videoData }) => {
         <div className="absolute top-96 z-10 w-full">
           <div className="grid grid-cols-12">
             <div className="col-start-5 col-span-4 text-center">
-              <h1 className="font-rufina lg:text-4xl text-xl lg:leading-4xl leading-xl">{videoData.title}</h1>
+              <h1 className="font-rufina text-4xl leading-4xl">{videoData.title}</h1>
             </div>
           </div>
         </div>
         <canvas className="sticky top-[137px]" ref={canvasRef} />
+      </div>
+      <div className="relative block lg:hidden">
+        <div className="grid grid-cols-12 mb-32">
+          <div className="col-start-5 col-span-4 text-center">
+            <h1 className="font-rufina text-3xl leading-3xl">{videoData.title}</h1>
+          </div>
+        </div>
+        {videoData.mobile_images.data.map((image, index) => (
+          <div className="relative" key={index}>
+            <NextImage
+              alt={image.attributes.alternativeText}
+              src={getImageFullUrl_client(image)}
+              width={image.attributes.width}
+              height={image.attributes.height}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
