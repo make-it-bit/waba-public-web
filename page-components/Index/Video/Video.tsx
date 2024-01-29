@@ -119,7 +119,7 @@ const HeroLightpass = ({ videoData }) => {
       </div>
       <div className="relative block lg:hidden">
         <div className="grid grid-cols-12 mb-32">
-          <div className="col-start-5 col-span-4 text-center">
+          <div className="col-span-12 text-center">
             <h1 className="font-rufina text-3xl leading-3xl">{videoData.title}</h1>
           </div>
         </div>
