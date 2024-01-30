@@ -187,7 +187,10 @@ export const getPageData = async (page: Pages) => {
     headers,
     next: { tags: [page] },
   });
-  if (!response.ok) throw new Error('Failed to fetch page data.');
+  if (!response.ok) {
+    //throw new Error('Failed to fetch page data.');
+    return null;
+  }
   const { data } = await response.json();
   return data;
 };

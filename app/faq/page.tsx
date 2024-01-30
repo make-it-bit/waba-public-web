@@ -9,14 +9,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const faqPageData = await getPageData('faq');
   return {
-    title: faqPageData.attributes.seo.title,
-    description: faqPageData.attributes.seo.description,
+    title: faqPageData.attributes.seo?.title ?? '',
+    description: faqPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/faq',
     },
     openGraph: {
       images: [
-        `/api/og?title=${faqPageData.attributes.seo.title}&desc=${faqPageData.attributes.seo.description}` || null,
+        `/api/og?title=${faqPageData.attributes.seo?.title ?? ''}&desc=${
+          faqPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };
