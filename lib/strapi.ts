@@ -1,5 +1,6 @@
 import { revalidateTag } from 'next/cache';
 import qs from 'qs';
+import { redirect } from 'next/navigation';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
 
@@ -188,8 +189,8 @@ export const getPageData = async (page: Pages) => {
     next: { tags: [page] },
   });
   if (!response.ok) {
-    //throw new Error('Failed to fetch page data.');
-    return null;
+    console.log('Failed to fetch page data.');
+    redirect('/404');
   }
   const { data } = await response.json();
   return data;

@@ -11,8 +11,6 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const termPageData = await getPageData('term');
 
-  if (!termPageData) return null;
-
   return {
     title: termPageData.attributes.seo?.title ?? '',
     description: termPageData.attributes.seo?.description ?? '',
@@ -35,13 +33,11 @@ const Terms = async () => {
 
   return (
     <>
-      {termPageData && (
-        <div className="container my-64">
-          <div className="text-base leading-base text-justify">
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{termPageData.attributes.content}</ReactMarkdown>
-          </div>
+      <div className="container my-64">
+        <div className="text-base leading-base text-justify">
+          <ReactMarkdown rehypePlugins={[rehypeRaw]}>{termPageData.attributes.content}</ReactMarkdown>
         </div>
-      )}
+      </div>
       <Footer footerData={footerData.attributes} small />
     </>
   );
