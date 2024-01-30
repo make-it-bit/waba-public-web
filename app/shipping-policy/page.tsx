@@ -11,15 +11,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const shippingPageData = await getPageData('shipping-policy');
   return {
-    title: shippingPageData.attributes.seo.title,
-    description: shippingPageData.attributes.seo.description,
+    title: shippingPageData.attributes.seo?.title ?? '',
+    description: shippingPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/shipping-policy',
     },
     openGraph: {
       images: [
-        `/api/og?title=${shippingPageData.attributes.seo.title}&desc=${shippingPageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${shippingPageData.attributes.seo?.title ?? ''}&desc=${
+          shippingPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };

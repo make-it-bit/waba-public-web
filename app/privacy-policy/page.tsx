@@ -11,15 +11,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const privacyPageData = await getPageData('privacy-policy');
   return {
-    title: privacyPageData.attributes.seo.title,
-    description: privacyPageData.attributes.seo.description,
+    title: privacyPageData.attributes.seo?.title ?? '',
+    description: privacyPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/privacy-policy',
     },
     openGraph: {
       images: [
-        `/api/og?title=${privacyPageData.attributes.seo.title}&desc=${privacyPageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${privacyPageData.attributes.seo?.title ?? ''}&desc=${
+          privacyPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };

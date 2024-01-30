@@ -10,15 +10,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const careersPageData = await getPageData('careers-at-waba');
   return {
-    title: careersPageData.attributes.seo.title,
-    description: careersPageData.attributes.seo.description,
+    title: careersPageData.attributes.seo?.title ?? '',
+    description: careersPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/careers-at-waba',
     },
     openGraph: {
       images: [
-        `/api/og?title=${careersPageData.attributes.seo.title}&desc=${careersPageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${careersPageData.attributes.seo?.title ?? ''}&desc=${
+          careersPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };

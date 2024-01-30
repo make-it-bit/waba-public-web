@@ -18,15 +18,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const resultsPageData = await getPageData('result');
   return {
-    title: resultsPageData.attributes.seo.title,
-    description: resultsPageData.attributes.seo.description,
+    title: resultsPageData.attributes.seo?.title ?? '',
+    description: resultsPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/results',
     },
     openGraph: {
       images: [
-        `/api/og?title=${resultsPageData.attributes.seo.title}&desc=${resultsPageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${resultsPageData.attributes.seo?.title ?? ''}&desc=${
+          resultsPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };

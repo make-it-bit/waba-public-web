@@ -21,15 +21,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const sciencePageData = await getPageData('science-behind');
   return {
-    title: sciencePageData.attributes.seo.title,
-    description: sciencePageData.attributes.seo.description,
+    title: sciencePageData.attributes.seo?.title ?? '',
+    description: sciencePageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/science-behind',
     },
     openGraph: {
       images: [
-        `/api/og?title=${sciencePageData.attributes.seo.title}&desc=${sciencePageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${sciencePageData.attributes.seo?.title ?? ''}&desc=${
+          sciencePageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };

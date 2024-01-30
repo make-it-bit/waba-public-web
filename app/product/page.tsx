@@ -9,15 +9,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const productPageData = await getPageData('product');
   return {
-    title: productPageData.attributes.seo.title,
-    description: productPageData.attributes.seo.description,
+    title: productPageData.attributes.seo?.title ?? '',
+    description: productPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/product',
     },
     openGraph: {
       images: [
-        `/api/og?title=${productPageData.attributes.seo.title}&desc=${productPageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${productPageData.attributes.seo?.title ?? ''}&desc=${
+          productPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };

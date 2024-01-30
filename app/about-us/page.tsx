@@ -22,14 +22,16 @@ export const dynamic = 'force-static';
 export async function generateMetadata() {
   const aboutPageData = await getPageData('about-us');
   return {
-    title: aboutPageData.attributes.seo.title,
-    description: aboutPageData.attributes.seo.description,
+    title: aboutPageData.attributes.seo?.title ?? '',
+    description: aboutPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/about-us',
     },
     openGraph: {
       images: [
-        `/api/og?title=${aboutPageData.attributes.seo.title}&desc=${aboutPageData.attributes.seo.description}` || null,
+        `/api/og?title=${aboutPageData.attributes.seo?.title ?? ''}&desc=${
+          aboutPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };
