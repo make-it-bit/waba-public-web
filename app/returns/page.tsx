@@ -14,15 +14,16 @@ export async function generateMetadata() {
   if (!returnPageData) return null;
 
   return {
-    title: returnPageData.attributes.seo.title,
-    description: returnPageData.attributes.seo.description,
+    title: returnPageData.attributes.seo?.title ?? '',
+    description: returnPageData.attributes.seo?.description ?? '',
     alternates: {
       canonical: '/returns',
     },
     openGraph: {
       images: [
-        `/api/og?title=${returnPageData.attributes.seo.title}&desc=${returnPageData.attributes.seo.description}` ||
-          null,
+        `/api/og?title=${returnPageData.attributes.seo?.title ?? ''}&desc=${
+          returnPageData.attributes.seo?.description ?? ''
+        }` || null,
       ],
     },
   };
