@@ -17,9 +17,9 @@ export const maxDuration = 180;
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const title = searchParams.get('title') === 'null' ? 'Discover Liberating Beauty' : searchParams.get('title');
+    const title = searchParams.get('title') === '' ? 'Discover Liberating Beauty' : searchParams.get('title');
     const description =
-      searchParams.get('desc') === 'null'
+      searchParams.get('desc') === ''
         ? 'Innovative light-based device that is more than just a skincare.'
         : searchParams.get('desc');
 

@@ -8,7 +8,6 @@ import { Checkout } from '@/page-components';
 import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const MainInfo = ({ mainInfoData }) => {
-  const testImage = null;
   return (
     <div className="container lg:mt-64 mt-24 lg:mb-72 mb-64">
       <div className="grid grid-cols-12 lg:gap-y-24 gap-y-32">
