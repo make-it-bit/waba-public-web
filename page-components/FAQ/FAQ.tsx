@@ -27,7 +27,7 @@ const FAQ = ({ faqPageData }) => {
         </div>
       </div>
       <div>
-        <div className="bg-supplementary-warm-gray sticky top-[137px]">
+        <div className="bg-supplementary-warm-gray sticky lg:top-[137px] top-[97px]">
           <div className="container md:px-12 px-0">
             <div className="grid grid-cols-12">
               <div className="md:col-start-3 md:col-span-8 col-span-12">
