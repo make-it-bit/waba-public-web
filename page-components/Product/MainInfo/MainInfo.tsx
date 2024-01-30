@@ -8,7 +8,8 @@ import { Checkout } from '@/page-components';
 import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const MainInfo = ({ mainInfoData }) => {
-  const hasImages = mainInfoData.images.length > 0;
+  console.log('mainInfoData: ', mainInfoData);
+  const imageLength = mainInfoData.images.length;
 
   return (
     <div className="container lg:mt-64 mt-24 lg:mb-72 mb-64">
@@ -16,7 +17,7 @@ const MainInfo = ({ mainInfoData }) => {
         {/* mobile images */}
         <div className="lg:hidden block col-span-12">
           <div className="flex gap-24 overflow-x-auto">
-            {hasImages &&
+            {imageLength > 0 &&
               mainInfoData.images.map((imageData, index) => (
                 <div key={index} className="relative min-w-[260px] h-[260px]">
                   <Image
@@ -31,7 +32,7 @@ const MainInfo = ({ mainInfoData }) => {
         </div>
 
         {/* desktop first image */}
-        {hasImages && (
+        {imageLength > 0 && (
           <div className="lg:block hidden col-start-1 col-span-5">
             <div className="relative w-full h-full min-h-[526px]">
               <Image
@@ -67,7 +68,7 @@ const MainInfo = ({ mainInfoData }) => {
           <div className="grid grid-cols-5 grid-flow-row gap-24">
             <div className="col-start-1 col-span-3 row-span-2">
               <div className="relative w-full h-full min-h-[416px]">
-                {hasImages && (
+                {imageLength > 1 && (
                   <Image
                     src={getImageFullUrl_server(mainInfoData.images?.[1]?.image.data)}
                     fill
@@ -79,7 +80,7 @@ const MainInfo = ({ mainInfoData }) => {
             </div>
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
-                {hasImages && (
+                {imageLength > 2 && (
                   <Image
                     src={getImageFullUrl_server(mainInfoData.images?.[2]?.image.data)}
                     fill
@@ -91,7 +92,7 @@ const MainInfo = ({ mainInfoData }) => {
             </div>
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
-                {hasImages && (
+                {imageLength > 3 && (
                   <Image
                     src={getImageFullUrl_server(mainInfoData.images?.[3]?.image.data)}
                     fill
@@ -106,7 +107,7 @@ const MainInfo = ({ mainInfoData }) => {
 
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[217px]">
-            {hasImages && (
+            {imageLength > 4 && (
               <Image
                 src={getImageFullUrl_server(mainInfoData.images?.[4]?.image.data)}
                 fill
