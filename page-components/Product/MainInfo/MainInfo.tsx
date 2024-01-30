@@ -8,16 +8,14 @@ import { Checkout } from '@/page-components';
 import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
 const MainInfo = ({ mainInfoData }) => {
-  console.log('mainInfoData: ', mainInfoData);
-  const imageLength = mainInfoData.images.length;
-
+  const testImage = null;
   return (
     <div className="container lg:mt-64 mt-24 lg:mb-72 mb-64">
       <div className="grid grid-cols-12 lg:gap-y-24 gap-y-32">
         {/* mobile images */}
         <div className="lg:hidden block col-span-12">
           <div className="flex gap-24 overflow-x-auto">
-            {imageLength > 0 &&
+            {mainInfoData.images.length > 0 &&
               mainInfoData.images.map((imageData, index) => (
                 <div key={index} className="relative min-w-[260px] h-[260px]">
                   <Image
@@ -32,7 +30,7 @@ const MainInfo = ({ mainInfoData }) => {
         </div>
 
         {/* desktop first image */}
-        {imageLength > 0 && (
+        {mainInfoData.images[0]?.image && (
           <div className="lg:block hidden col-start-1 col-span-5">
             <div className="relative w-full h-full min-h-[526px]">
               <Image
@@ -68,11 +66,11 @@ const MainInfo = ({ mainInfoData }) => {
           <div className="grid grid-cols-5 grid-flow-row gap-24">
             <div className="col-start-1 col-span-3 row-span-2">
               <div className="relative w-full h-full min-h-[416px]">
-                {imageLength > 1 && (
+                {mainInfoData.images[1]?.image && (
                   <Image
-                    src={getImageFullUrl_server(mainInfoData.images?.[1]?.image.data)}
+                    src={getImageFullUrl_server(mainInfoData.images[1].image.data)}
                     fill
-                    className={`absolute w-full h-full object-${mainInfoData.images?.[1]?.object_fit}`}
+                    className={`absolute w-full h-full object-${mainInfoData.images[1].object_fit}`}
                     alt="product main info image"
                   />
                 )}
@@ -80,11 +78,11 @@ const MainInfo = ({ mainInfoData }) => {
             </div>
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
-                {imageLength > 2 && (
+                {mainInfoData.images[2]?.image && (
                   <Image
-                    src={getImageFullUrl_server(mainInfoData.images?.[2]?.image.data)}
+                    src={getImageFullUrl_server(mainInfoData.images[2].image.data)}
                     fill
-                    className={`absolute w-full h-full object-${mainInfoData.images?.[2]?.object_fit}`}
+                    className={`absolute w-full h-full object-${mainInfoData.images[2].object_fit}`}
                     alt="product main info image"
                   />
                 )}
@@ -92,11 +90,11 @@ const MainInfo = ({ mainInfoData }) => {
             </div>
             <div className="col-start-4 col-span-2">
               <div className="relative w-full h-full min-h-[196px]">
-                {imageLength > 3 && (
+                {mainInfoData.images[3]?.image && (
                   <Image
-                    src={getImageFullUrl_server(mainInfoData.images?.[3]?.image.data)}
+                    src={getImageFullUrl_server(mainInfoData.images[3].image.data)}
                     fill
-                    className={`absolute w-full h-full object-${mainInfoData.images?.[3]?.object_fit}`}
+                    className={`absolute w-full h-full object-${mainInfoData.images[3].object_fit}`}
                     alt="product main info image"
                   />
                 )}
@@ -107,11 +105,11 @@ const MainInfo = ({ mainInfoData }) => {
 
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[217px]">
-            {imageLength > 4 && (
+            {mainInfoData.images[4]?.image && (
               <Image
-                src={getImageFullUrl_server(mainInfoData.images?.[4]?.image.data)}
+                src={getImageFullUrl_server(mainInfoData.images[4].image.data)}
                 fill
-                className={`absolute w-full h-full object-${mainInfoData.images?.[4]?.object_fit}`}
+                className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
                 alt="device"
               />
             )}
