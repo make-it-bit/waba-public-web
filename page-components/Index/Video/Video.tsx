@@ -10,7 +10,7 @@ const HeroLightpass = ({ videoData }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const frameCount = videoData.total_images;
+  const frameCount = videoData.desktop_images.data.length;
   const currentFrame = (index) => getImageFullUrl_client(videoData.desktop_images.data[index]);
 
   // const currentFrame = (index) => {
