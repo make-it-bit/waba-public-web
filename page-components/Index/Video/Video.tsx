@@ -10,6 +10,8 @@ const HeroLightpass = ({ videoData }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  if (!videoData.desktop_images?.data?.length) return <p>No images found</p>;
+
   const frameCount = videoData.desktop_images.data.length;
   const currentFrame = (index) => getImageFullUrl_client(videoData.desktop_images.data[index]);
 
@@ -52,7 +54,7 @@ const HeroLightpass = ({ videoData }) => {
     setCurrentCanvasWidth(correctWidth);
     const correctHeight = getCorrectCanvasHeight(correctWidth);
     canvas.height = correctHeight;
-  }, []);
+  }, [frameCount]);
 
   // handle image change and canvas resize when screen size changes
   useEffect(() => {
@@ -86,9 +88,7 @@ const HeroLightpass = ({ videoData }) => {
           const scrollFraction = (containerScrollTop + 500) / (maxScrollTop * 0.45);
           const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
           requestAnimationFrame(() => {
-            if (frameIndex + 1 < frameCount) {
-              updateImage(frameIndex + 1);
-            }
+            if (frameIndex + 1 < frameCount) updateImage(frameIndex + 1);
           });
         }
       }
@@ -103,7 +103,7 @@ const HeroLightpass = ({ videoData }) => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleCanvasResize);
     };
-  }, [currentCanvasWidth]);
+  }, [currentCanvasWidth, frameCount, currentFrame]);
 
   return (
     <div ref={containerRef} className="container">
