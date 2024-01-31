@@ -5,7 +5,8 @@ import NextImage from 'next/image';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
-const HeroLightpass = ({ videoData }) => {
+const Video = ({ videoData }) => {
+  console.log('videoData: ', videoData);
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,11 @@ const HeroLightpass = ({ videoData }) => {
   if (!videoData.desktop_images?.data?.length) return <p>No images found</p>;
 
   const frameCount = videoData.desktop_images.data.length;
-  const currentFrame = (index) => getImageFullUrl_client(videoData.desktop_images.data[index]);
+
+  const currentFrame = (index) => {
+    const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+    return frame;
+  };
 
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
@@ -54,7 +59,7 @@ const HeroLightpass = ({ videoData }) => {
     setCurrentCanvasWidth(correctWidth);
     const correctHeight = getCorrectCanvasHeight(correctWidth);
     canvas.height = correctHeight;
-  }, [frameCount]);
+  }, []);
 
   // handle image change and canvas resize when screen size changes
   useEffect(() => {
@@ -82,7 +87,6 @@ const HeroLightpass = ({ videoData }) => {
       if (containerRef.current) {
         const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop;
         const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-
         // start the animation when the container is in the viewport
         if (containerScrollTop + 500 >= 0) {
           const scrollFraction = (containerScrollTop + 500) / (maxScrollTop * 0.45);
@@ -103,7 +107,7 @@ const HeroLightpass = ({ videoData }) => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleCanvasResize);
     };
-  }, [currentCanvasWidth, frameCount, currentFrame]);
+  }, [currentCanvasWidth, frameCount]);
 
   return (
     <div ref={containerRef} className="container">
@@ -123,7 +127,7 @@ const HeroLightpass = ({ videoData }) => {
             <h1 className="font-rufina text-3xl leading-3xl">{videoData.title}</h1>
           </div>
         </div>
-        {videoData.mobile_images.data.map((image, index) => (
+        {videoData.mobile_images?.data?.map((image, index) => (
           <div className="relative" key={index}>
             <NextImage
               alt={image.attributes.alternativeText}
@@ -138,4 +142,4 @@ const HeroLightpass = ({ videoData }) => {
   );
 };
 
-export default HeroLightpass;
+export default Video;
