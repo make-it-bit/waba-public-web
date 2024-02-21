@@ -5,7 +5,7 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { TestimonialCard } from '@/components';
 
-const Results = ({ title, resultsData }) => {
+const UserStories = ({ title, userStoriesData }) => {
   return (
     <>
       <div className="grid grid-cols-12 mt-40 mb-64">
@@ -14,14 +14,14 @@ const Results = ({ title, resultsData }) => {
         </div>
       </div>
       <div className="grid grid-cols-12 gap-24 pb-48">
-        {resultsData.data.map((result, index) => (
+        {userStoriesData.data.map((userStory, index) => (
           <TestimonialCard
             key={index}
-            image={getImageFullUrl_client(result.attributes.image.data)}
-            name={result.attributes.name}
+            image={getImageFullUrl_client(userStory.attributes.image.data)}
+            name={userStory.attributes.name}
             border
-            content={result.attributes.story}
-            resultImage={getImageFullUrl_client(result.attributes.result_image.data)}
+            content={userStory.attributes.story}
+            resultImage={getImageFullUrl_client(userStory.attributes.result_image.data)}
           />
         ))}
       </div>
@@ -29,4 +29,4 @@ const Results = ({ title, resultsData }) => {
   );
 };
 
-export default Results;
+export default UserStories;

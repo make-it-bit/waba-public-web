@@ -3,9 +3,9 @@ import classNames from 'classnames';
 
 import { LazyLoadVideo } from '@/components';
 
-import styles from './_resultsWarranty.module.scss';
+import styles from './_userStoriesWarranty.module.scss';
 
-const ResultsWarranty = ({ warrantyData }) => {
+const UserStoriesWarranty = ({ warrantyData }) => {
   return (
     <div className="sm:py-72 pb-72 sm:mx-0 mx-16">
       <div className="container">
@@ -40,4 +40,4 @@ const ResultsWarranty = ({ warrantyData }) => {
   );
 };
 
-export default ResultsWarranty;
+export default UserStoriesWarranty;

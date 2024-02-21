@@ -17,10 +17,10 @@ export { default as Warranty } from './Product/Warranty';
 export { default as ProductFAQ } from './Product/ProductFAQ';
 export { default as Checkout } from './Product/Checkout';
 
-export { default as ResultsHero } from './Results/ResultsHero';
-export { default as Examples } from './Results/Examples';
-export { default as ResultsTestimonials } from './Results/ResultsTestimonials';
-export { default as ResultsWarranty } from './Results/ResultsWarranty';
+export { default as UserStoriesHero } from './UserStories/UserStoriesHero';
+export { default as Examples } from './UserStories/Examples';
+export { default as UserStoriesTestimonials } from './UserStories/UserStoriesTestimonials';
+export { default as UserStoriesWarranty } from './UserStories/UserStoriesWarranty';
 
 export { default as FAQ } from './FAQ';
 
