@@ -27,10 +27,7 @@ const footerNestedComponents = [
   'footer_top.input_button',
   'page_links.page_link_data',
   'social_media_links.icon',
-  'terms',
-  'returns',
-  'shipping_policy',
-  'privacy_policy',
+  'terms_policies_links.page_link_data',
 ];
 
 const populateComponent = {

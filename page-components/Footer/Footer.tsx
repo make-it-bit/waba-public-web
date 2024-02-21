@@ -132,18 +132,15 @@ const Footer = ({ footerData, small = false }) => {
                   ))}
                 </div>
                 <div className="flex flex-wrap sm:justify-normal justify-center xl:gap-40 lg:gap-40 md:gap-16 gap-40 gap-y-8">
-                  <Link href={footerData.terms.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.terms.href_text}
-                  </Link>
-                  <Link href={footerData.returns.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.returns.href_text}
-                  </Link>
-                  <Link href={footerData.shipping_policy.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.shipping_policy.href_text}
-                  </Link>
-                  <Link href={footerData.privacy_policy.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.privacy_policy.href_text}
-                  </Link>
+                  {footerData.terms_policies_links.data.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.attributes.page_link_data.href_src}
+                      className="text-xs leading-xs text-white-100"
+                    >
+                      {link.attributes.page_link_data.href_text}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
