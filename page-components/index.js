@@ -38,3 +38,6 @@ export { default as Photobiomodulation } from './Science/Photobiomodulation';
 export { default as Wavelengths } from './Science/Wavelengths';
 export { default as Beam } from './Science/Beam';
 export { default as ScienceWarranty } from './Science/ScienceWarranty';
+
+export { default as BlogHero } from './Blog/BlogHero';
+export { default as BlogPosts } from './Blog/BlogPosts';
