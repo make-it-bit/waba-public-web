@@ -16,14 +16,12 @@ const navbarNestedComponents = [
   'rightside_links.page_link_data',
   'button',
 ];
-
 const preFooterCardNestedComponents = [
   'pre_footer_card_1.background_image',
   'pre_footer_card_1.button',
   'pre_footer_card_2.background_image',
   'pre_footer_card_2.button',
 ];
-
 const footerNestedComponents = [
   'footer_top.icon',
   'footer_top.input_button',
@@ -85,7 +83,6 @@ const indexPageNestedComponents = [
   'testimonial.user_stories.image',
   'testimonial.user_stories.button',
 ];
-
 const productPageNestedComponents = [
   'seo',
   'hero.images.image',
@@ -106,7 +103,6 @@ const productPageNestedComponents = [
   'warranty.icon',
   'faq.faq_elements',
 ];
-
 const sciencePageNestedComponents = [
   'seo',
   'hero.background_video',
@@ -117,12 +113,11 @@ const sciencePageNestedComponents = [
   'beam.beam_image',
   'beam.device_images',
   'text_image.image',
-  'text_image.animation_image',
+  'text_image.animation_images',
   'warranty.quote_author',
   'warranty.quote_text',
   'warranty.quote_image',
 ];
-
 const resultPageNestedComponents = [
   'seo',
   'hero.background_media',
@@ -130,7 +125,6 @@ const resultPageNestedComponents = [
   'testimonial.user_stories.image',
   'warranty.video',
 ];
-
 const aboutPageNestedComponents = [
   'seo',
   'hero.background_image',
@@ -145,10 +139,8 @@ const aboutPageNestedComponents = [
   'difference.button',
   'difference.device_image',
 ];
-
 const faqPageNestedComponents = ['seo', 'hero_title', 'faq_elements'];
-
-const careersBusinessPageNestedComponents = ['seo', 'hero_background_image', 'form.button'];
+const formPagesNestedComponents = ['seo', 'hero_background_image', 'form.button'];
 
 type Pages =
   | 'index'
@@ -159,6 +151,7 @@ type Pages =
   | 'faq'
   | 'careers-at-waba'
   | 'waba-for-business'
+  | 'contact-us'
   | 'term'
   | 'return'
   | 'shipping-policy'
@@ -171,8 +164,9 @@ const populatePage = {
   result: resultPageNestedComponents,
   'about-us': aboutPageNestedComponents,
   faq: faqPageNestedComponents,
-  'careers-at-waba': careersBusinessPageNestedComponents,
-  'waba-for-business': careersBusinessPageNestedComponents,
+  'careers-at-waba': formPagesNestedComponents,
+  'waba-for-business': formPagesNestedComponents,
+  'contact-us': formPagesNestedComponents,
   term: '*',
   return: '*',
   'shipping-policy': '*',

@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import Features from './Features/Features';
-import Science from './Science/Science';
-import Included from './Included/Included';
 import Results from './Results/Results';
+import Included from './Included/Included';
+import Science from './Science/Science';
 import Specifications from './Specifications/Specifications';
-
 import { ScrollableNavbar } from '@/components';
 
 import styles from './_productInfo.module.scss';
@@ -23,14 +22,14 @@ const ProductInfo = ({ productInfoData }) => {
   ];
   const navbarPages = [
     <Features key={0} featuresData={productInfoData.feature_cards} />,
-    <Science key={1} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
+    <Results key={1} title={productInfoData.results_title} resultsData={productInfoData.stories} />,
     <Included
       key={2}
       title={productInfoData.included_title}
       includedData={productInfoData.included}
       includedImage={productInfoData.included_image}
     />,
-    <Results key={3} title={productInfoData.results_title} resultsData={productInfoData.stories} />,
+    <Science key={3} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
     <Specifications
       key={4}
       title={productInfoData.specifications_title}
@@ -50,7 +49,13 @@ const ProductInfo = ({ productInfoData }) => {
           <div className="lg:col-start-3 lg:col-span-8 col-span-12">
             <ScrollableNavbar
               pageIndex={pageIndex}
-              navbarItems={['Features', 'The Science Behind', 'What’s included', 'Results', 'Technical specifications']}
+              navbarItems={[
+                'Features',
+                'User stories',
+                'What’s included',
+                'The Science Behind',
+                'Technical specifications',
+              ]}
               handleClick={handleClick}
               justify="justify-between"
             />

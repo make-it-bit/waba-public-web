@@ -58,7 +58,7 @@ const ScienceBehind = async () => {
         title={sciencePageData.attributes.text_image.title}
         content={sciencePageData.attributes.text_image.description}
         imageSide="right"
-        animationImage={sciencePageData.attributes.text_image.animation_image}
+        animationImages={sciencePageData.attributes.text_image.animation_images}
       />
       <ScienceWarranty warrantyData={sciencePageData.attributes.warranty} />
       <LogoBar />

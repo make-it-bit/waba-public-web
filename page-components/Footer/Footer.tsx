@@ -118,22 +118,20 @@ const Footer = ({ footerData, small = false }) => {
                 ))}
               </div>
               <div className="border border-white-100"></div>
-              <div className="relative flex md:flex-row flex-col md:justify-end justify-center items-center gap-y-48">
-                <div className="md:absolute top-0 lg:left-1/2 left-0 lg:translate-x-neg-1/2">
-                  <div className="flex xl:gap-40 lg:gap-16 gap-40">
-                    {footerData.social_media_links.data.map((link, index) => (
-                      <Link key={index} href={link.attributes.href} target={link.attributes.target}>
-                        <Image
-                          src={getImageFullUrl_client(link.attributes.icon.data)}
-                          alt={link.attributes.name}
-                          width={16}
-                          height={16}
-                        />
-                      </Link>
-                    ))}
-                  </div>
+              <div className="relative flex md:flex-row flex-col md:justify-between justify-center items-center gap-y-48">
+                <div className="flex lg:gap-40 md:gap-16 gap-40">
+                  {footerData.social_media_links.data.map((link, index) => (
+                    <Link key={index} href={link.attributes.href} target={link.attributes.target}>
+                      <Image
+                        src={getImageFullUrl_client(link.attributes.icon.data)}
+                        alt={link.attributes.name}
+                        width={16}
+                        height={16}
+                      />
+                    </Link>
+                  ))}
                 </div>
-                <div className="flex flex-wrap sm:justify-normal justify-center xl:gap-40 lg:gap-16 sm:gap-40 gap-16">
+                <div className="flex flex-wrap sm:justify-normal justify-center xl:gap-40 lg:gap-40 md:gap-16 gap-40 gap-y-8">
                   <Link href={footerData.terms.href_src} className="text-xs leading-xs text-white-100">
                     {footerData.terms.href_text}
                   </Link>

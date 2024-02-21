@@ -1,5 +1,3 @@
-import CareersAtWaba from './CareersAtWaba/CareersAtWaba';
-
 export { default as PromoBar } from './PromoBar';
 export { default as Navbar } from './Navbar';
 export { default as LogoBar } from './LogoBar';
@@ -27,9 +25,7 @@ export { default as ResultsWarranty } from './Results/ResultsWarranty';
 export { default as FAQ } from './FAQ';
 
 export { default as AboutScienceHero } from './AboutScienceHero';
-export { default as BusinessCareersHero } from './BusinessCareersHero';
-export { default as CareersAtWaba } from './CareersAtWaba';
-export { default as WabaForBusiness } from './WabaForBusiness';
+export { default as FormPagesHero } from './FormPagesHero';
 
 export { default as Origins } from './About/Origins';
 export { default as TextImage } from './About/TextImage';

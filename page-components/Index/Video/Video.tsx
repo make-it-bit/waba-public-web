@@ -6,7 +6,6 @@ import NextImage from 'next/image';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const Video = ({ videoData }) => {
-  console.log('videoData: ', videoData);
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

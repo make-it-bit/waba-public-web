@@ -11,13 +11,13 @@ const TextImage = ({
   content,
   image,
   imageSide,
-  animationImage,
+  animationImages,
 }: {
   title: string;
   content: string;
   image?: string | StaticImport;
   imageSide: string;
-  animationImage?: { data: { [key: string]: any } };
+  animationImages?: { data: { [key: string]: any } };
 }) => {
   const topHead = useRef<HTMLImageElement>(null);
   const middleHead = useRef<HTMLImageElement>(null);
@@ -90,11 +90,11 @@ const TextImage = ({
             </div>
             <div className="sm:col-start-8 col-start-1 sm:col-span-5 col-span-12 sm:my-80 mt-64">
               <div className="relative w-auto h-[670px] bg-supplementary-warm-gray">
-                {animationImage && (
+                {animationImages && (
                   <>
                     <Image
                       ref={topHead}
-                      src={getImageFullUrl_client(animationImage.data)}
+                      src={getImageFullUrl_client(animationImages?.data?.[0])}
                       alt="changeable head"
                       width={145}
                       height={212}
@@ -102,7 +102,7 @@ const TextImage = ({
                     />
                     <Image
                       ref={middleHead}
-                      src={getImageFullUrl_client(animationImage.data)}
+                      src={getImageFullUrl_client(animationImages?.data?.[1])}
                       alt="changeable head"
                       width={145}
                       height={212}
@@ -110,7 +110,7 @@ const TextImage = ({
                     />
                     <Image
                       ref={bottomHead}
-                      src={getImageFullUrl_client(animationImage.data)}
+                      src={getImageFullUrl_client(animationImages?.data?.[2])}
                       alt="changeable head"
                       width={145}
                       height={212}

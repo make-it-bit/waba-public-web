@@ -11,6 +11,7 @@ const {
   SPREADSHEET_PRIVATE_KEY,
   CAREERS_SHEET_ID,
   BUSINESS_SHEET_ID,
+  CONTACT_SHEET_ID,
   SENDGRID_API_KEY,
 } = process.env;
 
@@ -23,13 +24,26 @@ const sharedEmailSettings = {
 
 export async function POST(req) {
   try {
-    if (!CAREERS_SHEET_ID || !BUSINESS_SHEET_ID || !SPREADSHEET_PRIVATE_KEY || !SPREADSHEET_ID || !SENDGRID_API_KEY) {
+    if (
+      !SPREADSHEET_ID ||
+      !SPREADSHEET_PRIVATE_KEY ||
+      !CAREERS_SHEET_ID ||
+      !BUSINESS_SHEET_ID ||
+      !CONTACT_SHEET_ID ||
+      !SENDGRID_API_KEY
+    ) {
       throw new Error('Missing ENV vars');
     }
 
     sgMail.setApiKey(SENDGRID_API_KEY);
 
     const { form, pathname } = await req.json();
+    const sheetId = {
+      '/careers-at-waba': CAREERS_SHEET_ID,
+      '/business-enquiries': BUSINESS_SHEET_ID,
+      '/contact-us': CONTACT_SHEET_ID,
+    }[pathname];
+
     const jwt = new JWT({
       email: SPREADSHEET_CLIENT_EMAIL,
       key: SPREADSHEET_PRIVATE_KEY.replace(/\\n/g, '\n'),
@@ -38,7 +52,7 @@ export async function POST(req) {
 
     const doc = new GoogleSpreadsheet(SPREADSHEET_ID, jwt);
     await doc.loadInfo();
-    const sheet = doc.sheetsById[pathname === '/careers-at-waba' ? CAREERS_SHEET_ID : BUSINESS_SHEET_ID];
+    const sheet = doc.sheetsById[sheetId];
     const row = {
       'First Name': form.firstName,
       'Last Name': form.lastName,
@@ -61,7 +75,7 @@ export async function POST(req) {
     await sgMail.send({
       ...sharedEmailSettings,
       subject: 'failed to submit enquiry',
-      text: 'Please report to Sebastian',
+      text: 'please report to Sebastian',
     });
     return NextResponse.json({ message: 'fail' }, { status: 400 });
   }

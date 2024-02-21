@@ -3,7 +3,8 @@ import React from 'react';
 import { getPageData, getComponentData } from '@/lib/strapi';
 import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
-import { BusinessCareersHero, CareersAtWaba, Footer } from '@/page-components';
+import { FormPagesHero, Footer } from '@/page-components';
+import { Form } from '@/components';
 
 export const dynamic = 'force-static';
 
@@ -25,21 +26,21 @@ export async function generateMetadata() {
   };
 }
 
-const CareersAtWABA = async () => {
+const CareersAtWaba = async () => {
   const careersPageData = await getPageData('careers-at-waba');
   const footerData = await getComponentData('footer');
 
   return (
     <div className="lg:bg-supplementary-warm-gray">
-      <BusinessCareersHero
+      <FormPagesHero
         image={getImageFullUrl_server(careersPageData.attributes.hero_background_image.data)}
         title={careersPageData.attributes.hero_title}
         content={careersPageData.attributes.hero_description}
       />
-      <CareersAtWaba careersData={careersPageData.attributes.form} />
+      <Form formData={careersPageData.attributes.form} />
       <Footer footerData={footerData.attributes} small />
     </div>
   );
 };
 
-export default CareersAtWABA;
+export default CareersAtWaba;

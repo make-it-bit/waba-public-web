@@ -3,7 +3,8 @@ import React from 'react';
 import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 import { getPageData, getComponentData } from '@/lib/strapi';
 
-import { BusinessCareersHero, WabaForBusiness, Footer } from '@/page-components';
+import { FormPagesHero, Footer } from '@/page-components';
+import { Form } from '@/components';
 
 export const dynamic = 'force-static';
 
@@ -31,12 +32,12 @@ const WABAForBusiness = async () => {
 
   return (
     <div className="lg:bg-supplementary-warm-gray">
-      <BusinessCareersHero
+      <FormPagesHero
         image={getImageFullUrl_server(businessPageData.attributes.hero_background_image.data)}
         title={businessPageData.attributes.hero_title}
         content={businessPageData.attributes.hero_description}
       />
-      <WabaForBusiness businessData={businessPageData.attributes.form} />
+      <Form formData={businessPageData.attributes.form} />
       <Footer footerData={footerData.attributes} small />
     </div>
   );
