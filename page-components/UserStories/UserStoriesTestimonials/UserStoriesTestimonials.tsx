@@ -7,9 +7,9 @@ import { TestimonialCard } from '@/components';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
-import styles from './_resultsTestimonials.module.scss';
+import styles from './_userStoriesTestimonials.module.scss';
 
-const ResultsTestimonials = ({ testimonialsData }) => {
+const UserStoriesTestimonials = ({ testimonialsData }) => {
   const style = { '--len': `${testimonialsData.user_stories.data.length}` } as React.CSSProperties;
 
   return (
@@ -45,4 +45,4 @@ const ResultsTestimonials = ({ testimonialsData }) => {
   );
 };
 
-export default ResultsTestimonials;
+export default UserStoriesTestimonials;
