@@ -96,11 +96,11 @@ const Colors = ({ colorsData }) => {
             styles.scrollBar
           )}
         >
-          {deviceHeads.map((deviceHead) => (
+          {deviceHeads.map((deviceHead, index) => (
             <div
               key={deviceHead.id}
               ref={refMap[deviceHead.id]}
-              className={classNames('cursor-pointer relative', activeId === deviceHead.id && styles.active)}
+              className="cursor-pointer relative"
               onClick={() => {
                 setActiveColor(deviceHead.title.split(' ')[0].toLowerCase());
                 setActiveId(deviceHead.id);
@@ -138,56 +138,80 @@ const Colors = ({ colorsData }) => {
             </div>
           ))}
         </div>
-        <div className="relative col-span-4 flex justify-center text-center">
-          <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
-            activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
-          } head`}</p>
-          <Image
-            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].light_image.data)}
-            alt="device lights"
-            width={287}
-            height={574}
-            className="absolute top-0 left-1/2 translate-x-neg-1/2"
-          />
-          <Image
-            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
-            alt="device head"
-            width={109}
-            height={78}
-            className={classNames(
-              'absolute 2xl:top-[138px] top-[138px]',
-              activeColor === 'blue' && styles.headBlue,
-              activeColor === 'red' && styles.headRed,
-              activeColor === 'infrared' && styles.headInfrared,
-              activeColor === 'infrared'
-                ? 'xl:top-[242px] lg:top-[307px] md:top-[423px]'
-                : 'xl:top-[138px] lg:top-[203px] md:top-[319px]'
-            )}
-          />
-          <Image
-            src={getImageFullUrl_client(colorsData.device_green_light.data)}
-            alt="device green light"
-            width={109}
-            height={10}
-            className={classNames(
-              'md:block hidden absolute 2xl:top-[186px] z-10',
-              activeColor === 'infrared'
-                ? 'xl:top-[290px] lg:top-[355px] md:top-[471px]'
-                : 'xl:top-[186px] lg:top-[251px] md:top-[367px]'
-            )}
-          />
-          <Image
-            src={getImageFullUrl_client(colorsData.device_body.data)}
-            alt="device body"
-            width={90}
-            height={407.24}
-            className={classNames(
-              'md:block hidden absolute 2xl:top-[196px]',
-              activeColor === 'infrared'
-                ? 'xl:top-[300px] lg:top-[365px] md:top-[481px]'
-                : 'xl:top-[196px] lg:top-[261px] md:top-[377px]'
-            )}
-          />
+        <div className="relative col-span-4 flex justify-between text-center">
+          <div
+            className="md:hidden flex items-center p-16 cursor-pointer"
+            onClick={() => {
+              const previousId = activeId === 1 ? 3 : activeId - 1;
+              setActiveColor(deviceHeads[previousId === -1 ? 2 : previousId - 1].title.split(' ')[0].toLowerCase());
+              setActiveId(previousId);
+              setProgressBarWidth(0);
+            }}
+          >
+            {'<'}
+          </div>
+          <div className="flex justify-center text-center">
+            <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
+              activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
+            } head`}</p>
+            <Image
+              src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].light_image.data)}
+              alt="device lights"
+              width={287}
+              height={574}
+              className="absolute top-0 left-1/2 translate-x-neg-1/2"
+            />
+            <Image
+              src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
+              alt="device head"
+              width={109}
+              height={78}
+              className={classNames(
+                'absolute 2xl:top-[138px] top-[138px]',
+                activeColor === 'blue' && styles.headBlue,
+                activeColor === 'red' && styles.headRed,
+                activeColor === 'infrared' && styles.headInfrared,
+                activeColor === 'infrared'
+                  ? 'xl:top-[242px] lg:top-[307px] md:top-[423px]'
+                  : 'xl:top-[138px] lg:top-[203px] md:top-[319px]'
+              )}
+            />
+            <Image
+              src={getImageFullUrl_client(colorsData.device_green_light.data)}
+              alt="device green light"
+              width={109}
+              height={10}
+              className={classNames(
+                'md:block hidden absolute 2xl:top-[186px] z-10',
+                activeColor === 'infrared'
+                  ? 'xl:top-[290px] lg:top-[355px] md:top-[471px]'
+                  : 'xl:top-[186px] lg:top-[251px] md:top-[367px]'
+              )}
+            />
+            <Image
+              src={getImageFullUrl_client(colorsData.device_body.data)}
+              alt="device body"
+              width={90}
+              height={407.24}
+              className={classNames(
+                'md:block hidden absolute 2xl:top-[196px]',
+                activeColor === 'infrared'
+                  ? 'xl:top-[300px] lg:top-[365px] md:top-[481px]'
+                  : 'xl:top-[196px] lg:top-[261px] md:top-[377px]'
+              )}
+            />
+          </div>
+          <div
+            className="md:hidden flex items-center p-16 cursor-pointer"
+            onClick={() => {
+              const nextId = activeId === 3 ? 1 : activeId + 1;
+              setActiveColor(deviceHeads[nextId === 3 ? 0 : nextId - 1].title.split(' ')[0].toLowerCase());
+              setActiveId(nextId);
+              setProgressBarWidth(0);
+            }}
+          >
+            {'>'}
+          </div>
         </div>
         <div className="col-span-4 flex flex-col justify-between">
           <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-64 mb-56">
