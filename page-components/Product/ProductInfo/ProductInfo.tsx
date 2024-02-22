@@ -46,7 +46,7 @@ const ProductInfo = ({ productInfoData }) => {
     <div className={classNames('relative', backgrounds[pageIndex])}>
       <div className="container">
         <div className="grid grid-cols-12">
-          <div className="lg:col-start-3 lg:col-span-8 col-span-12">
+          <div className="xl:static relative lg:col-start-3 lg:col-span-8 col-span-12">
             <ScrollableNavbar
               pageIndex={pageIndex}
               navbarItems={[
@@ -59,6 +59,7 @@ const ProductInfo = ({ productInfoData }) => {
               handleClick={handleClick}
               justify="justify-between"
             />
+            <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>
           </div>
         </div>
         {navbarPages[pageIndex]}

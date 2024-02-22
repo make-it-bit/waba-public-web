@@ -30,7 +30,7 @@ const Skin = ({ skinData }) => {
       />
       {categorizedElements[navbarItems[pageIndex]].map((element, index) => (
         <div key={index} className="grid grid-cols-12 items-center my-80">
-          <div className="md:col-start-2 md:col-span-5 col-span-12 md:order-1 order-2">
+          <div className="lg:col-start-2 lg:col-span-5 md:col-span-6 col-span-12 md:order-1 order-2">
             <div className="flex flex-col justify-center gap-48">
               <h1 className="font-rufina text-5xl leading-5xl md:mt-0 mt-56">{element.attributes.title}</h1>
               <div className="flex flex-col gap-40">
@@ -59,8 +59,8 @@ const Skin = ({ skinData }) => {
               </div>
             </div>
           </div>
-          <div className="md:col-start-8 md:col-span-5 col-span-12 md:order-2 order-1">
-            <div className="relative w-full md:h-[554px] h-[352px]">
+          <div className="lg:col-start-8 md:col-start-8 lg:col-span-4 md:col-span-5 col-span-12 md:order-2 order-1">
+            <div className="relative w-full md:h-[500px] h-[352px]">
               <Image
                 src={getImageFullUrl_client(element.attributes.image.data)}
                 alt="ageing image"

@@ -18,7 +18,7 @@ const FeatureCard = ({ icon, title, description }) => {
 
 const Features = ({ featuresData }) => {
   return (
-    <div className="grid grid-cols-12 sm:gap-x-48 sm:gap-y-64 gap-y-16 sm:mt-32 mt-8 sm:pb-80 pb-64">
+    <div className="grid grid-cols-12 lg:gap-x-48 lg:gap-y-64 md:gap-x-32 md:gap-y-48 gap-x-16 gap-y-32 sm:mt-32 mt-8 sm:pb-80 pb-64">
       {featuresData.map((feature, index) => (
         <FeatureCard
           key={index}

@@ -1,8 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import classNames from 'classnames';
 
 import { ScrollableNavbar } from '@/components';
+
+import styles from './_faq.module.scss';
 
 const FAQ = ({ faqPageData }) => {
   const categorizedElements = faqPageData.faq_elements.data.reduce((acc, element) => {
@@ -30,13 +33,14 @@ const FAQ = ({ faqPageData }) => {
         <div className="bg-supplementary-warm-gray sticky lg:top-[137px] top-[97px]">
           <div className="container md:px-12 px-0">
             <div className="grid grid-cols-12">
-              <div className="md:col-start-3 md:col-span-8 col-span-12">
+              <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
                 <ScrollableNavbar
                   pageIndex={pageIndex}
                   navbarItems={navbarItems}
                   handleClick={setPageIndex}
                   justify="justify-between"
                 />
+                <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>
               </div>
             </div>
           </div>

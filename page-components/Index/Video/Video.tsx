@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import NextImage from 'next/image';
+import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
@@ -10,15 +10,18 @@ const Video = ({ videoData }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  if (!videoData.desktop_images?.data?.length) return <p>No images found</p>;
+  if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
 
-  const frameCount = videoData.desktop_images.data.length;
+  const frameCount = currentCanvasWidth && currentCanvasWidth >= 994 ? videoData.desktop_images.data.length : 6;
 
   const currentFrame = (index) => {
-    const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+    if (currentCanvasWidth && currentCanvasWidth >= 994) {
+      const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+      return frame;
+    }
+    const frame = `MOBILE ${index}.svg`;
     return frame;
   };
-
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
   //   return url;
@@ -27,7 +30,10 @@ const Video = ({ videoData }) => {
   const getCorrectCavasWidth = () => {
     if (window.innerWidth > 1535) return 1504;
     if (window.innerWidth > 1279) return 1248;
-    if (window.innerWidth > 1023) return 994;
+    if (window.innerWidth > 1023) return 992;
+    if (window.innerWidth > 767) return 736;
+    if (window.innerWidth > 511) return 480;
+    if (window.innerWidth > 255) return 224;
     return null;
   };
 
@@ -35,7 +41,10 @@ const Video = ({ videoData }) => {
     return {
       1504: 844,
       1248: 700,
-      994: 556,
+      992: 556,
+      736: 950,
+      480: 750,
+      224: 550,
     }[width];
   };
 
@@ -72,7 +81,8 @@ const Video = ({ videoData }) => {
       if (context === null) return;
       const img = new Image();
       img.src = currentFrame(index);
-      img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+      //img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+      img.onload = () => context.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
@@ -110,32 +120,22 @@ const Video = ({ videoData }) => {
 
   return (
     <div ref={containerRef} className="container">
-      <div className="relative hidden lg:block h-[600vh]">
+      <div className="relative flex flex-col h-[600vh]">
         <div className="absolute top-96 z-10 w-full">
           <div className="grid grid-cols-12">
-            <div className="col-start-5 col-span-4 text-center">
+            <div className="lg:col-start-5 lg:col-span-4 col-span-12 text-center">
               <h1 className="font-rufina text-4xl leading-4xl">{videoData.title}</h1>
             </div>
           </div>
         </div>
-        <canvas className="sticky top-[137px]" ref={canvasRef} />
-      </div>
-      <div className="relative block lg:hidden">
-        <div className="grid grid-cols-12 mb-32">
-          <div className="col-span-12 text-center">
-            <h1 className="font-rufina text-3xl leading-3xl">{videoData.title}</h1>
-          </div>
-        </div>
-        {videoData.mobile_images?.data?.map((image, index) => (
-          <div className="relative" key={index}>
-            <NextImage
-              alt={image.attributes.alternativeText}
-              src={getImageFullUrl_client(image)}
-              width={image.attributes.width}
-              height={image.attributes.height}
-            />
-          </div>
-        ))}
+        <canvas
+          className={classNames(
+            'sticky top-[137px]',
+            currentCanvasWidth === 994 && 'mt-88',
+            currentCanvasWidth && currentCanvasWidth <= 736 && 'mt-256'
+          )}
+          ref={canvasRef}
+        />
       </div>
     </div>
   );

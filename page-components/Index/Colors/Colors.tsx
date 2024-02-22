@@ -138,7 +138,7 @@ const Colors = ({ colorsData }) => {
             </div>
           ))}
         </div>
-        <div className="relative col-span-4 flex justify-between text-center">
+        <div className="col-span-4 flex justify-between text-center">
           <div
             className="md:hidden flex items-center p-16 cursor-pointer"
             onClick={() => {
@@ -150,10 +150,10 @@ const Colors = ({ colorsData }) => {
           >
             {'<'}
           </div>
-          <div className="flex justify-center text-center">
-            <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>{`${
-              activeColor.charAt(0).toUpperCase() + activeColor.slice(1)
-            } head`}</p>
+          <div className="relative flex justify-center w-full text-center">
+            <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>
+              {colorsData[`device_head_${activeColor}`].title_in_the_middle}
+            </p>
             <Image
               src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].light_image.data)}
               alt="device lights"
@@ -205,7 +205,7 @@ const Colors = ({ colorsData }) => {
             className="md:hidden flex items-center p-16 cursor-pointer"
             onClick={() => {
               const nextId = activeId === 3 ? 1 : activeId + 1;
-              setActiveColor(deviceHeads[nextId === 3 ? 0 : nextId - 1].title.split(' ')[0].toLowerCase());
+              setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
               setActiveId(nextId);
               setProgressBarWidth(0);
             }}
