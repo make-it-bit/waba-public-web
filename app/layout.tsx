@@ -1,4 +1,5 @@
 import React from 'react';
+import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { DM_Sans } from 'next/font/google';
 import classNames from 'classnames';
@@ -34,6 +35,15 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={classNames('min-h-screen flex flex-col', dmSans.className)}>
         {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
+        <Script id="google-tag-manager-consent" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+            });
+          `}
+        </Script>
         <div className="sticky top-0 z-[500]">
           <PromoBar promobarData={promobarData.attributes} />
           <Navbar navbarData={navbarData.attributes} />
