@@ -7,17 +7,17 @@ const BlogHero = () => {
   return (
     <div className="container mt-64 mb-40">
       <div className="grid grid-cols-12 gap-x-32">
-        <div className="col-start-4 col-span-6 text-center">
+        <div className="lg:col-start-4 lg:col-span-6 col-span-12 text-center">
           <p className="text-base leading-base font-bold text-deep-purple-100 mb-16">OUR BLOG</p>
           <h1 className="font-rufina text-5xl leading-5xl mb-88">Insight and advice from our expert team</h1>
         </div>
-        <div className="col-start-2 col-span-5">
-          <div className="relative w-auto h-[400px]">
+        <div className="lg:col-start-2 lg:col-span-5 col-span-6">
+          <div className="relative w-auto h-full">
             <Image src="/product-main-info-img-2.png" alt="blog hero image" fill className="absolute object-cover" />
           </div>
         </div>
-        <div className="col-span-5">
-          <div className="flex flex-col justify-end h-full">
+        <div className="lg:col-span-5 col-span-6">
+          <div className="flex flex-col justify-end h-full text-justify">
             <div className="flex gap-8">
               <Tag text="UPDATES" />
               <Tag text="UPDATES" />

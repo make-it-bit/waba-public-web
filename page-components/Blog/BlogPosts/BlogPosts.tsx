@@ -10,19 +10,23 @@ import { TextInput, Button } from '@/gui-components/client';
 
 const BlogPost = ({ image, category, title, author, date }) => {
   return (
-    <div className="col-span-4">
+    <div className="md:col-span-4 col-span-6">
       <div className="flex flex-col gap-24">
-        <div className="relative w-auto h-256">
-          <Image src={image} alt="blog post" fill className="absolute object-cover" />
-        </div>
+        <Link href="/blog/blogPostId">
+          <div className="relative w-auto h-256">
+            <Image src={image} alt="blog post" fill className="absolute object-cover" />
+          </div>
+        </Link>
         <div className="flex gap-8 text-deep-purple-100">
           <Tag text={category} />
           <Tag text={category} />
         </div>
-        <div className="flex flex-col gap-8">
-          <p className="text-2xl leading-2xl">{title}</p>
-          <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>
-        </div>
+        <Link href="/blog/blogPostId">
+          <div className="flex flex-col gap-8">
+            <p className="text-2xl leading-2xl">{title}</p>
+            <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>
+          </div>
+        </Link>
       </div>
     </div>
   );
@@ -70,13 +74,13 @@ const BlogPosts = () => {
         <div className="container">
           <div className="grid grid-cols-12">
             <div className="col-span-12">
-              <div className="flex justify-around">
+              <div className="flex flex-wrap lg:justify-around justify-center gap-8">
                 {categories.map((category, index) => (
                   <div
                     key={index}
                     className={classNames(
                       'text-deep-purple-100 cursor-pointer',
-                      activeCategoryIndex === index && 'font-bold'
+                      activeCategoryIndex === index && 'border rounded-40 bg-deep-purple-10'
                     )}
                     onClick={() => setActiveCategoryIndex(index)}
                   >
@@ -89,47 +93,47 @@ const BlogPosts = () => {
         </div>
       </div>
       <div className="container mb-64">
-        <div className="grid grid-cols-12 gap-64">
-          <div className="col-span-8">
-            <div className="grid grid-cols-8 gap-x-32 gap-y-40">
+        <div className="grid grid-cols-12 md:gap-64 gap-40">
+          <div className="md:col-span-8 col-span-6">
+            <div className="grid md:grid-cols-8 grid-cols-6 gap-x-32 gap-y-40">
               <BlogPost
-                image="/product-main-info-img-1.png"
+                image="/product-main-info-img-2.png"
                 category="category 1"
                 title="Blog Post 1 blablabla"
-                author="AUTHOR KEEGI"
+                author="AUTOR KEEGI"
                 date="2021-09-01"
               />
               <BlogPost
-                image="/product-main-info-img-1.png"
+                image="/product-main-info-img-2.png"
                 category="category 1"
-                title="Blog Post 1 blablabla"
-                author="AUTHOR KEEGI"
+                title="Blog Post 2 blablabla"
+                author="AUTOR KEEGI"
                 date="2021-09-01"
               />
               <BlogPost
-                image="/product-main-info-img-1.png"
+                image="/product-main-info-img-2.png"
                 category="category 1"
-                title="Blog Post 1 blablabla"
-                author="AUTHOR KEEGI"
+                title="Blog Post 3 blablabla"
+                author="AUTOR KEEGI"
                 date="2021-09-01"
               />
               <BlogPost
-                image="/product-main-info-img-1.png"
+                image="/product-main-info-img-2.png"
                 category="category 1"
-                title="Blog Post 1 blablabla"
-                author="AUTHOR KEEGI"
+                title="Blog Post 4 blablabla"
+                author="AUTOR KEEGI"
                 date="2021-09-01"
               />
               <BlogPost
-                image="/product-main-info-img-1.png"
+                image="/product-main-info-img-2.png"
                 category="category 1"
-                title="Blog Post 1 blablabla"
-                author="AUTHOR KEEGI"
+                title="Blog Post 5 blablabla"
+                author="AUTOR KEEGI"
                 date="2021-09-01"
               />
             </div>
           </div>
-          <div className="col-span-4">
+          <div className="md:col-span-4 col-span-6">
             <div className="flex flex-col gap-32 sticky top-[169px]">
               <div className="flex flex-col gap-8">
                 <p className="text-base leading-base font-bold mb-8">NEWSLETTER</p>
