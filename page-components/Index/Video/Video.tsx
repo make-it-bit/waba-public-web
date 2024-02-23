@@ -12,14 +12,14 @@ const Video = ({ videoData }) => {
 
   if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
 
-  const frameCount = currentCanvasWidth && currentCanvasWidth >= 994 ? videoData.desktop_images.data.length : 6;
+  const frameCount = currentCanvasWidth && currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : 8;
 
   const currentFrame = (index) => {
-    if (currentCanvasWidth && currentCanvasWidth >= 994) {
+    if (currentCanvasWidth && currentCanvasWidth >= 992) {
       const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
       return frame;
     }
-    const frame = `MOBILE ${index}.svg`;
+    const frame = `${index}.png`;
     return frame;
   };
   // const currentFrame = (index) => {
@@ -42,9 +42,9 @@ const Video = ({ videoData }) => {
       1504: 844,
       1248: 700,
       992: 556,
-      736: 950,
+      736: 1150,
       480: 750,
-      224: 550,
+      224: 350,
     }[width];
   };
 
@@ -81,8 +81,8 @@ const Video = ({ videoData }) => {
       if (context === null) return;
       const img = new Image();
       img.src = currentFrame(index);
-      //img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-      img.onload = () => context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+      //img.onload = () => context.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
@@ -131,7 +131,7 @@ const Video = ({ videoData }) => {
         <canvas
           className={classNames(
             'sticky top-[137px]',
-            currentCanvasWidth === 994 && 'mt-88',
+            currentCanvasWidth === 992 && 'mt-88',
             currentCanvasWidth && currentCanvasWidth <= 736 && 'mt-256'
           )}
           ref={canvasRef}

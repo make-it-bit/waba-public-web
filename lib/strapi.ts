@@ -60,6 +60,7 @@ const indexPageNestedComponents = [
   'hero.button_2',
   'hero.tags.logo',
   'hero.background_video',
+  'hero.background_video_first_frame',
   'color.device_head_blue.light_image',
   'color.device_head_blue.head_image',
   'color.device_head_red.light_image',

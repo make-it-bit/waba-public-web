@@ -37,7 +37,7 @@ const Hero = ({ heroData }) => {
         </video>
       ) : (
         <Image
-          src="/hero-video-first-frame.png"
+          src={getImageFullUrl_client(heroData.background_video_first_frame.data)}
           alt="hero video first frame"
           width={1920}
           height={1080}
