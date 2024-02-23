@@ -36,9 +36,10 @@ const populateComponent = {
   'cta-block': '*',
   'pre-footer-card': preFooterCardNestedComponents,
   footer: footerNestedComponents,
+  'cookie-consent': '*',
 };
 
-type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer';
+type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer' | 'cookie-consent';
 
 export const getComponentData = async (component: Component) => {
   const query = qs.stringify({ populate: populateComponent[component] });

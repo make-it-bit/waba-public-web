@@ -12,7 +12,7 @@ const Video = ({ videoData }) => {
 
   if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
 
-  const frameCount = currentCanvasWidth && currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : 8;
+  const frameCount = currentCanvasWidth && currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : 7;
 
   const currentFrame = (index) => {
     if (currentCanvasWidth && currentCanvasWidth >= 992) {

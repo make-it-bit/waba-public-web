@@ -167,7 +167,7 @@ const Colors = ({ colorsData }) => {
               width={108}
               height={78}
               className={classNames(
-                'absolute 2xl:top-[138px] top-[138px] left-[196px]',
+                'absolute 2xl:top-[138px] top-[138px] 2xl:left-[196px] xl:left-[153.5px] lg:left-[111px] left-[68px]',
                 activeColor === 'blue' && styles.headBlue,
                 activeColor === 'red' && styles.headRed,
                 activeColor === 'infrared' && styles.headInfrared,

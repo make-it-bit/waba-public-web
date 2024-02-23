@@ -30,6 +30,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const promobarData = await getComponentData('promobar');
   const navbarData = await getComponentData('navbar');
+  const cookieConsentData = await getComponentData('cookie-consent');
 
   return (
     <html lang="en">
@@ -49,7 +50,7 @@ export default async function RootLayout({ children }) {
           <Navbar navbarData={navbarData.attributes} />
         </div>
         {children}
-        <CookieConsent />
+        <CookieConsent cookiesConsentData={cookieConsentData.attributes} />
       </body>
     </html>
   );
