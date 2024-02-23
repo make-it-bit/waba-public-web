@@ -30,25 +30,25 @@
 }
 
 .headBlue {
-  @media (max-width: 352px) {
+  @media (max-width: 433px) {
     top: 224px;
   }
-  @media (width: 352px) {
+  @media (width: 433px) {
     top: 138px;
   }
 }
 
 .headRed {
-  @media (max-width: 337px) {
+  @media (max-width: 418px) {
     top: 224px;
   }
 }
 
 .headInfrared {
-  @media (max-width: 470px) {
+  @media (max-width: 552px) {
     top: 224px;
   }
-  @media (width: 470px) {
+  @media (width: 552px) {
     top: 138px;
   }
 }
