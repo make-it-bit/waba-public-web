@@ -164,10 +164,10 @@ const Colors = ({ colorsData }) => {
             <Image
               src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
               alt="device head"
-              width={109}
+              width={108}
               height={78}
               className={classNames(
-                'absolute 2xl:top-[138px] top-[138px]',
+                'absolute 2xl:top-[138px] top-[138px] left-[196px]',
                 activeColor === 'blue' && styles.headBlue,
                 activeColor === 'red' && styles.headRed,
                 activeColor === 'infrared' && styles.headInfrared,
