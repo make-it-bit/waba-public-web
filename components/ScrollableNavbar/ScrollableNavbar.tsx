@@ -20,13 +20,13 @@ const ScrollableNavbar = ({ pageIndex, navbarItems, handleClick, justify }) => {
         <p
           key={index}
           className={classNames(
-            'grow-0 shrink-0 basis-0 text-sm leading-sm cursor-pointer',
-            pageIndex === scienceBehindIndex
-              ? 'text-white-100 border-b border-white-100 hover:border-b hover:border-white-100'
-              : '',
-            pageIndex === index
-              ? 'border-b border-black-100'
-              : 'border-b border-transparent hover:border-b hover:border-black-100'
+            'grow-0 shrink-0 basis-0 text-sm leading-sm cursor-pointer border-b',
+            pageIndex === scienceBehindIndex && index === scienceBehindIndex && 'text-white-100 border-white-100',
+            pageIndex === index && 'border-black-100',
+            pageIndex !== scienceBehindIndex && pageIndex !== index && 'border-transparent hover:border-black-100',
+            pageIndex === scienceBehindIndex &&
+              pageIndex !== index &&
+              'text-white-100 border-transparent hover:border-white-100'
           )}
           onClick={() => handleClick(index)}
         >

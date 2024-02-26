@@ -11,7 +11,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('gtaConsent') !== 'granted') setDisplayCookieConsent(true);
+    if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {

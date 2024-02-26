@@ -54,7 +54,7 @@ const ProductInfo = ({ productInfoData }) => {
               handleClick={setPageIndex}
               justify="justify-between"
             />
-            <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>
+            {/*  <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div> */}
           </div>
         </div>
         {navbarPages[pageIndex]}
