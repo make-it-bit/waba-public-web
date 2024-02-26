@@ -12,15 +12,17 @@ const Video = ({ videoData }) => {
 
   if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
 
-  const frameCount = currentCanvasWidth && currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : 7;
+  const frameCount = currentCanvasWidth && (currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : 7);
 
   const currentFrame = (index) => {
-    if (currentCanvasWidth && currentCanvasWidth >= 992) {
-      const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+    if (currentCanvasWidth) {
+      if (currentCanvasWidth >= 992) {
+        const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+        return frame;
+      }
+      const frame = `${index}.png`;
       return frame;
     }
-    const frame = `${index}.png`;
-    return frame;
   };
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
@@ -82,7 +84,6 @@ const Video = ({ videoData }) => {
       const img = new Image();
       img.src = currentFrame(index);
       img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-      //img.onload = () => context.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
@@ -123,8 +124,8 @@ const Video = ({ videoData }) => {
       <div className="relative flex flex-col h-[600vh]">
         <div className="absolute top-96 z-10 w-full">
           <div className="grid grid-cols-12">
-            <div className="lg:col-start-5 lg:col-span-4 col-span-12 text-center">
-              <h1 className="font-rufina text-4xl leading-4xl">{videoData.title}</h1>
+            <div className="lg:col-start-5 lg:col-span-4 col-start-2 col-span-10 text-center">
+              <h1 className="font-rufina sm:text-4xl sm:leading-4xl text-3xl leading-3xl">{videoData.title}</h1>
             </div>
           </div>
         </div>
