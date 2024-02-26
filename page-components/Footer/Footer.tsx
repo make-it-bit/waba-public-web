@@ -17,10 +17,6 @@ const Footer = ({ footerData, small = false }) => {
   const [messageStatus, setMessageStatus] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
-
   const handleSubscribe = async () => {
     try {
       setMessage('');
@@ -77,7 +73,7 @@ const Footer = ({ footerData, small = false }) => {
                       name="footer-email"
                       value={email}
                       placeholder={footerData.footer_top.input_placeholder}
-                      onChange={handleChange}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     {subscribed && message === '' ? (
                       <div className="bg-deep-purple-20 flex justify-center items-center px-24 py-8">

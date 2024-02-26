@@ -11,7 +11,7 @@ const ScrollableNavbar = ({ pageIndex, navbarItems, handleClick, justify }) => {
   return (
     <div
       className={classNames(
-        'flex items-center md:px-0 px-12 my-32 gap-48 overflow-x-auto whitespace-nowrap',
+        'flex items-center md:px-0 px-12 py-32 gap-48 overflow-x-auto whitespace-nowrap',
         justify,
         styles.navbar
       )}
@@ -21,8 +21,12 @@ const ScrollableNavbar = ({ pageIndex, navbarItems, handleClick, justify }) => {
           key={index}
           className={classNames(
             'grow-0 shrink-0 basis-0 text-sm leading-sm cursor-pointer',
-            pageIndex === scienceBehindIndex && 'text-white-100 border-neutral-100',
-            pageIndex === index && 'border-b border-black-100'
+            pageIndex === scienceBehindIndex
+              ? 'text-white-100 border-b border-white-100 hover:border-b hover:border-white-100'
+              : '',
+            pageIndex === index
+              ? 'border-b border-black-100'
+              : 'border-b border-transparent hover:border-b hover:border-black-100'
           )}
           onClick={() => handleClick(index)}
         >

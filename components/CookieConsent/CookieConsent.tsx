@@ -7,11 +7,11 @@ import rehypeRaw from 'rehype-raw';
 import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
-  const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
+  const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('gtaConsent') === 'granted') setDisplayCookieConsent(false);
+    if (localStorage.getItem('gtaConsent') !== 'granted') setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
@@ -29,11 +29,11 @@ const CookieConsent = ({ cookiesConsentData }) => {
       <div className="w-full flex items-center justify-center fixed bottom-0 m-auto bg-black-100 z-[420]">
         <div className="container">
           <div className="flex flex-col">
-            <div className="flex flex-wrap justify-between items-center gap-x-32 gap-y-16 py-12">
-              <div className="text-base leading-base text-neutral-100 text-justify m-0">
+            <div className="flex flex-wrap sm:justify-between justify-center items-center gap-x-32 gap-y-16 py-12">
+              <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0">
                 <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown>
               </div>
-              <div className="flex gap-16">
+              <div className="flex sm:flex-row flex-col gap-16 sm:w-auto w-full">
                 <Button
                   CTA={cookiesConsentData.accept_all_button_text}
                   style="tertiary"
@@ -63,7 +63,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
             </div>
             {displayReadMore && (
               <div className="w-full">
-                <div className="text-base leading-base text-neutral-100 text-justify my-12">
+                <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
                   <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
                 </div>
               </div>

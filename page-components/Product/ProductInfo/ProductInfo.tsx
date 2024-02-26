@@ -20,6 +20,7 @@ const ProductInfo = ({ productInfoData }) => {
     styles.background3,
     styles.background4,
   ];
+  const navbarItems = ['Features', 'User stories', 'What’s included', 'The Science Behind', 'Technical specifications'];
   const navbarPages = [
     <Features key={0} featuresData={productInfoData.feature_cards} />,
     <UserStories key={1} title={productInfoData.user_stories_title} userStoriesData={productInfoData.stories} />,
@@ -46,17 +47,11 @@ const ProductInfo = ({ productInfoData }) => {
     <div className={classNames('relative', backgrounds[pageIndex])}>
       <div className="container">
         <div className="grid grid-cols-12">
-          <div className="xl:static relative lg:col-start-3 lg:col-span-8 col-span-12">
+          <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
             <ScrollableNavbar
               pageIndex={pageIndex}
-              navbarItems={[
-                'Features',
-                'User stories',
-                'What’s included',
-                'The Science Behind',
-                'Technical specifications',
-              ]}
-              handleClick={handleClick}
+              navbarItems={navbarItems}
+              handleClick={setPageIndex}
               justify="justify-between"
             />
             <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>

@@ -8,6 +8,8 @@ import classNames from 'classnames';
 import { Tag } from '@/components';
 import { TextInput, Button } from '@/gui-components/client';
 
+import styles from './_blogPosts.module.scss';
+
 const BlogPost = ({ image, category, title, author, date }) => {
   return (
     <div className="md:col-span-4 col-span-6">
@@ -137,13 +139,46 @@ const BlogPosts = () => {
             <div className="flex flex-col gap-32 sticky top-[169px]">
               <div className="flex flex-col gap-8">
                 <p className="text-base leading-base font-bold mb-8">NEWSLETTER</p>
-                <TextInput
-                  name="blog-email"
-                  value={email}
-                  placeholder={'Enter your email'}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Button CTA={'Subscribe'} style="tertiary" onClick={handleSubscribe} disabled={subscribed} svg />
+                {messageStatus === 'success' ? (
+                  <div className="bg-signal-green-20 flex justify-center items-center text-center gap-8 px-16 py-12">
+                    <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                    <p className="text-xs leading-xs text-signal-green-100">{message}</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex flex-col gap-8">
+                      <TextInput
+                        name="blog-email"
+                        value={email}
+                        placeholder={'Enter your email'}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      {subscribed && message === '' ? (
+                        <div className="bg-deep-purple-20 flex justify-center items-center px-24 py-8">
+                          <div
+                            className={classNames(
+                              'w-24 h-24 border-2 border-purple-100 border-b-transparent rounded-[50%]',
+                              styles.loader
+                            )}
+                          ></div>
+                        </div>
+                      ) : (
+                        <Button
+                          CTA={'Subscribe'}
+                          style="tertiary"
+                          onClick={handleSubscribe}
+                          disabled={subscribed}
+                          svg
+                        />
+                      )}
+                    </div>
+                    {message !== '' && (
+                      <div className="bg-signal-red-10 flex justify-center items-center text-center gap-8 px-16 py-12">
+                        <p className="text-xs leading-xs text-signal-red-100">{message}</p>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
               <div className="flex flex-col gap-8">
                 <p className="text-base leading-base font-bold mb-8">FOLLOW US</p>
