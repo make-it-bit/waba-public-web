@@ -131,7 +131,7 @@ export async function GET(request) {
       }
     );
   } catch (error) {
-    console.log('failed to generate og image');
+    console.log('Failed to generate og image.');
     console.log('error: ', error);
 
     return NextResponse.json({ message: 'fail' }, { status: 400 });

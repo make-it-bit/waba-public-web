@@ -32,7 +32,7 @@ export async function POST(req) {
       !CONTACT_SHEET_ID ||
       !SENDGRID_API_KEY
     ) {
-      throw new Error('Missing ENV vars');
+      throw new Error('Missing ENV vars.');
     }
 
     sgMail.setApiKey(SENDGRID_API_KEY);
@@ -40,7 +40,7 @@ export async function POST(req) {
     const { form, pathname } = await req.json();
     const sheetId = {
       '/careers-at-waba': CAREERS_SHEET_ID,
-      '/business-enquiries': BUSINESS_SHEET_ID,
+      '/waba-for-business': BUSINESS_SHEET_ID,
       '/contact-us': CONTACT_SHEET_ID,
     }[pathname];
 
@@ -74,8 +74,8 @@ export async function POST(req) {
     console.error(e);
     await sgMail.send({
       ...sharedEmailSettings,
-      subject: 'failed to submit enquiry',
-      text: 'please report to Sebastian',
+      subject: 'Failed to submit enquiry.',
+      text: 'Please report to Sebastian.',
     });
     return NextResponse.json({ message: 'fail' }, { status: 400 });
   }
