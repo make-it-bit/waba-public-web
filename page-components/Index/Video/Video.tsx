@@ -12,7 +12,9 @@ const Video = ({ videoData }) => {
 
   if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
 
-  const frameCount = currentCanvasWidth && (currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : 7);
+  const frameCount =
+    currentCanvasWidth &&
+    (currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : videoData.mobile_images.data.length);
 
   const currentFrame = (index) => {
     if (currentCanvasWidth) {
@@ -20,7 +22,7 @@ const Video = ({ videoData }) => {
         const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
         return frame;
       }
-      const frame = `${index}.png`;
+      const frame = getImageFullUrl_client(videoData.mobile_images?.data?.[index]);
       return frame;
     }
   };
