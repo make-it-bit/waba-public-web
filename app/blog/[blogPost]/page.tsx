@@ -26,11 +26,13 @@ export async function generateMetadata({ params: { blogPost } }) {
   };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ blogPost: string }[]> {
   const blogPosts = await getBlogPosts();
-  return blogPosts?.map((post) => ({
-    blogPost: post.attributes.slug.substring(1),
-  }));
+  return (
+    blogPosts?.map((post) => ({
+      blogPost: post.attributes.slug.substring(1),
+    })) ?? []
+  );
 }
 
 const BlogPostPage = async ({ params: { blogPost } }) => {
