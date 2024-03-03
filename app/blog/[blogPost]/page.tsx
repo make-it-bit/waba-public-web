@@ -28,10 +28,9 @@ export async function generateMetadata({ params: { blogPost } }) {
 
 export async function generateStaticParams() {
   const blogPosts = await getBlogPosts();
-  let postSlugs = blogPosts?.map((post) => {
-    return { blogPost: post.attributes.slug.substring(1) };
-  });
-  return postSlugs;
+  return blogPosts?.map((post) => ({
+    blogPost: post.attributes.slug.substring(1),
+  }));
 }
 
 const BlogPostPage = async ({ params: { blogPost } }) => {
