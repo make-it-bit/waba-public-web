@@ -8,6 +8,7 @@ body {
 }
 
 h1 {
+  @apply font-rufina;
   @apply text-4xl;
   @apply leading-4xl;
 }
@@ -35,6 +36,11 @@ h5 {
 h6 {
   @apply text-xs;
   @apply leading-xs;
+}
+
+p {
+  @apply text-base;
+  @apply leading-base;
 }
 
 ul {

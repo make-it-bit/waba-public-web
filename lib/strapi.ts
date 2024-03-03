@@ -139,6 +139,15 @@ const aboutPageNestedComponents = [
   'difference.device_image',
 ];
 const faqPageNestedComponents = ['seo', 'hero_title', 'faq_elements'];
+const blogPageNestedComponents = [
+  'seo',
+  'hero.featured_blog_post',
+  'hero.featured_blog_post.image',
+  'hero.featured_blog_post.categories',
+  'blog_categories',
+  'input_button',
+  'socials_tags.logo',
+];
 const formPagesNestedComponents = ['seo', 'hero_background_image', 'form.button'];
 
 type Pages =
@@ -148,6 +157,7 @@ type Pages =
   | 'result'
   | 'about-us'
   | 'faq'
+  | 'blog'
   | 'careers-at-waba'
   | 'waba-for-business'
   | 'contact-us'
@@ -163,6 +173,7 @@ const populatePage = {
   result: userStoriesPageNestedComponents,
   'about-us': aboutPageNestedComponents,
   faq: faqPageNestedComponents,
+  blog: blogPageNestedComponents,
   'careers-at-waba': formPagesNestedComponents,
   'waba-for-business': formPagesNestedComponents,
   'contact-us': formPagesNestedComponents,
@@ -207,5 +218,50 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
+  return responseData;
+};
+
+type SEO = {
+  title: string;
+  description: string;
+  og_image: Object;
+};
+
+type BlogCategory = {
+  name: string;
+};
+
+type BlogPost = {
+  id: number;
+  attributes: {
+    seo: SEO;
+    slug: string;
+    image: Object;
+    title: string;
+    description: string;
+    author: string;
+    date: string;
+    content: string;
+    categories: BlogCategory[];
+    back_to_blog: {
+      href_text: string;
+      href_src: string;
+    };
+  };
+};
+
+export const getBlogPosts = async (): Promise<null | BlogPost[]> => {
+  const query = qs.stringify({ populate: '*' });
+  const url = `${STRAPI_BASE_URL}/api/blog-posts?${query}`;
+  revalidateTag('blogPosts');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['blogPosts'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+  responseData.sort((a, b) => a.id - b.id);
   return responseData;
 };

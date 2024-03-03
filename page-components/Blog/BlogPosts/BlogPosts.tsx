@@ -5,26 +5,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import { Tag } from '@/components';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
+import { CategoryTag, Tag } from '@/components';
 import { TextInput, Button } from '@/gui-components/client';
 
 import styles from './_blogPosts.module.scss';
 
-const BlogPost = ({ image, category, title, author, date }) => {
+const BlogPost = ({ image, slug, categories, title, author, date }) => {
   return (
     <div className="md:col-span-4 col-span-6">
-      <div className="flex flex-col gap-24">
-        <Link href="/blog/blogPostId">
+      <div className="flex flex-col gap-16">
+        <Link href={`/blog${slug}`}>
           <div className="relative w-auto h-256">
             <Image src={image} alt="blog post" fill className="absolute object-cover" />
           </div>
         </Link>
-        <div className="flex gap-8 text-deep-purple-100">
-          <Tag text={category} />
-          <Tag text={category} />
+        <div className="flex gap-8">
+          {categories.map((category, index) => (
+            <CategoryTag key={index} text={category.attributes.name} />
+          ))}
         </div>
-        <Link href="/blog/blogPostId">
-          <div className="flex flex-col gap-8">
+        <Link href={`/blog${slug}`}>
+          <div className="flex flex-col">
             <p className="text-2xl leading-2xl">{title}</p>
             <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>
           </div>
@@ -34,14 +37,26 @@ const BlogPost = ({ image, category, title, author, date }) => {
   );
 };
 
-const BlogPosts = () => {
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+const BlogPosts = ({ blogData, blogPosts }) => {
+  const [filteredBlogPosts, setFilteredBlogPosts] = useState(blogPosts);
+  const [activeCategory, setActiveCategory] = useState(blogData.blog_categories.data[0].attributes.name);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [messageStatus, setMessageStatus] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const categories = ['all categories', 'category 1', 'category 2', 'category 3', 'category 4', 'category 5'];
+  const handleCategoryChange = (selectedCategory) => {
+    if (selectedCategory === blogData.blog_categories.data[0].attributes.name) {
+      setFilteredBlogPosts(blogPosts);
+    } else {
+      setFilteredBlogPosts(
+        blogPosts.filter((post) =>
+          post.attributes.categories.data.some((category) => category.attributes.name === selectedCategory)
+        )
+      );
+    }
+    setActiveCategory(selectedCategory);
+  };
 
   const handleSubscribe = async () => {
     try {
@@ -56,16 +71,16 @@ const BlogPosts = () => {
       });
       if (response.ok) {
         setMessageStatus('success');
-        setMessage('Thank you. You subscribed successfully!');
+        setMessage(blogData.SUCCESS);
       } else {
         setMessageStatus('error');
         const { message } = await response.json();
-        setMessage(message);
+        setMessage(blogData[message]);
         setSubscribed(false);
       }
     } catch (error) {
       setMessageStatus('error');
-      setMessage('An unknown error occurred.');
+      setMessage(blogData.UNKNOWN_ERROR);
       setSubscribed(false);
     }
   };
@@ -77,17 +92,14 @@ const BlogPosts = () => {
           <div className="grid grid-cols-12">
             <div className="col-span-12">
               <div className="flex flex-wrap lg:justify-around justify-center gap-8">
-                {categories.map((category, index) => (
-                  <div
+                {blogData.blog_categories.data.map((category, index) => (
+                  <CategoryTag
                     key={index}
-                    className={classNames(
-                      'text-deep-purple-100 cursor-pointer',
-                      activeCategoryIndex === index && 'border rounded-40 bg-deep-purple-10'
-                    )}
-                    onClick={() => setActiveCategoryIndex(index)}
-                  >
-                    <Tag text={category} />
-                  </div>
+                    isInteractive
+                    text={category.attributes.name}
+                    checked={category.attributes.name === activeCategory}
+                    handleClick={() => handleCategoryChange(category.attributes.name)}
+                  />
                 ))}
               </div>
             </div>
@@ -96,49 +108,31 @@ const BlogPosts = () => {
       </div>
       <div className="container mb-64">
         <div className="grid grid-cols-12 md:gap-64 gap-40">
-          <div className="md:col-span-8 col-span-6">
+          <div className="md:col-span-8 col-span-12 md:order-1 order-2">
             <div className="grid md:grid-cols-8 grid-cols-6 gap-x-32 gap-y-40">
-              <BlogPost
-                image="/product-main-info-img-2.png"
-                category="category 1"
-                title="Blog Post 1 blablabla"
-                author="AUTOR KEEGI"
-                date="2021-09-01"
-              />
-              <BlogPost
-                image="/product-main-info-img-2.png"
-                category="category 1"
-                title="Blog Post 2 blablabla"
-                author="AUTOR KEEGI"
-                date="2021-09-01"
-              />
-              <BlogPost
-                image="/product-main-info-img-2.png"
-                category="category 1"
-                title="Blog Post 3 blablabla"
-                author="AUTOR KEEGI"
-                date="2021-09-01"
-              />
-              <BlogPost
-                image="/product-main-info-img-2.png"
-                category="category 1"
-                title="Blog Post 4 blablabla"
-                author="AUTOR KEEGI"
-                date="2021-09-01"
-              />
-              <BlogPost
-                image="/product-main-info-img-2.png"
-                category="category 1"
-                title="Blog Post 5 blablabla"
-                author="AUTOR KEEGI"
-                date="2021-09-01"
-              />
+              {filteredBlogPosts.length === 0 ? (
+                <div className="col-span-12 flex justify-center items-center">
+                  <p className="text-2xl leading-2xl">No blog posts found in this category.</p>
+                </div>
+              ) : (
+                filteredBlogPosts.map((post, index) => (
+                  <BlogPost
+                    key={index}
+                    slug={post.attributes.slug}
+                    image={getImageFullUrl_client(post.attributes.image.data)}
+                    categories={post.attributes.categories.data}
+                    title={post.attributes.title}
+                    author={post.attributes.author}
+                    date={post.attributes.date}
+                  />
+                ))
+              )}
             </div>
           </div>
-          <div className="md:col-span-4 col-span-6">
-            <div className="flex flex-col gap-32 sticky top-[169px]">
+          <div className="md:col-span-4 col-span-12 md:order-2 order-1">
+            <div className="flex flex-col gap-32 md:sticky md:top-[169px] md:mb-0 mb-32">
               <div className="flex flex-col gap-8">
-                <p className="text-base leading-base font-bold mb-8">NEWSLETTER</p>
+                <p className="text-base leading-base font-bold mb-4">{blogData.newsletter_title}</p>
                 {messageStatus === 'success' ? (
                   <div className="bg-signal-green-20 flex justify-center items-center text-center gap-8 px-16 py-12">
                     <Image src="/icons/check.svg" alt="check" width={16} height={16} />
@@ -150,7 +144,7 @@ const BlogPosts = () => {
                       <TextInput
                         name="blog-email"
                         value={email}
-                        placeholder={'Enter your email'}
+                        placeholder={blogData.input_placeholder}
                         onChange={(e) => setEmail(e.target.value)}
                       />
                       {subscribed && message === '' ? (
@@ -164,7 +158,7 @@ const BlogPosts = () => {
                         </div>
                       ) : (
                         <Button
-                          CTA={'Subscribe'}
+                          CTA={blogData.input_button.href_text}
                           style="tertiary"
                           onClick={handleSubscribe}
                           disabled={subscribed}
@@ -181,16 +175,12 @@ const BlogPosts = () => {
                 )}
               </div>
               <div className="flex flex-col gap-8">
-                <p className="text-base leading-base font-bold mb-8">FOLLOW US</p>
-                <Link href="#" target="_blank">
-                  <Tag text="Instagram" svg="/logos/instagram-black.svg" />
-                </Link>
-                <Link href="#" target="_blank">
-                  <Tag text="Twitter" svg="/logos/x-black.svg" />
-                </Link>
-                <Link href="#" target="_blank">
-                  <Tag text="Facebook" svg="/logos/facebook-black.svg" />
-                </Link>
+                <p className="text-base leading-base font-bold mb-4">{blogData.follow_title}</p>
+                {blogData.socials_tags.data.map((social, index) => (
+                  <Link key={index} href="#" target="_blank">
+                    <Tag text={social.attributes.text} svg={getImageFullUrl_client(social.attributes.logo.data)} />
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

@@ -30,7 +30,7 @@ const Footer = ({ footerData, small = false }) => {
       });
       if (response.ok) {
         setMessageStatus('success');
-        setMessage(footerData.footer_top['SUCCESS']);
+        setMessage(footerData.footer_top.SUCCESS);
       } else {
         setMessageStatus('error');
         const { message } = await response.json();
@@ -39,7 +39,7 @@ const Footer = ({ footerData, small = false }) => {
       }
     } catch (error) {
       setMessageStatus('error');
-      setMessage(footerData.footer_top['UNKNOWN_ERROR']);
+      setMessage(footerData.footer_top.UNKNOWN_ERROR);
       setSubscribed(false);
     }
   };
