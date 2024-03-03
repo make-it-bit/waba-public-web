@@ -172,7 +172,7 @@ const Colors = ({ colorsData }) => {
                 activeColor === 'red' && styles.headRed,
                 activeColor === 'infrared' && styles.headInfrared,
                 activeColor === 'infrared'
-                  ? 'xl:top-[242px] lg:top-[307px] md:top-[423px]'
+                  ? 'xl:top-[242px] lg:top-[307px] md:top-[319px]'
                   : 'xl:top-[138px] lg:top-[203px] md:top-[319px]'
               )}
             />
@@ -184,7 +184,7 @@ const Colors = ({ colorsData }) => {
               className={classNames(
                 'md:block hidden absolute 2xl:top-[186px] z-10',
                 activeColor === 'infrared'
-                  ? 'xl:top-[290px] lg:top-[355px] md:top-[471px]'
+                  ? 'xl:top-[290px] lg:top-[355px] md:top-[367px]'
                   : 'xl:top-[186px] lg:top-[251px] md:top-[367px]'
               )}
             />
@@ -196,7 +196,7 @@ const Colors = ({ colorsData }) => {
               className={classNames(
                 'md:block hidden absolute 2xl:top-[196px]',
                 activeColor === 'infrared'
-                  ? 'xl:top-[300px] lg:top-[365px] md:top-[481px]'
+                  ? 'xl:top-[300px] lg:top-[365px] md:top-[377px]'
                   : 'xl:top-[196px] lg:top-[261px] md:top-[377px]'
               )}
             />
