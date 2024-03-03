@@ -262,6 +262,30 @@ export const getBlogPosts = async (): Promise<null | BlogPost[]> => {
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
-  responseData.sort((a, b) => a.id - b.id);
+  responseData.sort((a, b) => new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime());
+  return responseData;
+};
+
+type PolicyPage = {
+  id: number;
+  attributes: {
+    seo: SEO;
+    slug: string;
+    content: string;
+  };
+};
+
+export const getPolicyPages = async (): Promise<null | PolicyPage[]> => {
+  const query = qs.stringify({ populate: '*' });
+  const url = `${STRAPI_BASE_URL}/api/policy-pages?${query}`;
+  revalidateTag('policyPages');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['policyPages'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
   return responseData;
 };

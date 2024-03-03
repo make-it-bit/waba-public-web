@@ -1,0 +1,13 @@
+.styles {
+  h2 {
+    @apply text-center;
+  }
+  h2 + p {
+    @apply mb-40;
+    @apply text-center;
+  }
+  h4 {
+    @apply mt-16;
+    @apply mb-8;
+  }
+}
