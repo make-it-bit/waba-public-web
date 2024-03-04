@@ -25,7 +25,7 @@ const TextImage = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      const startAnimationOffset = 600;
+      const startAnimationOffset = 550;
 
       if (topHead.current) {
         const topHeadPosition = topHead.current.getBoundingClientRect();
