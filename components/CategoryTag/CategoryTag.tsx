@@ -16,9 +16,10 @@ const CategoryTag = ({ isInteractive = false, text, checked, handleClick }: Cate
       className={classNames(
         'flex justify-center items-center px-16 py-4',
         isInteractive
-          ? 'border-2 rounded-40 border-transparent hover:border-deep-purple-60 cursor-pointer'
-          : 'border-2 rounded-40 border-deep-purple-60',
-        checked && 'border-deep-purple-60'
+          ? checked
+            ? 'border-2 rounded-40 border-deep-purple-60 cursor-pointer'
+            : 'border-2 rounded-40 border-transparent hover:border-deep-purple-60 cursor-pointer'
+          : 'border rounded-40 border-black-100'
       )}
       onClick={handleClick}
     >

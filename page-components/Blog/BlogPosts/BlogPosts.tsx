@@ -28,7 +28,7 @@ const BlogPost = ({ image, slug, categories, title, author, date }) => {
         </div>
         <Link href={`/blog${slug}`}>
           <div className="flex flex-col">
-            <p className="text-2xl leading-2xl">{title}</p>
+            <p className="md:text-2xl md:leading-2xl text-xl leading-xl">{title}</p>
             <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>
           </div>
         </Link>
@@ -107,7 +107,7 @@ const BlogPosts = ({ blogData, blogPosts }) => {
         </div>
       </div>
       <div className="container mb-64">
-        <div className="grid grid-cols-12 md:gap-64 gap-40">
+        <div className="grid grid-cols-12 md:gap-64">
           <div className="md:col-span-8 col-span-12 md:order-1 order-2">
             <div className="grid md:grid-cols-8 grid-cols-6 gap-x-32 gap-y-40">
               {filteredBlogPosts.length === 0 ? (
@@ -130,7 +130,7 @@ const BlogPosts = ({ blogData, blogPosts }) => {
             </div>
           </div>
           <div className="md:col-span-4 col-span-12 md:order-2 order-1">
-            <div className="flex flex-col gap-32 md:sticky md:top-[169px] md:mb-0 mb-32">
+            <div className="flex flex-col gap-32 md:sticky md:top-[169px] md:mb-0 mb-64">
               <div className="flex flex-col gap-8">
                 <p className="text-base leading-base font-bold mb-4">{blogData.newsletter_title}</p>
                 {messageStatus === 'success' ? (

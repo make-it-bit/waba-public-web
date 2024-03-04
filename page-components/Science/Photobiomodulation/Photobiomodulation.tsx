@@ -23,7 +23,7 @@ const Photobiomodulation = ({ photobiomodulationData }) => {
               </p>
             </div>
           </div>
-          <div className="lg:col-start-6 lg:col-span-6 col-span-12 lg:order-2 order-1">
+          <div className="lg:col-start-7 lg:col-span-5 col-span-12 lg:order-2 order-1">
             <div className="flex justify-center items-center h-full">
               <Image
                 src={getImageFullUrl_server(photobiomodulationData.image.data[0])}
