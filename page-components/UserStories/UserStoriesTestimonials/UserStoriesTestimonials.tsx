@@ -3,13 +3,13 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
-
 import { TestimonialCard } from '@/components';
 
-import styles from './_resultsTestimonials.module.scss';
+import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
-const ResultsTestimonials = ({ testimonialsData }) => {
+import styles from './_userStoriesTestimonials.module.scss';
+
+const UserStoriesTestimonials = ({ testimonialsData }) => {
   const style = { '--len': `${testimonialsData.user_stories.data.length}` } as React.CSSProperties;
 
   return (
@@ -31,7 +31,7 @@ const ResultsTestimonials = ({ testimonialsData }) => {
             ].map((userStory, index) => (
               <TestimonialCard
                 key={index}
-                image={userStory.attributes.image.data ? getImageFullUrl_client(userStory.attributes.image.data) : null}
+                image={getImageFullUrl_client(userStory.attributes.image.data)}
                 name={userStory.attributes.name}
                 border
                 content={userStory.attributes.story}
@@ -45,4 +45,4 @@ const ResultsTestimonials = ({ testimonialsData }) => {
   );
 };
 
-export default ResultsTestimonials;
+export default UserStoriesTestimonials;

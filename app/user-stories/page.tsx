@@ -3,10 +3,10 @@ import React from 'react';
 import { getPageData, getComponentData } from '@/lib/strapi';
 
 import {
-  ResultsHero,
+  UserStoriesHero,
   Examples,
-  ResultsTestimonials,
-  ResultsWarranty,
+  UserStoriesTestimonials,
+  UserStoriesWarranty,
   LogoBar,
   CTABlock,
   PreFooterCard,
@@ -16,17 +16,17 @@ import {
 export const dynamic = 'force-static';
 
 export async function generateMetadata() {
-  const resultsPageData = await getPageData('result');
+  const userStoriesPageData = await getPageData('result');
   return {
-    title: resultsPageData.attributes.seo?.title ?? '',
-    description: resultsPageData.attributes.seo?.description ?? '',
+    title: userStoriesPageData.attributes.seo?.title ?? '',
+    description: userStoriesPageData.attributes.seo?.description ?? '',
     alternates: {
-      canonical: '/results',
+      canonical: '/user-stories',
     },
     openGraph: {
       images: [
-        `/api/og?title=${resultsPageData.attributes.seo?.title ?? ''}&desc=${
-          resultsPageData.attributes.seo?.description ?? ''
+        `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${
+          userStoriesPageData.attributes.seo?.description ?? ''
         }` || null,
       ],
     },
@@ -34,17 +34,18 @@ export async function generateMetadata() {
 }
 
 const UserStories = async () => {
-  const resultsPageData = await getPageData('result');
+  // user stories page api route is named 'result' in strapi
+  const userStoriesPageData = await getPageData('result');
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
   return (
     <>
-      <ResultsHero resultsHeroData={resultsPageData.attributes.hero} />
-      <Examples examplesData={resultsPageData.attributes.example} />
-      <ResultsTestimonials testimonialsData={resultsPageData.attributes.testimonial} />
-      <ResultsWarranty warrantyData={resultsPageData.attributes.warranty} />
+      <UserStoriesHero userStoriesHeroData={userStoriesPageData.attributes.hero} />
+      <Examples examplesData={userStoriesPageData.attributes.example} />
+      <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} />
+      <UserStoriesWarranty warrantyData={userStoriesPageData.attributes.warranty} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />

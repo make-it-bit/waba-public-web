@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import Features from './Features/Features';
-import Results from './Results/Results';
+import UserStories from './UserStories/UserStories';
 import Included from './Included/Included';
 import Science from './Science/Science';
 import Specifications from './Specifications/Specifications';
@@ -22,7 +22,7 @@ const ProductInfo = ({ productInfoData }) => {
   ];
   const navbarPages = [
     <Features key={0} featuresData={productInfoData.feature_cards} />,
-    <Results key={1} title={productInfoData.results_title} resultsData={productInfoData.stories} />,
+    <UserStories key={1} title={productInfoData.user_stories_title} userStoriesData={productInfoData.stories} />,
     <Included
       key={2}
       title={productInfoData.included_title}

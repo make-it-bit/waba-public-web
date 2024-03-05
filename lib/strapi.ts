@@ -115,7 +115,7 @@ const sciencePageNestedComponents = [
   'warranty.quote_text',
   'warranty.quote_image',
 ];
-const resultPageNestedComponents = [
+const userStoriesPageNestedComponents = [
   'seo',
   'hero.background_media',
   'example.examples.image',
@@ -158,7 +158,7 @@ const populatePage = {
   index: indexPageNestedComponents,
   product: productPageNestedComponents,
   'science-behind': sciencePageNestedComponents,
-  result: resultPageNestedComponents,
+  result: userStoriesPageNestedComponents,
   'about-us': aboutPageNestedComponents,
   faq: faqPageNestedComponents,
   'careers-at-waba': formPagesNestedComponents,
