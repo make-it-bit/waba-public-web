@@ -5,11 +5,12 @@ import classNames from 'classnames';
 
 import styles from './_scrollableNavbar.module.scss';
 
-const ScrollableNavbar = ({ pageIndex, navbarItems, handleClick, justify }) => {
+const ScrollableNavbar = ({ scrollableNavbarRef, pageIndex, navbarItems, handleClick, justify }) => {
   const scienceBehindIndex = navbarItems.indexOf('The Science Behind');
 
   return (
     <div
+      ref={scrollableNavbarRef}
       className={classNames(
         'flex items-center md:px-0 px-12 py-32 gap-48 overflow-x-auto whitespace-nowrap',
         justify,

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import { ScrollableNavbar } from '@/components';
@@ -15,6 +15,31 @@ const FAQ = ({ faqPageData }) => {
   }, {});
   const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
+
+  const scrollContainerRef = useRef(null);
+  const [gradientIsVisible, setGradientIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        if (scrollContainerRef.current.scrollLeft > 0) {
+          setGradientIsVisible(false);
+        } else {
+          setGradientIsVisible(true);
+        }
+      }
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -35,12 +60,15 @@ const FAQ = ({ faqPageData }) => {
             <div className="grid grid-cols-12">
               <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
                 <ScrollableNavbar
+                  scrollableNavbarRef={scrollContainerRef}
                   pageIndex={pageIndex}
                   navbarItems={navbarItems}
                   handleClick={setPageIndex}
                   justify="justify-between"
                 />
-                <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>
+                {gradientIsVisible && (
+                  <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>
+                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import Features from './Features/Features';
@@ -39,9 +39,31 @@ const ProductInfo = ({ productInfoData }) => {
   ];
   const [pageIndex, setPageIndex] = useState(0);
 
-  const handleClick = (index) => {
-    setPageIndex(index);
-  };
+  const gradients = [styles.gradient0, styles.gradient1, styles.gradient2, styles.gradient3, styles.gradient4];
+  const scrollContainerRef = useRef(null);
+  const [gradientIsVisible, setGradientIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        if (scrollContainerRef.current.scrollLeft > 0) {
+          setGradientIsVisible(false);
+        } else {
+          setGradientIsVisible(true);
+        }
+      }
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <div className={classNames('relative', backgrounds[pageIndex])}>
@@ -49,12 +71,20 @@ const ProductInfo = ({ productInfoData }) => {
         <div className="grid grid-cols-12">
           <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
             <ScrollableNavbar
+              scrollableNavbarRef={scrollContainerRef}
               pageIndex={pageIndex}
               navbarItems={navbarItems}
               handleClick={setPageIndex}
               justify="justify-between"
             />
-            {/*  <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div> */}
+            {gradientIsVisible && (
+              <div
+                className={classNames(
+                  'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[28px] w-40',
+                  gradients[pageIndex]
+                )}
+              ></div>
+            )}
           </div>
         </div>
         {navbarPages[pageIndex]}
