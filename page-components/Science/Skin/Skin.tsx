@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { ScrollableNavbar } from '@/components';
+
+import styles from './_skin.module.scss';
 
 const Skin = ({ skinData }) => {
   const categorizedElements = skinData.reduce((acc, element) => {
@@ -16,18 +19,47 @@ const Skin = ({ skinData }) => {
   const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const handleClick = (pageIndex) => {
-    setPageIndex(pageIndex);
-  };
+  const scrollContainerRef = useRef<any>(null);
+  const [gradientIsVisible, setGradientIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        if (scrollContainerRef.current.scrollLeft > 0) {
+          setGradientIsVisible(false);
+        } else {
+          setGradientIsVisible(true);
+        }
+      }
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <div className="container">
-      <ScrollableNavbar
-        pageIndex={pageIndex}
-        navbarItems={navbarItems}
-        handleClick={handleClick}
-        justify="md:justify-evenly justify-between"
-      />
+      <div className="relative">
+        <ScrollableNavbar
+          scrollableNavbarRef={scrollContainerRef}
+          pageIndex={pageIndex}
+          navbarItems={navbarItems}
+          handleClick={setPageIndex}
+          justify="md:justify-evenly justify-between"
+        />
+        {gradientIsVisible && (
+          <div
+            className={classNames('absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[28px] w-40', styles.gradient)}
+          ></div>
+        )}
+      </div>
       {categorizedElements[navbarItems[pageIndex]].map((element, index) => (
         <div key={index} className="grid grid-cols-12 items-center md:mt-80 mt-8 md:mb-176 mb-80">
           <div className="xl:col-start-3 xl:col-span-4 lg:col-start-2 lg:col-span-5 md:col-span-6 col-span-12 md:order-1 order-2">

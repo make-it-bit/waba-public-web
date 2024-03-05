@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import { ScrollableNavbar } from '@/components';
@@ -16,9 +16,30 @@ const ProductFAQ = ({ productFaqData }) => {
   const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const handleClick = (pageIndex) => {
-    setPageIndex(pageIndex);
-  };
+  const scrollContainerRef = useRef<any>(null);
+  const [gradientIsVisible, setGradientIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        if (scrollContainerRef.current.scrollLeft > 0) {
+          setGradientIsVisible(false);
+        } else {
+          setGradientIsVisible(true);
+        }
+      }
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <div className={classNames('relative', styles.background)}>
@@ -28,12 +49,23 @@ const ProductFAQ = ({ productFaqData }) => {
             <h1 className="font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl text-center">
               {productFaqData.title}
             </h1>
-            <ScrollableNavbar
-              pageIndex={pageIndex}
-              navbarItems={navbarItems}
-              handleClick={handleClick}
-              justify="justify-between"
-            />
+            <div className="relative">
+              <ScrollableNavbar
+                scrollableNavbarRef={scrollContainerRef}
+                pageIndex={pageIndex}
+                navbarItems={navbarItems}
+                handleClick={setPageIndex}
+                justify="justify-between"
+              />
+              {gradientIsVisible && (
+                <div
+                  className={classNames(
+                    'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[28px] w-40',
+                    styles.gradient
+                  )}
+                ></div>
+              )}
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-12 md:mt-64 mt-8 md:pb-160 pb-64">

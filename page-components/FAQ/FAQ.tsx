@@ -67,7 +67,12 @@ const FAQ = ({ faqPageData }) => {
                   justify="justify-between"
                 />
                 {gradientIsVisible && (
-                  <div className={classNames('absolute top-0 right-[-1px] h-full w-40', styles.gradient)}></div>
+                  <div
+                    className={classNames(
+                      'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[28px] w-40',
+                      styles.gradient
+                    )}
+                  ></div>
                 )}
               </div>
             </div>
