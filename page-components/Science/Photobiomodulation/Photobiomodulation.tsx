@@ -30,15 +30,15 @@ const Photobiomodulation = ({ photobiomodulationData }) => {
                 alt="photobiomodulation graph"
                 width={635}
                 height={396}
-                className="lg:block hidden"
+                //className="lg:block hidden"
               />
-              <Image
+              {/* <Image
                 src={getImageFullUrl_server(photobiomodulationData.image.data[1])}
                 alt="photobiomodulation graph"
                 width={635}
                 height={396}
                 className="lg:hidden block"
-              />
+              /> */}
             </div>
           </div>
         </div>
