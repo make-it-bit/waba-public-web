@@ -3,9 +3,9 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { TestimonialCard } from '@/components';
-
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
+
+import { TestimonialCard } from '@/components';
 
 import styles from './_resultsTestimonials.module.scss';
 
@@ -31,7 +31,7 @@ const ResultsTestimonials = ({ testimonialsData }) => {
             ].map((userStory, index) => (
               <TestimonialCard
                 key={index}
-                image={getImageFullUrl_client(userStory.attributes.image.data)}
+                image={userStory.attributes.image.data ? getImageFullUrl_client(userStory.attributes.image.data) : null}
                 name={userStory.attributes.name}
                 border
                 content={userStory.attributes.story}

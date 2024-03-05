@@ -17,10 +17,6 @@ const Footer = ({ footerData, small = false }) => {
   const [messageStatus, setMessageStatus] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
-
   const handleSubscribe = async () => {
     try {
       setMessage('');
@@ -34,7 +30,7 @@ const Footer = ({ footerData, small = false }) => {
       });
       if (response.ok) {
         setMessageStatus('success');
-        setMessage(footerData.footer_top['SUCCESS']);
+        setMessage(footerData.footer_top.SUCCESS);
       } else {
         setMessageStatus('error');
         const { message } = await response.json();
@@ -43,7 +39,7 @@ const Footer = ({ footerData, small = false }) => {
       }
     } catch (error) {
       setMessageStatus('error');
-      setMessage(footerData.footer_top['UNKNOWN_ERROR']);
+      setMessage(footerData.footer_top.UNKNOWN_ERROR);
       setSubscribed(false);
     }
   };
@@ -77,7 +73,7 @@ const Footer = ({ footerData, small = false }) => {
                       name="footer-email"
                       value={email}
                       placeholder={footerData.footer_top.input_placeholder}
-                      onChange={handleChange}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     {subscribed && message === '' ? (
                       <div className="bg-deep-purple-20 flex justify-center items-center px-24 py-8">
@@ -132,18 +128,15 @@ const Footer = ({ footerData, small = false }) => {
                   ))}
                 </div>
                 <div className="flex flex-wrap sm:justify-normal justify-center xl:gap-40 lg:gap-40 md:gap-16 gap-40 gap-y-8">
-                  <Link href={footerData.terms.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.terms.href_text}
-                  </Link>
-                  <Link href={footerData.returns.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.returns.href_text}
-                  </Link>
-                  <Link href={footerData.shipping_policy.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.shipping_policy.href_text}
-                  </Link>
-                  <Link href={footerData.privacy_policy.href_src} className="text-xs leading-xs text-white-100">
-                    {footerData.privacy_policy.href_text}
-                  </Link>
+                  {footerData.terms_policies_links.data.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.attributes.page_link_data.href_src}
+                      className="text-xs leading-xs text-white-100"
+                    >
+                      {link.attributes.page_link_data.href_text}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>

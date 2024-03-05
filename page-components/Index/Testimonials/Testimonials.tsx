@@ -21,7 +21,7 @@ const Testimonials = ({ testimonialsData }) => {
           {testimonialsData.user_stories.data.map((userStory, index) => (
             <TestimonialCard
               key={index}
-              image={getImageFullUrl_client(userStory.attributes.image.data)}
+              image={userStory.attributes.image.data ? getImageFullUrl_client(userStory.attributes.image.data) : null}
               name={userStory.attributes.name}
               content={userStory.attributes.story}
               buttonCTA={userStory.attributes.button.href_text}

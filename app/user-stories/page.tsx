@@ -33,7 +33,7 @@ export async function generateMetadata() {
   };
 }
 
-const Results = async () => {
+const UserStories = async () => {
   const resultsPageData = await getPageData('result');
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
@@ -53,4 +53,4 @@ const Results = async () => {
   );
 };
 
-export default Results;
+export default UserStories;
