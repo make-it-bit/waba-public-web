@@ -40,7 +40,7 @@ const ProductInfo = ({ productInfoData }) => {
   const [pageIndex, setPageIndex] = useState(0);
 
   const gradients = [styles.gradient0, styles.gradient1, styles.gradient2, styles.gradient3, styles.gradient4];
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<any>(null);
   const [gradientIsVisible, setGradientIsVisible] = useState(true);
 
   useEffect(() => {

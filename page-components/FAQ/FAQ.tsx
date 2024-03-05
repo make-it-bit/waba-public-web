@@ -16,7 +16,7 @@ const FAQ = ({ faqPageData }) => {
   const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<any>(null);
   const [gradientIsVisible, setGradientIsVisible] = useState(true);
 
   useEffect(() => {
