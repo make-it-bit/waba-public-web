@@ -14,11 +14,11 @@ const Video = ({ videoData }) => {
 
   const frameCount =
     currentCanvasWidth &&
-    (currentCanvasWidth >= 992 ? videoData.desktop_images.data.length : videoData.mobile_images.data.length);
+    (currentCanvasWidth >= 736 ? videoData.desktop_images.data.length : videoData.mobile_images.data.length);
 
   const currentFrame = (index) => {
     if (currentCanvasWidth) {
-      if (currentCanvasWidth >= 992) {
+      if (currentCanvasWidth >= 736) {
         const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
         return frame;
       }
@@ -36,8 +36,8 @@ const Video = ({ videoData }) => {
     if (window.innerWidth > 1279) return 1248;
     if (window.innerWidth > 1023) return 992;
     if (window.innerWidth > 767) return 736;
-    if (window.innerWidth > 511) return 480;
-    if (window.innerWidth > 255) return 224;
+    if (window.innerWidth > 511) return 640;
+    if (window.innerWidth > 255) return 480;
     return null;
   };
 
@@ -46,9 +46,9 @@ const Video = ({ videoData }) => {
       1504: 844,
       1248: 700,
       992: 556,
-      736: 1150,
-      480: 750,
-      224: 350,
+      736: 412,
+      640: 1140,
+      480: 856,
     }[width];
   };
 
@@ -124,9 +124,9 @@ const Video = ({ videoData }) => {
   return (
     <div ref={containerRef} className="container">
       <div className="relative flex flex-col h-[600vh]">
-        <div className="absolute top-96 z-10 w-full">
+        <div className="absolute md:top-96 top-48 z-10 w-full">
           <div className="grid grid-cols-12">
-            <div className="lg:col-start-5 lg:col-span-4 col-start-2 col-span-10 text-center">
+            <div className="col-span-12 text-center">
               <h1 className="font-rufina sm:text-4xl sm:leading-4xl text-3xl leading-3xl">{videoData.title}</h1>
             </div>
           </div>
@@ -134,8 +134,11 @@ const Video = ({ videoData }) => {
         <canvas
           className={classNames(
             'sticky top-[137px]',
-            currentCanvasWidth === 992 && 'mt-88',
-            currentCanvasWidth && currentCanvasWidth <= 736 && 'mt-256'
+            currentCanvasWidth === 1248 && 'mt-0',
+            currentCanvasWidth === 992 && 'mt-32',
+            currentCanvasWidth === 736 && 'mt-80',
+            currentCanvasWidth === 640 && 'mt-120',
+            currentCanvasWidth === 480 && 'mt-120'
           )}
           ref={canvasRef}
         />

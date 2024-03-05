@@ -84,7 +84,7 @@ const Colors = ({ colorsData }) => {
   return (
     <div className="container md:pb-216 pb-72 overflow-hidden">
       <div className="grid grid-cols-12">
-        <div className="md:col-start-5 col-start-2 md:col-span-4 col-span-10 text-center md:mt-160 mt-72 md:mb-144 mb-88">
+        <div className="lg:col-start-5 md:col-start-3 col-start-2 lg:col-span-4 md:col-span-8 col-span-10 text-center md:mt-160 mt-72 md:mb-144 mb-88">
           <h1 className="font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl">{colorsData.title}</h1>
         </div>
       </div>
@@ -167,13 +167,7 @@ const Colors = ({ colorsData }) => {
               width={108}
               height={78}
               className={classNames(
-                'absolute 2xl:top-[138px] top-[138px] 2xl:left-[196px] xl:left-[153.5px] lg:left-[111px] md:left-[68px]',
-                activeColor === 'blue' && styles.headBlue,
-                activeColor === 'red' && styles.headRed,
-                activeColor === 'infrared' && styles.headInfrared,
-                activeColor === 'infrared'
-                  ? 'xl:top-[242px] lg:top-[307px] md:top-[319px]'
-                  : 'xl:top-[138px] lg:top-[203px] md:top-[319px]'
+                'md:block hidden absolute 2xl:top-[138px] xl:top-[242px] lg:top-[307px] md:top-[319px] 2xl:left-[196px] xl:left-[153.5px] lg:left-[111px] md:left-[68px]'
               )}
             />
             <Image
@@ -182,10 +176,7 @@ const Colors = ({ colorsData }) => {
               width={109}
               height={10}
               className={classNames(
-                'md:block hidden absolute 2xl:top-[186px] z-10',
-                activeColor === 'infrared'
-                  ? 'xl:top-[290px] lg:top-[355px] md:top-[367px]'
-                  : 'xl:top-[186px] lg:top-[251px] md:top-[367px]'
+                'md:block hidden absolute 2xl:top-[186px] xl:top-[290px] lg:top-[355px] md:top-[367px] z-10'
               )}
             />
             <Image
@@ -194,10 +185,7 @@ const Colors = ({ colorsData }) => {
               width={90}
               height={407.24}
               className={classNames(
-                'md:block hidden absolute 2xl:top-[196px]',
-                activeColor === 'infrared'
-                  ? 'xl:top-[300px] lg:top-[365px] md:top-[377px]'
-                  : 'xl:top-[196px] lg:top-[261px] md:top-[377px]'
+                'md:block hidden absolute 2xl:top-[196px] xl:top-[300px] lg:top-[365px] md:top-[377px]'
               )}
             />
           </div>
@@ -213,8 +201,15 @@ const Colors = ({ colorsData }) => {
             {'>'}
           </div>
         </div>
-        <div className="col-span-4 flex flex-col justify-between">
-          <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-64 mb-56">
+        <div className="relative col-span-4 flex flex-col justify-between">
+          <Image
+            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
+            alt="device head"
+            width={108}
+            height={78}
+            className={classNames('md:hidden block absolute left-1/2 translate-x-neg-1/2')}
+          />
+          <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-128 mb-56">
             {colorsData[`device_head_${activeColor}`].long_description}
           </p>
           <div className="flex flex-col md:items-start items-center gap-24">
