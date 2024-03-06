@@ -141,6 +141,7 @@ const Video = ({ videoData }) => {
         <canvas
           className={classNames(
             'sticky top-[137px]',
+            'border-2 border-signal-red-100',
             currentCanvasWidth === 1248 && 'mt-0',
             currentCanvasWidth === 992 && 'mt-32',
             currentCanvasWidth === 736 && 'mt-80',

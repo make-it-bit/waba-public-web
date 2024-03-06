@@ -22,9 +22,9 @@ const FoundationCard = ({
     <div
       className={classNames(
         'relative flex flex-col items-center text-center gap-24 h-full',
-        leftBorder && 'md:border-l md:border-black-100',
-        rightBorder && 'md:border-r md:border-black-100',
-        bottomBorder && 'md:border-b-0 border-b border-black-100',
+        leftBorder && 'lg:border-l lg:border-black-100',
+        rightBorder && 'lg:border-r lg:border-black-100',
+        bottomBorder && 'lg:border-b-0 border-b border-black-100',
         paddingMargin,
         transition && 'hover:text-white-100',
         transition && styles.foundationCard
