@@ -1,6 +1,7 @@
 import React from 'react';
 import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { AxiomWebVitals } from 'next-axiom';
 import { DM_Sans } from 'next/font/google';
 import classNames from 'classnames';
 
@@ -45,6 +46,7 @@ export default async function RootLayout({ children }) {
             });
           `}
         </Script>
+        <AxiomWebVitals />
         <div className="sticky top-0 z-[500]">
           <PromoBar promobarData={promobarData.attributes} />
           <Navbar navbarData={navbarData.attributes} />

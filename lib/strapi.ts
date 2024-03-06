@@ -1,6 +1,7 @@
 import { revalidateTag } from 'next/cache';
 import qs from 'qs';
 import { redirect } from 'next/navigation';
+import { Logger } from 'next-axiom';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
 
@@ -8,6 +9,8 @@ const headers = {
   Accept: '*/*',
   Authorization: 'Bearer ' + STRAPI_API_TOKEN,
 };
+
+const log = new Logger();
 
 const navbarNestedComponents = [
   'waba_logos',
@@ -52,6 +55,10 @@ export const getComponentData = async (component: Component) => {
   });
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
+
+  log.info('Successfully fetched component data.', { data: data });
+  await log.flush();
+
   return data;
 };
 
