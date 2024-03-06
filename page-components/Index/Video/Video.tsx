@@ -83,9 +83,16 @@ const Video = ({ videoData }) => {
       if (canvas === null) return;
       const context = canvas.getContext('2d');
       if (context === null) return;
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = 'high';
       const img = new Image();
       img.src = currentFrame(index);
-      img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height; // <-- these two are important for preserving the aspct ratio
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      //img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
