@@ -5,10 +5,13 @@ import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
+import styles from './_video.module.scss';
+
 const Video = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [sticky, setSticky] = useState(false);
 
   if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
 
@@ -128,6 +131,38 @@ const Video = ({ videoData }) => {
     };
   }, [currentCanvasWidth, frameCount]);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+
+    const handleScroll = () => {
+      if (canvas && container) {
+        const scrollTop = window.scrollY;
+        const containerTop = container?.offsetTop;
+        const containerHeight = container?.offsetHeight;
+        const canvasHeight = canvas?.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const offset = 137;
+
+        if (containerTop && containerHeight && canvasHeight) {
+          // check if the canvas is in the viewport
+          if (scrollTop > containerTop - offset && scrollTop < containerTop + containerHeight - canvasHeight + offset) {
+            let newPosition = offset + (scrollTop - containerTop + offset);
+            // limit until the middle of the screen
+            newPosition = Math.min(newPosition, windowHeight / 2 - canvasHeight / 2);
+            canvas.style.top = `${newPosition}px`;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div ref={containerRef} className="container">
       <div className="relative flex flex-col md:h-[600vh] h-[700vh]">
@@ -140,8 +175,7 @@ const Video = ({ videoData }) => {
         </div>
         <canvas
           className={classNames(
-            'sticky top-[137px]',
-            'border-2 border-signal-red-100',
+            'border-2 border-signal-red-100 sticky',
             currentCanvasWidth === 1248 && 'mt-0',
             currentCanvasWidth === 992 && 'mt-32',
             currentCanvasWidth === 736 && 'mt-80',

@@ -56,7 +56,7 @@ export const getComponentData = async (component: Component) => {
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
 
-  log.info('Successfully fetched component data.', { data: data });
+  log.info('Successfully fetched component data.', { component: component });
   await log.flush();
 
   return data;
