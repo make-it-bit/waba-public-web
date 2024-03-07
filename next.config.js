@@ -12,11 +12,6 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'waba-strapi.fly.dev',
-        pathname: '**',
-      },
-      {
-        protocol: 'https',
         hostname: 'wabaskin.eu',
         pathname: '**',
       },
