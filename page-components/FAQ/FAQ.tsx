@@ -17,15 +17,41 @@ const FAQ = ({ faqPageData }) => {
   const [pageIndex, setPageIndex] = useState(0);
 
   const scrollContainerRef = useRef<any>(null);
-  const [gradientIsVisible, setGradientIsVisible] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [gradientLeftIsVisible, setGradientLeftIsVisible] = useState(false);
+  const [gradientRightIsVisible, setGradientRightIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setGradientRightIsVisible(scrollContainerRef.current.scrollWidth > scrollContainerRef.current.clientWidth);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [windowWidth]);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (scrollContainerRef.current.scrollLeft === 0) {
+        setGradientLeftIsVisible(false);
+      } else {
+        setGradientLeftIsVisible(true);
+      }
+
       if (scrollContainerRef.current) {
-        if (scrollContainerRef.current.scrollLeft > 0) {
-          setGradientIsVisible(false);
+        if (
+          scrollContainerRef.current.scrollLeft > 0 &&
+          scrollContainerRef.current.scrollWidth <=
+            scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
+        ) {
+          setGradientRightIsVisible(false);
         } else {
-          setGradientIsVisible(true);
+          setGradientRightIsVisible(true);
         }
       }
     };
@@ -33,7 +59,6 @@ const FAQ = ({ faqPageData }) => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.addEventListener('scroll', handleScroll, { passive: true });
     }
-
     return () => {
       if (scrollContainerRef.current) {
         scrollContainerRef.current.removeEventListener('scroll', handleScroll);
@@ -59,6 +84,14 @@ const FAQ = ({ faqPageData }) => {
           <div className="container md:px-12 px-0">
             <div className="grid grid-cols-12">
               <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
+                {gradientLeftIsVisible && (
+                  <div
+                    className={classNames(
+                      'absolute top-1/2 translate-y-neg-1/2 left-0] h-[28px] w-40',
+                      styles.gradientLeft
+                    )}
+                  ></div>
+                )}
                 <ScrollableNavbar
                   scrollableNavbarRef={scrollContainerRef}
                   pageIndex={pageIndex}
@@ -66,11 +99,11 @@ const FAQ = ({ faqPageData }) => {
                   handleClick={setPageIndex}
                   justify="justify-between"
                 />
-                {gradientIsVisible && (
+                {gradientRightIsVisible && (
                   <div
                     className={classNames(
                       'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[28px] w-40',
-                      styles.gradient
+                      styles.gradientRight
                     )}
                   ></div>
                 )}

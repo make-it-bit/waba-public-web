@@ -18,15 +18,14 @@ const FoundationCard = ({
   breakpoint,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  console.log('breakpoint: ', breakpoint);
 
   return (
     <div
       className={classNames(
         'relative flex flex-col items-center text-center gap-24 h-full',
-        leftBorder && `${breakpoint}:border-l ${breakpoint}:border-black-100`,
-        rightBorder && `${breakpoint}:border-r ${breakpoint}:border-black-100`,
-        bottomBorder && `${breakpoint}:border-b-0 border-b border-black-100`,
+        leftBorder && (breakpoint === 'md' ? styles.borderMdLeft : styles.borderLgLeft),
+        rightBorder && (breakpoint === 'md' ? styles.borderMdRight : styles.borderLgRight),
+        bottomBorder && (breakpoint === 'md' ? styles.borderMdBottom : styles.borderLgBottom),
         paddingMargin,
         transition && 'hover:text-white-100',
         transition && styles.foundationCard

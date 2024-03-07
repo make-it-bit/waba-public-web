@@ -1,3 +1,7 @@
-.gradient {
+.gradientLeft {
+  background: linear-gradient(270deg, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%);
+}
+
+.gradientRight {
   background: linear-gradient(90deg, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%);
 }

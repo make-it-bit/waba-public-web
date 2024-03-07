@@ -104,7 +104,8 @@ const Colors = ({ colorsData }) => {
               onClick={() => {
                 setActiveColor(deviceHead.title.split(' ')[0].toLowerCase());
                 setActiveId(deviceHead.id);
-                setProgressBarHeight(0);
+                if (window.innerWidth >= 768) setProgressBarHeight(0);
+                else setProgressBarWidth(0);
               }}
               onMouseEnter={() => setIsIntervalRunning(false)}
               onMouseLeave={() => setIsIntervalRunning(true)}
@@ -142,10 +143,10 @@ const Colors = ({ colorsData }) => {
           <div
             className="md:hidden flex items-center p-16 cursor-pointer"
             onClick={() => {
+              setProgressBarWidth(0);
               const previousId = activeId === 1 ? 3 : activeId - 1;
               setActiveColor(deviceHeads[previousId === -1 ? 2 : previousId - 1].title.split(' ')[0].toLowerCase());
               setActiveId(previousId);
-              setProgressBarWidth(0);
             }}
           >
             {'<'}
@@ -192,10 +193,10 @@ const Colors = ({ colorsData }) => {
           <div
             className="md:hidden flex items-center p-16 cursor-pointer"
             onClick={() => {
+              setProgressBarWidth(0);
               const nextId = activeId === 3 ? 1 : activeId + 1;
               setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
               setActiveId(nextId);
-              setProgressBarWidth(0);
             }}
           >
             {'>'}

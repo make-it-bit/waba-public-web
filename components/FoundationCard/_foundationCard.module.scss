@@ -1,3 +1,41 @@
+.borderMdLeft {
+  @media (min-width: 768px) {
+    @apply border-l border-black-100;
+  }
+}
+
+.borderMdRight {
+  @media (min-width: 768px) {
+    @apply border-r border-black-100;
+  }
+}
+
+.borderMdBottom {
+  @media (min-width: 768px) {
+    @apply border-b-0;
+  }
+  @apply border-b border-black-100;
+}
+
+.borderLgLeft {
+  @media (min-width: 1024px) {
+    @apply border-l border-black-100;
+  }
+}
+
+.borderLgRight {
+  @media (min-width: 1024px) {
+    @apply border-r border-black-100;
+  }
+}
+
+.borderLgBottom {
+  @media (min-width: 1024px) {
+    @apply border-b-0;
+  }
+  @apply border-b border-black-100;
+}
+
 .image {
   opacity: 0;
 
