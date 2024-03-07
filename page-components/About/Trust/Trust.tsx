@@ -21,7 +21,12 @@ const Trust = ({ trustData }) => {
           </div>
           <div className="grid grid-cols-12 lg:mb-80 mb-32">
             <div className="col-start-1 lg:col-span-3 col-span-12">
-              <FoundationCard foundationCardData={trustData.reason_1} bottomBorder paddingMargin="px-48 pt-56 pb-40" />
+              <FoundationCard
+                foundationCardData={trustData.reason_1}
+                bottomBorder
+                paddingMargin="px-48 pt-56 pb-40"
+                breakpoint="lg"
+              />
             </div>
             <div className="lg:col-start-4 col-start-1 lg:col-span-3 col-span-12">
               <FoundationCard
@@ -30,6 +35,7 @@ const Trust = ({ trustData }) => {
                 rightBorder
                 bottomBorder
                 paddingMargin="px-48 pt-56 pb-40"
+                breakpoint="lg"
               />
             </div>
             <div className="lg:col-start-7 col-start-1 lg:col-span-3 col-span-12">
@@ -38,10 +44,15 @@ const Trust = ({ trustData }) => {
                 rightBorder
                 bottomBorder
                 paddingMargin="px-48 pt-56 pb-40"
+                breakpoint="lg"
               />
             </div>
             <div className="lg:col-start-10 col-start-1 lg:col-span-3 col-span-12">
-              <FoundationCard foundationCardData={trustData.reason_4} paddingMargin="px-48 pt-56 pb-40" />
+              <FoundationCard
+                foundationCardData={trustData.reason_4}
+                paddingMargin="px-48 pt-56 pb-40"
+                breakpoint="lg"
+              />
             </div>
           </div>
         </div>

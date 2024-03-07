@@ -142,14 +142,14 @@ const Video = ({ videoData }) => {
         const containerHeight = container?.offsetHeight;
         const canvasHeight = canvas?.offsetHeight;
         const windowHeight = window.innerHeight;
-        const offset = 137;
+        const offset = window.innerWidth > 1023 ? 137 : 98;
 
         if (containerTop && containerHeight && canvasHeight) {
           // check if the canvas is in the viewport
           if (scrollTop > containerTop - offset && scrollTop < containerTop + containerHeight - canvasHeight + offset) {
             let newPosition = offset + (scrollTop - containerTop + offset);
             // limit until the middle of the screen
-            newPosition = Math.min(newPosition, windowHeight / 2 - canvasHeight / 2);
+            newPosition = Math.min(newPosition, windowHeight / 2 - canvasHeight / 2 + offset / 2);
             canvas.style.top = `${newPosition}px`;
           }
         }

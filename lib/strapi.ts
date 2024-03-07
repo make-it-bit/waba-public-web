@@ -204,6 +204,10 @@ export const getPageData = async (page: Pages) => {
     redirect('/404');
   }
   const { data } = await response.json();
+
+  log.info('Successfully fetched page data.', { page: page });
+  await log.flush();
+
   return data;
 };
 
@@ -225,6 +229,10 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched FAQ elements.', { elements: responseData });
+  await log.flush();
+
   return responseData;
 };
 
@@ -270,6 +278,10 @@ export const getBlogPosts = async (): Promise<null | BlogPost[]> => {
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
   responseData.sort((a, b) => new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime());
+
+  log.info('Successfully fetched blog posts.', { posts: responseData });
+  await log.flush();
+
   return responseData;
 };
 
@@ -294,5 +306,9 @@ export const getPolicyPages = async (): Promise<null | PolicyPage[]> => {
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched policy pages.', { pages: 'policy-pages' });
+  await log.flush();
+
   return responseData;
 };
