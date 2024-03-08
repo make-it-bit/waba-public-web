@@ -233,8 +233,8 @@ const Colors = ({ colorsData }) => {
         </div>
         <div className="relative col-span-4 flex flex-col justify-between">
           <Image
-            //src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
-            src={`/try/head-${activeColor}-new.svg`}
+            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
+            //src={`/try/head-${activeColor}-new.svg`}
             alt="device head"
             width={108}
             height={78}
