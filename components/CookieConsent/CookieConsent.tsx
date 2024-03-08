@@ -6,22 +6,22 @@ import rehypeRaw from 'rehype-raw';
 
 import { Button } from '@/gui-components/client';
 
-declare const window: any;
-
 const CookieConsent = ({ cookiesConsentData }) => {
   const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
+    //if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
     if (status === 'granted') {
-      //window.gtag('consent', 'update', { analytics_storage: 'granted' });
-      localStorage.setItem('gtaConsent', 'granted');
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+      //localStorage.setItem('gtaConsent', 'granted');
     } else {
-      localStorage.setItem('gtaConsent', 'denied');
+      //localStorage.setItem('gtaConsent', 'denied');
     }
     setDisplayCookieConsent(false);
   };
