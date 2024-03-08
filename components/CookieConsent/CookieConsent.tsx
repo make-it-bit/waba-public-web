@@ -4,7 +4,7 @@ import React /* , { useEffect, useState } */ from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
-import { Button } from '@/gui-components/client';
+import { Button } from '@/gui-components/server';
 
 const CookieConsent = ({ cookiesConsentData }) => {
   /* const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
@@ -38,18 +38,16 @@ const CookieConsent = ({ cookiesConsentData }) => {
               <Button
                 CTA={cookiesConsentData.accept_all_button_text}
                 style="tertiary"
-                onClick={() => {
-                  console.log('Accept all cookies');
-                  //setCookieConsent('granted');
-                }}
+                /* onClick={() => {
+                  setCookieConsent('granted');
+                }} */
               />
               <Button
                 CTA={cookiesConsentData.accept_necessary_button_text}
                 style="quaternary"
-                onClick={() => {
-                  console.log('Accept necessary cookies');
-                  //setCookieConsent('denied');
-                }}
+                /* onClick={() => {
+                  setCookieConsent('denied');
+                }} */
               />
               <Button
                 CTA={
@@ -59,10 +57,9 @@ const CookieConsent = ({ cookiesConsentData }) => {
                       : cookiesConsentData.read_more_button_text */
                 }
                 style="quaternary"
-                onClick={() => {
-                  console.log('Read more');
-                  //setDisplayReadMore(!displayReadMore);
-                }}
+                /* onClick={() => {
+                  setDisplayReadMore(!displayReadMore);
+                }} */
               />
             </div>
           </div>
