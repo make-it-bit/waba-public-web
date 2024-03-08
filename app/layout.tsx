@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
 
-//import { CookieConsent } from '@/components';
+import { CookieConsent } from '@/components';
 import { PromoBar, Navbar } from '@/page-components';
 
 import './_globals.scss';
@@ -31,7 +31,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const promobarData = await getComponentData('promobar');
   const navbarData = await getComponentData('navbar');
-  //const cookieConsentData = await getComponentData('cookie-consent');
+  const cookieConsentData = await getComponentData('cookie-consent');
 
   return (
     <html lang="en">
@@ -64,7 +64,7 @@ export default async function RootLayout({ children }) {
           <Navbar navbarData={navbarData.attributes} />
         </div>
         {children}
-        {/* <CookieConsent cookiesConsentData={cookieConsentData.attributes} /> */}
+        <CookieConsent cookiesConsentData={cookieConsentData.attributes} />
       </body>
     </html>
   );
