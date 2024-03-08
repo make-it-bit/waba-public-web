@@ -39,8 +39,8 @@ const NavbarMobile = ({ navbarData }) => {
               key={index}
               href={link.attributes.page_link_data.href_src}
               className={classNames(
-                'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-0',
-                pathname === link.attributes.page_link_data.href_src && 'border-b border-black-100 mb-0'
+                'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-[-1px]',
+                pathname === link.attributes.page_link_data.href_src && 'border-b border-white-100 mb-[-1px]'
               )}
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -52,8 +52,8 @@ const NavbarMobile = ({ navbarData }) => {
               key={index}
               href={link.attributes.page_link_data.href_src}
               className={classNames(
-                'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-0',
-                pathname === link.attributes.page_link_data.href_src && 'border-b border-black-100 mb-0'
+                'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-[-1px]',
+                pathname === link.attributes.page_link_data.href_src && 'border-b border-white-100 mb-[-1px]'
               )}
               onClick={() => setIsOpen(!isOpen)}
             >
