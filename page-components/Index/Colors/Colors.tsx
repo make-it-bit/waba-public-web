@@ -210,7 +210,7 @@ const Colors = ({ colorsData }) => {
             alt="device head"
             width={108}
             height={78}
-            className={classNames('md:hidden block absolute left-1/2 translate-x-neg-1/2')}
+            className={classNames('md:hidden block absolute left-1/2 translate-x-neg-1/2 z-10')}
           />
           <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-128 mb-56">
             {colorsData[`device_head_${activeColor}`].long_description}
