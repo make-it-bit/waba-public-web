@@ -1,13 +1,13 @@
 import React from 'react';
-/* import Script from 'next/script';
+import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
-import { AxiomWebVitals } from 'next-axiom'; */
+import { AxiomWebVitals } from 'next-axiom';
 import { DM_Sans } from 'next/font/google';
 import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
 
-import { CookieConsent } from '@/components';
+//import { CookieConsent } from '@/components';
 import { PromoBar, Navbar } from '@/page-components';
 
 import './_globals.scss';
@@ -31,12 +31,12 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const promobarData = await getComponentData('promobar');
   const navbarData = await getComponentData('navbar');
-  const cookieConsentData = await getComponentData('cookie-consent');
+  //const cookieConsentData = await getComponentData('cookie-consent');
 
   return (
     <html lang="en">
       <body className={classNames('min-h-screen flex flex-col', dmSans.className)}>
-        {/* {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
+        {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
         <Script id="google-tag-manager-consent" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -58,7 +58,7 @@ export default async function RootLayout({ children }) {
             })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
          `}
         </Script>
-        <AxiomWebVitals /> */}
+        <AxiomWebVitals />
         <div className="sticky top-0 z-[500]">
           <PromoBar promobarData={promobarData.attributes} />
           <Navbar navbarData={navbarData.attributes} />
