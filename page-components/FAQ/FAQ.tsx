@@ -45,15 +45,10 @@ const FAQ = ({ faqPageData }) => {
       }
 
       if (scrollContainerRef.current) {
-        console.log('scrollContainerRef.current.scrollWidth', scrollContainerRef.current.scrollWidth);
-        console.log(
-          'scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth',
-          scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth
-        );
         if (
           scrollContainerRef.current.scrollLeft > 0 &&
           scrollContainerRef.current.scrollWidth <=
-            scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
+            scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 1
         ) {
           setGradientRightIsVisible(false);
         } else {
@@ -94,7 +89,7 @@ const FAQ = ({ faqPageData }) => {
                   <>
                     <div
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40 blur-sm',
+                        'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40',
                         styles.gradientLeft
                       )}
                     ></div>
@@ -120,7 +115,7 @@ const FAQ = ({ faqPageData }) => {
                   <>
                     <div
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40 blur-sm',
+                        'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40',
                         styles.gradientRight
                       )}
                     ></div>
