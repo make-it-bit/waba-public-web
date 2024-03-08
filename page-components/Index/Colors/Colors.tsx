@@ -170,49 +170,22 @@ const Colors = ({ colorsData }) => {
               height={574}
               className="absolute top-0 left-1/2 translate-x-neg-1/2"
             />
-            {/* <Image
-              src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
-              alt="device head"
-              width={108}
-              height={78}
-              className={classNames(
-                'md:block hidden absolute 2xl:top-[138px] xl:top-[242px] lg:top-[307px] md:top-[319px] 2xl:left-[196px] xl:left-[153.5px] lg:left-[111px] md:left-[68px]'
-              )}
-            /> */}
             <Image
-              src={`/try/head-${activeColor}-new.svg`}
+              src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
               alt="device head"
               width={94}
               height={78}
               className="md:block hidden absolute 2xl:top-[219px] xl:top-[267px] top-[350px] 2xl:left-[250.5px] xl:left-[208px] lg:left-[165.5px] md:left-[122.5px] translate-x-neg-1/2"
             />
-            {/* <Image
-              src={getImageFullUrl_client(colorsData.device_green_light.data)}
-              alt="device green light"
-              width={109}
-              height={10}
-              className={classNames(
-                'md:block hidden absolute 2xl:top-[186px] xl:top-[290px] lg:top-[355px] md:top-[367px] z-10'
-              )}
-            /> */}
             <Image
-              src={'/try/green-light-new.svg'}
+              src={getImageFullUrl_client(colorsData.device_green_light.data)}
               alt="device green light"
               width={96.5}
               height={10}
               className="md:block hidden absolute 2xl:top-[260px] xl:top-[308px] top-[391px] left-1/2 translate-x-neg-1/2 z-10"
             />
-            {/* <Image
-              src={getImageFullUrl_client(colorsData.device_body.data)}
-              alt="device body"
-              width={90}
-              height={407.24}
-              className={classNames(
-                'md:block hidden absolute 2xl:top-[196px] xl:top-[300px] lg:top-[365px] md:top-[377px]'
-              )}
-            /> */}
             <Image
-              src={'/try/body.svg'}
+              src={getImageFullUrl_client(colorsData.device_body.data)}
               alt="device body"
               width={78}
               height={196}
@@ -234,7 +207,6 @@ const Colors = ({ colorsData }) => {
         <div className="relative col-span-4 flex flex-col justify-between">
           <Image
             src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
-            //src={`/try/head-${activeColor}-new.svg`}
             alt="device head"
             width={108}
             height={78}
