@@ -1,19 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 
 const NavbarMobile = ({ navbarData }) => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
 
   return isOpen ? (
     <div className="lg:hidden block fixed bg-black-100 w-full h-screen top-[41px]">
@@ -25,12 +24,12 @@ const NavbarMobile = ({ navbarData }) => {
             height={32}
             alt="mobile menu close"
             className="d-block cursor-pointer"
-            onClick={handleClick}
+            onClick={() => setIsOpen(!isOpen)}
           />
-          <Link href="/" className="absolute left-1/2 translate-x-neg-1/2" onClick={handleClick}>
+          <Link href="/" className="absolute left-1/2 translate-x-neg-1/2" onClick={() => setIsOpen(!isOpen)}>
             <Image src={getImageFullUrl_client(navbarData.waba_logos.data[3])} alt="waba logo" width={80} height={20} />
           </Link>
-          <Link href={navbarData.button.href_src} onClick={handleClick}>
+          <Link href={navbarData.button.href_src} onClick={() => setIsOpen(!isOpen)}>
             <Button CTA={navbarData.button.href_text} style="tertiary" size="sm" />
           </Link>
         </div>
@@ -39,8 +38,11 @@ const NavbarMobile = ({ navbarData }) => {
             <Link
               key={index}
               href={link.attributes.page_link_data.href_src}
-              className="text-sm leading-sm"
-              onClick={handleClick}
+              className={classNames(
+                'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-0',
+                pathname === link.attributes.page_link_data.href_src && 'border-b border-black-100 mb-0'
+              )}
+              onClick={() => setIsOpen(!isOpen)}
             >
               {link.attributes.page_link_data.href_text}
             </Link>
@@ -49,8 +51,11 @@ const NavbarMobile = ({ navbarData }) => {
             <Link
               key={index}
               href={link.attributes.page_link_data.href_src}
-              className="text-sm leading-sm"
-              onClick={handleClick}
+              className={classNames(
+                'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-0',
+                pathname === link.attributes.page_link_data.href_src && 'border-b border-black-100 mb-0'
+              )}
+              onClick={() => setIsOpen(!isOpen)}
             >
               {link.attributes.page_link_data.href_text}
             </Link>
@@ -68,7 +73,7 @@ const NavbarMobile = ({ navbarData }) => {
             height={32}
             alt="mobile menu open"
             className="d-block cursor-pointer"
-            onClick={handleClick}
+            onClick={() => setIsOpen(!isOpen)}
           />
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
             <Image src={getImageFullUrl_client(navbarData.waba_logos.data[2])} alt="waba logo" width={80} height={20} />
