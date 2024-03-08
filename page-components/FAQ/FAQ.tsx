@@ -45,6 +45,11 @@ const FAQ = ({ faqPageData }) => {
       }
 
       if (scrollContainerRef.current) {
+        console.log('scrollContainerRef.current.scrollWidth', scrollContainerRef.current.scrollWidth);
+        console.log(
+          'scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth',
+          scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth
+        );
         if (
           scrollContainerRef.current.scrollLeft > 0 &&
           scrollContainerRef.current.scrollWidth <=
