@@ -236,7 +236,7 @@ const Colors = ({ colorsData }) => {
             //src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
             src={`/try/head-${activeColor}-new.svg`}
             alt="device head"
-            width={94}
+            width={108}
             height={78}
             className={classNames('md:hidden block absolute left-1/2 translate-x-neg-1/2')}
           />
