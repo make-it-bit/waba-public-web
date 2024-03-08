@@ -64,7 +64,7 @@ export default async function RootLayout({ children }) {
           <Navbar navbarData={navbarData.attributes} />
         </div>
         {children}
-        {/* <CookieConsent cookiesConsentData={cookieConsentData.attributes} /> */}
+        <CookieConsent cookiesConsentData={cookieConsentData.attributes} />
       </body>
     </html>
   );
