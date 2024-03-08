@@ -159,7 +159,7 @@ module.exports = {
     keyframes: {
       scale: {
         '0%, 100%': { transform: 'translate(-50%, -50%) scale(1)' },
-        '50%': { transform: 'translate(-50%, -50%) scale(1.5)' },
+        '50%': { transform: 'translate(-50%, -50%) scale(2)' },
       },
     },
     animation: {
