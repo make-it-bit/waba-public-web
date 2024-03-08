@@ -156,6 +156,15 @@ module.exports = {
       'neg-1/2': '-50%',
       'neg-1/4': '-25%',
     },
+    keyframes: {
+      scale: {
+        '0%, 100%': { transform: 'translate(-50%, -50%) scale(1)' },
+        '50%': { transform: 'translate(-50%, -50%) scale(1.5)' },
+      },
+    },
+    animation: {
+      scale: 'scale 3s ease-in-out infinite',
+    },
     plugins: [],
   },
 };

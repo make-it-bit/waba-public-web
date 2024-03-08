@@ -5,15 +5,13 @@ import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
-import styles from './_video.module.scss';
-
 const Video = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [sticky, setSticky] = useState(false);
 
   if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
+  if (!videoData.mobile_images?.data?.length) return <p>No images found.</p>;
 
   const frameCount =
     currentCanvasWidth &&

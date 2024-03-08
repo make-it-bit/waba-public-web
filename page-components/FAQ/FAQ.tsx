@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import classNames from 'classnames';
 
 import { ScrollableNavbar } from '@/components';
@@ -85,12 +86,23 @@ const FAQ = ({ faqPageData }) => {
             <div className="grid grid-cols-12">
               <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
                 {gradientLeftIsVisible && (
-                  <div
-                    className={classNames(
-                      'absolute top-1/2 translate-y-neg-1/2 left-0] h-[28px] w-40',
-                      styles.gradientLeft
-                    )}
-                  ></div>
+                  <>
+                    <div
+                      className={classNames(
+                        'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40 blur-sm',
+                        styles.gradientLeft
+                      )}
+                    ></div>
+                    <div className="absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40">
+                      <Image
+                        src="/icons/arrow-left.svg"
+                        alt="arrow left"
+                        width={8}
+                        height={8}
+                        className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
+                      />
+                    </div>
+                  </>
                 )}
                 <ScrollableNavbar
                   scrollableNavbarRef={scrollContainerRef}
@@ -100,12 +112,23 @@ const FAQ = ({ faqPageData }) => {
                   justify="justify-between"
                 />
                 {gradientRightIsVisible && (
-                  <div
-                    className={classNames(
-                      'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[28px] w-40',
-                      styles.gradientRight
-                    )}
-                  ></div>
+                  <>
+                    <div
+                      className={classNames(
+                        'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40 blur-sm',
+                        styles.gradientRight
+                      )}
+                    ></div>
+                    <div className="absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40">
+                      <Image
+                        src="/icons/arrow-right.svg"
+                        alt="arrow right"
+                        width={8}
+                        height={8}
+                        className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
+                      />
+                    </div>
+                  </>
                 )}
               </div>
             </div>

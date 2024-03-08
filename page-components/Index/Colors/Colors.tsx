@@ -52,27 +52,33 @@ const Colors = ({ colorsData }) => {
               const nextId = activeId === 3 ? 1 : activeId + 1;
               setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
               setActiveId(nextId);
-              const nextElement = refMap[nextId].current;
-              const scrollPosition = nextElement.offsetLeft - 16;
-              deviceHeadsListRef.current.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth',
-              });
             }
           } else {
             if (progressBarWidth < refMap[activeId].current.offsetWidth) {
               setProgressBarWidth((prev) => prev + 2);
+              if (activeId === 1) deviceHeadsListRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+              else {
+                const element = refMap[activeId].current;
+                const scrollPosition = element.offsetLeft - 16;
+                deviceHeadsListRef.current.scrollTo({
+                  left: scrollPosition,
+                  behavior: 'smooth',
+                });
+              }
             } else {
               setProgressBarWidth(0);
               const nextId = activeId === 3 ? 1 : activeId + 1;
               setActiveColor(deviceHeads[nextId - 1].title.split(' ')[0].toLowerCase());
               setActiveId(nextId);
-              const nextElement = refMap[nextId].current;
-              const scrollPosition = nextElement.offsetLeft - 16;
-              deviceHeadsListRef.current.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth',
-              });
+              if (nextId === 1) deviceHeadsListRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+              else {
+                const nextElement = refMap[nextId].current;
+                const scrollPosition = nextElement.offsetLeft - 16;
+                deviceHeadsListRef.current.scrollTo({
+                  left: scrollPosition,
+                  behavior: 'smooth',
+                });
+              }
             }
           }
         }
@@ -80,6 +86,13 @@ const Colors = ({ colorsData }) => {
     }
     return () => interval && clearInterval(interval);
   }, [isIntervalRunning, progressBarHeight, progressBarWidth, refMap, activeId, deviceHeads]);
+
+  const handleDeviceHeadChange = (deviceHead) => {
+    setActiveColor(deviceHead.title.split(' ')[0].toLowerCase());
+    setActiveId(deviceHead.id);
+    if (window.innerWidth >= 768) setProgressBarHeight(0);
+    else setProgressBarWidth(0);
+  };
 
   return (
     <div className="container md:pb-216 pb-72 overflow-hidden">
@@ -101,12 +114,7 @@ const Colors = ({ colorsData }) => {
               key={deviceHead.id}
               ref={refMap[deviceHead.id]}
               className="cursor-pointer relative"
-              onClick={() => {
-                setActiveColor(deviceHead.title.split(' ')[0].toLowerCase());
-                setActiveId(deviceHead.id);
-                if (window.innerWidth >= 768) setProgressBarHeight(0);
-                else setProgressBarWidth(0);
-              }}
+              onClick={() => handleDeviceHeadChange(deviceHead)}
               onMouseEnter={() => setIsIntervalRunning(false)}
               onMouseLeave={() => setIsIntervalRunning(true)}
             >
@@ -141,7 +149,7 @@ const Colors = ({ colorsData }) => {
         </div>
         <div className="col-span-4 flex justify-between text-center">
           <div
-            className="md:hidden flex items-center p-16 cursor-pointer"
+            className="md:hidden flex items-center p-16 mt-80 cursor-pointer"
             onClick={() => {
               setProgressBarWidth(0);
               const previousId = activeId === 1 ? 3 : activeId - 1;
@@ -149,7 +157,7 @@ const Colors = ({ colorsData }) => {
               setActiveId(previousId);
             }}
           >
-            {'<'}
+            <Image src="/icons/arrow-left.svg" alt="arrow left" width={8} height={8} />
           </div>
           <div className="relative flex justify-center w-full text-center">
             <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>
@@ -162,7 +170,7 @@ const Colors = ({ colorsData }) => {
               height={574}
               className="absolute top-0 left-1/2 translate-x-neg-1/2"
             />
-            <Image
+            {/* <Image
               src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
               alt="device head"
               width={108}
@@ -170,8 +178,15 @@ const Colors = ({ colorsData }) => {
               className={classNames(
                 'md:block hidden absolute 2xl:top-[138px] xl:top-[242px] lg:top-[307px] md:top-[319px] 2xl:left-[196px] xl:left-[153.5px] lg:left-[111px] md:left-[68px]'
               )}
-            />
+            /> */}
             <Image
+              src={`/try/head-${activeColor}-new.svg`}
+              alt="device head"
+              width={94}
+              height={78}
+              className="md:block hidden absolute 2xl:top-[219px] xl:top-[267px] top-[350px] 2xl:left-[250.5px] xl:left-[208px] lg:left-[165.5px] md:left-[122.5px] translate-x-neg-1/2"
+            />
+            {/* <Image
               src={getImageFullUrl_client(colorsData.device_green_light.data)}
               alt="device green light"
               width={109}
@@ -179,8 +194,15 @@ const Colors = ({ colorsData }) => {
               className={classNames(
                 'md:block hidden absolute 2xl:top-[186px] xl:top-[290px] lg:top-[355px] md:top-[367px] z-10'
               )}
-            />
+            /> */}
             <Image
+              src={'/try/green-light-new.svg'}
+              alt="device green light"
+              width={96.5}
+              height={10}
+              className="md:block hidden absolute 2xl:top-[260px] xl:top-[308px] top-[391px] left-1/2 translate-x-neg-1/2 z-10"
+            />
+            {/* <Image
               src={getImageFullUrl_client(colorsData.device_body.data)}
               alt="device body"
               width={90}
@@ -188,10 +210,17 @@ const Colors = ({ colorsData }) => {
               className={classNames(
                 'md:block hidden absolute 2xl:top-[196px] xl:top-[300px] lg:top-[365px] md:top-[377px]'
               )}
+            /> */}
+            <Image
+              src={'/try/body.svg'}
+              alt="device body"
+              width={78}
+              height={196}
+              className="md:block hidden absolute 2xl:top-[269px] xl:top-[317px] top-400 left-1/2 translate-x-neg-1/2"
             />
           </div>
           <div
-            className="md:hidden flex items-center p-16 cursor-pointer"
+            className="md:hidden flex items-center p-16 mt-80 cursor-pointer"
             onClick={() => {
               setProgressBarWidth(0);
               const nextId = activeId === 3 ? 1 : activeId + 1;
@@ -199,14 +228,15 @@ const Colors = ({ colorsData }) => {
               setActiveId(nextId);
             }}
           >
-            {'>'}
+            <Image src="/icons/arrow-right.svg" alt="arrow right" width={8} height={8} />
           </div>
         </div>
         <div className="relative col-span-4 flex flex-col justify-between">
           <Image
-            src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
+            //src={getImageFullUrl_client(colorsData[`device_head_${activeColor}`].head_image.data)}
+            src={`/try/head-${activeColor}-new.svg`}
             alt="device head"
-            width={108}
+            width={94}
             height={78}
             className={classNames('md:hidden block absolute left-1/2 translate-x-neg-1/2')}
           />
