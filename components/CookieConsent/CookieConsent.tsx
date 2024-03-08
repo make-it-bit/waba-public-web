@@ -6,6 +6,8 @@ import rehypeRaw from 'rehype-raw';
 
 import { Button } from '@/gui-components/client';
 
+declare const window: any;
+
 const CookieConsent = ({ cookiesConsentData }) => {
   const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
   const [displayReadMore, setDisplayReadMore] = useState(false);
