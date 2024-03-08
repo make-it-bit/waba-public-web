@@ -18,7 +18,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
 
   const setCookieConsent = (status) => {
     if (status === 'granted') {
-      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      //window.gtag('consent', 'update', { analytics_storage: 'granted' });
       localStorage.setItem('gtaConsent', 'granted');
     } else {
       localStorage.setItem('gtaConsent', 'denied');
