@@ -1,6 +1,7 @@
 import { revalidateTag } from 'next/cache';
 import qs from 'qs';
 import { redirect } from 'next/navigation';
+import { Logger } from 'next-axiom';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
 
@@ -8,6 +9,8 @@ const headers = {
   Accept: '*/*',
   Authorization: 'Bearer ' + STRAPI_API_TOKEN,
 };
+
+const log = new Logger();
 
 const navbarNestedComponents = [
   'waba_logos',
@@ -36,9 +39,10 @@ const populateComponent = {
   'cta-block': '*',
   'pre-footer-card': preFooterCardNestedComponents,
   footer: footerNestedComponents,
+  'cookie-consent': '*',
 };
 
-type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer';
+type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer' | 'cookie-consent';
 
 export const getComponentData = async (component: Component) => {
   const query = qs.stringify({ populate: populateComponent[component] });
@@ -51,6 +55,10 @@ export const getComponentData = async (component: Component) => {
   });
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
+
+  log.info('Successfully fetched component data.', { component: component });
+  await log.flush();
+
   return data;
 };
 
@@ -60,6 +68,7 @@ const indexPageNestedComponents = [
   'hero.button_2',
   'hero.tags.logo',
   'hero.background_video',
+  'hero.background_video_first_frame',
   'color.device_head_blue.light_image',
   'color.device_head_blue.head_image',
   'color.device_head_red.light_image',
@@ -137,6 +146,15 @@ const aboutPageNestedComponents = [
   'difference.device_image',
 ];
 const faqPageNestedComponents = ['seo', 'hero_title', 'faq_elements'];
+const blogPageNestedComponents = [
+  'seo',
+  'hero.featured_blog_post',
+  'hero.featured_blog_post.image',
+  'hero.featured_blog_post.categories',
+  'blog_categories',
+  'input_button',
+  'socials_tags.logo',
+];
 const formPagesNestedComponents = ['seo', 'hero_background_image', 'form.button'];
 
 type Pages =
@@ -146,6 +164,7 @@ type Pages =
   | 'result'
   | 'about-us'
   | 'faq'
+  | 'blog'
   | 'careers-at-waba'
   | 'waba-for-business'
   | 'contact-us'
@@ -161,6 +180,7 @@ const populatePage = {
   result: userStoriesPageNestedComponents,
   'about-us': aboutPageNestedComponents,
   faq: faqPageNestedComponents,
+  blog: blogPageNestedComponents,
   'careers-at-waba': formPagesNestedComponents,
   'waba-for-business': formPagesNestedComponents,
   'contact-us': formPagesNestedComponents,
@@ -184,6 +204,10 @@ export const getPageData = async (page: Pages) => {
     redirect('/404');
   }
   const { data } = await response.json();
+
+  log.info('Successfully fetched page data.', { page: page });
+  await log.flush();
+
   return data;
 };
 
@@ -205,5 +229,86 @@ export const getFaqElements = async (): Promise<null | FaqElement[]> => {
   const data = await response.json();
   const responseData = data.data as any[];
   if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched FAQ elements.', { elements: responseData });
+  await log.flush();
+
+  return responseData;
+};
+
+type SEO = {
+  title: string;
+  description: string;
+  og_image: Object;
+};
+
+type BlogCategory = {
+  name: string;
+};
+
+type BlogPost = {
+  id: number;
+  attributes: {
+    seo: SEO;
+    slug: string;
+    image: Object;
+    title: string;
+    description: string;
+    author: string;
+    date: string;
+    content: string;
+    categories: BlogCategory[];
+    back_to_blog: {
+      href_text: string;
+      href_src: string;
+    };
+  };
+};
+
+export const getBlogPosts = async (): Promise<null | BlogPost[]> => {
+  const query = qs.stringify({ populate: '*' });
+  const url = `${STRAPI_BASE_URL}/api/blog-posts?${query}`;
+  revalidateTag('blogPosts');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['blogPosts'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+  responseData.sort((a, b) => new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime());
+
+  log.info('Successfully fetched blog posts.', { posts: responseData });
+  await log.flush();
+
+  return responseData;
+};
+
+type PolicyPage = {
+  id: number;
+  attributes: {
+    seo: SEO;
+    slug: string;
+    content: string;
+  };
+};
+
+export const getPolicyPages = async (): Promise<null | PolicyPage[]> => {
+  const query = qs.stringify({ populate: '*' });
+  const url = `${STRAPI_BASE_URL}/api/policy-pages?${query}`;
+  revalidateTag('policyPages');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['policyPages'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched policy pages.', { pages: 'policy-pages' });
+  await log.flush();
+
   return responseData;
 };

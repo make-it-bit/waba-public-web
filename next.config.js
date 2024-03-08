@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-module.exports = {
+const { withAxiom } = require('next-axiom');
+
+module.exports = withAxiom({
   sassOptions: {
     includePaths: [path.join(__dirname, 'app')],
   },
-  experimental: {
-    serverActions: true,
-  },
+  /* experimental: {
+      serverActions: true,
+    }, */
   images: {
     remotePatterns: [
       {
@@ -22,4 +24,4 @@ module.exports = {
       },
     ],
   },
-};
+});

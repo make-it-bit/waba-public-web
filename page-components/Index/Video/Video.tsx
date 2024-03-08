@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import NextImage from 'next/image';
+import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
@@ -10,15 +10,23 @@ const Video = ({ videoData }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  if (!videoData.desktop_images?.data?.length) return <p>No images found</p>;
+  if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
+  if (!videoData.mobile_images?.data?.length) return <p>No images found.</p>;
 
-  const frameCount = videoData.desktop_images.data.length;
+  const frameCount =
+    currentCanvasWidth &&
+    (currentCanvasWidth >= 736 ? videoData.desktop_images.data.length : videoData.mobile_images.data.length);
 
   const currentFrame = (index) => {
-    const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
-    return frame;
+    if (currentCanvasWidth) {
+      if (currentCanvasWidth >= 736) {
+        const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+        return frame;
+      }
+      const frame = getImageFullUrl_client(videoData.mobile_images?.data?.[index]);
+      return frame;
+    }
   };
-
   // const currentFrame = (index) => {
   //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
   //   return url;
@@ -27,7 +35,10 @@ const Video = ({ videoData }) => {
   const getCorrectCavasWidth = () => {
     if (window.innerWidth > 1535) return 1504;
     if (window.innerWidth > 1279) return 1248;
-    if (window.innerWidth > 1023) return 994;
+    if (window.innerWidth > 1023) return 992;
+    if (window.innerWidth > 767) return 736;
+    if (window.innerWidth > 511) return 640;
+    if (window.innerWidth > 255) return 480;
     return null;
   };
 
@@ -35,7 +46,10 @@ const Video = ({ videoData }) => {
     return {
       1504: 844,
       1248: 700,
-      994: 556,
+      992: 556,
+      736: 412,
+      640: 1140,
+      480: 856,
     }[width];
   };
 
@@ -70,9 +84,16 @@ const Video = ({ videoData }) => {
       if (canvas === null) return;
       const context = canvas.getContext('2d');
       if (context === null) return;
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = 'high';
       const img = new Image();
       img.src = currentFrame(index);
-      img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height; // <-- these two are important for preserving the aspct ratio
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      //img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
     };
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
@@ -108,34 +129,59 @@ const Video = ({ videoData }) => {
     };
   }, [currentCanvasWidth, frameCount]);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+
+    const handleScroll = () => {
+      if (canvas && container) {
+        const scrollTop = window.scrollY;
+        const containerTop = container?.offsetTop;
+        const containerHeight = container?.offsetHeight;
+        const canvasHeight = canvas?.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const offset = window.innerWidth > 1023 ? 137 : 98;
+
+        if (containerTop && containerHeight && canvasHeight) {
+          // check if the canvas is in the viewport
+          if (scrollTop > containerTop - offset && scrollTop < containerTop + containerHeight - canvasHeight + offset) {
+            let newPosition = offset + (scrollTop - containerTop + offset);
+            // limit until the middle of the screen
+            newPosition = Math.min(newPosition, windowHeight / 2 - canvasHeight / 2 + offset / 2);
+            canvas.style.top = `${newPosition}px`;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div ref={containerRef} className="container">
-      <div className="relative hidden lg:block h-[600vh]">
-        <div className="absolute top-96 z-10 w-full">
+      <div className="relative flex flex-col md:h-[600vh] h-[700vh]">
+        <div className="absolute md:top-96 top-48 z-10 w-full">
           <div className="grid grid-cols-12">
-            <div className="col-start-5 col-span-4 text-center">
-              <h1 className="font-rufina text-4xl leading-4xl">{videoData.title}</h1>
+            <div className="col-span-12 text-center">
+              <h1 className="font-rufina sm:text-4xl sm:leading-4xl text-3xl leading-3xl">{videoData.title}</h1>
             </div>
           </div>
         </div>
-        <canvas className="sticky top-[137px]" ref={canvasRef} />
-      </div>
-      <div className="relative block lg:hidden">
-        <div className="grid grid-cols-12 mb-32">
-          <div className="col-span-12 text-center">
-            <h1 className="font-rufina text-3xl leading-3xl">{videoData.title}</h1>
-          </div>
-        </div>
-        {videoData.mobile_images?.data?.map((image, index) => (
-          <div className="relative" key={index}>
-            <NextImage
-              alt={image.attributes.alternativeText}
-              src={getImageFullUrl_client(image)}
-              width={image.attributes.width}
-              height={image.attributes.height}
-            />
-          </div>
-        ))}
+        <canvas
+          className={classNames(
+            'border-2 border-signal-red-100 sticky',
+            currentCanvasWidth === 1248 && 'mt-0',
+            currentCanvasWidth === 992 && 'mt-32',
+            currentCanvasWidth === 736 && 'mt-80',
+            currentCanvasWidth === 640 && 'mt-24',
+            currentCanvasWidth === 480 && 'mt-64'
+          )}
+          ref={canvasRef}
+        />
       </div>
     </div>
   );

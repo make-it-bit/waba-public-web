@@ -6,10 +6,10 @@ import classNames from 'classnames';
 
 type TagProps = {
   text: string;
-  svg?: boolean;
+  svg?: string;
 };
 
-const Tag = ({ text, svg = false }: TagProps) => {
+const Tag = ({ text, svg }: TagProps) => {
   return (
     <div
       className={classNames(
@@ -18,7 +18,7 @@ const Tag = ({ text, svg = false }: TagProps) => {
         svg ? 'pr-16 pl-8' : 'px-16'
       )}
     >
-      {svg && <ReactSVG src="/logos/eu.svg" className="inline-block" />}
+      {svg && <ReactSVG src={svg} className="inline-block" />}
       <p className="text-sm leading-sm">{text}</p>
     </div>
   );

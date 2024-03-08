@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import classNames from 'classnames';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
@@ -21,7 +22,7 @@ const Hero = ({ heroData }) => {
 
   return (
     <div className={classNames('relative lg:block flex flex-col lg:min-h-screen overflow-hidden', styles.background)}>
-      {video && (
+      {video ? (
         <video
           autoPlay
           muted
@@ -34,6 +35,14 @@ const Hero = ({ heroData }) => {
             type={heroData.background_video.data.attributes.mime}
           />
         </video>
+      ) : (
+        <Image
+          src={getImageFullUrl_client(heroData.background_video_first_frame.data)}
+          alt="hero video first frame"
+          width={1920}
+          height={1080}
+          className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain lg:z-[-1] order-2 lg:mt-0 mt-32"
+        />
       )}
       <div className="container relative order-1">
         <div className="lg:grid grid-cols-12">

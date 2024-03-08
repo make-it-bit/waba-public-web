@@ -64,6 +64,7 @@ module.exports = {
         208: '208px',
         216: '216px',
         224: '224px',
+        240: '240px',
         248: '248px',
         256: '256px',
         272: '272px',
@@ -132,6 +133,7 @@ module.exports = {
           },
           green: {
             100: 'rgb(58, 203, 133, 1)',
+            20: 'rgb(58, 203, 133, 0.2)',
             10: 'rgba(58, 203, 133, 0.1)',
           },
         },
@@ -153,6 +155,15 @@ module.exports = {
       'neg-3/4': '-75%',
       'neg-1/2': '-50%',
       'neg-1/4': '-25%',
+    },
+    keyframes: {
+      scale: {
+        '0%, 100%': { transform: 'translate(-50%, -50%) scale(1)' },
+        '50%': { transform: 'translate(-50%, -50%) scale(2)' },
+      },
+    },
+    animation: {
+      scale: 'scale 3s ease-in-out infinite',
     },
     plugins: [],
   },

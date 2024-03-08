@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import classNames from 'classnames';
 
 import { ScrollableNavbar } from '@/components';
@@ -16,9 +17,55 @@ const ProductFAQ = ({ productFaqData }) => {
   const navbarItems = Object.keys(categorizedElements);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const handleClick = (pageIndex) => {
-    setPageIndex(pageIndex);
-  };
+  const scrollContainerRef = useRef<any>(null);
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [gradientLeftIsVisible, setGradientLeftIsVisible] = useState(false);
+  const [gradientRightIsVisible, setGradientRightIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setGradientRightIsVisible(scrollContainerRef.current.scrollWidth > scrollContainerRef.current.clientWidth);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [windowWidth]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current.scrollLeft === 0) {
+        setGradientLeftIsVisible(false);
+      } else {
+        setGradientLeftIsVisible(true);
+      }
+
+      if (scrollContainerRef.current) {
+        if (
+          scrollContainerRef.current.scrollLeft > 0 &&
+          scrollContainerRef.current.scrollWidth <=
+            scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
+        ) {
+          setGradientRightIsVisible(false);
+        } else {
+          setGradientRightIsVisible(true);
+        }
+      }
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll, { passive: true });
+    }
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <div className={classNames('relative', styles.background)}>
@@ -28,12 +75,53 @@ const ProductFAQ = ({ productFaqData }) => {
             <h1 className="font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl text-center">
               {productFaqData.title}
             </h1>
-            <ScrollableNavbar
-              pageIndex={pageIndex}
-              navbarItems={navbarItems}
-              handleClick={handleClick}
-              justify="justify-between"
-            />
+            <div className="relative">
+              {gradientLeftIsVisible && (
+                <>
+                  <div
+                    className={classNames(
+                      'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40 blur-sm',
+                      styles.gradientLeft
+                    )}
+                  ></div>
+                  <div className="absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40">
+                    <Image
+                      src="/icons/arrow-white-left.svg"
+                      alt="arrow left"
+                      width={8}
+                      height={8}
+                      className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
+                    />
+                  </div>
+                </>
+              )}
+              <ScrollableNavbar
+                scrollableNavbarRef={scrollContainerRef}
+                pageIndex={pageIndex}
+                navbarItems={navbarItems}
+                handleClick={setPageIndex}
+                justify="justify-between"
+              />
+              {gradientRightIsVisible && (
+                <>
+                  <div
+                    className={classNames(
+                      'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40 blur-sm',
+                      styles.gradientRight
+                    )}
+                  ></div>
+                  <div className="absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40">
+                    <Image
+                      src="/icons/arrow-white-right.svg"
+                      alt="arrow right"
+                      width={8}
+                      height={8}
+                      className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-12 md:mt-64 mt-8 md:pb-160 pb-64">

@@ -26,6 +26,7 @@ const Foundations = ({ foundationsData }) => {
                 bottomBorder
                 paddingMargin="lg:px-80 md:px-32 px-16 md:py-48 py-40"
                 transition
+                breakpoint="md"
               />
             </div>
             <div className="md:col-span-4 col-span-12">
@@ -36,6 +37,7 @@ const Foundations = ({ foundationsData }) => {
                 bottomBorder
                 paddingMargin="lg:px-80 md:px-32 px-16 md:py-48 py-40"
                 transition
+                breakpoint="md"
               />
             </div>
             <div className="md:col-span-4 col-span-12">
@@ -43,6 +45,7 @@ const Foundations = ({ foundationsData }) => {
                 foundationCardData={foundationsData.foundation_card_3}
                 paddingMargin="lg:px-80 md:px-32 px-16 md:py-48 py-40"
                 transition
+                breakpoint="md"
               />
             </div>
           </div>

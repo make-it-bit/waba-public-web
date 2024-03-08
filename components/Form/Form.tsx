@@ -42,7 +42,7 @@ const Form = ({ formData }) => {
         });
         if (response.status === 200) {
           setMessageStatus('success');
-          setMessage(formData['SUCCESS']);
+          setMessage(formData.SUCCESS);
           setForm({
             firstName: '',
             lastName: '',
@@ -54,12 +54,12 @@ const Form = ({ formData }) => {
           setSubmitted(false);
         } else {
           setMessageStatus('error');
-          setMessage(formData['UNKNOWN_ERROR']);
+          setMessage(formData.UNKNOWN_ERROR);
           setSubmitted(false);
         }
       } catch (error) {
         setMessageStatus('error');
-        setMessage(formData['UNKNOWN_ERROR']);
+        setMessage(formData.UNKNOWN_ERROR);
         setSubmitted(false);
       }
     } else {

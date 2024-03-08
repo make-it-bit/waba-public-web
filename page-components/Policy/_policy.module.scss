@@ -1,0 +1,55 @@
+.styles {
+  h1 {
+    @apply font-rufina;
+    @apply text-4xl;
+    @apply leading-4xl;
+  }
+
+  h2 {
+    @apply font-rufina;
+    @apply text-3xl;
+    @apply leading-3xl;
+  }
+
+  h2 + p {
+    @apply mb-40;
+  }
+
+  h3 {
+    @apply font-rufina;
+    @apply text-2xl;
+    @apply leading-2xl;
+  }
+
+  h4 {
+    @apply font-rufina;
+    @apply text-xl;
+    @apply leading-xl;
+
+    @apply mt-16;
+    @apply mb-8;
+  }
+
+  h5 {
+    @apply font-rufina;
+    @apply text-sm;
+    @apply leading-sm;
+  }
+
+  h6 {
+    @apply font-rufina;
+    @apply text-xs;
+    @apply leading-xs;
+  }
+
+  p {
+    @apply text-base;
+    @apply leading-base;
+  }
+
+  ul {
+    @apply text-base;
+    @apply leading-base;
+    @apply list-disc list-inside;
+  }
+}
