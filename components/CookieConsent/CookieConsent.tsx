@@ -11,7 +11,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
+    if (!window.localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
@@ -19,9 +19,9 @@ const CookieConsent = ({ cookiesConsentData }) => {
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         window.gtag('consent', 'update', { analytics_storage: 'granted' });
       }
-      localStorage.setItem('gtaConsent', 'granted');
+      window.localStorage.setItem('gtaConsent', 'granted');
     } else {
-      localStorage.setItem('gtaConsent', 'denied');
+      window.localStorage.setItem('gtaConsent', 'denied');
     }
     setDisplayCookieConsent(false);
   };
