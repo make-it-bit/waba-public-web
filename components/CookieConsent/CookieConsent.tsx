@@ -10,19 +10,19 @@ const CookieConsent = ({ cookiesConsentData }) => {
   const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
-  useEffect(() => {
-    if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
-  }, []);
+  // useEffect(() => {
+  //   if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
+  // }, []);
 
-  const setCookieConsent = (status) => {
-    if (status === 'granted') {
-      window.gtag('consent', 'update', { analytics_storage: 'granted' });
-      localStorage.setItem('gtaConsent', 'granted');
-    } else {
-      localStorage.setItem('gtaConsent', 'denied');
-    }
-    setDisplayCookieConsent(false);
-  };
+  // const setCookieConsent = (status) => {
+  //   if (status === 'granted') {
+  //     window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  //     localStorage.setItem('gtaConsent', 'granted');
+  //   } else {
+  //     localStorage.setItem('gtaConsent', 'denied');
+  //   }
+  //   setDisplayCookieConsent(false);
+  // };
 
   return (
     displayCookieConsent && (
@@ -64,7 +64,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
             {displayReadMore && (
               <div className="w-full">
                 <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
+                  {/* <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown> */}
                 </div>
               </div>
             )}
