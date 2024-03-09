@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -12,6 +13,8 @@ import { TextInput, Button } from '@/gui-components/client';
 import styles from './_footer.module.scss';
 
 const Footer = ({ footerData, small = false }) => {
+  const pathname = usePathname();
+
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [messageStatus, setMessageStatus] = useState('');
@@ -108,7 +111,14 @@ const Footer = ({ footerData, small = false }) => {
               {!small && <div className="md:hidden block border border-white-100"></div>}
               <div className="flex md:flex-row flex-col lg:justify-evenly md:justify-between items-center md:gap-0 gap-8 text-center text-white-100">
                 {footerData.page_links.data.map((link, index) => (
-                  <Link key={index} href={link.attributes.page_link_data.href_src} className="text-sm leading-sm">
+                  <Link
+                    key={index}
+                    href={link.attributes.page_link_data.href_src}
+                    className={classNames(
+                      'text-sm leading-sm hover:border-b hover:border-white-100 hover:mb-[-1px]',
+                      pathname === link.attributes.page_link_data.href_src && 'border-b border-white-100 mb-[-1px]'
+                    )}
+                  >
                     {link.attributes.page_link_data.href_text}
                   </Link>
                 ))}

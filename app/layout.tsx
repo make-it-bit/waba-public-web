@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
 
-import { CookieConsent } from '@/components';
+import { CookieConsentWrapper } from '@/components';
 import { PromoBar, Navbar } from '@/page-components';
 
 import './_globals.scss';
@@ -64,7 +64,7 @@ export default async function RootLayout({ children }) {
           <Navbar navbarData={navbarData.attributes} />
         </div>
         {children}
-        <CookieConsent cookiesConsentData={cookieConsentData.attributes} />
+        <CookieConsentWrapper cookiesConsentData={cookieConsentData.attributes} />
       </body>
     </html>
   );

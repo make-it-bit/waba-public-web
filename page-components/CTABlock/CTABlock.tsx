@@ -2,13 +2,15 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
+
 import { Button } from '@/gui-components/client';
 
 const CTABlock = ({ ctaBlockData }) => {
   return (
     <div className="container relative">
       <Image
-        src="/device-upside.png"
+        src={getImageFullUrl_server(ctaBlockData.device_image.data)}
         alt="device"
         width={196}
         height={308}
