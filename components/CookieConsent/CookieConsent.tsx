@@ -10,21 +10,21 @@ const CookieConsent = ({ cookiesConsentData }) => {
   const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
-  // useEffect(() => {
-  //   if (!window.localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
-  // }, []);
+  useEffect(() => {
+    if (!window.localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
+  }, []);
 
-  // const setCookieConsent = (status) => {
-  //   if (status === 'granted') {
-  //     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-  //       window.gtag('consent', 'update', { analytics_storage: 'granted' });
-  //     }
-  //     window.localStorage.setItem('gtaConsent', 'granted');
-  //   } else {
-  //     window.localStorage.setItem('gtaConsent', 'denied');
-  //   }
-  //   setDisplayCookieConsent(false);
-  // };
+  const setCookieConsent = (status) => {
+    if (status === 'granted') {
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+      window.localStorage.setItem('gtaConsent', 'granted');
+    } else {
+      window.localStorage.setItem('gtaConsent', 'denied');
+    }
+    setDisplayCookieConsent(false);
+  };
 
   return (
     displayCookieConsent && (
@@ -32,22 +32,21 @@ const CookieConsent = ({ cookiesConsentData }) => {
         <div className="container">
           <div className="flex flex-col">
             <div className="flex flex-wrap sm:justify-between justify-center items-center gap-x-32 gap-y-16 py-12">
-              <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0">
-                {/* <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown> */}
-              </div>
+              {/* <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown> */}
+              <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0"></div>
               <div className="flex sm:flex-row flex-col gap-16 sm:w-auto w-full">
                 <Button
                   CTA={cookiesConsentData.accept_all_button_text}
                   style="tertiary"
                   onClick={() => {
-                    // setCookieConsent('granted');
+                    setCookieConsent('granted');
                   }}
                 />
                 <Button
                   CTA={cookiesConsentData.accept_necessary_button_text}
                   style="quaternary"
                   onClick={() => {
-                    // setCookieConsent('denied');
+                    setCookieConsent('denied');
                   }}
                 />
                 <Button
@@ -66,7 +65,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
             {displayReadMore && (
               <div className="w-full">
                 <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
+                  {/* <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown> */}
                 </div>
               </div>
             )}
