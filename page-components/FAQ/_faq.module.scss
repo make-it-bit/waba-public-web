@@ -1,7 +1,9 @@
 .gradientLeft {
-  background: linear-gradient(90deg, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%);
+  background: -webkit-linear-gradient(left, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%); /* For Chrome, Safari */
+  background: linear-gradient(to right, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%); /* Standard syntax */
 }
 
 .gradientRight {
-  background: linear-gradient(90deg, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%);
+  background: -webkit-linear-gradient(right, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%); /* For Chrome, Safari */
+  background: linear-gradient(to left, rgba(243, 236, 238, 0.8) 0%, #f3ecee 100%); /* Standard syntax */
 }
