@@ -85,6 +85,13 @@ const FAQ = ({ faqPageData }) => {
           <div className="container md:px-12 px-0">
             <div className="grid grid-cols-12">
               <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
+                <ScrollableNavbar
+                  scrollableNavbarRef={scrollContainerRef}
+                  pageIndex={pageIndex}
+                  navbarItems={navbarItems}
+                  handleClick={setPageIndex}
+                  justify="justify-between"
+                />
                 {gradientLeftIsVisible && (
                   <div className="z-10">
                     <div
@@ -104,13 +111,6 @@ const FAQ = ({ faqPageData }) => {
                     </div>
                   </div>
                 )}
-                <ScrollableNavbar
-                  scrollableNavbarRef={scrollContainerRef}
-                  pageIndex={pageIndex}
-                  navbarItems={navbarItems}
-                  handleClick={setPageIndex}
-                  justify="justify-between"
-                />
                 {gradientRightIsVisible && (
                   <div className="z-10">
                     <div
