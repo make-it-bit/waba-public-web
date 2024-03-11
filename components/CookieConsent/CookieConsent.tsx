@@ -7,11 +7,12 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
-  const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
+  const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
-    if (!window.localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
+    const consent = window.localStorage.getItem('gtaConsent');
+    if (!consent) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
@@ -48,9 +49,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
                 <Button
                   CTA={cookiesConsentData.accept_necessary_button_text}
                   style="quaternary"
-                  onClick={() => {
-                    setCookieConsent('denied');
-                  }}
+                  onClick={() => setCookieConsent('denied')}
                 />
                 <Button
                   CTA={
