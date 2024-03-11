@@ -34,7 +34,8 @@ const CookieConsent = ({ cookiesConsentData }) => {
             <div className="flex flex-wrap sm:justify-between justify-center items-center gap-x-32 gap-y-16 py-12">
               <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0">
                 {cookiesConsentData.read_less_text && (
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown>
+                  <div>{cookiesConsentData.read_less_text}</div>
+                  // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown>
                 )}
               </div>
               <div className="flex sm:flex-row flex-col gap-16 sm:w-auto w-full">
@@ -65,7 +66,8 @@ const CookieConsent = ({ cookiesConsentData }) => {
               <div className="w-full">
                 <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
                   {cookiesConsentData.read_more_text && (
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
+                    <div>{cookiesConsentData.read_more_text}</div>
+                    // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
                   )}
                 </div>
               </div>
