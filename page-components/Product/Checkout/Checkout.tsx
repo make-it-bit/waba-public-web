@@ -24,7 +24,7 @@ const Checkout = ({ mainInfoData }) => {
             quantity={quantity}
             CTA={mainInfoData.button_1.href_text}
           />
-          <div className="flex justify-center items-center justify-center gap-2 lg:w-auto w-full">
+          <div className="flex justify-center items-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>
             <Image
               src={getImageFullUrl_client(mainInfoData.powered_by_logos.data[0])}
@@ -41,7 +41,7 @@ const Checkout = ({ mainInfoData }) => {
             CTA={mainInfoData.button_2.href_text}
             style="tertiary"
           />
-          <div className="flex justify-center items-center justify-center gap-2 lg:w-auto w-full">
+          <div className="flex justify-center items-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>
             <Image
               src={getImageFullUrl_client(mainInfoData.powered_by_logos.data[1])}
