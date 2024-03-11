@@ -89,11 +89,11 @@ const FAQ = ({ faqPageData }) => {
                   <div className="z-10">
                     <div
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 left-[-1px] h-[29px] w-80',
+                        'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-80',
                         styles.gradientLeft
                       )}
                     />
-                    <div className="absolute top-1/2 translate-y-neg-1/2 left-[-1px] h-[29px] w-40">
+                    <div className="absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40">
                       <Image
                         src="/icons/arrow-left.svg"
                         alt="arrow left"
@@ -115,11 +115,11 @@ const FAQ = ({ faqPageData }) => {
                   <div className="z-10">
                     <div
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-80',
+                        'absolute top-1/2 translate-y-neg-1/2 right-0 h-[29px] w-80',
                         styles.gradientRight
                       )}
                     />
-                    <div className="absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-80">
+                    <div className="absolute top-1/2 translate-y-neg-1/2 right-0 h-[29px] w-40">
                       <Image
                         src="/icons/arrow-right.svg"
                         alt="arrow right"
