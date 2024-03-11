@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
+// import ReactMarkdown from 'react-markdown';
+// import rehypeRaw from 'rehype-raw';
 
 import { Button } from '@/gui-components/client';
 
@@ -35,6 +35,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
               <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0">
                 {cookiesConsentData.read_less_text && (
                   <div>{cookiesConsentData.read_less_text}</div>
+                  // REACT MARKDOWN MAKES THE SITE CRASH
                   // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown>
                 )}
               </div>
@@ -67,6 +68,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
                 <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
                   {cookiesConsentData.read_more_text && (
                     <div>{cookiesConsentData.read_more_text}</div>
+                    // REACT MARKDOWN MAKES THE SITE CRASH
                     // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
                   )}
                 </div>
