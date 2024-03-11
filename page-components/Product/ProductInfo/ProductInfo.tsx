@@ -110,13 +110,13 @@ const ProductInfo = ({ productInfoData }) => {
         <div className="grid grid-cols-12">
           <div className="xl:static relative col-span-12">
             {gradientLeftIsVisible && (
-              <>
+              <div className="z-10">
                 <div
                   className={classNames(
                     'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40',
                     gradientsLeft[pageIndex]
                   )}
-                ></div>
+                />
                 <div className="absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40">
                   <Image
                     src="/icons/arrow-white-left.svg"
@@ -126,7 +126,7 @@ const ProductInfo = ({ productInfoData }) => {
                     className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
                   />
                 </div>
-              </>
+              </div>
             )}
             <ScrollableNavbar
               scrollableNavbarRef={scrollContainerRef}
@@ -136,13 +136,13 @@ const ProductInfo = ({ productInfoData }) => {
               justify="justify-between"
             />
             {gradientRightIsVisible && (
-              <>
+              <div className="z-10">
                 <div
                   className={classNames(
                     'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-80',
                     gradientsRight[pageIndex]
                   )}
-                ></div>
+                />
                 <div className="absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-80">
                   <Image
                     src="/icons/arrow-white-right.svg"
@@ -152,7 +152,7 @@ const ProductInfo = ({ productInfoData }) => {
                     className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
                   />
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
