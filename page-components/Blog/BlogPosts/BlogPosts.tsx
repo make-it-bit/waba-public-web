@@ -29,7 +29,7 @@ const BlogPost = ({ image, slug, categories, title, author, date }) => {
         <Link href={`/blog${slug}`}>
           <div className="flex flex-col">
             <p className="md:text-2xl md:leading-2xl text-xl leading-xl">{title}</p>
-            <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>
+            {author && date && <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>}
           </div>
         </Link>
       </div>
