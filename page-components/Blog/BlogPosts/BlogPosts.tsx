@@ -177,7 +177,7 @@ const BlogPosts = ({ blogData, blogPosts }) => {
               <div className="flex flex-col gap-8">
                 <p className="text-base leading-base font-bold mb-4">{blogData.follow_title}</p>
                 {blogData.socials_tags.data.map((social, index) => (
-                  <Link key={index} href="#" target="_blank">
+                  <Link key={index} href={social.attributes.href ?? '#'} target={social.attributes.target}>
                     <Tag text={social.attributes.text} svg={getImageFullUrl_client(social.attributes.logo.data)} />
                   </Link>
                 ))}
