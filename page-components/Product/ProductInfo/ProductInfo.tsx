@@ -109,6 +109,13 @@ const ProductInfo = ({ productInfoData }) => {
       <div className="container">
         <div className="grid grid-cols-12">
           <div className="xl:static relative col-span-12">
+            <ScrollableNavbar
+              scrollableNavbarRef={scrollContainerRef}
+              pageIndex={pageIndex}
+              navbarItems={navbarItems}
+              handleClick={setPageIndex}
+              justify="justify-between"
+            />
             {gradientLeftIsVisible && (
               <div className="z-10">
                 <div
@@ -128,13 +135,6 @@ const ProductInfo = ({ productInfoData }) => {
                 </div>
               </div>
             )}
-            <ScrollableNavbar
-              scrollableNavbarRef={scrollContainerRef}
-              pageIndex={pageIndex}
-              navbarItems={navbarItems}
-              handleClick={setPageIndex}
-              justify="justify-between"
-            />
             {gradientRightIsVisible && (
               <div className="z-10">
                 <div
