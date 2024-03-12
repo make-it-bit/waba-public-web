@@ -85,16 +85,22 @@ const FAQ = ({ faqPageData }) => {
           <div className="container md:px-12 px-0">
             <div className="grid grid-cols-12">
               <div className="xl:static relative md:col-start-3 md:col-span-8 col-span-12">
+                <ScrollableNavbar
+                  scrollableNavbarRef={scrollContainerRef}
+                  pageIndex={pageIndex}
+                  navbarItems={navbarItems}
+                  handleClick={setPageIndex}
+                  justify="justify-between"
+                />
                 {gradientLeftIsVisible && (
-                  <>
+                  <div className="z-10">
                     <div
                       className={classNames(
-                        'absolute top-1/2 translate-y-neg-1/2 left-[-1px] h-[29px] w-80',
-
+                        'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-80',
                         styles.gradientLeft
                       )}
-                    ></div>
-                    <div className="absolute top-1/2 translate-y-neg-1/2 left-[-1px] h-[29px] w-40">
+                    />
+                    <div className="absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40">
                       <Image
                         src="/icons/arrow-left.svg"
                         alt="arrow left"
@@ -103,26 +109,17 @@ const FAQ = ({ faqPageData }) => {
                         className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
                       />
                     </div>
-                  </>
+                  </div>
                 )}
-                <ScrollableNavbar
-                  scrollableNavbarRef={scrollContainerRef}
-                  pageIndex={pageIndex}
-                  navbarItems={navbarItems}
-                  handleClick={setPageIndex}
-                  justify="justify-between"
-                />
                 {gradientRightIsVisible && (
-                  <>
+                  <div className="z-10">
                     <div
                       className={classNames(
-
-                        'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-80',
-
+                        'absolute top-1/2 translate-y-neg-1/2 right-0 h-[29px] w-80',
                         styles.gradientRight
                       )}
-                    ></div>
-                    <div className="absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-80">
+                    />
+                    <div className="absolute top-1/2 translate-y-neg-1/2 right-0 h-[29px] w-40">
                       <Image
                         src="/icons/arrow-right.svg"
                         alt="arrow right"
@@ -131,7 +128,7 @@ const FAQ = ({ faqPageData }) => {
                         className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
                       />
                     </div>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
