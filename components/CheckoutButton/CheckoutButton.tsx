@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useLogger } from 'next-axiom';
 
 import { Button } from '@/gui-components/client';
 
@@ -17,14 +18,22 @@ const CheckoutButton = ({
   quantity: number;
   setInitCheckoutError: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const log = useLogger();
+
   const initCheckout = async () => {
     try {
+      log.info('Checkout process started (button clicked).', { quantity: quantity ? quantity : null });
       const response = await fetch(`/api/shopify/checkout?quantity=${quantity}`);
-      if (!response.ok) return setInitCheckoutError('Network response was not ok.');
+      if (!response.ok) {
+        log.error('Checkout process failed. Network response was not ok.', { response: response });
+        return setInitCheckoutError('Network response was not ok.');
+      }
       const { data } = await response.json();
       window.location.href = data.URL;
+      log.info('Checkout process in progress. Redirecting to checkout page.', { data: data });
     } catch (error) {
       console.log('error: ', error);
+      log.error('Checkout process failed. Something went wrong.', { error: error });
       setInitCheckoutError('Something went wrong. Please try again.');
     }
   };
