@@ -7,6 +7,7 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const Video = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
+  const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -17,20 +18,33 @@ const Video = ({ videoData }) => {
     currentCanvasWidth &&
     (currentCanvasWidth >= 736 ? videoData.desktop_images.data.length : videoData.mobile_images.data.length);
 
-  const currentFrame = (index) => {
-    if (currentCanvasWidth) {
-      if (currentCanvasWidth >= 736) {
-        const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
-        return frame;
-      }
-      const frame = getImageFullUrl_client(videoData.mobile_images?.data?.[index]);
-      return frame;
-    }
-  };
   // const currentFrame = (index) => {
-  //   const url = `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index}.jpg`;
-  //   return url;
+  //   if (currentCanvasWidth) {
+  //     if (currentCanvasWidth >= 736) {
+  //       const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
+  //       return frame;
+  //     }
+  //     const frame = getImageFullUrl_client(videoData.mobile_images?.data?.[index]);
+  //     return frame;
+  //   }
   // };
+
+  const currentFrame = (index) => preloadedImages[index]; // Use preloaded images
+
+  useEffect(() => {
+    // Preload images and store them in state
+    const preloadImages = () => {
+      const imagesToPreload = currentCanvasWidth >= 736 ? videoData.desktop_images.data : videoData.mobile_images.data;
+      const loadedImages = imagesToPreload.map((src) => {
+        const img = new Image();
+        img.src = getImageFullUrl_client(src);
+        return img;
+      });
+      setPreloadedImages(loadedImages);
+    };
+
+    preloadImages();
+  }, [videoData, currentCanvasWidth]); // Depend on currentCanvasWidth to choose the right set of images
 
   const getCorrectCavasWidth = () => {
     if (window.innerWidth > 1535) return 1504;
@@ -55,14 +69,6 @@ const Video = ({ videoData }) => {
 
   // set up canvas and images when page is loaded
   useEffect(() => {
-    // preload images
-    const preloadImages = () => {
-      for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
-      }
-    };
-    preloadImages();
     // set canvas width
     const canvas = canvasRef.current;
     if (canvas === null) return;
@@ -81,19 +87,24 @@ const Video = ({ videoData }) => {
 
     const updateImage = (index) => {
       const canvas = canvasRef.current;
-      if (canvas === null) return;
+      if (canvas === null || index >= preloadedImages.length) return;
       const context = canvas.getContext('2d');
       if (context === null) return;
+      const img = preloadedImages[index]; // This is already an HTMLImageElement
+      if (!img) return; // Check if the image is loaded
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = 'high';
-      const img = new Image();
-      img.src = currentFrame(index);
       img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height; // <-- these two are important for preserving the aspct ratio
-        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.width = img.naturalWidth; // Use naturalWidth and naturalHeight for original dimensions
+        canvas.height = img.naturalHeight;
+        context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
       };
-      //img.onload = () => context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+      // If the image is already loaded, draw it immediately
+      if (img.complete) {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+      }
     };
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
