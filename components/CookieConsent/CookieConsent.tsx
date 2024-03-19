@@ -12,7 +12,7 @@ const CookieConsent = ({ cookiesConsentData }) => {
 
   useEffect(() => {
     const consent = window.localStorage.getItem('gtaConsent');
-    if (!consent) setDisplayCookieConsent(true);
+    if (consent) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
