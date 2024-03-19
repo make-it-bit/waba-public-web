@@ -11,40 +11,9 @@ const Video = ({ videoData }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
-  if (!videoData.mobile_images?.data?.length) return <p>No images found.</p>;
-
   const frameCount =
     currentCanvasWidth &&
     (currentCanvasWidth >= 736 ? videoData.desktop_images.data.length : videoData.mobile_images.data.length);
-
-  // const currentFrame = (index) => {
-  //   if (currentCanvasWidth) {
-  //     if (currentCanvasWidth >= 736) {
-  //       const frame = getImageFullUrl_client(videoData.desktop_images?.data?.[index]);
-  //       return frame;
-  //     }
-  //     const frame = getImageFullUrl_client(videoData.mobile_images?.data?.[index]);
-  //     return frame;
-  //   }
-  // };
-
-  const currentFrame = (index) => preloadedImages[index]; // Use preloaded images
-
-  useEffect(() => {
-    // Preload images and store them in state
-    const preloadImages = () => {
-      const imagesToPreload = currentCanvasWidth >= 736 ? videoData.desktop_images.data : videoData.mobile_images.data;
-      const loadedImages = imagesToPreload.map((src) => {
-        const img = new Image();
-        img.src = getImageFullUrl_client(src);
-        return img;
-      });
-      setPreloadedImages(loadedImages);
-    };
-
-    preloadImages();
-  }, [videoData, currentCanvasWidth]); // Depend on currentCanvasWidth to choose the right set of images
 
   const getCorrectCavasWidth = () => {
     if (window.innerWidth > 1535) return 1504;
@@ -78,6 +47,38 @@ const Video = ({ videoData }) => {
     setCurrentCanvasWidth(correctWidth);
     const correctHeight = getCorrectCanvasHeight(correctWidth);
     canvas.height = correctHeight;
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+
+    const handleScroll = () => {
+      if (canvas && container) {
+        const scrollTop = window.scrollY;
+        const containerTop = container?.offsetTop;
+        const containerHeight = container?.offsetHeight;
+        const canvasHeight = canvas?.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const offset = window.innerWidth > 1023 ? 137 : 98;
+
+        if (containerTop && containerHeight && canvasHeight) {
+          // check if the canvas is in the viewport
+          if (scrollTop > containerTop - offset && scrollTop < containerTop + containerHeight - canvasHeight + offset) {
+            let newPosition = offset + (scrollTop - containerTop + offset);
+            // limit until the middle of the screen
+            newPosition = Math.min(newPosition, windowHeight / 2 - canvasHeight / 2 + offset / 2);
+            canvas.style.top = `${newPosition}px`;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // handle image change and canvas resize when screen size changes
@@ -141,36 +142,22 @@ const Video = ({ videoData }) => {
   }, [currentCanvasWidth, frameCount]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const container = containerRef.current;
-
-    const handleScroll = () => {
-      if (canvas && container) {
-        const scrollTop = window.scrollY;
-        const containerTop = container?.offsetTop;
-        const containerHeight = container?.offsetHeight;
-        const canvasHeight = canvas?.offsetHeight;
-        const windowHeight = window.innerHeight;
-        const offset = window.innerWidth > 1023 ? 137 : 98;
-
-        if (containerTop && containerHeight && canvasHeight) {
-          // check if the canvas is in the viewport
-          if (scrollTop > containerTop - offset && scrollTop < containerTop + containerHeight - canvasHeight + offset) {
-            let newPosition = offset + (scrollTop - containerTop + offset);
-            // limit until the middle of the screen
-            newPosition = Math.min(newPosition, windowHeight / 2 - canvasHeight / 2 + offset / 2);
-            canvas.style.top = `${newPosition}px`;
-          }
-        }
-      }
+    // Preload images and store them in state
+    const preloadImages = () => {
+      const imagesToPreload = currentCanvasWidth >= 736 ? videoData.desktop_images.data : videoData.mobile_images.data;
+      const loadedImages = imagesToPreload.map((src) => {
+        const img = new Image();
+        img.src = getImageFullUrl_client(src);
+        return img;
+      });
+      setPreloadedImages(loadedImages);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    preloadImages();
+  }, [videoData, currentCanvasWidth]);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
+  if (!videoData.mobile_images?.data?.length) return <p>No images found.</p>;
 
   return (
     <div ref={containerRef} className="container">

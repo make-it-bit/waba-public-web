@@ -8,12 +8,12 @@ import { marked } from 'marked';
 import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
-  const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
+  const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
     const consent = window.localStorage.getItem('gtaConsent');
-    if (consent) setDisplayCookieConsent(true);
+    if (!consent) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
