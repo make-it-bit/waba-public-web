@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const Video = ({ videoData }) => {
-  const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
+  const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number>(0);
+  // const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
