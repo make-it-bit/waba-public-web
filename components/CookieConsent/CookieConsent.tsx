@@ -9,7 +9,7 @@ import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
   const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
-  const [displayReadMore, setDisplayReadMore] = useState(true);
+  const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
     const consent = window.localStorage.getItem('gtaConsent');
