@@ -44,12 +44,12 @@ const CookieConsent = ({ cookiesConsentData }) => {
                 <Button
                   CTA={cookiesConsentData.accept_all_button_text}
                   style="tertiary"
-                  onClick={() => setCookieConsent('granted')}
+                  // onClick={() => setCookieConsent('granted')}
                 />
                 <Button
                   CTA={cookiesConsentData.accept_necessary_button_text}
                   style="quaternary"
-                  onClick={() => setCookieConsent('denied')}
+                  // onClick={() => setCookieConsent('denied')}
                 />
                 <Button
                   CTA={
