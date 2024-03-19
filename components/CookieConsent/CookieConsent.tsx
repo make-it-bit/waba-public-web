@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-// import ReactMarkdown from 'react-markdown';
-// import rehypeRaw from 'rehype-raw';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import { marked } from 'marked';
 
 import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
-  const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
-  const [displayReadMore, setDisplayReadMore] = useState(false);
+  const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
+  const [displayReadMore, setDisplayReadMore] = useState(true);
 
   useEffect(() => {
     const consent = window.localStorage.getItem('gtaConsent');
-    if (!consent) setDisplayCookieConsent(true);
+    if (consent) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
@@ -34,28 +35,33 @@ const CookieConsent = ({ cookiesConsentData }) => {
           <div className="flex flex-col">
             <div className="flex flex-wrap sm:justify-between justify-center items-center gap-x-32 gap-y-16 py-12">
               <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0">
-                {cookiesConsentData.read_less_text && (
-                  <div>{cookiesConsentData.read_less_text}</div>
+                {cookiesConsentData?.read_less_text && (
+                  // <div>{cookiesConsentData?.read_less_text}</div>
                   // REACT MARKDOWN MAKES THE SITE CRASH
-                  // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown>
+                  // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_less_text}</ReactMarkdown>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: marked(cookiesConsentData?.read_less_text),
+                    }}
+                  />
                 )}
               </div>
               <div className="flex sm:flex-row flex-col gap-16 sm:w-auto w-full">
                 <Button
-                  CTA={cookiesConsentData.accept_all_button_text}
+                  CTA={cookiesConsentData?.accept_all_button_text}
                   style="tertiary"
                   onClick={() => setCookieConsent('granted')}
                 />
                 <Button
-                  CTA={cookiesConsentData.accept_necessary_button_text}
+                  CTA={cookiesConsentData?.accept_necessary_button_text}
                   style="quaternary"
                   onClick={() => setCookieConsent('denied')}
                 />
                 <Button
                   CTA={
                     displayReadMore
-                      ? cookiesConsentData.read_less_button_text
-                      : cookiesConsentData.read_more_button_text
+                      ? cookiesConsentData?.read_less_button_text
+                      : cookiesConsentData?.read_more_button_text
                   }
                   style="quaternary"
                   onClick={() => setDisplayReadMore(!displayReadMore)}
@@ -65,10 +71,15 @@ const CookieConsent = ({ cookiesConsentData }) => {
             {displayReadMore && (
               <div className="w-full">
                 <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
-                  {cookiesConsentData.read_more_text && (
-                    <div>{cookiesConsentData.read_more_text}</div>
+                  {cookiesConsentData?.read_more_text && (
+                    // <div>{cookiesConsentData?.read_more_text}</div>
                     // REACT MARKDOWN MAKES THE SITE CRASH
-                    // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
+                    // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_more_text}</ReactMarkdown>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: marked(cookiesConsentData?.read_more_text),
+                      }}
+                    />
                   )}
                 </div>
               </div>
