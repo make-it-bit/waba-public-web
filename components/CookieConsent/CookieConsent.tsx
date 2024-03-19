@@ -8,24 +8,24 @@ import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
   const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
-  const [displayReadMore, setDisplayReadMore] = useState(false);
+  const [displayReadMore, setDisplayReadMore] = useState(true);
 
-  useEffect(() => {
-    const consent = window.localStorage.getItem('gtaConsent');
-    if (consent) setDisplayCookieConsent(true);
-  }, []);
+  // useEffect(() => {
+  //   const consent = window.localStorage.getItem('gtaConsent');
+  //   if (consent) setDisplayCookieConsent(true);
+  // }, []);
 
-  const setCookieConsent = (status) => {
-    if (status === 'granted') {
-      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-        window.gtag('consent', 'update', { analytics_storage: 'granted' });
-      }
-      window.localStorage.setItem('gtaConsent', 'granted');
-    } else {
-      window.localStorage.setItem('gtaConsent', 'denied');
-    }
-    setDisplayCookieConsent(false);
-  };
+  // const setCookieConsent = (status) => {
+  //   if (status === 'granted') {
+  //     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+  //       window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  //     }
+  //     window.localStorage.setItem('gtaConsent', 'granted');
+  //   } else {
+  //     window.localStorage.setItem('gtaConsent', 'denied');
+  //   }
+  //   setDisplayCookieConsent(false);
+  // };
 
   return (
     displayCookieConsent && (
