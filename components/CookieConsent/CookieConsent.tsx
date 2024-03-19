@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { marked } from 'marked';
 
 import { Button } from '@/gui-components/client';
 
 const CookieConsent = ({ cookiesConsentData }) => {
-  const [displayCookieConsent, setDisplayCookieConsent] = useState(false);
+  const [displayCookieConsent, setDisplayCookieConsent] = useState(true);
   const [displayReadMore, setDisplayReadMore] = useState(true);
 
   // useEffect(() => {
@@ -37,7 +38,12 @@ const CookieConsent = ({ cookiesConsentData }) => {
                 {cookiesConsentData?.read_less_text && (
                   // <div>{cookiesConsentData?.read_less_text}</div>
                   // REACT MARKDOWN MAKES THE SITE CRASH
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_less_text}</ReactMarkdown>
+                  // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_less_text}</ReactMarkdown>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: marked(cookiesConsentData?.read_less_text),
+                    }}
+                  />
                 )}
               </div>
               <div className="flex sm:flex-row flex-col gap-16 sm:w-auto w-full">
@@ -68,7 +74,12 @@ const CookieConsent = ({ cookiesConsentData }) => {
                   {cookiesConsentData?.read_more_text && (
                     // <div>{cookiesConsentData?.read_more_text}</div>
                     // REACT MARKDOWN MAKES THE SITE CRASH
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_more_text}</ReactMarkdown>
+                    // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_more_text}</ReactMarkdown>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: marked(cookiesConsentData?.read_more_text),
+                      }}
+                    />
                   )}
                 </div>
               </div>
