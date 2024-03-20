@@ -140,7 +140,7 @@ const Video = ({ videoData }) => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleCanvasResize);
     };
-  }, [currentCanvasWidth, frameCount]);
+  }, [currentCanvasWidth, frameCount, preloadedImages]);
 
   useEffect(() => {
     // Preload images and store them in state
