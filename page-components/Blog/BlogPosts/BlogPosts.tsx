@@ -29,7 +29,7 @@ const BlogPost = ({ image, slug, categories, title, author, date }) => {
         <Link href={`/blog${slug}`}>
           <div className="flex flex-col">
             <p className="md:text-2xl md:leading-2xl text-xl leading-xl">{title}</p>
-            <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>
+            {author && date && <p className="text-base leading-base text-black-60">{`${author} ﹒ ${date}`}</p>}
           </div>
         </Link>
       </div>
@@ -177,7 +177,7 @@ const BlogPosts = ({ blogData, blogPosts }) => {
               <div className="flex flex-col gap-8">
                 <p className="text-base leading-base font-bold mb-4">{blogData.follow_title}</p>
                 {blogData.socials_tags.data.map((social, index) => (
-                  <Link key={index} href="#" target="_blank">
+                  <Link key={index} href={social.attributes.href ?? '#'} target={social.attributes.target}>
                     <Tag text={social.attributes.text} svg={getImageFullUrl_client(social.attributes.logo.data)} />
                   </Link>
                 ))}
