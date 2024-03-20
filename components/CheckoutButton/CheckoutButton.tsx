@@ -26,7 +26,8 @@ const CheckoutButton = ({
       const response = await fetch(`/api/shopify/checkout?quantity=${quantity}`);
       if (!response.ok) {
         log.error('Checkout process failed. Network response was not ok.', { response: response });
-        return setInitCheckoutError('Network response was not ok.');
+
+        return setInitCheckoutError(`Currently only e-mail based checkout is available.`);
       }
       const { data } = await response.json();
       window.location.href = data.URL;

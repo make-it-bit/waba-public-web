@@ -53,7 +53,14 @@ const Checkout = ({ mainInfoData }) => {
         </div>
       </div>
       {initCheckoutError && (
-        <p className="text-xs text-center leading-xs text-signal-red-100 mt-8">{initCheckoutError}</p>
+        <>
+          <p className="text-xs text-center leading-xs text-signal-red-100 mt-8">
+            {initCheckoutError} Please contact us via{' '}
+            <a className="underline" href="mailto:info@wabaskin.com">
+              info@wabaskin.com
+            </a>
+          </p>
+        </>
       )}
     </>
   );
