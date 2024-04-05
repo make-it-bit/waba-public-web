@@ -49,9 +49,11 @@ const Foundations = ({ foundationsData }) => {
               />
             </div>
           </div>
-          <Link href={foundationsData.button.href_src} className="contents justify-center">
-            <Button CTA={foundationsData.button.href_text} svg />
-          </Link>
+          {foundationsData.button && (
+            <Link href={foundationsData.button.href_src} className="contents justify-center">
+              <Button CTA={foundationsData.button.href_text} svg />
+            </Link>
+          )}
         </div>
       </div>
     </div>

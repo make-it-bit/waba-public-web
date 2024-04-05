@@ -14,36 +14,21 @@ import { Button } from '@/gui-components/client';
 import styles from './_hero.module.scss';
 
 const Hero = ({ heroData }) => {
-  const [video, setVideo] = useState(false);
-
-  useEffect(() => {
-    setVideo(true);
-  }, []);
-
   return (
     <div className={classNames('relative lg:block flex flex-col lg:min-h-screen overflow-hidden', styles.background)}>
-      {video ? (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1] order-2 lg:mt-0 mt-32"
-        >
-          <source
-            src={getImageFullUrl_client(heroData.background_video.data)}
-            type={heroData.background_video.data.attributes.mime}
-          />
-        </video>
-      ) : (
-        <Image
-          src={getImageFullUrl_client(heroData.background_video_first_frame.data)}
-          alt="hero video first frame"
-          width={1920}
-          height={1080}
-          className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain lg:z-[-1] order-2 lg:mt-0 mt-32"
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="lg:absolute lg:top-0 top-144 lg:left-248 left-0 w-full lg:h-full lg:object-cover object-contain mix-blend-darken lg:z-[-1] order-2 lg:mt-0 mt-32"
+      >
+        <source
+          src={getImageFullUrl_client(heroData.background_video.data)}
+          type={heroData.background_video.data.attributes.mime}
         />
-      )}
+      </video>
       <div className="container relative order-1">
         <div className="lg:grid grid-cols-12">
           <div className="col-start-1 xl:col-span-6 col-span-4 flex flex-col lg:items-start items-center lg:text-left text-center lg:mt-248 mt-56 lg:mb-104">

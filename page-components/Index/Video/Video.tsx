@@ -7,10 +7,15 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const Video = ({ videoData }) => {
   const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number>(0);
-  // const [currentCanvasWidth, setCurrentCanvasWidth] = useState<number | null>(null);
   const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const mdHeight = `md:h-[${videoData.desktop_scroll_height}vh]`;
+  const smHeight = `h-[${videoData.mobile_scroll_height}vh]`;
+
+  if (!videoData.desktop_images?.data?.length) return <p>No images found.</p>;
+  if (!videoData.mobile_images?.data?.length) return <p>No images found.</p>;
 
   const frameCount =
     currentCanvasWidth &&
@@ -162,7 +167,7 @@ const Video = ({ videoData }) => {
 
   return (
     <div ref={containerRef} className="container">
-      <div className="relative flex flex-col md:h-[600vh] h-[700vh]">
+      <div className={classNames('relative flex flex-col', mdHeight, smHeight)}>
         <div className="absolute md:top-96 top-48 z-10 w-full">
           <div className="grid grid-cols-12">
             <div className="col-span-12 text-center">
