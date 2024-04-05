@@ -5,7 +5,7 @@
 
 .slider {
   @media (min-width: 768px) {
-    animation: scroll 50s linear infinite;
+    animation: scroll 60s linear infinite;
     width: calc(428px * var(--len) * 1);
   }
 }
