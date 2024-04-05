@@ -1,0 +1,6 @@
+.scrollHeight {
+  @media (min-width: 768px) {
+    height: calc(0vh + var(--desktopScrollHeight));
+  }
+  height: calc(0vh + var(--mobileScrollHeight));
+}
