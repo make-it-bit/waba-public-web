@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { marked } from 'marked';
 
 import { Button } from '@/gui-components/client';
 
@@ -11,15 +12,18 @@ const CookieConsent = ({ cookiesConsentData }) => {
   const [displayReadMore, setDisplayReadMore] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem('gtaConsent')) setDisplayCookieConsent(true);
+    const consent = window.localStorage.getItem('gtaConsent');
+    if (!consent) setDisplayCookieConsent(true);
   }, []);
 
   const setCookieConsent = (status) => {
     if (status === 'granted') {
-      window.gtag('consent', 'update', { analytics_storage: 'granted' });
-      localStorage.setItem('gtaConsent', 'granted');
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+      window.localStorage.setItem('gtaConsent', 'granted');
     } else {
-      localStorage.setItem('gtaConsent', 'denied');
+      window.localStorage.setItem('gtaConsent', 'denied');
     }
     setDisplayCookieConsent(false);
   };
@@ -31,40 +35,52 @@ const CookieConsent = ({ cookiesConsentData }) => {
           <div className="flex flex-col">
             <div className="flex flex-wrap sm:justify-between justify-center items-center gap-x-32 gap-y-16 py-12">
               <div className="text-base leading-base text-neutral-100 sm:text-justify text-center m-0">
-                <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_less_text}</ReactMarkdown>
+                {cookiesConsentData?.read_less_text && (
+                  // <div>{cookiesConsentData?.read_less_text}</div>
+                  // REACT MARKDOWN MAKES THE SITE CRASH
+                  // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_less_text}</ReactMarkdown>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: marked(cookiesConsentData?.read_less_text),
+                    }}
+                  />
+                )}
               </div>
               <div className="flex sm:flex-row flex-col gap-16 sm:w-auto w-full">
                 <Button
-                  CTA={cookiesConsentData.accept_all_button_text}
+                  CTA={cookiesConsentData?.accept_all_button_text}
                   style="tertiary"
-                  onClick={() => {
-                    setCookieConsent('granted');
-                  }}
+                  onClick={() => setCookieConsent('granted')}
                 />
                 <Button
-                  CTA={cookiesConsentData.accept_necessary_button_text}
+                  CTA={cookiesConsentData?.accept_necessary_button_text}
                   style="quaternary"
-                  onClick={() => {
-                    setCookieConsent('denied');
-                  }}
+                  onClick={() => setCookieConsent('denied')}
                 />
                 <Button
                   CTA={
                     displayReadMore
-                      ? cookiesConsentData.read_less_button_text
-                      : cookiesConsentData.read_more_button_text
+                      ? cookiesConsentData?.read_less_button_text
+                      : cookiesConsentData?.read_more_button_text
                   }
                   style="quaternary"
-                  onClick={() => {
-                    setDisplayReadMore(!displayReadMore);
-                  }}
+                  onClick={() => setDisplayReadMore(!displayReadMore)}
                 />
               </div>
             </div>
             {displayReadMore && (
               <div className="w-full">
                 <div className="text-base leading-base text-neutral-100 sm:text-justify text-center my-12">
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData.read_more_text}</ReactMarkdown>
+                  {cookiesConsentData?.read_more_text && (
+                    // <div>{cookiesConsentData?.read_more_text}</div>
+                    // REACT MARKDOWN MAKES THE SITE CRASH
+                    // <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cookiesConsentData?.read_more_text}</ReactMarkdown>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: marked(cookiesConsentData?.read_more_text),
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             )}

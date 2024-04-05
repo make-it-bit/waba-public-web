@@ -6,7 +6,6 @@ import { DM_Sans } from 'next/font/google';
 import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
-
 import { CookieConsent } from '@/components';
 import { PromoBar, Navbar } from '@/page-components';
 

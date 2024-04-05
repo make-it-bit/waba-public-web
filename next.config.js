@@ -14,7 +14,7 @@ module.exports = withAxiom({
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: /* 'waba-strapi.fly.dev' */ 'wabaskin.eu',
+        hostname: 'wabaskin.eu',
         pathname: '**',
       },
       {

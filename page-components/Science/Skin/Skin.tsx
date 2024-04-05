@@ -75,10 +75,7 @@ const Skin = ({ skinData }) => {
         {gradientLeftIsVisible && (
           <>
             <div
-              className={classNames(
-                'absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40 blur-sm',
-                styles.gradientLeft
-              )}
+              className={classNames('absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40', styles.gradientLeft)}
             ></div>
             <div className="absolute top-1/2 translate-y-neg-1/2 left-0 h-[29px] w-40">
               <Image
@@ -102,7 +99,7 @@ const Skin = ({ skinData }) => {
           <>
             <div
               className={classNames(
-                'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40 blur-sm',
+                'absolute top-1/2 translate-y-neg-1/2 right-[-1px] h-[29px] w-40',
                 styles.gradientRight
               )}
             ></div>
