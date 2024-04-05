@@ -86,8 +86,12 @@ const indexPageNestedComponents = [
   'foundation.button',
   'peek_inside.desktop_images',
   'peek_inside.mobile_images',
-  'testimonial.user_stories.image',
-  'testimonial.user_stories.button',
+  'testimonial.foundation_card_1.icon',
+  'testimonial.foundation_card_1.background_image',
+  'testimonial.foundation_card_2.icon',
+  'testimonial.foundation_card_2.background_image',
+  'testimonial.foundation_card_3.icon',
+  'testimonial.foundation_card_3.background_image',
 ];
 const productPageNestedComponents = [
   'seo',
