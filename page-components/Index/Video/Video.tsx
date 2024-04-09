@@ -133,7 +133,7 @@ const Video = ({ videoData }) => {
             ? (videoData.desktop_scroll_height * viewportHeight) / 100
             : (videoData.mobile_scroll_height * viewportHeight) / 100;
         // additionalPX is needed to make the scroll more accurate and so that the last image is shown
-        const additionalPX = currentCanvasWidth >= 736 ? 550 : 1050;
+        const additionalPX = currentCanvasWidth >= 736 ? 750 : 1050;
         const scrollFraction = containerScrollTop / (customScrollHeightInPX - additionalPX);
         const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
         requestAnimationFrame(() => updateImage(frameIndex + 1));
