@@ -1,4 +1,4 @@
-import { Logger } from 'next-axiom';
+/* import { Logger } from 'next-axiom';
 
 export async function GET(req) {
   const log = new Logger();
@@ -14,4 +14,12 @@ export async function GET(req) {
     await log.flush();
     return Response('error fetching website', { status: 400 });
   }
+} */
+
+export async function GET() {
+  await fetch('http://wabaskin.com', {
+    cache: 'no-store',
+  });
+
+  return Response.json({ message: 'website fetched' });
 }
