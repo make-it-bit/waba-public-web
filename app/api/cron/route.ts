@@ -1,6 +1,9 @@
-/* import { Logger } from 'next-axiom';
+import { NextResponse } from 'next/server';
+import { Logger } from 'next-axiom';
 
-export async function GET(req) {
+export const runtime = 'edge';
+
+export async function GET() {
   const log = new Logger();
 
   try {
@@ -8,18 +11,10 @@ export async function GET(req) {
 
     log.info('Website (http://wabaskin.com) fetched.');
     await log.flush();
-    return new Response('website fetched', { status: 200 });
+    return NextResponse.json({ message: 'Website fetched.' }, { status: 200 });
   } catch (error) {
     log.error('Error fetching website (http://wabaskin.com).', { error: error.message });
     await log.flush();
-    return Response('error fetching website', { status: 400 });
+    return NextResponse.json({ message: 'Error fetching website.' }, { status: 400 });
   }
-} */
-
-export async function GET() {
-  await fetch('http://wabaskin.com', {
-    cache: 'no-store',
-  });
-
-  return Response.json({ message: 'website fetched' });
 }
