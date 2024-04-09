@@ -63,9 +63,9 @@ const Video = ({ videoData }) => {
     const handleScroll = () => {
       if (canvas && container) {
         const scrollTop = window.scrollY;
-        const containerTop = container?.offsetTop;
-        const containerHeight = container?.offsetHeight;
-        const canvasHeight = canvas?.offsetHeight;
+        const containerTop = container.offsetTop;
+        const containerHeight = container.offsetHeight;
+        const canvasHeight = canvas.offsetHeight;
         const windowHeight = window.innerHeight;
         const offset = window.innerWidth > 1023 ? 137 : 98;
 
@@ -114,6 +114,7 @@ const Video = ({ videoData }) => {
         context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
       }
     };
+
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
       if (correctWidth === null || correctWidth === currentCanvasWidth) return;
@@ -122,6 +123,7 @@ const Video = ({ videoData }) => {
       const correctHeight = getCorrectCanvasHeight(correctWidth);
       canvas.height = correctHeight;
     };
+
     const handleScroll = () => {
       if (containerRef.current) {
         const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop;
