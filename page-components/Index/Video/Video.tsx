@@ -126,16 +126,17 @@ const Video = ({ videoData }) => {
 
     const handleScroll = () => {
       if (containerRef.current) {
+        const viewportHeight = window.innerHeight;
         const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop;
-        const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-        // start the animation when the container is in the viewport
-        if (containerScrollTop + 500 >= 0) {
-          const scrollFraction = (containerScrollTop + 500) / (maxScrollTop * 0.45);
-          const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
-          requestAnimationFrame(() => {
-            if (frameIndex + 1 < frameCount) updateImage(frameIndex + 1);
-          });
-        }
+        const customScrollHeightInPX =
+          currentCanvasWidth >= 736
+            ? (videoData.desktop_scroll_height * viewportHeight) / 100
+            : (videoData.mobile_scroll_height * viewportHeight) / 100;
+        // additionalPX is needed to make the scroll more accurate and so that the last image is shown
+        const additionalPX = currentCanvasWidth >= 736 ? 550 : 1050;
+        const scrollFraction = containerScrollTop / (customScrollHeightInPX - additionalPX);
+        const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
+        requestAnimationFrame(() => updateImage(frameIndex + 1));
       }
     };
 
