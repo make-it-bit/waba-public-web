@@ -127,13 +127,14 @@ const Video = ({ videoData }) => {
     const handleScroll = () => {
       if (containerRef.current) {
         const viewportHeight = window.innerHeight;
-        const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop;
+        // add the 550px to make the images appear a bit earlier
+        const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop + 750;
         const customScrollHeightInPX =
           currentCanvasWidth >= 736
             ? (videoData.desktop_scroll_height * viewportHeight) / 100
             : (videoData.mobile_scroll_height * viewportHeight) / 100;
         // additionalPX is needed to make the scroll more accurate and so that the last image is shown
-        const additionalPX = currentCanvasWidth >= 736 ? 750 : 1050;
+        const additionalPX = currentCanvasWidth >= 736 ? 150 : 250;
         const scrollFraction = containerScrollTop / (customScrollHeightInPX - additionalPX);
         const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
         requestAnimationFrame(() => updateImage(frameIndex + 1));
