@@ -137,7 +137,6 @@ const Video = ({ videoData }) => {
         const additionalPX = currentCanvasWidth >= 736 ? 150 : 250;
         const scrollFraction = containerScrollTop / (customScrollHeightInPX - additionalPX);
         const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
-        console.log('frameIndex: ', frameIndex);
         requestAnimationFrame(() => updateImage(frameIndex + 1));
       }
     };
