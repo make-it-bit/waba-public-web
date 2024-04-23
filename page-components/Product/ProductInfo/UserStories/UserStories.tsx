@@ -22,6 +22,7 @@ const UserStories = ({ title, userStoriesData }) => {
             border
             content={userStory.attributes.story}
             resultImage={getImageFullUrl_client(userStory.attributes.result_image.data)}
+            imageFit={userStory.attributes.image_fit}
           />
         ))}
       </div>

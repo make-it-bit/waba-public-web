@@ -28,8 +28,7 @@ export async function generateMetadata() {
     },
     openGraph: {
       images: [
-        `/api/og?title=${sciencePageData.attributes.seo?.title ?? ''}&desc=${
-          sciencePageData.attributes.seo?.description ?? ''
+        `/api/og?title=${sciencePageData.attributes.seo?.title ?? ''}&desc=${sciencePageData.attributes.seo?.description ?? ''
         }` || null,
       ],
     },
@@ -60,7 +59,6 @@ const ScienceBehind = async () => {
         imageSide="right"
         animationImages={sciencePageData.attributes.text_image.animation_images}
       />
-      <ScienceWarranty warrantyData={sciencePageData.attributes.warranty} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
