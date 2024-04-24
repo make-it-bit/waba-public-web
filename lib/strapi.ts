@@ -92,6 +92,7 @@ const indexPageNestedComponents = [
   'testimonial.foundation_card_2.background_image',
   'testimonial.foundation_card_3.icon',
   'testimonial.foundation_card_3.background_image',
+  'testimonial.button',
 ];
 const productPageNestedComponents = [
   'seo',
