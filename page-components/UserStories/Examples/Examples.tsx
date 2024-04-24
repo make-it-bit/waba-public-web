@@ -4,20 +4,20 @@ import classNames from 'classnames';
 
 import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 
-const ExampleBlock = ({ title, image, contentArray }) => {
+const ExampleBlock = ({ title, image, contentArray, imageFit = 'cover' }) => {
   const subtitles = ['Target', 'Protocol', 'Result'];
 
   return (
     <div className="lg:col-start-2 col-start-1 lg:col-span-10 col-span-12">
       <p className="font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl text-center md:mb-64 mb-40">{title}</p>
       <div className="grid lg:grid-cols-10 grid-cols-12">
-        <div className="col-start-1 lg:col-span-4 md:col-span-5 col-span-12">
-          <div className="relative w-auto md:h-full h-[272px] md:mb-0 mb-64">
-            <Image src={image} alt="example image" fill className="absolute object-cover" />
+        <div className={classNames("col-start-1 col-span-12", imageFit === 'cover' ? 'md:col-span-5' : 'lg:col-span-4 md:col-span-5')}>
+          <div className="relative w-full md:h-full h-[300px] md:mb-0 mb-64">
+            <Image src={image} alt="example image" fill className={`object-${imageFit}`} />
           </div>
         </div>
-        <div className="lg:col-start-5 md:col-start-6 col-start-1 lg:col-span-6 md:col-span-7 col-span-12">
-          <div className="flex-flex-col md:ml-48">
+        <div className={classNames("col-start-1 lg:col-span-6 md:col-span-7 col-span-12", imageFit === 'cover' ? 'lg:col-start-6 md:col-start-6' : 'lg:col-start-5 md:col-start-6')}>
+          <div className={classNames("flex-flex-col", imageFit === 'contain' && 'md:ml-48')}>
             {contentArray.map((content, index) => (
               <div
                 key={index}
@@ -44,6 +44,7 @@ const Examples = ({ examplesData }) => {
               key={index}
               title={example.title}
               image={getImageFullUrl_server(example.image.data)}
+              imageFit={example.image_fit}
               contentArray={[example.target_text, example.protocol_text, example.result_text]}
             />
           ))}

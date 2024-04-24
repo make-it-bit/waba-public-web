@@ -25,8 +25,7 @@ export async function generateMetadata() {
     },
     openGraph: {
       images: [
-        `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${
-          userStoriesPageData.attributes.seo?.description ?? ''
+        `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${userStoriesPageData.attributes.seo?.description ?? ''
         }` || null,
       ],
     },
@@ -45,7 +44,6 @@ const UserStories = async () => {
       <UserStoriesHero userStoriesHeroData={userStoriesPageData.attributes.hero} />
       <Examples examplesData={userStoriesPageData.attributes.example} />
       <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} />
-      <UserStoriesWarranty warrantyData={userStoriesPageData.attributes.warranty} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
