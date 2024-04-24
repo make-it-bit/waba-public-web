@@ -10,6 +10,7 @@ const FormPagesHero = ({ image, title, content }) => {
       <Image
         src={image}
         alt="waba business-careers image"
+        quality={100}
         fill
         className="absolute w-full h-full object-cover inset-0 z-[-1]"
       />

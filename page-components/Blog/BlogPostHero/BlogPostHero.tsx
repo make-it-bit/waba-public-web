@@ -20,6 +20,7 @@ const BlogPostHero = ({ backToBlog, image, categories, title, description, autho
                 src={getImageFullUrl_server(image.data)}
                 alt="blog hero image"
                 fill
+                quality={100}
                 className="absolute object-cover"
               />
             </div>

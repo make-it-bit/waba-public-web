@@ -40,7 +40,7 @@ const TestimonialCard = ({
         >
           {image && (
             <div className="relative w-64 h-64">
-              <Image src={image} alt="image" fill className="absolute w-full h-full object-cover inset-0" />
+              <Image src={image} alt="image" fill quality={100} className="absolute w-full h-full object-cover inset-0" />
             </div>
           )}
           <h1 className="font-rufina text-xl leading-xl">{name}</h1>
@@ -56,7 +56,7 @@ const TestimonialCard = ({
         </div>
         {resultImage && (
           <div className='relative w-full h-[270px]'>
-            <Image src={resultImage} alt="result image" fill objectFit={imageFit} />
+            <Image src={resultImage} alt="result image" fill quality={100} objectFit={imageFit} />
           </div>)}
       </div>
     </div>

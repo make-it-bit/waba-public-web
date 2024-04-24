@@ -13,6 +13,7 @@ const UserStoriesHero = ({ userStoriesHeroData }) => {
         alt="user stories hero image"
         width={305}
         height={336}
+        quality={100}
         className="lg:block hidden absolute top-64 left-0"
       />
       <LazyLoadVideo
@@ -24,6 +25,7 @@ const UserStoriesHero = ({ userStoriesHeroData }) => {
           src={getImageFullUrl_server(userStoriesHeroData.background_media.data[3])}
           alt="user stories hero image"
           fill
+          quality={100}
           className="object-cover"
         />
       </div>
@@ -32,6 +34,7 @@ const UserStoriesHero = ({ userStoriesHeroData }) => {
         alt="user stories hero image"
         width={184}
         height={236}
+        quality={100}
         className="lg:hidden block absolute bottom-0 left-[-50px]"
       />
       <div className="container">
@@ -41,6 +44,7 @@ const UserStoriesHero = ({ userStoriesHeroData }) => {
             alt="user stories hero image"
             width={306}
             height={392}
+            quality={100}
             className="lg:block hidden absolute bottom-0 left-0"
           />
           <LazyLoadVideo

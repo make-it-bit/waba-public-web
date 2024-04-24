@@ -48,7 +48,7 @@ const ProductFAQ = ({ productFaqData }) => {
         if (
           scrollContainerRef.current.scrollLeft > 0 &&
           scrollContainerRef.current.scrollWidth <=
-            scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
+          scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
         ) {
           setGradientRightIsVisible(false);
         } else {
@@ -90,6 +90,7 @@ const ProductFAQ = ({ productFaqData }) => {
                       alt="arrow left"
                       width={8}
                       height={8}
+                      quality={100}
                       className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
                     />
                   </div>
@@ -116,6 +117,7 @@ const ProductFAQ = ({ productFaqData }) => {
                       alt="arrow right"
                       width={8}
                       height={8}
+                      quality={100}
                       className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
                     />
                   </div>

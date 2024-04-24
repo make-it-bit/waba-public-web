@@ -38,6 +38,7 @@ const NavbarDesktop = ({ navbarData }) => {
                 alt="waba logo"
                 width={96}
                 height={24}
+                quality={100}
               />
             </Link>
           </div>

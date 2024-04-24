@@ -39,6 +39,7 @@ const FoundationCard = ({
             src={getImageFullUrl_client(foundationCardData.background_image.data)}
             alt="foundation transition image"
             fill
+            quality={100}
             className={classNames('absolute w-full h-full object-cover inset-0', styles.image)}
           />
           <div className={classNames('absolute w-full h-full top-0 left-0', styles.gradient)}></div>
@@ -51,6 +52,7 @@ const FoundationCard = ({
             alt="icon"
             width={56}
             height={56}
+            quality={100}
             className={classNames('relative', styles.icon2)}
           />
         ) : (
@@ -59,6 +61,7 @@ const FoundationCard = ({
             alt="icon"
             width={56}
             height={56}
+            quality={100}
             className={classNames('relative', styles.icon1)}
           />
         ))}

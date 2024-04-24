@@ -36,6 +36,7 @@ const Difference = ({ differenceData }) => {
         alt="device"
         width={1038}
         height={585}
+        quality={100}
         className="absolute top-0 right-0"
       />
     </div>

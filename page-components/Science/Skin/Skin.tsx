@@ -50,7 +50,7 @@ const Skin = ({ skinData }) => {
         if (
           scrollContainerRef.current.scrollLeft > 0 &&
           scrollContainerRef.current.scrollWidth <=
-            scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
+          scrollContainerRef.current.scrollLeft + scrollContainerRef.current.clientWidth + 0.5
         ) {
           setGradientRightIsVisible(false);
         } else {
@@ -83,6 +83,7 @@ const Skin = ({ skinData }) => {
                 alt="arrow left"
                 width={8}
                 height={8}
+                quality={100}
                 className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
               />
             </div>
@@ -109,6 +110,7 @@ const Skin = ({ skinData }) => {
                 alt="arrow right"
                 width={8}
                 height={8}
+                quality={100}
                 className="absolute top-1/2 translate-y-neg-1/2 left-1/2 translate-x-neg-1/2 animate-scale"
               />
             </div>
@@ -124,24 +126,24 @@ const Skin = ({ skinData }) => {
                 <div className="flex flex-col gap-16">
                   {pageIndex === 0
                     ? element.attributes.description.split('\n').map((description, index) =>
-                        index % 2 === 0 ? (
-                          <p key={index} className="font-rufina text-2xl leading-2xl">
-                            {description}
-                          </p>
-                        ) : (
-                          <React.Fragment key={index}>
-                            <p className="text-sm leading-sm">{description}</p>
-                            {index !== element.attributes.description.split('\n').length - 1 && (
-                              <div className="border border-black-100 my-8"></div>
-                            )}
-                          </React.Fragment>
-                        )
-                      )
-                    : element.attributes.description.split('\n').map((description, index) => (
-                        <p key={index} className="text-sm leading-sm">
+                      index % 2 === 0 ? (
+                        <p key={index} className="font-rufina text-2xl leading-2xl">
                           {description}
                         </p>
-                      ))}
+                      ) : (
+                        <React.Fragment key={index}>
+                          <p className="text-sm leading-sm">{description}</p>
+                          {index !== element.attributes.description.split('\n').length - 1 && (
+                            <div className="border border-black-100 my-8"></div>
+                          )}
+                        </React.Fragment>
+                      )
+                    )
+                    : element.attributes.description.split('\n').map((description, index) => (
+                      <p key={index} className="text-sm leading-sm">
+                        {description}
+                      </p>
+                    ))}
                 </div>
               </div>
             </div>
@@ -152,6 +154,7 @@ const Skin = ({ skinData }) => {
                 src={getImageFullUrl_client(element.attributes.image.data)}
                 alt="ageing image"
                 fill
+                quality={100}
                 className="absolute object-cover"
               />
             </div>

@@ -59,13 +59,14 @@ const Footer = ({ footerData, small = false }) => {
                   alt="email"
                   width={56}
                   height={56}
+                  quality={100}
                 />
                 <h1 className="font-rufina text-4xl leading-4xl">{footerData.footer_top.title}</h1>
                 <p className="text-sm leading-sm">{footerData.footer_top.description}</p>
               </div>
               {messageStatus === 'success' ? (
                 <div className="bg-signal-green-10 flex justify-center items-center text-center gap-8 px-16 py-12">
-                  <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                  <Image src="/icons/check.svg" alt="check" width={16} height={16} quality={100} />
                   <p className="text-xs leading-xs text-signal-green-100">{message}</p>
                 </div>
               ) : (
@@ -133,6 +134,7 @@ const Footer = ({ footerData, small = false }) => {
                         alt={link.attributes.name}
                         width={16}
                         height={16}
+                        quality={100}
                       />
                     </Link>
                   ))}

@@ -53,6 +53,7 @@ const BeamVideo = ({ video, beamImage, deviceImages }) => {
         alt="device"
         width={232.5}
         height={459}
+        quality={100}
         className={classNames(
           'absolute max-md:right-0 max-md:m-auto left-0 md:left-[85px] lg:left-[185px] xl:left-[283px] 2xl:left-[390px]',
           styles.beamRays,
@@ -64,6 +65,7 @@ const BeamVideo = ({ video, beamImage, deviceImages }) => {
         alt="device"
         width={221}
         height={407}
+        quality={100}
         className="absolute bottom-[-121px] max-md:right-0 max-md:m-auto left-0 md:left-[90px] lg:left-[190px] xl:left-[290px] 2xl:left-[395px]"
       />
       <Image
@@ -71,6 +73,7 @@ const BeamVideo = ({ video, beamImage, deviceImages }) => {
         alt="device"
         width={243}
         height={45}
+        quality={100}
         className={classNames(
           'absolute bottom-[80px] max-md:right-0 max-md:m-auto left-0 md:left-[80px] lg:left-[180px] xl:left-[280px] 2xl:left-[385px]',
           styles.beamVideo,
@@ -82,6 +85,7 @@ const BeamVideo = ({ video, beamImage, deviceImages }) => {
         alt="device"
         width={303}
         height={123}
+        quality={100}
         className={classNames(
           'absolute bottom-[150px] max-md:right-0 max-md:m-auto left-0 md:left-[50px] lg:left-[150px] xl:left-[250px] 2xl:left-[355px]',
           styles.beamVideo,

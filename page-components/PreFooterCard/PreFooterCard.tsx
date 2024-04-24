@@ -21,6 +21,7 @@ const PreFooterCard = ({ preFooterCardData }) => {
               <Image
                 src={getImageFullUrl_server(pre_footer_card_1.background_image.data)}
                 fill
+                quality={100}
                 className="absolute w-full h-full object-cover object-right inset-0 z-[-1]"
                 alt="pre-footer image"
               />
@@ -41,6 +42,7 @@ const PreFooterCard = ({ preFooterCardData }) => {
               <Image
                 src={getImageFullUrl_server(pre_footer_card_2.background_image.data)}
                 fill
+                quality={100}
                 className="absolute w-full h-full object-cover inset-0 z-[-1]"
                 alt="pre-footer image"
               />

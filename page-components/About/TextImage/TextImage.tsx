@@ -98,6 +98,7 @@ const TextImage = ({
                       alt="changeable head"
                       width={145}
                       height={212}
+                      quality={100}
                       className="absolute top-1/4 translate-y-neg-1/4 translate-x-neg-1/2"
                     />
                     <Image
@@ -106,6 +107,7 @@ const TextImage = ({
                       alt="changeable head"
                       width={145}
                       height={212}
+                      quality={100}
                       className="absolute top-1/2 translate-y-neg-1/2 translate-x-neg-1/2"
                     />
                     <Image
@@ -114,11 +116,12 @@ const TextImage = ({
                       alt="changeable head"
                       width={145}
                       height={212}
+                      quality={100}
                       className="absolute top-3/4 translate-y-neg-3/4 translate-x-neg-1/2"
                     />
                   </>
                 )}
-                {image && <Image src={image} alt="about image" fill className="absolute object-cover" />}
+                {image && <Image src={image} alt="about image" quality={100} fill className="absolute object-cover" />}
               </div>
             </div>
           </>
@@ -127,7 +130,7 @@ const TextImage = ({
             {image && (
               <div className="col-start-1 sm:col-span-5 col-span-12 sm:order-1 order-2 sm:my-80 mt-112">
                 <div className="relative w-auto h-[670px]">
-                  <Image src={image} alt="about image" fill className="absolute object-cover" />
+                  <Image src={image} alt="about image" quality={100} fill className="absolute object-cover" />
                 </div>
               </div>
             )}

@@ -23,6 +23,7 @@ const ScienceWarranty = ({ warrantyData }) => {
                 alt="doctor"
                 width={878}
                 height={1228}
+                quality={100}
                 className={classNames(
                   'absolute md:top-[-192px] top-64 xl:left-[-104px] lg:left-[-168px] md:left-[-272px]',
                   styles.imageTop
