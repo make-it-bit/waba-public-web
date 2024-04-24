@@ -30,6 +30,7 @@ const Checkout = ({ mainInfoData }) => {
               src={getImageFullUrl_client(mainInfoData.powered_by_logos.data[0])}
               width={35}
               height={21}
+              quality={100}
               alt="stripe"
             />
           </div>
@@ -47,6 +48,7 @@ const Checkout = ({ mainInfoData }) => {
               src={getImageFullUrl_client(mainInfoData.powered_by_logos.data[1])}
               width={45}
               height={13}
+              quality={100}
               alt="klarna"
             />
           </div>

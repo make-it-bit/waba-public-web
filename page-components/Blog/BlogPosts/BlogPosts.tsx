@@ -18,7 +18,7 @@ const BlogPost = ({ image, slug, categories, title, author, date }) => {
       <div className="flex flex-col gap-16">
         <Link href={`/blog${slug}`}>
           <div className="relative w-auto h-256">
-            <Image src={image} alt="blog post" fill className="absolute object-cover" />
+            <Image src={image} alt="blog post" fill quality={100} className="absolute object-cover" />
           </div>
         </Link>
         <div className="flex gap-8">
@@ -135,7 +135,7 @@ const BlogPosts = ({ blogData, blogPosts }) => {
                 <p className="text-base leading-base font-bold mb-4">{blogData.newsletter_title}</p>
                 {messageStatus === 'success' ? (
                   <div className="bg-signal-green-20 flex justify-center items-center text-center gap-8 px-16 py-12">
-                    <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                    <Image src="/icons/check.svg" alt="check" quality={100} width={16} height={16} />
                     <p className="text-xs leading-xs text-signal-green-100">{message}</p>
                   </div>
                 ) : (

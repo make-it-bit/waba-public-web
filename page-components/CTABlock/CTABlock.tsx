@@ -14,6 +14,7 @@ const CTABlock = ({ ctaBlockData }) => {
         alt="device"
         width={196}
         height={308}
+        quality={100}
         className="absolute top-0 left-1/2 translate-x-neg-1/2"
       />
       <div className="grid grid-cols-12">

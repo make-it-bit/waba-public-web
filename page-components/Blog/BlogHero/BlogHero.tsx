@@ -25,6 +25,7 @@ const BlogHero = ({ blogHeroData }) => {
                 src={getImageFullUrl_server(blogHeroData.featured_blog_post.data.attributes.image.data)}
                 alt="blog hero image"
                 fill
+                quality={100}
                 className="absolute object-cover"
               />
             </div>

@@ -164,7 +164,7 @@ const Form = ({ formData }) => {
                       )}
                     >
                       {messageStatus === 'success' && (
-                        <Image src="/icons/check.svg" alt="check" width={16} height={16} />
+                        <Image src="/icons/check.svg" alt="check" quality={100} width={16} height={16} />
                       )}
                       <p
                         className={classNames(

@@ -16,6 +16,7 @@ const Warranty = ({ warrantyData }) => {
               <Image
                 src={getImageFullUrl_server(warrantyData.background_image.data)}
                 fill
+                quality={100}
                 className="absolute w-full h-full object-cover object-left inset-0 z-[-1]"
                 alt="product warranty image"
               />
@@ -28,6 +29,7 @@ const Warranty = ({ warrantyData }) => {
                       alt="warranty"
                       width={102}
                       height={102}
+                      quality={100}
                       className={styles.iconSpin}
                     />
                     <div>

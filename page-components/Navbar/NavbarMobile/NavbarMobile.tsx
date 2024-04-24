@@ -22,12 +22,13 @@ const NavbarMobile = ({ navbarData }) => {
             src={getImageFullUrl_client(navbarData.menu_icons.data[1])}
             width={32}
             height={32}
+            quality={100}
             alt="mobile menu close"
             className="d-block cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
           />
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2" onClick={() => setIsOpen(!isOpen)}>
-            <Image src={getImageFullUrl_client(navbarData.waba_logos.data[3])} alt="waba logo" width={80} height={20} />
+            <Image src={getImageFullUrl_client(navbarData.waba_logos.data[3])} alt="waba logo" width={80} height={20} quality={100} />
           </Link>
           <Link href={navbarData.button.href_src} onClick={() => setIsOpen(!isOpen)}>
             <Button CTA={navbarData.button.href_text} style="tertiary" size="sm" />
@@ -71,12 +72,13 @@ const NavbarMobile = ({ navbarData }) => {
             src={getImageFullUrl_client(navbarData.menu_icons.data[0])}
             width={32}
             height={32}
+            quality={100}
             alt="mobile menu open"
             className="d-block cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
           />
           <Link href="/" className="absolute left-1/2 translate-x-neg-1/2">
-            <Image src={getImageFullUrl_client(navbarData.waba_logos.data[2])} alt="waba logo" width={80} height={20} />
+            <Image src={getImageFullUrl_client(navbarData.waba_logos.data[2])} alt="waba logo" width={80} height={20} quality={100} />
           </Link>
           <Link href={navbarData.button.href_src}>
             <Button CTA={navbarData.button.href_text} size="sm" />

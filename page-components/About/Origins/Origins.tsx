@@ -21,6 +21,7 @@ const Origins = ({ originData }) => {
         alt="device"
         width={879}
         height={144}
+        quality={100}
         className="absolute bottom-0 left-1/2 !translate-x-neg-1/2"
       />
     </div>

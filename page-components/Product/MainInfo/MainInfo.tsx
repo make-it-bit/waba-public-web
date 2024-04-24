@@ -20,6 +20,7 @@ const MainInfo = ({ mainInfoData }) => {
                   <Image
                     src={getImageFullUrl_server(imageData.image.data)}
                     fill
+                    quality={100}
                     className={`absolute w-full h-full object-${imageData.object_fit}`}
                     alt="product main info image"
                   />
@@ -35,6 +36,7 @@ const MainInfo = ({ mainInfoData }) => {
               <Image
                 src={getImageFullUrl_server(mainInfoData.images[0].image.data)}
                 fill
+                quality={100}
                 className={`absolute w-full h-full object-${mainInfoData.images[0].object_fit}`}
                 alt="device"
               />
@@ -69,6 +71,7 @@ const MainInfo = ({ mainInfoData }) => {
                   <Image
                     src={getImageFullUrl_server(mainInfoData.images[1].image.data)}
                     fill
+                    quality={100}
                     className={`absolute w-full h-full object-${mainInfoData.images[1].object_fit}`}
                     alt="product main info image"
                   />
@@ -81,6 +84,7 @@ const MainInfo = ({ mainInfoData }) => {
                   <Image
                     src={getImageFullUrl_server(mainInfoData.images[2].image.data)}
                     fill
+                    quality={100}
                     className={`absolute w-full h-full object-${mainInfoData.images[2].object_fit}`}
                     alt="product main info image"
                   />
@@ -93,6 +97,7 @@ const MainInfo = ({ mainInfoData }) => {
                   <Image
                     src={getImageFullUrl_server(mainInfoData.images[3].image.data)}
                     fill
+                    quality={100}
                     className={`absolute w-full h-full object-${mainInfoData.images[3].object_fit}`}
                     alt="product main info image"
                   />
@@ -108,6 +113,7 @@ const MainInfo = ({ mainInfoData }) => {
               <Image
                 src={getImageFullUrl_server(mainInfoData.images[4].image.data)}
                 fill
+                quality={100}
                 className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
                 alt="device"
               />

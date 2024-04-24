@@ -8,7 +8,7 @@ const FeatureCard = ({ icon, title, description }) => {
   return (
     <div className="sm:col-span-4 col-span-12">
       <div className="flex flex-col h-full bg-white-100 p-24">
-        <Image src={icon} alt="icon" width={56} height={56} />
+        <Image src={icon} alt="icon" width={56} height={56} quality={100} />
         <p className="text-base leading-base mt-8">{title}</p>
         <p className="text-xs leading-xs">{description}</p>
       </div>

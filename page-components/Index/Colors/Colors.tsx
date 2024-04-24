@@ -157,7 +157,7 @@ const Colors = ({ colorsData }) => {
               setActiveId(previousId);
             }}
           >
-            <Image src="/icons/arrow-left.svg" alt="arrow left" width={8} height={8} />
+            <Image src="/icons/arrow-left.svg" alt="arrow left" width={8} height={8} quality={100} />
           </div>
           <div className="relative flex justify-center w-full text-center">
             <p className={classNames('text-7xl leading-7xl md:mt-56 mt-80', colorMap)}>
@@ -168,6 +168,7 @@ const Colors = ({ colorsData }) => {
               alt="device lights"
               width={287}
               height={574}
+              quality={100}
               className="absolute top-0 left-1/2 translate-x-neg-1/2"
             />
             <Image
@@ -175,6 +176,7 @@ const Colors = ({ colorsData }) => {
               alt="device head"
               width={94}
               height={78}
+              quality={100}
               className="md:block hidden absolute 2xl:top-[219px] xl:top-[267px] top-[350px] 2xl:left-[250.5px] xl:left-[208px] lg:left-[165.5px] md:left-[122.5px] translate-x-neg-1/2"
             />
             <Image
@@ -182,6 +184,7 @@ const Colors = ({ colorsData }) => {
               alt="device green light"
               width={96.5}
               height={10}
+              quality={100}
               className="md:block hidden absolute 2xl:top-[260px] xl:top-[308px] top-[391px] left-1/2 translate-x-neg-1/2 z-10"
             />
             <Image
@@ -189,6 +192,7 @@ const Colors = ({ colorsData }) => {
               alt="device body"
               width={78}
               height={196}
+              quality={100}
               className="md:block hidden absolute 2xl:top-[269px] xl:top-[317px] top-400 left-1/2 translate-x-neg-1/2"
             />
           </div>
@@ -210,6 +214,7 @@ const Colors = ({ colorsData }) => {
             alt="device head"
             width={108}
             height={78}
+            quality={100}
             className={classNames('md:hidden block absolute left-1/2 translate-x-neg-1/2 z-10')}
           />
           <p className="text-sm leading-sm md:text-left text-center md:mt-0 mt-128 mb-56">

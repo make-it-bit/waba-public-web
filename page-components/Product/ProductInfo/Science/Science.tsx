@@ -42,6 +42,7 @@ const Science = ({ background, scienceData }) => {
               alt="photobiomodulation graph"
               width={635}
               height={396}
+              quality={100}
               className="lg:block hidden"
             />
             <Image
@@ -49,6 +50,7 @@ const Science = ({ background, scienceData }) => {
               alt="photobiomodulation graph"
               width={635}
               height={396}
+              quality={100}
               className="lg:hidden block"
             />
           </div>

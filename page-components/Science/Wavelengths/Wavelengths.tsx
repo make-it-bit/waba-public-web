@@ -73,6 +73,7 @@ const Wavelengths = ({ wavelengthsData }) => {
               alt="pink wavelength"
               width={408}
               height={171}
+              quality={100}
               className="w-full h-auto"
             />
           </div>
@@ -89,6 +90,7 @@ const Wavelengths = ({ wavelengthsData }) => {
               alt="blue wavelength"
               width={408}
               height={171}
+              quality={100}
               className="w-full h-auto"
             />
           </div>
@@ -98,6 +100,7 @@ const Wavelengths = ({ wavelengthsData }) => {
               alt="orange wavelength"
               width={408}
               height={171}
+              quality={100}
               className="w-full h-auto"
             />
           </div>
@@ -106,6 +109,7 @@ const Wavelengths = ({ wavelengthsData }) => {
             alt="wavelength first background"
             width={525}
             height={219}
+            quality={100}
             className="absolute bottom-0 left-1/2 translate-x-neg-1/2 xl:w-full w-auto xl:h-auto h-144"
           />
           <Image
@@ -114,6 +118,7 @@ const Wavelengths = ({ wavelengthsData }) => {
             alt="wavelength second background"
             width={525}
             height={219}
+            quality={100}
             className="absolute bottom-0 left-1/2 translate-x-neg-1/2 xl:w-full w-auto xl:h-auto h-144"
           />
         </div>

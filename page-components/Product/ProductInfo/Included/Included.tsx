@@ -31,6 +31,7 @@ const Included = ({ title, includedData, includedImage }) => {
             src={getImageFullUrl_client(includedImage.data)}
             alt="inlcuded image"
             fill
+            quality={100}
             className="lg:absolute object-contain"
           />
         </div>
