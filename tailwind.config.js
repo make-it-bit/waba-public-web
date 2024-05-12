@@ -169,7 +169,7 @@ module.exports = {
     animation: {
       scale: 'scale 3s ease-in-out infinite',
       'infinite-scroll-logobar': 'infinite-scroll 45s linear infinite',
-      'infinite-scroll-testimonials': 'infinite-scroll 60s linear infinite',
+      'infinite-scroll-testimonials': 'infinite-scroll 70s linear infinite',
     },
     plugins: [],
   },
