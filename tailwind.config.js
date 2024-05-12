@@ -161,9 +161,15 @@ module.exports = {
         '0%, 100%': { transform: 'translate(-50%, -50%) scale(1)' },
         '50%': { transform: 'translate(-50%, -50%) scale(2)' },
       },
+      'infinite-scroll': {
+        from: { transform: 'translateX(0)' },
+        to: { transform: 'translateX(-100%)' },
+      },
     },
     animation: {
       scale: 'scale 3s ease-in-out infinite',
+      'infinite-scroll-logobar': 'infinite-scroll 45s linear infinite',
+      'infinite-scroll-testimonials': 'infinite-scroll 60s linear infinite',
     },
     plugins: [],
   },
