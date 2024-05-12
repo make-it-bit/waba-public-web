@@ -35,7 +35,7 @@ const UserStoriesTestimonials = ({ testimonialsData }) => {
               />
             ))}
           </div>
-          <div className="flex justify-center items-center [&_div:first-child]:mx-6 animate-infinite-scroll-testimonials">
+          <div className="flex justify-center items-center [&_div]:mx-6 animate-infinite-scroll-testimonials">
             {testimonialsData.user_stories.data.map((userStory, index) => (
               <TestimonialCard
                 key={index}
