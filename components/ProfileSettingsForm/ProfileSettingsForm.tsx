@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-import { getAuthenticatedUser } from '@/lib/auth';
+import { GetAuthenticatedUser } from '@/lib/auth';
 
 import { TextInput, Button } from '@/gui-components/client';
 
 const ProfileSettingsForm = () => {
-  const user = getAuthenticatedUser();
+  const user = GetAuthenticatedUser();
 
   const [form, setForm] = useState({
     firstName: '',

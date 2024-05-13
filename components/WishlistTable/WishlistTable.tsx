@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getAuthenticatedUser } from '@/lib/auth';
+import { GetAuthenticatedUser } from '@/lib/auth';
 
 const WishlistTable = () => {
-  const user = getAuthenticatedUser();
+  const user = GetAuthenticatedUser();
   // TODO: set the order of the items in the wishlist
   const [wishListItems, setWishListItems] = useState([]);
 

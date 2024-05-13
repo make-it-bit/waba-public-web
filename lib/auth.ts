@@ -23,7 +23,7 @@ export async function handleSignOut() {
   return signOut(auth);
 }
 
-export function getAuthenticatedUser() {
+export function GetAuthenticatedUser() {
   const [user, setUser] = useState<User | null | false>(false);
 
   useEffect(() => {

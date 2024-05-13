@@ -6,14 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import { getAuthenticatedUser, handleSignOut } from '@/lib/auth';
+import { GetAuthenticatedUser, handleSignOut } from '@/lib/auth';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 
 const NavbarMobile = ({ navbarData }) => {
   const pathname = usePathname();
-  const user = getAuthenticatedUser();
+  const user = GetAuthenticatedUser();
 
   const [isOpen, setIsOpen] = useState(false);
 

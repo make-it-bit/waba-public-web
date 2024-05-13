@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import { getAuthenticatedUser } from '@/lib/auth';
+import { GetAuthenticatedUser } from '@/lib/auth';
 
 const OrdersTable = () => {
-  const user = getAuthenticatedUser();
+  const user = GetAuthenticatedUser();
   const ordersDataColumns = ['Order no.', 'Date', 'Customer', 'Total', 'Status', 'Action'];
   const [orders, setOrders] = useState([]);
 

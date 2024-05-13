@@ -3,7 +3,7 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
 
-import { getAuthenticatedUser } from '@/lib/auth';
+import { GetAuthenticatedUser } from '@/lib/auth';
 
 import { SideNavbar } from '@/page-components';
 
@@ -13,7 +13,7 @@ import styles from '../_layout.module.scss';
 export const dynamic = 'force-dynamic';
 
 export default function ProtectedLayout({ children }) {
-  const user = getAuthenticatedUser();
+  const user = GetAuthenticatedUser();
 
   if (user === null) redirect('/auth');
 
