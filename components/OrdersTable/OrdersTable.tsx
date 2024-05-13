@@ -5,10 +5,19 @@ import Link from 'next/link';
 
 import { GetAuthenticatedUser } from '@/lib/auth';
 
+type Order = {
+  orderNumber: string;
+  date: string;
+  customer: string;
+  price: number;
+  status: string;
+  orderPdf: string;
+};
+
 const OrdersTable = () => {
   const user = GetAuthenticatedUser();
   const ordersDataColumns = ['Order no.', 'Date', 'Customer', 'Total', 'Status', 'Action'];
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
