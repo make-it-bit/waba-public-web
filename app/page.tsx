@@ -34,6 +34,7 @@ export async function generateMetadata() {
 
 const Home = async () => {
   const indexPageData = await getPageData('index');
+  console.log('indexPageData: ', indexPageData);
 
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
