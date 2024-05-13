@@ -9,7 +9,7 @@ import { getComponentData } from '@/lib/strapi';
 import { CookieConsent } from '@/components';
 import { PromoBar, Navbar } from '@/page-components';
 
-import './_globals.scss';
+import '../_globals.scss';
 
 const dmSans = DM_Sans({
   variable: '--dmSans-font',

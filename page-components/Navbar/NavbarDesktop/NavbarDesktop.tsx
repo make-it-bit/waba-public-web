@@ -1,17 +1,26 @@
 'use client';
 
 import React from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, redirect } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
 
+import { getAuthenticatedUser, handleSignOut } from '@/lib/auth';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
-
-import { Button } from '@/gui-components/client';
 
 const NavbarDesktop = ({ navbarData }) => {
   const pathname = usePathname();
+  const user = getAuthenticatedUser();
+
+  const handleClick = async () => {
+    try {
+      await handleSignOut();
+      redirect('/auth');
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  };
 
   return (
     <div className="bg-white-100 lg:block hidden">
@@ -56,17 +65,26 @@ const NavbarDesktop = ({ navbarData }) => {
               </Link>
             ))}
             <Link
-              href="#"
+              href={user ? '/profile' : '/auth'}
               className={classNames(
-                'text-sm leading-sm hover:border-b hover:border-black-100 hover:mb-0'
-                //pathname === link.attributes.page_link_data.href_src && 'border-b border-black-100 mb-0'
+                'text-sm leading-sm hover:border-b hover:border-black-100 hover:mb-0',
+                (pathname === '/profile' ||
+                  pathname === '/wishlist' ||
+                  pathname === '/orders' ||
+                  pathname === '/discounts') &&
+                  'border-b border-black-100 mb-0'
               )}
             >
-              My profile
+              {user ? 'My profile' : 'Sign in / Sign up'}
             </Link>
-            <Link href={navbarData.button.href_src}>
-              <Button CTA={navbarData.button.href_text} size="sm" />
-            </Link>
+            {user && (
+              <p
+                className="text-sm leading-sm cursor-pointer hover:border-b hover:border-black-100 hover:mb-0"
+                onClick={handleClick}
+              >
+                Sign out
+              </p>
+            )}
           </div>
         </div>
       </div>

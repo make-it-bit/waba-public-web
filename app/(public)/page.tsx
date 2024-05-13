@@ -2,17 +2,7 @@ import React from 'react';
 
 import { getComponentData, getPageData } from '@/lib/strapi';
 
-import {
-  Hero,
-  Colors,
-  Foundations,
-  Video,
-  Testimonials,
-  LogoBar,
-  CTABlock,
-  PreFooterCard,
-  Footer,
-} from '@/page-components';
+import { Hero, Colors, Foundations, Video, LogoBar, CTABlock, PreFooterCard, Footer } from '@/page-components';
 
 export const dynamic = 'force-static';
 
