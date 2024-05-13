@@ -55,6 +55,15 @@ const NavbarDesktop = ({ navbarData }) => {
                 {link.attributes.page_link_data.href_text}
               </Link>
             ))}
+            <Link
+              href="#"
+              className={classNames(
+                'text-sm leading-sm hover:border-b hover:border-black-100 hover:mb-0'
+                //pathname === link.attributes.page_link_data.href_src && 'border-b border-black-100 mb-0'
+              )}
+            >
+              My profile
+            </Link>
             <Link href={navbarData.button.href_src}>
               <Button CTA={navbarData.button.href_text} size="sm" />
             </Link>
