@@ -6,10 +6,17 @@ import Link from 'next/link';
 
 import { GetAuthenticatedUser } from '@/lib/auth';
 
+type WishlistItem = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+};
+
 const WishlistTable = () => {
   const user = GetAuthenticatedUser();
   // TODO: set the order of the items in the wishlist
-  const [wishListItems, setWishListItems] = useState([]);
+  const [wishListItems, setWishListItems] = useState<WishlistItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
