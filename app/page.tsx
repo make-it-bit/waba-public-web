@@ -41,7 +41,7 @@ const Home = async () => {
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
-  const { data } = await fetch('http://localhost:3000/api/instagram/posts', {
+  const { data } = await fetch(`https://${process.env.NEXT_PUBLIC_BASE_URL}/api/instagram/posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
