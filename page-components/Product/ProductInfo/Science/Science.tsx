@@ -21,7 +21,7 @@ const Science = ({ background, scienceData }) => {
             type={scienceData.background_video.data.attributes.mime}
           />
         </video>
-        <div className={classNames('absolute w-full h-full inset-0 z-[-1]', background)}></div>
+        <div className={classNames('absolute w-full h-full inset-0 z-[-2]', background)}></div>
         <div className="col-span-12">
           <h1 className="lg:hidden block font-rufina md:text-4xl text-3xl md:leading-4xl leading-3xl text-white-100 text-center mb-48">
             {scienceData.title}

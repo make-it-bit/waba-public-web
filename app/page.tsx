@@ -14,6 +14,8 @@ import {
   Footer,
 } from '@/page-components';
 
+import { InstagramBlock } from '@/components';
+
 export const dynamic = 'force-static';
 
 export async function generateMetadata() {
@@ -39,6 +41,13 @@ const Home = async () => {
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
+  const { data } = await fetch(`https://${process.env.NEXT_PUBLIC_BASE_URL}/api/instagram/posts`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((res) => res.json());
+
   return (
     <>
       <Hero heroData={indexPageData.attributes.hero} />
@@ -48,6 +57,7 @@ const Home = async () => {
       <Foundations foundationsData={indexPageData.attributes.testimonial} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
+      <InstagramBlock posts={data} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
       <Footer footerData={footerData.attributes} />
     </>

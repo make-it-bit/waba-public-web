@@ -32,7 +32,7 @@ const BlogPostHero = ({ backToBlog, image, categories, title, description, autho
             <div className="flex flex-col gap-8 text-justify">
               <h1 className="font-rufina md:text-5xl md:leading-5xl text-4xl leading-4xl">{title}</h1>
               <h2 className="text-base leading-base text-black-60">{description}</h2>
-              <p className="text-base leading-base">{`${author}﹒ ${date}`}</p>
+              <p className="text-base leading-base">{`${author}${date ? ` ﹒ ${date}` : ''}`}</p>
             </div>
           </div>
         </div>

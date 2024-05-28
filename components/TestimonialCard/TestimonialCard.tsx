@@ -29,8 +29,13 @@ const TestimonialCard = ({
   imageFit = 'contain',
 }: TestimonialCardProps) => {
   return (
-    <div className={classNames(!fixedWidth && 'md:col-span-4 col-span-12')}>
-      <div className={classNames('bg-white-100 flex flex-col h-full', resultImage ? (imageFit === 'contain' ? 'px-40 pt-32' : 'pt-32') : 'px-40 py-32')}>
+    <div className={classNames('h-full', !fixedWidth && 'md:col-span-4 col-span-12')}>
+      <div
+        className={classNames(
+          'bg-white-100 flex flex-col h-full',
+          resultImage ? (imageFit === 'contain' ? 'px-40 pt-32' : 'pt-32') : 'px-40 py-32'
+        )}
+      >
         <div
           className={classNames(
             'bg-white-100 flex flex-col gap-24',
@@ -40,7 +45,13 @@ const TestimonialCard = ({
         >
           {image && (
             <div className="relative w-64 h-64">
-              <Image src={image} alt="image" fill quality={100} className="absolute w-full h-full object-cover inset-0" />
+              <Image
+                src={image}
+                alt="image"
+                fill
+                quality={100}
+                className="absolute w-full h-full object-cover inset-0"
+              />
             </div>
           )}
           <h1 className="font-rufina text-xl leading-xl">{name}</h1>
@@ -55,9 +66,10 @@ const TestimonialCard = ({
           )}
         </div>
         {resultImage && (
-          <div className='relative w-full h-[200px] lg:h-[270px] mt-auto'>
+          <div className="relative w-full h-[200px] lg:h-[270px] mt-auto">
             <Image src={resultImage} alt="result image" fill quality={100} objectFit={imageFit} />
-          </div>)}
+          </div>
+        )}
       </div>
     </div>
   );

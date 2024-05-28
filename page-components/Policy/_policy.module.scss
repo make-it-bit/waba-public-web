@@ -11,14 +11,12 @@
     @apply leading-3xl;
   }
 
-  h2 + p {
-    @apply mb-40;
-  }
-
   h3 {
     @apply font-rufina;
     @apply text-2xl;
     @apply leading-2xl;
+
+    @apply mb-4;
   }
 
   h4 {
@@ -26,8 +24,7 @@
     @apply text-xl;
     @apply leading-xl;
 
-    @apply mt-16;
-    @apply mb-8;
+    @apply mb-4;
   }
 
   h5 {
@@ -45,6 +42,11 @@
   p {
     @apply text-base;
     @apply leading-base;
+  }
+
+  p + h4,
+  ul + h4 {
+    @apply mt-4;
   }
 
   ul {

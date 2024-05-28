@@ -7,3 +7,4 @@ export { default as Form } from './Form';
 export { default as CheckoutButton } from './CheckoutButton';
 export { default as LazyLoadVideo } from './LazyLoadVideo';
 export { default as CookieConsent } from './CookieConsent';
+export { default as InstagramBlock } from './InstagramBlock';

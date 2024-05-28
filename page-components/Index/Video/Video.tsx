@@ -63,9 +63,9 @@ const Video = ({ videoData }) => {
     const handleScroll = () => {
       if (canvas && container) {
         const scrollTop = window.scrollY;
-        const containerTop = container?.offsetTop;
-        const containerHeight = container?.offsetHeight;
-        const canvasHeight = canvas?.offsetHeight;
+        const containerTop = container.offsetTop;
+        const containerHeight = container.offsetHeight;
+        const canvasHeight = canvas.offsetHeight;
         const windowHeight = window.innerHeight;
         const offset = window.innerWidth > 1023 ? 137 : 98;
 
@@ -114,6 +114,7 @@ const Video = ({ videoData }) => {
         context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
       }
     };
+
     const handleCanvasResize = () => {
       const correctWidth = getCorrectCavasWidth();
       if (correctWidth === null || correctWidth === currentCanvasWidth) return;
@@ -122,18 +123,21 @@ const Video = ({ videoData }) => {
       const correctHeight = getCorrectCanvasHeight(correctWidth);
       canvas.height = correctHeight;
     };
+
     const handleScroll = () => {
       if (containerRef.current) {
-        const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop;
-        const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-        // start the animation when the container is in the viewport
-        if (containerScrollTop + 500 >= 0) {
-          const scrollFraction = (containerScrollTop + 500) / (maxScrollTop * 0.45);
-          const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
-          requestAnimationFrame(() => {
-            if (frameIndex + 1 < frameCount) updateImage(frameIndex + 1);
-          });
-        }
+        const viewportHeight = window.innerHeight;
+        // add the 550px to make the images appear a bit earlier
+        const containerScrollTop = document.documentElement.scrollTop - containerRef.current.offsetTop + 750;
+        const customScrollHeightInPX =
+          currentCanvasWidth >= 736
+            ? (videoData.desktop_scroll_height * viewportHeight) / 100
+            : (videoData.mobile_scroll_height * viewportHeight) / 100;
+        // additionalPX is needed to make the scroll more accurate and so that the last image is shown
+        const additionalPX = currentCanvasWidth >= 736 ? 150 : 250;
+        const scrollFraction = containerScrollTop / (customScrollHeightInPX - additionalPX);
+        const frameIndex = Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount));
+        requestAnimationFrame(() => updateImage(frameIndex + 1));
       }
     };
 
@@ -178,7 +182,7 @@ const Video = ({ videoData }) => {
         </div>
         <canvas
           className={classNames(
-            'sticky',
+            'sticky bg-transparent',
             currentCanvasWidth === 1248 && 'mt-0',
             currentCanvasWidth === 992 && 'mt-32',
             currentCanvasWidth === 736 && 'mt-80',
