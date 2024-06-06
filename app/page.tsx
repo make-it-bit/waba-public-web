@@ -43,7 +43,7 @@ const Home = async () => {
 
   console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
-  const { data } = await fetch(`https://waba-public-web-git-development-bitropia.vercel.app/api/instagram/posts`, {
+  const { data } = await fetch(`http://localhost:3000/api/instagram/posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
