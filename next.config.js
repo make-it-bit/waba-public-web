@@ -24,7 +24,7 @@ module.exports = withAxiom({
       },
       {
         protocol: 'https',
-        hostname: 'scontent-hel3-1.cdninstagram.com',
+        hostname: '*.cdninstagram.com',
       },
     ],
   },
