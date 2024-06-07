@@ -42,7 +42,7 @@ const UserStories = async () => {
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
-  const { data: posts } = await fetch(`http://localhost:3000/api/instagram/posts`, {
+  const { data: posts } = await fetch(`${process.env.BASE_URL}/api/instagram/posts`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   }).then((res) => res.json());
