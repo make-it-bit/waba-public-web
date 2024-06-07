@@ -42,13 +42,10 @@ const UserStories = async () => {
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
-  const { data: posts } = await fetch(`${process.env.BASE_URL}/api/instagram/posts`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  }).then((res) => {
-    console.log('res: ', res);
-    return res.json();
-  });
+  const { data: posts } = await fetch(
+    `https://graph.instagram.com/me/media?fields=media_url,permalink,caption&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`,
+    { method: 'GET', headers: { 'Content-Type': 'application/json' } }
+  ).then((res) => res.json());
 
   return (
     <>
