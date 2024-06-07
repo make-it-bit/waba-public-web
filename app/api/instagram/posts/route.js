@@ -6,9 +6,10 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   const log = new Logger();
-  console.log('Fetching Instagram posts...');
+
   try {
     const { INSTAGRAM_ACCESS_TOKEN } = process.env;
+
     if (!INSTAGRAM_ACCESS_TOKEN) {
       log.error('Instagram access token is not set.');
       await log.flush();
@@ -27,7 +28,6 @@ export async function GET(req) {
     }
 
     const { data } = await response.json();
-    console.log('Instagram posts fetched.', { count: data.length });
 
     log.info('Instagram posts fetched.', { count: data.length });
     await log.flush();
