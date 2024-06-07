@@ -45,7 +45,10 @@ const UserStories = async () => {
   const { data: posts } = await fetch(`${process.env.BASE_URL}/api/instagram/posts`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
-  }).then((res) => res.json());
+  }).then((res) => {
+    console.log('res: ', res);
+    return res.json();
+  });
 
   return (
     <>
