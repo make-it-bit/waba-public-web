@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, FC } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -27,7 +27,7 @@ const InstagramBlock: FC<InstagramBlockProps> = ({ posts }) => {
         </div>
         {posts.length > 0 && (
           <div className="grid grid-cols-12 gap-24  overflow-hidden mt-24">
-            <div className="lg:col-span-6 col-span-12">
+            <div className="lg:col-span-6 col-span-12 lg:block hidden">
               <Link
                 href={posts[0].permalink}
                 className="flex w-full lg:h-full h-[300px] relative rounded-xl overflow-hidden"
@@ -37,7 +37,7 @@ const InstagramBlock: FC<InstagramBlockProps> = ({ posts }) => {
             </div>
             <div className="lg:col-span-6 col-span-12 mt-16">
               <div className="grid grid-cols-12 gap-24">
-                <div className="lg:col-span-6 col-span-12">
+                <div className="lg:col-span-6 col-span-12 lg:block hidden">
                   <Link
                     href={posts[3].permalink}
                     className="flex w-full h-[300px] relative overflow-hidden"
