@@ -13,6 +13,8 @@ import {
   Footer,
 } from '@/page-components';
 
+import { InstagramBlock } from '@/components';
+
 export const dynamic = 'force-static';
 
 export async function generateMetadata() {
@@ -25,7 +27,8 @@ export async function generateMetadata() {
     },
     openGraph: {
       images: [
-        `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${userStoriesPageData.attributes.seo?.description ?? ''
+        `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${
+          userStoriesPageData.attributes.seo?.description ?? ''
         }` || null,
       ],
     },
@@ -39,11 +42,17 @@ const UserStories = async () => {
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
 
+  const { data: posts } = await fetch(
+    `https://graph.instagram.com/me/media?fields=media_url,permalink,caption&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`,
+    { method: 'GET', headers: { 'Content-Type': 'application/json' } }
+  ).then((res) => res.json());
+
   return (
     <>
       <UserStoriesHero userStoriesHeroData={userStoriesPageData.attributes.hero} />
       <Examples examplesData={userStoriesPageData.attributes.example} />
       <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} />
+      <InstagramBlock posts={posts} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
