@@ -135,6 +135,7 @@ const userStoriesPageNestedComponents = [
   'example.examples.image',
   'testimonial.user_stories.image',
   'warranty.video',
+  'ig_block',
 ];
 const aboutPageNestedComponents = [
   'seo',

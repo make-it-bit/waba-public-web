@@ -35,6 +35,22 @@ export async function generateMetadata() {
   };
 }
 
+const findMatchingPosts = (igPosts, igBlock) => {
+  const igBlockCaptions = [
+    igBlock.first_caption,
+    igBlock.second_caption,
+    igBlock.third_caption,
+    igBlock.fourth_caption,
+    igBlock.fifth_caption,
+  ];
+
+  const matchingPosts = igPosts.filter((post) => {
+    return igBlockCaptions.some((blockCaption) => post.caption.includes(blockCaption));
+  });
+
+  return matchingPosts;
+};
+
 const UserStories = async () => {
   // user stories page api route is named 'result' in strapi
   const userStoriesPageData = await getPageData('result');
@@ -47,12 +63,16 @@ const UserStories = async () => {
     { method: 'GET', headers: { 'Content-Type': 'application/json' } }
   ).then((res) => res.json());
 
+  const { ig_block: igBlock } = userStoriesPageData.attributes;
+
+  const matchingPosts = findMatchingPosts(posts, igBlock);
+
   return (
     <>
       <UserStoriesHero userStoriesHeroData={userStoriesPageData.attributes.hero} />
       <Examples examplesData={userStoriesPageData.attributes.example} />
       <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} />
-      <InstagramBlock posts={posts} />
+      <InstagramBlock posts={matchingPosts} blockData={igBlock} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />
