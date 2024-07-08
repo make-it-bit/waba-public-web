@@ -45,3 +45,5 @@ export { default as BlogPostHero } from './Blog/BlogPostHero';
 export { default as BlogPost } from './Blog/BlogPost';
 
 export { default as Policy } from './Policy';
+
+export { default as DownloadablesContent } from './DownloadablesContent';

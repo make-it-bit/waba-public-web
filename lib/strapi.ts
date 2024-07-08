@@ -19,6 +19,15 @@ const navbarNestedComponents = [
   'rightside_links.page_link_data',
   'button',
 ];
+
+const downloadablesContentNestedComponents = [
+  'seo.title',
+  'seo.description',
+  'logo',
+  'description',
+  'bg_image',
+  'file',
+];
 const preFooterCardNestedComponents = [
   'pre_footer_card_1.background_image',
   'pre_footer_card_1.button',
@@ -40,9 +49,12 @@ const populateComponent = {
   'pre-footer-card': preFooterCardNestedComponents,
   footer: footerNestedComponents,
   'cookie-consent': '*',
+  downloadables: downloadablesContentNestedComponents,
 };
 
 type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer' | 'cookie-consent';
+
+type CollectionName = 'downloadables';
 
 export const getComponentData = async (component: Component) => {
   const query = qs.stringify({ populate: populateComponent[component] });
@@ -60,6 +72,38 @@ export const getComponentData = async (component: Component) => {
   await log.flush();
 
   return data;
+};
+
+export const getCollectionSlugs = async (collectionName: CollectionName, url = null) => {
+  const items = await getCollectionData(collectionName);
+  if (url) {
+    return items.map((item) => `/${url}/${item.attributes.slug}`);
+  } else {
+    return items.map((item) => `/${item.attributes.slug}`);
+  }
+};
+
+export const getCollectionItem = async (collectionName: CollectionName, slug: string) => {
+  const items = await getCollectionData(collectionName);
+  const slugItem = items.find((item: any) => item.attributes.slug === slug);
+  if (!slugItem) return null;
+  return slugItem.attributes;
+};
+
+export const getCollectionData = async (collectionName: CollectionName) => {
+  const query = qs.stringify({ populate: populateComponent[collectionName] });
+
+  try {
+    const response = await fetch(`${STRAPI_BASE_URL}/api/${collectionName}?${query}`, {
+      headers,
+    });
+    if (!response.ok) throw new Error(`Failed to fetch ${collectionName} data`);
+
+    const { data } = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const indexPageNestedComponents = [
