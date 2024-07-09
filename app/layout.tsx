@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
 import { CookieConsent } from '@/components';
-import { PromoBar, Navbar } from '@/page-components';
+import { PromoBar, Navbar, NavbarSlim } from '@/page-components';
 
 import './_globals.scss';
 
@@ -61,6 +61,7 @@ export default async function RootLayout({ children }) {
         <div className="sticky top-0 z-[500]">
           <PromoBar promobarData={promobarData.attributes} />
           <Navbar navbarData={navbarData.attributes} />
+          <NavbarSlim navbarData={navbarData.attributes} />
         </div>
         {children}
         <CookieConsent cookiesConsentData={cookieConsentData.attributes} />

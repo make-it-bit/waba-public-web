@@ -23,10 +23,9 @@ const navbarNestedComponents = [
 const downloadablesContentNestedComponents = [
   'seo.title',
   'seo.description',
-  'logo',
-  'description',
-  'bg_image',
-  'file',
+  'content.bg_image',
+  'content.file',
+  'form.fields',
 ];
 const preFooterCardNestedComponents = [
   'pre_footer_card_1.background_image',

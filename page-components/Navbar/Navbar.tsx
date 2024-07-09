@@ -1,9 +1,14 @@
+'use client';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 import NavbarDesktop from './NavbarDesktop/NavbarDesktop';
 import NavbarMobile from './NavbarMobile/NavbarMobile';
 
-const Navbar = async ({ navbarData }) => {
+const Navbar = ({ navbarData }) => {
+  const pathname = usePathname();
+
+  if (pathname.includes('/downloadables')) return null;
   return (
     <nav>
       <NavbarDesktop navbarData={navbarData} />
