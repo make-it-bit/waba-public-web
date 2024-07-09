@@ -32,3 +32,32 @@ export const formValidation = (form, setMessage) => {
   }
   return true;
 };
+
+export const downloadableFormValidation = (fields, formFields) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+
+  let errors = {};
+
+  fields.forEach((field) => {
+    if (!formFields[field.field_name] && field.required) {
+      errors[field.field_name] = `Please enter ${field.placeholder}`;
+    }
+    if (
+      field.validation_type === 'email' &&
+      formFields[field.field_name] &&
+      !emailRegex.test(formFields[field.field_name])
+    ) {
+      errors[field.field_name] = 'Please enter a valid email address';
+    }
+    if (
+      field.validation_type === 'phone' &&
+      formFields[field.field_name] &&
+      !phoneRegex.test(formFields[field.field_name])
+    ) {
+      errors[field.field_name] = 'Please enter a valid phone number';
+    }
+  });
+
+  return errors;
+};

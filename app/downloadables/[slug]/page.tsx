@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 
 import { getComponentData, getCollectionSlugs, getCollectionItem } from '@/lib/strapi';
-import { DownloadablesContent, Footer } from '@/page-components';
+import { DownloadablesContent, FooterSlim } from '@/page-components';
 
 export const dynamic = 'force-static';
 
@@ -19,9 +19,7 @@ export async function generateMetadata({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const pageData = await getCollectionItem('downloadables', params.slug);
-  if (!pageData) {
-    redirect('/not-found');
-  }
+  if (!pageData) redirect('/not-found');
   const { seo } = pageData;
   return {
     title: seo.title,
@@ -50,7 +48,7 @@ const Downloadables = async ({
   return (
     <>
       <DownloadablesContent downloadableData={downloadableData} />
-      <Footer footerData={footerData.attributes} small={true} />
+      <FooterSlim footerData={footerData.attributes} />
     </>
   );
 };

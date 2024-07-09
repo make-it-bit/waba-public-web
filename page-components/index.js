@@ -47,3 +47,6 @@ export { default as BlogPost } from './Blog/BlogPost';
 export { default as Policy } from './Policy';
 
 export { default as DownloadablesContent } from './DownloadablesContent';
+
+export { default as FooterSlim } from './FooterSlim';
+export { default as NavbarSlim } from './NavbarSlim';
