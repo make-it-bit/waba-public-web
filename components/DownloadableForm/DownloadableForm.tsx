@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import { TextInput, Button } from '@/gui-components/client';
 
@@ -7,6 +8,8 @@ import { downloadableFormValidation } from '@/utils/formValidation';
 
 const DownloadableForm = ({ form, buttonCta }) => {
   const { success_message: successMessage, error_message: errorMessage, fields } = form;
+  const pathname = usePathname();
+  const slug = pathname.split('/').pop();
 
   const [formFields, setFormFields] = useState(
     fields.reduce((acc, field) => {
@@ -31,12 +34,26 @@ const DownloadableForm = ({ form, buttonCta }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormErrors(
+      fields.reduce((acc, field) => {
+        acc[field.field_name] = '';
+        return acc;
+      })
+    );
     const validationErrors = downloadableFormValidation(fields, formFields);
     setFormErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        // Your fetch request here
+        setIsSent(true);
+        formFields.slug = slug;
+        await fetch('/api/spreadsheets', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ form: formFields, pathname: '/downloadables' }),
+        });
         setIsSent(true);
         setMessage(successMessage);
       } catch (error) {
@@ -53,6 +70,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
           {fields.map((field, index) => (
             <TextInput
               key={index}
+              theme="light"
               type={'text'}
               placeholder={field.placeholder}
               name={field.field_name}
@@ -65,8 +83,8 @@ const DownloadableForm = ({ form, buttonCta }) => {
           <Button CTA={buttonCta} type="submit" size="reg" disabled={isSent} />
         </form>
       ) : (
-        <div className="flex justify-center items-center">
-          <p className="text-3xl m-0">{message}</p>
+        <div className="flex justify-center items-center relative">
+          <p className="text-3xl text-white-100 m-0">{message}</p>
         </div>
       )}
     </>
