@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { AxiomWebVitals } from 'next-axiom';
 import { DM_Sans } from 'next/font/google';
+import { Rufina } from 'next/font/google';
 import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
@@ -17,6 +18,14 @@ const dmSans = DM_Sans({
   display: 'swap',
   style: 'normal',
   weight: ['400', '500', '700'],
+});
+
+const rufina = Rufina({
+  variable: '--rufina-font',
+  subsets: ['latin'],
+  display: 'swap',
+  style: 'normal',
+  weight: '400',
 });
 
 export const dynamic = 'force-static';
@@ -34,7 +43,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={classNames('min-h-screen flex flex-col', dmSans.className)}>
+      <body className={classNames('min-h-screen flex flex-col', dmSans.className, rufina.className)}>
         {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
         <Script id="google-tag-manager-consent" strategy="afterInteractive">
           {`

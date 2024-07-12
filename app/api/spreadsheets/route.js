@@ -13,6 +13,7 @@ const {
   BUSINESS_SHEET_ID,
   CONTACT_SHEET_ID,
   SENDGRID_API_KEY,
+  DOWNLOADABLE_SHEET_ID,
 } = process.env;
 
 export const maxDuration = 180;
@@ -30,7 +31,8 @@ export async function POST(req) {
       !CAREERS_SHEET_ID ||
       !BUSINESS_SHEET_ID ||
       !CONTACT_SHEET_ID ||
-      !SENDGRID_API_KEY
+      !SENDGRID_API_KEY ||
+      !DOWNLOADABLE_SHEET_ID
     ) {
       throw new Error('Missing ENV vars.');
     }
@@ -42,6 +44,7 @@ export async function POST(req) {
       '/careers-at-waba': CAREERS_SHEET_ID,
       '/waba-for-business': BUSINESS_SHEET_ID,
       '/contact-us': CONTACT_SHEET_ID,
+      '/offers': DOWNLOADABLE_SHEET_ID,
     }[pathname];
 
     const jwt = new JWT({
@@ -53,21 +56,32 @@ export async function POST(req) {
     const doc = new GoogleSpreadsheet(SPREADSHEET_ID, jwt);
     await doc.loadInfo();
     const sheet = doc.sheetsById[sheetId];
-    const row = {
-      'First Name': form.firstName,
-      'Last Name': form.lastName,
-      Email: form.email,
-      'Phone Number': form.number,
-      Subject: form.subject,
-      Enquiry: form.enquiry,
-    };
-    await sheet.addRow(row);
+    let row;
+    if (sheetId === DOWNLOADABLE_SHEET_ID) {
+      row = { ...form };
+      await sheet.addRow(row);
+      await sgMail.send({
+        ...sharedEmailSettings,
+        subject: 'NEW WABA OFFERS FORM SUBMISSION',
+        text: 'check google sheets...',
+      });
+    } else {
+      row = {
+        'First Name': form.firstName,
+        'Last Name': form.lastName,
+        Email: form.email,
+        'Phone Number': form.number,
+        Subject: form.subject,
+        Enquiry: form.enquiry,
+      };
+      await sheet.addRow(row);
 
-    await sgMail.send({
-      ...sharedEmailSettings,
-      subject: 'NEW WABA ENQUIRY',
-      text: 'check google sheets...',
-    });
+      await sgMail.send({
+        ...sharedEmailSettings,
+        subject: 'NEW WABA ENQUIRY',
+        text: 'check google sheets...',
+      });
+    }
 
     return NextResponse.json({ message: 'success' }, { status: 200 });
   } catch (e) {

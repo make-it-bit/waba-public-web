@@ -1,22 +1,22 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
 const Checkbox = ({
   name,
   label,
-  size = "reg",
+  size = 'reg',
   disabled = false,
   value,
-  layout = "vertical",
+  layout = 'vertical',
   errorMessage = undefined,
 }) => {
   return (
-    <div className={layout === "vertical" ? "block" : "inline-block"}>
+    <div className={layout === 'vertical' ? 'flex' : 'inline-block'}>
       <label
         className={classNames(
           `checkbox-${size}`,
-          errorMessage && (value ? `checkbox__checked--error` : "checkbox__unchecked--error"),
-          value ? `checkbox__checked` : "checkbox__unchecked"
+          errorMessage && (value ? `checkbox__checked--error` : 'checkbox__unchecked--error'),
+          value ? `checkbox__checked` : 'checkbox__unchecked'
         )}
       >
         <input type="checkbox" name={name} checked={value} id={name} disabled={disabled} />

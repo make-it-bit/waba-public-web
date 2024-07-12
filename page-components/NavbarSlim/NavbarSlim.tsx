@@ -10,12 +10,12 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 const NavbarSlim = ({ navbarData }) => {
   const pathname = usePathname();
 
-  if (!pathname.includes('/downloadables')) return null;
+  if (!pathname.includes('/offers')) return null;
 
   return (
-    <div className="bg-white-100 lg:block hidden">
+    <div className="bg-white-100">
       <div className="container">
-        <div className="relative flex justify-center items-center py-32">
+        <div className="relative flex justify-center items-center lg:py-32 py-16">
           <Link href="/">
             <Image
               src={getImageFullUrl_client(navbarData.waba_logos.data[0])}
