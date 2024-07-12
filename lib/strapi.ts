@@ -26,6 +26,7 @@ const downloadablesContentNestedComponents = [
   'content.bg_image',
   'content.file',
   'form.fields',
+  'form.terms_label',
 ];
 const preFooterCardNestedComponents = [
   'pre_footer_card_1.background_image',

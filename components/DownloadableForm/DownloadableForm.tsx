@@ -7,7 +7,7 @@ import { TextInput, Button, Checkbox } from '@/gui-components/client';
 import { downloadableFormValidation } from '@/utils/formValidation';
 
 const DownloadableForm = ({ form, buttonCta }) => {
-  const { success_message: successMessage, error_message: errorMessage, fields } = form;
+  const { success_message: successMessage, error_message: errorMessage, fields, terms_label: termsLabel } = form;
   const [terms, setTerms] = useState(false);
   const pathname = usePathname();
   const slug = pathname.split('/').pop();
@@ -88,7 +88,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
               name="terms"
               size="reg"
               layout="vertical"
-              label={'I agree to the terms and conditions'}
+              label={termsLabel}
               value={terms}
               onChange={() => setTerms(!terms)}
               labelColor="text-white-100"
