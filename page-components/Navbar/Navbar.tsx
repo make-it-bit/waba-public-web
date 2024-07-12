@@ -8,7 +8,7 @@ import NavbarMobile from './NavbarMobile/NavbarMobile';
 const Navbar = ({ navbarData }) => {
   const pathname = usePathname();
 
-  if (pathname.includes('/downloadables')) return null;
+  if (pathname.includes('/offers')) return null;
   return (
     <nav>
       <NavbarDesktop navbarData={navbarData} />

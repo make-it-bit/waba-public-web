@@ -44,7 +44,7 @@ export async function POST(req) {
       '/careers-at-waba': CAREERS_SHEET_ID,
       '/waba-for-business': BUSINESS_SHEET_ID,
       '/contact-us': CONTACT_SHEET_ID,
-      '/downloadables': DOWNLOADABLE_SHEET_ID,
+      '/offers': DOWNLOADABLE_SHEET_ID,
     }[pathname];
 
     const jwt = new JWT({
@@ -62,7 +62,7 @@ export async function POST(req) {
       await sheet.addRow(row);
       await sgMail.send({
         ...sharedEmailSettings,
-        subject: 'NEW WABA DOWNLOADABLE FORM SUBMISSION',
+        subject: 'NEW WABA OFFERS FORM SUBMISSION',
         text: 'check google sheets...',
       });
     } else {
