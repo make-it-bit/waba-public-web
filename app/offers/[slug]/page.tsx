@@ -64,7 +64,7 @@ const Downloadables = async ({
 
   return (
     <>
-      <div className="relative w-screen h-[700px]">
+      <div className="relative w-screen lg:h-[700px] h-[800px]">
         <Image src={getImageFullUrl_server(bgImage.data)} fill alt="Downloadables" className="object-cover" />
         <div className="container relative">
           <div className="grid grid-cols-12">
@@ -76,12 +76,12 @@ const Downloadables = async ({
                 {!file.data && !buttonHref && <DownloadableForm form={form} buttonCta={buttonCta} />}
                 {file.data && (
                   <Link href={getImageFullUrl_server(file.data)} target="_blank" className="self-center">
-                    <Button CTA={buttonCta} style="primary" size="reg" />
+                    <Button CTA={buttonCta} style="tertiary" size="reg" />
                   </Link>
                 )}
                 {buttonHref && !file.data && (
                   <Link href={buttonHref} target="_blank" className="self-center">
-                    <Button CTA={buttonCta} style="primary" size="reg" />
+                    <Button CTA={buttonCta} style="tertiary" size="reg" />
                   </Link>
                 )}
               </div>
