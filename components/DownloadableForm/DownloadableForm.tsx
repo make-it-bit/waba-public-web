@@ -94,7 +94,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
               labelColor="text-white-100"
               otherClassnames="mb-16"
             />
-            <Button CTA={buttonCta} type="submit" size="reg" disabled={isSent || !terms} />
+            <Button CTA={buttonCta} type="submit" size="reg" style="tertiary" disabled={isSent || !terms} />
           </form>
         ) : (
           <div className="flex justify-center items-center relative">

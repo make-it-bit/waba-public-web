@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       fontFamily: {
         rufina: '"Rufina"',
+        dmSans: '"DM Sans"',
       },
       lineHeight: {
         base: '30px',
