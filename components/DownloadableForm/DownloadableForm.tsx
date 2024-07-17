@@ -12,6 +12,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
   const [termsError, setTermsError] = useState('');
   const pathname = usePathname();
   const slug = pathname.split('/').pop();
+  const emailFieldName = fields.find((field) => field.validation_type === 'email').field_name;
 
   const [formFields, setFormFields] = useState(
     fields.reduce((acc, field) => {
@@ -44,8 +45,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
       })
     );
     if (!terms) {
-      setTermsError('Please accept the terms');
-      return;
+      setTermsError(form.terms_error);
     }
     const validationErrors = downloadableFormValidation(fields, formFields);
 
@@ -60,12 +60,13 @@ const DownloadableForm = ({ form, buttonCta }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email: formFields.email }),
+          body: JSON.stringify({ email: formFields[emailFieldName] }),
         });
         const { message } = await response.json();
+
         if (message !== 'success') {
           setIsSent(false);
-          setFormErrors({ email: 'Please enter correct email' });
+          setFormErrors({ ...formErrors, [emailFieldName]: form.email_invalid_error });
           return;
         }
         await fetch('/api/spreadsheets', {
@@ -111,7 +112,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
               onChange={() => setTerms(!terms)}
               labelColor="text-white-100"
             />
-            {termsError && <p className="text-sm text-signal-red-100 m-0">Please accept the terms</p>}
+            {termsError && <p className="text-sm text-signal-red-100 m-0">{termsError}</p>}
             <Button
               CTA={buttonCta}
               type="submit"
