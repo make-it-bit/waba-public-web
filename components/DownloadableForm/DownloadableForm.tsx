@@ -9,6 +9,7 @@ import { downloadableFormValidation } from '@/utils/formValidation';
 const DownloadableForm = ({ form, buttonCta }) => {
   const { success_message: successMessage, error_message: errorMessage, fields, terms_label: termsLabel } = form;
   const [terms, setTerms] = useState(false);
+  const [termsError, setTermsError] = useState('');
   const pathname = usePathname();
   const slug = pathname.split('/').pop();
 
@@ -35,21 +36,38 @@ const DownloadableForm = ({ form, buttonCta }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setTermsError('');
     setFormErrors(
       fields.reduce((acc, field) => {
         acc[field.field_name] = '';
         return acc;
       })
     );
+    if (!terms) {
+      setTermsError('Please accept the terms');
+      return;
+    }
     const validationErrors = downloadableFormValidation(fields, formFields);
 
     setFormErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log('Form submitted');
       try {
         setIsSent(true);
         formFields.slug = slug;
+        const response = await fetch('/api/verify-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: formFields.email }),
+        });
+        const { message } = await response.json();
+        if (message !== 'success') {
+          setIsSent(false);
+          setFormErrors({ email: 'Please enter correct email' });
+          return;
+        }
         await fetch('/api/spreadsheets', {
           method: 'POST',
           headers: {
@@ -92,9 +110,16 @@ const DownloadableForm = ({ form, buttonCta }) => {
               value={terms}
               onChange={() => setTerms(!terms)}
               labelColor="text-white-100"
-              otherClassnames="mb-16"
             />
-            <Button CTA={buttonCta} type="submit" size="reg" style="tertiary" disabled={isSent || !terms} />
+            {termsError && <p className="text-sm text-signal-red-100 m-0">Please accept the terms</p>}
+            <Button
+              CTA={buttonCta}
+              type="submit"
+              size="reg"
+              style="tertiary"
+              otherClassnames="mt-16"
+              disabled={isSent}
+            />
           </form>
         ) : (
           <div className="flex justify-center items-center relative">
