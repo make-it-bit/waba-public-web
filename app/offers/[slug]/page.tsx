@@ -10,7 +10,7 @@ import { FooterSlim } from '@/page-components';
 import { RichTextBlock, DownloadableForm } from '@/components';
 import { Button } from '@/gui-components/client';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
   const slugs = await getCollectionSlugs('downloadables');
