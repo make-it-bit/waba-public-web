@@ -20,7 +20,7 @@ const navbarNestedComponents = [
   'button',
 ];
 
-const downloadablesContentNestedComponents = [
+const offersContentNestedComponents = [
   'seo.title',
   'seo.description',
   'content.bg_image',
@@ -50,12 +50,12 @@ const populateComponent = {
   'pre-footer-card': preFooterCardNestedComponents,
   footer: footerNestedComponents,
   'cookie-consent': '*',
-  downloadables: downloadablesContentNestedComponents,
+  offers: offersContentNestedComponents,
 };
 
 type Component = 'promobar' | 'navbar' | 'cta-block' | 'pre-footer-card' | 'footer' | 'cookie-consent';
 
-type CollectionName = 'downloadables';
+type CollectionName = 'offers';
 
 export const getComponentData = async (component: Component) => {
   const query = qs.stringify({ populate: populateComponent[component] });
