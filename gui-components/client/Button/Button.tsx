@@ -17,6 +17,7 @@ type ButtonProps = {
   inlineMaxWidthBreakpoint?: SizeOptions;
   blockMaxWidthBreakpoint?: SizeOptions;
   btnBlock?: boolean;
+  otherClassnames?: string;
 };
 
 const Button = ({
@@ -30,6 +31,7 @@ const Button = ({
   inlineMaxWidthBreakpoint = undefined,
   blockMaxWidthBreakpoint = undefined,
   btnBlock = false,
+  otherClassnames = '',
 }: ButtonProps) => {
   const styleMap = {
     primary:
@@ -84,7 +86,8 @@ const Button = ({
         blockMaxWidthBreakpointMap,
         btnBlock && 'block',
         svg && 'flex items-center gap-8',
-        'relative justify-center text-base leading-base'
+        'relative justify-center text-base leading-base',
+        otherClassnames
       )}
       type={type}
       onClick={onClick}
