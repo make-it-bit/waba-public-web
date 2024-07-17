@@ -13,7 +13,7 @@ import { Button } from '@/gui-components/client';
 export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
-  const slugs = await getCollectionSlugs('downloadables');
+  const slugs = await getCollectionSlugs('offers');
   return slugs.map((slug: string) => ({ params: { slug } }));
 }
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const pageData = await getCollectionItem('downloadables', params.slug);
+  const pageData = await getCollectionItem('offers', params.slug);
   if (!pageData) redirect('/not-found');
   const { seo } = pageData;
   return {
@@ -47,7 +47,7 @@ const Downloadables = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const footerData = await getComponentData('footer');
-  const downloadableData = await getCollectionItem('downloadables', params.slug);
+  const downloadableData = await getCollectionItem('offers', params.slug);
 
   if (!downloadableData) redirect('/not-found');
 
