@@ -2,8 +2,7 @@ import React from 'react';
 import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { AxiomWebVitals } from 'next-axiom';
-import { DM_Sans } from 'next/font/google';
-import { Rufina } from 'next/font/google';
+import { DM_Sans, Rufina } from 'next/font/google';
 import classNames from 'classnames';
 
 import { getComponentData } from '@/lib/strapi';
@@ -43,7 +42,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={classNames('min-h-screen flex flex-col', dmSans.className, rufina.className)}>
+      <body className={classNames('min-h-screen flex flex-col', dmSans.className)}>
         {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
         <Script id="google-tag-manager-consent" strategy="afterInteractive">
           {`
