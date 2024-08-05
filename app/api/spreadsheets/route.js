@@ -58,7 +58,14 @@ export async function POST(req) {
     const sheet = doc.sheetsById[sheetId];
     let row;
     if (sheetId === DOWNLOADABLE_SHEET_ID) {
-      row = { ...form };
+      console.log('form', form);
+      const now = new Date();
+      const timeStamp = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')} ${now.getFullYear()}-${(
+        now.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+      row = { ...form, timestamp: timeStamp };
       await sheet.addRow(row);
       await sgMail.send({
         ...sharedEmailSettings,

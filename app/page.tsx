@@ -16,7 +16,7 @@ export async function generateMetadata() {
     },
     openGraph: {
       images: [
-        `/api/og?title=${indexPageData.attributes.seo.title}&desc=${indexPageData.attributes.seo.description}` || null,
+        `/api/og?title=${indexPageData.attributes.seo.title}&desc=${indexPageData.attributes.seo.description}` ?? null,
       ],
     },
   };
