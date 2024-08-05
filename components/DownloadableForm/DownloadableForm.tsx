@@ -28,8 +28,6 @@ const DownloadableForm = ({ form, buttonCta }) => {
     }, {})
   );
 
-  console.log(formFields);
-
   const [message, setMessage] = useState('');
   const [isSent, setIsSent] = useState(false);
 
