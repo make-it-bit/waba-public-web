@@ -29,7 +29,7 @@ export async function generateMetadata() {
       images: [
         `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${
           userStoriesPageData.attributes.seo?.description ?? ''
-        }` || null,
+        }` ?? null,
       ],
     },
   };
@@ -44,11 +44,15 @@ const findMatchingPosts = (igPosts, igBlock) => {
     igBlock.fifth_caption,
   ];
 
-  const matchingPosts = igPosts.filter((post) => {
-    return igBlockCaptions.some((blockCaption) => post.caption.includes(blockCaption));
-  });
+  if (igPosts) {
+    const matchingPosts = igPosts.filter((post) => {
+      return igBlockCaptions.some((blockCaption) => post.caption.includes(blockCaption));
+    });
 
-  return matchingPosts;
+    return matchingPosts;
+  } else {
+    return [];
+  }
 };
 
 const UserStories = async () => {
@@ -72,7 +76,7 @@ const UserStories = async () => {
       <UserStoriesHero userStoriesHeroData={userStoriesPageData.attributes.hero} />
       <Examples examplesData={userStoriesPageData.attributes.example} />
       <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} />
-      <InstagramBlock posts={matchingPosts} blockData={igBlock} />
+      {matchingPosts && <InstagramBlock posts={matchingPosts} blockData={igBlock} />}
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />

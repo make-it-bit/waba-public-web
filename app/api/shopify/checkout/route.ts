@@ -20,10 +20,7 @@ export async function GET(req) {
     const shopifyProductData = await getProductById('gid://shopify/Product/8668620783962');
 
     const checkout = await createCheckout([
-      {
-        variantId: shopifyProductData.product.variants.edges[0].node.id,
-        quantity: parseInt(quantity),
-      },
+      { variantId: shopifyProductData.product.variants.edges[0].node.id, quantity: parseInt(quantity) },
     ]);
 
     log.info('Checkout process in progress. Creating checkout URL.', {
@@ -36,7 +33,7 @@ export async function GET(req) {
     );
   } catch (e) {
     console.error(e);
-    log.error('Checkout process failed.', { error: e.message });
+    log.error('Checkout process failed.', { error: e.message, stack: e.stack });
     await log.flush();
     return NextResponse.json({ message: 'fail' }, { status: 400 });
   }

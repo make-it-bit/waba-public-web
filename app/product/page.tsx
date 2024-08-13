@@ -18,7 +18,7 @@ export async function generateMetadata() {
       images: [
         `/api/og?title=${productPageData.attributes.seo?.title ?? ''}&desc=${
           productPageData.attributes.seo?.description ?? ''
-        }` || null,
+        }` ?? null,
       ],
     },
   };
