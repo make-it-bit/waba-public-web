@@ -71,6 +71,7 @@ export async function POST(req) {
     if (sheetId === DOWNLOADABLE_SHEET_ID) {
       log.info('Processing offers form submission.', { form });
       await log.flush();
+      // Email verification
       try {
         log.info('Verifying email address.', { email: form.email });
         await log.flush();
@@ -96,13 +97,19 @@ export async function POST(req) {
         await log.flush();
         return NextResponse.json({ message: 'email_verification_error' }, { status: 500 });
       }
+
       const now = new Date();
       const timeStamp = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')} ${now.getFullYear()}-${(
         now.getMonth() + 1
       )
         .toString()
         .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
-      row = { ...form, timestamp: timeStamp };
+      let row: any[] = [];
+      Object.keys(form).forEach((key) => {
+        row.push(form[key]);
+      });
+      row.push(timeStamp);
+
       log.info('Adding a new row to the sheet.', { row });
       await log.flush();
       await sheet.addRow(row);
