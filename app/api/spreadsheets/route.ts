@@ -18,7 +18,7 @@ const {
 
 export const maxDuration = 180;
 
-const sharedEmailSettings = {
+const sharedEmailConf = {
   to: 'mart.lakspere@wabaskin.com',
   from: 'mart.lakspere@wabaskin.com',
 };
@@ -56,9 +56,10 @@ export async function POST(req) {
     const doc = new GoogleSpreadsheet(SPREADSHEET_ID, jwt);
     await doc.loadInfo();
     const sheet = doc.sheetsById[sheetId];
+
     let row;
+
     if (sheetId === DOWNLOADABLE_SHEET_ID) {
-      console.log('form', form);
       const now = new Date();
       const timeStamp = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')} ${now.getFullYear()}-${(
         now.getMonth() + 1
@@ -68,7 +69,7 @@ export async function POST(req) {
       row = { ...form, timestamp: timeStamp };
       await sheet.addRow(row);
       await sgMail.send({
-        ...sharedEmailSettings,
+        ...sharedEmailConf,
         subject: 'NEW WABA OFFERS FORM SUBMISSION',
         text: 'check google sheets...',
       });
@@ -82,19 +83,14 @@ export async function POST(req) {
         Enquiry: form.enquiry,
       };
       await sheet.addRow(row);
-
-      await sgMail.send({
-        ...sharedEmailSettings,
-        subject: 'NEW WABA ENQUIRY',
-        text: 'check google sheets...',
-      });
+      await sgMail.send({ ...sharedEmailConf, subject: 'NEW WABA ENQUIRY', text: 'check google sheets...' });
     }
 
     return NextResponse.json({ message: 'success' }, { status: 200 });
   } catch (e) {
     console.error(e);
     await sgMail.send({
-      ...sharedEmailSettings,
+      ...sharedEmailConf,
       subject: 'Failed to submit enquiry.',
       text: 'Please report to Sebastian.',
     });

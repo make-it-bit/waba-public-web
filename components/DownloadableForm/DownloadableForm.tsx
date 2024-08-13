@@ -31,9 +31,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
   const [message, setMessage] = useState('');
   const [isSent, setIsSent] = useState(false);
 
-  const handleChange = (e) => {
-    setFormFields({ ...formFields, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormFields({ ...formFields, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,36 +42,32 @@ const DownloadableForm = ({ form, buttonCta }) => {
         return acc;
       })
     );
-    if (!terms) {
-      setTermsError(form.terms_error);
-    }
-    const validationErrors = downloadableFormValidation(fields, formFields);
 
+    if (!terms) setTermsError(form.terms_error);
+
+    const validationErrors = downloadableFormValidation(fields, formFields);
     setFormErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
       try {
         setIsSent(true);
         formFields.slug = slug;
+
         const response = await fetch('/api/verify-email', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: formFields[emailFieldName] }),
         });
         const { message } = await response.json();
-
         if (message !== 'success') {
           setIsSent(false);
           setFormErrors({ ...formErrors, [emailFieldName]: form.email_invalid_error });
           return;
         }
+
         await fetch('/api/spreadsheets', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ form: formFields, pathname: '/offers' }),
         });
         setIsSent(true);
