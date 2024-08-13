@@ -7,7 +7,7 @@ import { getImageFullUrl_server } from '@/lib/getImgFullUrl';
 import { getComponentData, getCollectionSlugs, getCollectionItem } from '@/lib/strapi';
 
 import { FooterSlim } from '@/page-components';
-import { RichTextBlock, DownloadableForm } from '@/components';
+import { RichTextBlock, StrapiForm } from '@/components';
 import { Button } from '@/gui-components/client';
 
 export const dynamic = 'force-dynamic';
@@ -73,7 +73,7 @@ const Downloadables = async ({
                 {introTitle && <h4 className="text-3xl font-bold text-purple-40 text-center m-0">{introTitle}</h4>}
                 <h1 className="text-4xl font-rufina font-bold text-white-100 text-center m-0">{mainTitle}</h1>
                 <RichTextBlock content={description} />
-                {!file.data && !buttonHref && <DownloadableForm form={form} buttonCta={buttonCta} />}
+                {!file.data && !buttonHref && <StrapiForm form={form} buttonCta={buttonCta} />}
                 {file.data && (
                   <Link href={getImageFullUrl_server(file.data)} target="_blank" className="self-center">
                     <Button CTA={buttonCta} style="tertiary" size="reg" />

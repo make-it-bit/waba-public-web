@@ -35,12 +35,19 @@ export const formValidation = (form, setMessage) => {
 
 export const downloadableFormValidation = (fields, formFields) => {
   let errors = {};
+  const phoneRegex = /^(\+?\d{1,3}[-.\s]?)?(\(?\d{1,4}\)?[-.\s]?)?\d{5,9}$/;
 
   fields.forEach((field) => {
     if (!formFields[field.field_name] && field.required) {
       errors[field.field_name] = field.field_error;
     }
+    if (
+      formFields[field.field_name] !== '' &&
+      field.validation_type === 'phone' &&
+      !phoneRegex.test(formFields[field.field_name])
+    ) {
+      errors[field.field_name] = field.field_error;
+    }
   });
-
   return errors;
 };

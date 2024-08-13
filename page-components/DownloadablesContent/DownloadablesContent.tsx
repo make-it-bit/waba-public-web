@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { RichTextBlock, DownloadableForm } from '@/components';
+import { RichTextBlock, StrapiForm } from '@/components';
 import { Button } from '@/gui-components/client';
 
 import type { BlocksContent } from '@strapi/blocks-react-renderer';
@@ -55,7 +55,7 @@ const DownloadablesContent = ({ downloadableData }: { downloadableData: Download
               {introTitle && <h4 className="text-3xl font-bold text-purple-40 text-center m-0">{introTitle}</h4>}
               <h1 className="text-4xl font-bold text-white-100 text-center m-0">{mainTitle}</h1>
               <RichTextBlock content={description} />
-              {!file.data && !buttonHref && <DownloadableForm form={form} buttonCta={buttonCta} />}
+              {!file.data && !buttonHref && <StrapiForm form={form} buttonCta={buttonCta} />}
               {file.data && (
                 <Link href={getImageFullUrl_client(file.data)} target="_blank" className="self-center">
                   <Button CTA={buttonCta} style="primary" size="reg" />
