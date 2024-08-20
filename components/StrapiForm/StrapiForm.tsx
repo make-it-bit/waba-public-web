@@ -12,7 +12,7 @@ const StrapiForm = ({ form, buttonCta }) => {
   const [termsError, setTermsError] = useState('');
   const pathname = usePathname();
   const slug = pathname.split('/').pop();
-  const emailFieldName = fields.find((field) => field.validation_type === 'email').field_name;
+  const emailFieldName = fields.find((field) => field.validation_type === 'email')?.field_name || '';
 
   const [formFields, setFormFields] = useState(
     fields.reduce((acc, field) => {

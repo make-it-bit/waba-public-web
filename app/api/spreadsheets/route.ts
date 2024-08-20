@@ -71,44 +71,49 @@ export async function POST(req) {
     if (sheetId === DOWNLOADABLE_SHEET_ID) {
       log.info('Processing offers form submission.', { form });
       await log.flush();
-      // Email verification
-      try {
-        log.info('Verifying email address.', { email: form.email });
-        await log.flush();
-        const emailVerification = await fetch(
-          `https://apps.emaillistverify.com/api/verifyEmail?secret=${EMAIL_VERIF_API_KEY}&email=${form.email}`
-        );
-
-        if (!emailVerification.ok) {
-          log.error('Error verifying email address.');
+      // // Email verification
+      await sheet.getRows();
+      const headers = sheet.headerValues;
+      if (form.email && form.email !== '' && process.env.NODE_ENV === 'production') {
+        try {
+          log.info('Verifying email address.', { email: form.email });
           await log.flush();
-          return NextResponse.json({ message: 'email_verification_failed' }, { status: 400 });
-        }
+          const emailVerification = await fetch(
+            `https://apps.emaillistverify.com/api/verifyEmail?secret=${EMAIL_VERIF_API_KEY}&email=${form.email}`
+          );
 
-        const emailVerificationData = await new Response(emailVerification.body).text();
+          if (!emailVerification.ok) {
+            log.error('Error verifying email address.');
+            await log.flush();
+            return NextResponse.json({ message: 'email_verification_failed' }, { status: 400 });
+          }
 
-        if (emailVerificationData !== 'ok') {
-          log.error('Email address is invalid.', { email: form.email });
+          const emailVerificationData = await new Response(emailVerification.body).text();
+
+          if (emailVerificationData !== 'ok') {
+            log.error('Email address is invalid.', { email: form.email });
+            await log.flush();
+            return NextResponse.json({ message: 'email_invalid' }, { status: 501 });
+          }
+        } catch (error) {
+          log.error('Failed to verify email address.', { error: error.message, stack: error.stack });
           await log.flush();
-          return NextResponse.json({ message: 'email_invalid' }, { status: 501 });
+          return NextResponse.json({ message: 'email_verification_error' }, { status: 500 });
         }
-      } catch (error) {
-        log.error('Failed to verify email address.', { error: error.message, stack: error.stack });
-        await log.flush();
-        return NextResponse.json({ message: 'email_verification_error' }, { status: 500 });
       }
-
       const now = new Date();
       const timeStamp = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')} ${now.getFullYear()}-${(
         now.getMonth() + 1
       )
         .toString()
         .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
-      let row: any[] = [];
-      Object.keys(form).forEach((key) => {
-        row.push(form[key]);
-      });
-      row.push(timeStamp);
+      form['timestamp'] = timeStamp;
+
+      const row = headers.map((header) => form[header] || '');
+      const additionalKeys = Object.keys(form).filter((key) => !headers.includes(key));
+      additionalKeys.forEach((key) => row.push(form[key]));
+
+      log.info('Result array:', row);
 
       log.info('Adding a new row to the sheet.', { row });
       await log.flush();
