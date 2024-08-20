@@ -6,13 +6,13 @@ import { TextInput, Button, Checkbox } from '@/gui-components/client';
 
 import { downloadableFormValidation } from '@/utils/formValidation';
 
-const DownloadableForm = ({ form, buttonCta }) => {
+const StrapiForm = ({ form, buttonCta }) => {
   const { success_message: successMessage, error_message: errorMessage, fields, terms_label: termsLabel } = form;
   const [terms, setTerms] = useState(false);
   const [termsError, setTermsError] = useState('');
   const pathname = usePathname();
   const slug = pathname.split('/').pop();
-  const emailFieldName = fields.find((field) => field.validation_type === 'email').field_name;
+  const emailFieldName = fields.find((field) => field.validation_type === 'email')?.field_name || '';
 
   const [formFields, setFormFields] = useState(
     fields.reduce((acc, field) => {
@@ -40,36 +40,40 @@ const DownloadableForm = ({ form, buttonCta }) => {
       fields.reduce((acc, field) => {
         acc[field.field_name] = '';
         return acc;
-      })
+      }, {})
     );
 
-    if (!terms) setTermsError(form.terms_error);
-
     const validationErrors = downloadableFormValidation(fields, formFields);
-    setFormErrors(validationErrors);
+    setFormErrors((prev) => ({ ...prev, ...validationErrors }));
+
+    if (!terms) return setTermsError(form.terms_error);
 
     if (Object.keys(validationErrors).length === 0) {
       try {
         setIsSent(true);
         formFields.slug = slug;
-
-        const response = await fetch('/api/verify-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: formFields[emailFieldName] }),
-        });
-        const { message } = await response.json();
-        if (message !== 'success') {
-          setIsSent(false);
-          setFormErrors({ ...formErrors, [emailFieldName]: form.email_invalid_error });
-          return;
-        }
-
-        await fetch('/api/spreadsheets', {
+        const response = await fetch('/api/spreadsheets', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ form: formFields, pathname: '/offers' }),
         });
+        const { message } = await response.json();
+        if (message !== 'success') {
+          setIsSent(false);
+          if (
+            message === 'email_invalid' ||
+            message === 'email_verification_failed' ||
+            message === 'email_verification_error'
+          ) {
+            setFormErrors((prev) => ({
+              ...prev,
+              [emailFieldName]: form.email_invalid_error,
+            }));
+          } else {
+            setMessage(errorMessage);
+          }
+          return;
+        }
         setIsSent(true);
         setMessage(successMessage);
       } catch (error) {
@@ -88,7 +92,7 @@ const DownloadableForm = ({ form, buttonCta }) => {
               <TextInput
                 key={index}
                 theme="light"
-                type={'text'}
+                type={fields.validation_type}
                 placeholder={field.placeholder}
                 name={field.field_name}
                 value={formFields[field.field_name]}
@@ -126,4 +130,4 @@ const DownloadableForm = ({ form, buttonCta }) => {
   );
 };
 
-export default DownloadableForm;
+export default StrapiForm;
