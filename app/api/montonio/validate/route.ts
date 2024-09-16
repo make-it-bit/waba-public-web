@@ -7,6 +7,9 @@ import jwt from 'jsonwebtoken';
 
 const { MONTONIO_SECRET_KEY, MONTONIO_ACCESS_KEY } = process.env;
 
+// TODO: lisada nii palju kui võimalik post to slacki
+// TODO: lisada log flush
+
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const orderToken = searchParams.get('orderToken');
@@ -27,6 +30,11 @@ export async function GET(req) {
     }
 
     const decoded = jwt.verify(orderToken, MONTONIO_SECRET_KEY) as JwtPayload;
+
+    //
+    // IF PAID check also if paid in mongodb –> if so, return early with payload to render /orders/_id
+    // otherwise, check if mongo montonioOrderId and decoded montonioOrderId match and then update the order in mongo
+    //
 
     if (
       decoded.paymentStatus === 'PAID' /* && decoded.uuid === montonioOrderId */ &&

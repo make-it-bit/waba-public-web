@@ -22,10 +22,13 @@ import { Logger } from 'next-axiom';
 
 const { BASE_URL } = process.env;
 
+async function getOrderDetailsFromMongoDB(orderToken: string) {}
+
 async function getOrderDetails(orderToken: string) {
   const log = new Logger();
 
   if (orderToken) {
+    // /api/orders/${_id}/validate?montonioOrderToken=${orderToken}
     const response = await fetch(`${BASE_URL}/api/montonio/validate?orderToken=${orderToken}`);
 
     if (!response.ok) {

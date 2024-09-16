@@ -8,6 +8,8 @@ import axios from 'axios';
 
 import { getCountryCode } from 'countries-list';
 
+// TODO: lisada nii palju kui võimalik post to slacki
+
 type Order = {
   _id: ObjectId;
   montonioOrderId: string;
@@ -36,11 +38,20 @@ export async function POST(req) {
 
     const { firstName, lastName, email, address, city, region, country, postalCode, quantity } = await req.json();
 
+    // TODO
+    // validate input
+
+    // CREATE MONGODB ORDER HERE TO GET _ID
+
+    // ...
+
+    // CREATE MONTONIO PAYLOAD
+
     const payload = {
       accessKey: MONTONIO_ACCESS_KEY,
       merchantReference: `ORDER-${Math.floor(Math.random() * 1000000000).toString()}`,
-      returnUrl: `${'https://development.wabaskin.com'}/payment-result`,
-      notificationUrl: `${'https://development.wabaskin.com'}/payment-notification`,
+      returnUrl: `${'https://development.wabaskin.com'}/payment-result`, // developmnet.wabaskin.com/orders/${_id}
+      notificationUrl: `${'https://development.wabaskin.com'}/api/montonio/validate`, // POST /api/orders/${_id}/validate?montonioOrderToken=${orderToken}
       currency: 'EUR',
       grandTotal: quantity * 962,
       locale: 'en',
@@ -68,11 +79,7 @@ export async function POST(req) {
       payment: {
         method: 'paymentInitiation',
         methodDisplay: 'Pay with your bank',
-        methodOptions: {
-          paymentDescription: 'PAYMENT FOR WABA ECLATIA',
-          preferredCountry: '',
-          preferredProvider: '',
-        },
+        methodOptions: { paymentDescription: 'PAYMENT FOR WABA ECLATIA', preferredCountry: '', preferredProvider: '' },
         amount: quantity * 962,
         currency: 'EUR',
       },
@@ -83,10 +90,13 @@ export async function POST(req) {
     const response = await axios.post(`${MONTONIO_API_BASE_URL}/orders`, { data: token });
     if (!response.data) throw new Error('Failed to create checkout URL!');
 
+    // TODO: validate if uuid and paymentStatus exist
+
+    // TODO: SHIPPING JA BILLING PUUDU
     const mongoPayload: Order = {
       _id: new ObjectId(),
       montonioOrderId: response.data.uuid,
-      montonioPaymentStatus: response.data.paymentStatus,
+      montonioPaymentStatus: response.data.paymentStatus, // montoioPaymentStatus enum?
       firstName,
       lastName,
       email,
@@ -96,9 +106,12 @@ export async function POST(req) {
       createdAt: new Date(),
     };
 
+    // MOVE THIS SHIT UP :D
     const db = await getDatabase();
     const orders = db.collection('orders');
     const insertResult = await orders.insertOne(mongoPayload);
+
+    // UPDATE MONGO HERE WITH MONTONIO DETAILS
 
     if (!insertResult.insertedId || !insertResult.acknowledged) {
       throw new Error('Failed to insert order into database!');
@@ -106,6 +119,8 @@ export async function POST(req) {
 
     log.info('Montonio payment initiated successfully!', { paymentUrl: response.data.paymentUrl });
     await log.flush();
+
+    // RETURN
     return NextResponse.json({ data: { paymentUrl: response.data.paymentUrl } }, { status: 200 });
   } catch (error) {
     log.error('Failed to initiate Montonio payment!', { error });
