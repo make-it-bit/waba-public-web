@@ -15,7 +15,7 @@ const TextInput = ({
   placeholder = '',
   disabled = false,
   onChange,
-  errorMessage = undefined,
+  errorMessage = '',
   otherClassnames = '',
 }) => {
   const themes = {
@@ -24,11 +24,7 @@ const TextInput = ({
       'bg-transparent text-white-100 border border-white-100 hover:border-white-40 focus-visible:outline-none focus-visible:border-purple-100 focus-visible:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus-visible:text-white-100 active:text-white-100 disabled:placeholder-white-40',
   }[theme];
 
-  /* const sizes = {
-    sm: "input-sm",
-    reg: "input-reg",
-    lg: "input-lg",
-  }[size]; */
+  /* const sizes = { sm: "input-sm", reg: "input-reg", lg: "input-lg"}[size]; */
 
   return (
     <>

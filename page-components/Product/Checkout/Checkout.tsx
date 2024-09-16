@@ -3,26 +3,116 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { NumberInput } from '@/gui-components/client';
+import { TextInput, NumberInput } from '@/gui-components/client';
 import { CheckoutButton } from '@/components';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 const Checkout = ({ mainInfoData }) => {
-  const [quantity, setQuantity] = useState(1);
+  const [paymentForm, setPaymentForm] = useState({
+    quantity: 1,
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    city: '',
+    region: '',
+    country: '',
+    postalCode: '',
+  });
+  const [inputErrors, setInputErrors] = useState({
+    quantity: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    city: '',
+    region: '',
+    country: '',
+    postalCode: '',
+  });
   const [initCheckoutError, setInitCheckoutError] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuantity(parseInt(e.target.value));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPaymentForm((prev) => ({ ...prev, [name]: name === 'quantity' ? parseInt(value) : value }));
+  };
 
   return (
     <>
-      <NumberInput label="Quantity" name="product-quantity" value={quantity} minValue={0} onChange={handleChange} />
+      <NumberInput
+        label="Quantity"
+        name="quantity"
+        value={paymentForm.quantity}
+        minValue={0}
+        onChange={(e) => handleChange(e)}
+        errorMessage={inputErrors.quantity}
+      />
+      <div className="flex flex-col gap-8 mt-24">
+        <TextInput
+          name="firstName"
+          value={paymentForm.firstName}
+          placeholder="First name"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.firstName}
+        />
+        <TextInput
+          name="lastName"
+          value={paymentForm.lastName}
+          placeholder="Last name"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.lastName}
+        />
+        <TextInput
+          name="email"
+          value={paymentForm.email}
+          placeholder="Email"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.email}
+        />
+        <TextInput
+          name="address"
+          value={paymentForm.address}
+          placeholder="Address"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.address}
+        />
+        <TextInput
+          name="city"
+          value={paymentForm.city}
+          placeholder="Locality"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.city}
+        />
+        <TextInput
+          name="region"
+          value={paymentForm.region}
+          placeholder="Region"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.region}
+        />
+        <TextInput
+          name="country"
+          value={paymentForm.country}
+          placeholder="Country"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.country}
+        />
+        <TextInput
+          name="postalCode"
+          value={paymentForm.postalCode}
+          placeholder="Postal code"
+          onChange={(e) => handleChange(e)}
+          errorMessage={inputErrors.postalCode}
+        />
+      </div>
       <div className="flex flex-wrap gap-16 mt-16">
         <div className="flex flex-col items-center gap-8 grow-1">
           <CheckoutButton
-            setInitCheckoutError={setInitCheckoutError}
-            quantity={quantity}
             CTA={mainInfoData.button_1.href_text}
+            paymentForm={paymentForm}
+            setInputErrors={setInputErrors}
+            setInitCheckoutError={setInitCheckoutError}
           />
           <div className="flex justify-center items-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>
@@ -37,10 +127,11 @@ const Checkout = ({ mainInfoData }) => {
         </div>
         <div className="flex flex-col items-center gap-8 grow-1">
           <CheckoutButton
-            setInitCheckoutError={setInitCheckoutError}
-            quantity={quantity}
             CTA={mainInfoData.button_2.href_text}
             style="tertiary"
+            paymentForm={paymentForm}
+            setInputErrors={setInputErrors}
+            setInitCheckoutError={setInitCheckoutError}
           />
           <div className="flex justify-center items-center gap-2 lg:w-auto w-full">
             <p className="text-xs leading-xs">powered by</p>

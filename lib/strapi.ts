@@ -1,14 +1,11 @@
 import { revalidateTag } from 'next/cache';
-import qs from 'qs';
 import { redirect } from 'next/navigation';
 import { Logger } from 'next-axiom';
+import qs from 'qs';
 
 const { STRAPI_BASE_URL, STRAPI_API_TOKEN } = process.env;
 
-const headers = {
-  Accept: '*/*',
-  Authorization: 'Bearer ' + STRAPI_API_TOKEN,
-};
+const headers = { Accept: '*/*', Authorization: 'Bearer ' + STRAPI_API_TOKEN };
 
 const log = new Logger();
 

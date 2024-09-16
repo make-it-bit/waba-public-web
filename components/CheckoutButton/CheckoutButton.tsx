@@ -3,6 +3,8 @@
 import React from 'react';
 import { useLogger } from 'next-axiom';
 
+import { paymentFormValidation } from '@/utils/formValidation';
+
 import { Button } from '@/gui-components/client';
 
 import styles from './_checkoutButton.module.scss';
@@ -10,32 +12,52 @@ import styles from './_checkoutButton.module.scss';
 const CheckoutButton = ({
   CTA,
   style = 'primary',
-  quantity,
+  paymentForm,
+  setInputErrors,
   setInitCheckoutError,
 }: {
   CTA: string;
   style?: 'primary' | 'tertiary';
-  quantity: number;
+  paymentForm: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    address: string;
+    city: string;
+    region: string;
+    country: string;
+    postalCode: string;
+    quantity: number;
+  };
+  setInputErrors: React.Dispatch<React.SetStateAction<Object>>;
   setInitCheckoutError: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const log = useLogger();
 
   const initCheckout = async () => {
-    try {
-      log.info('Checkout process started (button clicked).', { quantity: quantity ? quantity : null });
-      const response = await fetch(`/api/shopify/checkout?quantity=${quantity}`);
-      if (!response.ok) {
-        log.error('Checkout process failed. Network response was not ok.', { response: response });
+    const formCheck = paymentFormValidation(paymentForm);
 
-        return setInitCheckoutError(`Currently only e-mail based checkout is available.`);
+    if (Object.keys(formCheck).length === 0) {
+      setInitCheckoutError('');
+      log.info('Checkout process started (button clicked).', { quantity: paymentForm.quantity ?? null });
+
+      const response = await fetch('/api/montonio/initiate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentForm),
+      });
+
+      if (!response.ok) {
+        log.error('Failed to initiate checkout process.', { error: response.statusText || 'Unknown error' });
+        return setInitCheckoutError('Failed to initiate checkout process. Please try again later.');
       }
+
       const { data } = await response.json();
-      window.location.href = data.URL;
-      log.info('Checkout process in progress. Redirecting to checkout page.', { data: data });
-    } catch (error) {
-      console.log('error: ', error);
-      log.error('Checkout process failed. Something went wrong.', { error: error });
-      setInitCheckoutError('Something went wrong. Please try again.');
+
+      window.location.href = data.paymentUrl;
+      log.info('Checkout process in progress. Redirecting to payment page.', { data });
+    } else {
+      setInputErrors(formCheck);
     }
   };
 
