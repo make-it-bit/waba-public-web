@@ -22,7 +22,7 @@ import { Logger } from 'next-axiom';
 
 const { BASE_URL } = process.env;
 
-export async function getOrderDetails(orderToken: string) {
+async function getOrderDetails(orderToken: string) {
   const log = new Logger();
 
   if (orderToken) {
