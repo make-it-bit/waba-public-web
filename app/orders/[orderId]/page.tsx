@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Logger } from 'next-axiom';
+import { getDatabase } from '@/lib/mongoClient';
+import { ObjectId } from 'mongodb';
 
 // export async function generateMetadata() {
 //   const orderResultData = await getPageData('order-result');
@@ -20,40 +22,23 @@ import { Logger } from 'next-axiom';
 //   };
 // }
 
-const { BASE_URL } = process.env;
-
-async function getOrderDetailsFromMongoDB({ orderId, orderToken }: { orderId: string; orderToken: string }) {
-  const log = new Logger();
-
-  if (!orderId || !orderToken) {
-    log.error('Missing order id or order token.', { orderId, orderToken });
-    return { error: 'Falsy order URL' };
+async function getOrderDetailsFromMongoDB({ orderId }: { orderId: string }) {
+  if (!orderId) {
+    throw new Error('Missing order id!');
   }
 
-  const response = await fetch(`${BASE_URL}/api/orders/${orderId}/validate?montonioOrderToken=${orderToken}`);
+  const db = await getDatabase();
+  const orders = db.collection('orders');
+  const order = await orders.findOne({ _id: new ObjectId(orderId) });
 
-  if (!response.ok) {
-    log.error('Failed to validate order.', { error: response.statusText || 'Unknown error' });
-    return { error: 'Failed to validate order.' };
-  }
+  if (!order) throw new Error('Order not found in the database!');
 
-  const { data } = await response.json();
-
-  log.info('Order validated successfully.', { orderDetails: data.orderDetails });
-  return data.orderDetails;
+  return order;
 }
 
-const Order = async ({
-  params,
-  searchParams,
-}: {
-  params: { orderId: string };
-  searchParams: { [key: string]: string };
-}) => {
+const Order = async ({ params }: { params: { orderId: string } }) => {
   const { orderId } = params;
-  const orderToken = searchParams['order-token'];
-
-  const orderDetails = await getOrderDetailsFromMongoDB({ orderId, orderToken });
+  const orderDetails = await getOrderDetailsFromMongoDB({ orderId });
 
   return (
     <>
