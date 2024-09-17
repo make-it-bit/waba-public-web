@@ -1,4 +1,5 @@
 import { getCountryCode } from 'countries-list';
+import { PaymentMethodEnum } from '@/components/CheckoutButton/CheckoutButton';
 
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -58,10 +59,11 @@ export const downloadableFormValidation = (fields, formFields) => {
   return errors;
 };
 
-export const paymentFormValidation = (form) => {
+export const paymentFormValidation = (form, paymentMethod) => {
   let errors = {};
 
   if (form.quantity === 0) errors.quantity = 'Please enter a quantity.';
+  if (paymentMethod === PaymentMethodEnum.BNPL && !form.period) errors.period = 'Please select a period.';
   if (form.firstName === '') errors.firstName = 'Please enter your first name.';
   if (form.lastName === '') errors.lastName = 'Please enter your last name.';
   if (form.email === '') errors.email = 'Please enter your email address.';
@@ -74,4 +76,22 @@ export const paymentFormValidation = (form) => {
   if (form.postalCode === '') errors.postalCode = 'Please enter your postal code.';
 
   return errors;
+};
+
+export const payingInPartsValidation = (grandTotal, paymentMethod, period) => {
+  if (paymentMethod === 'hirePurchase' /* PaymentMethodEnum.HIRE_PURCHASE */) {
+    if (grandTotal < 100) return 'Minimum order amount for Hire Purchase is 100 €.';
+    if (grandTotal > 10000) return 'Maximum order amount for Hire Purchase is 10 000 €.';
+  }
+  if (paymentMethod === 'bnpl' /* PaymentMethodEnum.BNPL */) {
+    if (period === 1) {
+      if (grandTotal < 30) return 'Minimum order amount for Buy Now Pay Later (next month) is 30 €.';
+      if (grandTotal > 800) return 'Maximum order amount for Buy Now Pay Later (next month) is 800 €.';
+    }
+    if (period === 2 || period === 3) {
+      if (grandTotal < 75) return `Minimum order amount for Buy Now Pay Later (${period} parts) is 75 €.`;
+      if (grandTotal > 2500) return `Maximum order amount for Buy Now Pay Later (${period} parts) is 2 500 €.`;
+    }
+  }
+  return '';
 };

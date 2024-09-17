@@ -2,49 +2,58 @@
 
 import React from 'react';
 import { useLogger } from 'next-axiom';
+import classNames from 'classnames';
 
-import { paymentFormValidation } from '@/utils/formValidation';
+import { PaymentForm } from '@/page-components/Product/Checkout/Checkout';
+import { payingInPartsValidation, paymentFormValidation } from '@/utils/formValidation';
 
 import { Button } from '@/gui-components/client';
 
 import styles from './_checkoutButton.module.scss';
 
+export enum PaymentMethodEnum {
+  PAYMENT_INITIATION = 'paymentInitiation',
+  CARD_PAYMENTS = 'cardPayments',
+  HIRE_PURCHASE = 'hirePurchase',
+  BNPL = 'bnpl',
+}
+
 const CheckoutButton = ({
   CTA,
+  method,
   style = 'primary',
   paymentForm,
   setInputErrors,
   setInitCheckoutError,
 }: {
   CTA: string;
+  method: PaymentMethodEnum;
   style?: 'primary' | 'tertiary';
-  paymentForm: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    address: string;
-    city: string;
-    region: string;
-    country: string;
-    postalCode: string;
-    quantity: number;
-  };
+  paymentForm: PaymentForm;
   setInputErrors: React.Dispatch<React.SetStateAction<Object>>;
   setInitCheckoutError: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const log = useLogger();
 
   const initCheckout = async () => {
-    const formCheck = paymentFormValidation(paymentForm);
+    setInitCheckoutError('');
+    setInputErrors({});
+
+    const payingInPartsCheck = payingInPartsValidation(paymentForm.quantity * 962, method, paymentForm.period);
+    if (payingInPartsCheck) {
+      setInitCheckoutError(payingInPartsCheck);
+      return;
+    }
+
+    const formCheck = paymentFormValidation(paymentForm, method);
 
     if (Object.keys(formCheck).length === 0) {
-      setInitCheckoutError('');
       log.info('Checkout process started (button clicked).', { quantity: paymentForm.quantity ?? null });
 
       const response = await fetch('/api/montonio/initiate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(paymentForm),
+        body: JSON.stringify({ ...paymentForm, paymentMethod: method }),
       });
 
       if (!response.ok) {
@@ -62,7 +71,7 @@ const CheckoutButton = ({
   };
 
   return (
-    <div className={styles.checkoutButtonWrapper}>
+    <div className={classNames('flex flex-1', styles.checkoutButtonWrapper)}>
       <Button onClick={initCheckout} CTA={CTA} style={style} svg />
     </div>
   );

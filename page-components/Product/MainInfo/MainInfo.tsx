@@ -45,7 +45,8 @@ const MainInfo = ({ mainInfoData }) => {
           </div>
         )}
 
-        <div className="lg:col-start-7 lg:col-span-5 col-span-12 sticky top-[201px]">
+        <div className="lg:col-start-7 lg:col-span-5 col-span-12">
+          {/* sticky top-[201px] */}
           <div className="flex flex-col">
             <div className="flex flex-wrap gap-8 lg:mb-48 mb-32">
               {mainInfoData.tags.data.map((tag, index) => (
