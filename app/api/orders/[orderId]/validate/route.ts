@@ -38,7 +38,7 @@ export async function POST(req: NextRequest, context: any) {
 
     const db = await getDatabase();
     const orders = db.collection('orders');
-    const order = await orders.findOne({ montonioOrderId: decoded.uuid });
+    const order = await orders.findOne({ montonioOrderId: decoded.uuid }); // TODO: mongodbOrder
 
     if (!order) {
       log.error('Order not found in the database!', { montonioOrderId: decoded.uuid });
@@ -54,6 +54,7 @@ export async function POST(req: NextRequest, context: any) {
     } else {
       if (decoded.uuid !== order.montonioOrderId || decoded.accessKey !== MONTONIO_ACCESS_KEY) {
         log.error('Order not found in the database! Failed to validate Montonio order!', {
+          // TODO: vale sõnum
           montonioOrderIdInDb: order.montonioOrderId,
           montonioOrderIdDecoded: decoded.uuid,
         });
@@ -64,6 +65,9 @@ export async function POST(req: NextRequest, context: any) {
         }
         return NextResponse.json({ message: 'Order not found!' }, { status: 404 });
       }
+
+      // IF decoded.paymentStatus === 'PAID' THEN update order in database and say success
+      // ELSE say something like "no unexpected errors, but payment not yet completed"
 
       const updateResult = await orders.updateOne(
         { montonioOrderId: decoded.uuid },
