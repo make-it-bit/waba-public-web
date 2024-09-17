@@ -152,8 +152,8 @@ export async function POST(req) {
     const payload = {
       accessKey: MONTONIO_ACCESS_KEY,
       merchantReference: `ORDER-${Math.floor(Math.random() * 1000000000).toString()}`,
-      returnUrl: `${'https://98b3-85-253-178-59.ngrok-free.app'}/orders/${insertResult.insertedId}`,
-      notificationUrl: `${'https://98b3-85-253-178-59.ngrok-free.app'}/api/orders/${insertResult.insertedId}/validate`,
+      returnUrl: `${BASE_URL}/orders/${insertResult.insertedId}`,
+      notificationUrl: `${BASE_URL}/api/orders/${insertResult.insertedId}/validate`,
       currency: 'EUR',
       grandTotal: quantity * 962,
       locale: 'en',
