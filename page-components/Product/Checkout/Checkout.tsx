@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { TextInput, NumberInput } from '@/gui-components/client';
+import { TextInput, SelectInput } from '@/gui-components/client';
 import { CheckoutButton } from '@/components';
-import { PaymentMethodEnum } from '@/components/CheckoutButton/CheckoutButton';
+import { PaymentMethodEnum } from '@/lib/enums';
 
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
@@ -38,7 +38,7 @@ type PaymentFormErrors = {
 const Checkout = ({ mainInfoData }) => {
   const [paymentForm, setPaymentForm] = useState<PaymentForm>({
     quantity: 1,
-    period: 1,
+    period: 0,
     firstName: '',
     lastName: '',
     email: '',
@@ -53,84 +53,90 @@ const Checkout = ({ mainInfoData }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setPaymentForm((prev) => ({ ...prev, [name]: name === 'quantity' || name === 'period' ? parseInt(value) : value }));
+    setPaymentForm((prev) => ({
+      ...prev,
+      [name]: name === 'quantity' || name === 'period' ? (value === '' ? 0 : parseInt(value)) : value,
+    }));
   };
 
   return (
     <>
       <div className="flex flex-col gap-16">
-        <NumberInput
-          label="Quantity"
+        <TextInput
+          type="number"
+          label="Quantity*"
           name="quantity"
-          value={paymentForm.quantity}
-          minValue={0}
+          value={paymentForm.quantity.toString()}
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.quantity}
         />
-        <NumberInput
+        <SelectInput
           label="Period (specify if preferred payment method is Buy Now Pay Later)"
           name="period"
-          value={paymentForm.period}
-          minValue={1}
-          maxValue={3}
+          value={paymentForm.period === 0 ? '' : paymentForm.period.toString()}
+          options={[
+            { value: '1', label: '1 month' },
+            { value: '2', label: '2 months' },
+            { value: '3', label: '3 months' },
+          ]}
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.period}
         />
       </div>
       <div className="flex flex-col gap-8 mt-24">
         <TextInput
+          label="First name*"
           name="firstName"
           value={paymentForm.firstName}
-          placeholder="First name"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.firstName}
         />
         <TextInput
+          label="Last name*"
           name="lastName"
           value={paymentForm.lastName}
-          placeholder="Last name"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.lastName}
         />
         <TextInput
+          label="Email*"
           name="email"
           value={paymentForm.email}
-          placeholder="Email"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.email}
         />
         <TextInput
+          label="Address*"
           name="address"
           value={paymentForm.address}
-          placeholder="Address"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.address}
         />
         <TextInput
+          label="City*"
           name="city"
           value={paymentForm.city}
-          placeholder="Locality"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.city}
         />
         <TextInput
+          label="Region*"
           name="region"
           value={paymentForm.region}
-          placeholder="Region"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.region}
         />
         <TextInput
+          label="Country*"
           name="country"
           value={paymentForm.country}
-          placeholder="Country"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.country}
         />
         <TextInput
+          label="Postal code*"
           name="postalCode"
           value={paymentForm.postalCode}
-          placeholder="Postal code"
           onChange={(e) => handleChange(e)}
           errorMessage={inputErrors.postalCode}
         />
@@ -139,7 +145,7 @@ const Checkout = ({ mainInfoData }) => {
         <div className="flex flex-wrap gap-16 mt-16">
           <CheckoutButton
             // CTA={mainInfoData.button_1.href_text}
-            CTA="Payment Initiation"
+            CTA="Bank Payments"
             method={PaymentMethodEnum.PAYMENT_INITIATION}
             paymentForm={paymentForm}
             setInputErrors={setInputErrors}

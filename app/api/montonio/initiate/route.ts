@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Logger } from 'next-axiom';
 import { getDatabase } from '@/lib/mongoClient';
 import { ObjectId } from 'mongodb';
@@ -9,12 +9,13 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
 import { payingInPartsValidation, paymentFormValidation } from '@/utils/formValidation';
-import { PaymentMethodEnum } from '@/components/CheckoutButton/CheckoutButton';
+import { PaymentMethodEnum, OrderStatusEnum } from '@/lib/enums';
 
-type Order = {
+export type Order = {
   _id: ObjectId;
   montonioOrderId: string;
-  montonioPaymentStatus: string;
+  montonioPaymentStatus: OrderStatusEnum;
+  merchantReference: string;
   billingAddress: {
     firstName: string;
     lastName: string;
@@ -44,7 +45,7 @@ type Order = {
 const { BASE_URL, SLACK_ALERTS_WEBHOOK_URL, MONTONIO_ACCESS_KEY, MONTONIO_SECRET_KEY, MONTONIO_API_BASE_URL } =
   process.env;
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   const log = new Logger();
 
   let slack: IncomingWebhook | null = null;
@@ -55,9 +56,6 @@ export async function POST(req) {
 
     if (!MONTONIO_ACCESS_KEY || !MONTONIO_SECRET_KEY || !MONTONIO_API_BASE_URL) {
       log.error('Missing Montonio credentials!');
-      if (slack) {
-        await slack.send({ text: 'Failed to initiate Montonio payment! Missing Montonio credentials!' });
-      }
       throw new Error('Missing Montonio credentials!');
     }
 
@@ -67,17 +65,7 @@ export async function POST(req) {
     const payingInPartsError = payingInPartsValidation(quantity * 962, paymentMethod, period);
     if (payingInPartsError) {
       log.error('Invalid payment form data!', { payingInPartsError });
-      if (slack) {
-        await slack.send({
-          text: `Failed to initiate Montonio payment! Invalid payment form data! payingInPartsError: ${JSON.stringify(
-            payingInPartsError
-          )}`,
-        });
-      }
-      return NextResponse.json(
-        { message: 'Invalid payment form data!', errors: { period: payingInPartsError } },
-        { status: 400 }
-      );
+      throw new Error(`Invalid payment form data (payingInPartsError: ${JSON.stringify(payingInPartsError)})!`);
     }
     const paymentFormErrors = paymentFormValidation(
       {
@@ -96,20 +84,14 @@ export async function POST(req) {
     );
     if (Object.keys(paymentFormErrors).length > 0) {
       log.error('Invalid payment form data!', { paymentFormErrors });
-      if (slack) {
-        await slack.send({
-          text: `Failed to initiate Montonio payment! Invalid payment form data! paymentFormErrors: ${JSON.stringify(
-            paymentFormErrors
-          )}`,
-        });
-      }
-      return NextResponse.json({ message: 'Invalid payment form data!', errors: paymentFormErrors }, { status: 400 });
+      throw new Error(`Invalid payment form data (paymentFormErrors: ${JSON.stringify(paymentFormErrors)})!`);
     }
 
     const mongoPayload: Order = {
       _id: new ObjectId(),
       montonioOrderId: '',
-      montonioPaymentStatus: 'not started',
+      montonioPaymentStatus: OrderStatusEnum.NOT_STARTED,
+      merchantReference: '',
       billingAddress: {
         firstName,
         lastName,
@@ -141,12 +123,7 @@ export async function POST(req) {
     const insertResult = await orders.insertOne(mongoPayload);
 
     if (!insertResult.insertedId || !insertResult.acknowledged) {
-      if (slack) {
-        await slack.send({
-          text: `Failed to insert order into database! mongoPayload: ${JSON.stringify(mongoPayload)}`,
-        });
-      }
-      throw new Error('Failed to insert order into database!');
+      throw new Error(`Failed to insert order into database (mongoPayload: ${JSON.stringify(mongoPayload)})!`);
     }
 
     const payload = {
@@ -179,14 +156,14 @@ export async function POST(req) {
       },
       lineItems: [{ name: 'WABA Eclatia', quantity, finalPrice: 962 }],
       payment: {
-        method: paymentMethod,
+        method: 'bla',
         methodOptions: {
-          ...(paymentMethod === 'paymentInitiation' /* PaymentMethodEnum.PAYMENT_INITIATION */ && {
+          ...(paymentMethod === PaymentMethodEnum.PAYMENT_INITIATION && {
             preferredProvider: '',
           }),
-          ...(paymentMethod === 'cardPayments' /* PaymentMethodEnum.CARD_PAYMENTS */ && { preferredMethod: 'wallet' }),
-          ...(paymentMethod === 'hirePurchase' /* PaymentMethodEnum.HIRE_PURCHASE */ && {}),
-          ...(paymentMethod === 'bnpl' /* PaymentMethodEnum.BNPL */ && { period }),
+          ...(paymentMethod === PaymentMethodEnum.CARD_PAYMENTS && { preferredMethod: 'wallet' }),
+          ...(paymentMethod === PaymentMethodEnum.HIRE_PURCHASE && {}),
+          ...(paymentMethod === PaymentMethodEnum.BNPL && { period }),
         },
         amount: quantity * 962,
         currency: 'EUR',
@@ -195,47 +172,42 @@ export async function POST(req) {
 
     const token = jwt.sign(payload, MONTONIO_SECRET_KEY, { algorithm: 'HS256', expiresIn: '10m' });
     if (!token) {
-      if (slack) {
-        await slack.send({ text: `Failed to create token! payload: ${JSON.stringify(payload)}` });
-      }
-      throw new Error('Failed to create token!');
+      throw new Error(`Failed to create token (payload: ${JSON.stringify(payload)})!`);
     }
 
     const response = await axios.post(`${MONTONIO_API_BASE_URL}/orders`, { data: token });
     if (!response.data?.uuid || !response.data?.paymentStatus || !response.data?.paymentUrl) {
-      if (slack) {
-        await slack.send({ text: `Failed to create checkout URL! response: ${JSON.stringify(response)}` });
-      }
-      throw new Error('Failed to create checkout URL!');
+      throw new Error(`Failed to create checkout URL (response: ${JSON.stringify(response)})!`);
     }
 
     const updateResult = await orders.updateOne(
       { _id: insertResult.insertedId },
-      { $set: { montonioOrderId: response.data.uuid, montonioPaymentStatus: response.data.paymentStatus } }
+      {
+        $set: {
+          montonioOrderId: response.data.uuid,
+          montonioPaymentStatus: response.data.paymentStatus,
+          merchantReference: response.data.merchantReferenceDisplay,
+        },
+      }
     );
     if (!updateResult.acknowledged) {
-      if (slack) {
-        await slack.send({ text: `Failed to update order in database! updateResult: ${JSON.stringify(updateResult)}` });
-      }
-      throw new Error('Failed to update order in database!');
+      throw new Error(`Failed to update order in database (updateResult: ${JSON.stringify(updateResult)})!`);
     } else if (updateResult.modifiedCount === 0) {
-      if (slack) {
-        await slack.send({
-          text: `Nothing was updated in the database (order)! updateResult: ${JSON.stringify(updateResult)}`,
-        });
-      }
-      throw new Error('Nothing was updated in the database (order)!');
+      throw new Error(`Nothing was updated in the database (updateResult: ${JSON.stringify(updateResult)})!`);
     }
 
     log.info('Montonio payment initiated successfully!', { paymentUrl: response.data.paymentUrl });
     await log.flush();
     return NextResponse.json({ data: { paymentUrl: response.data.paymentUrl } }, { status: 200 });
   } catch (error) {
-    log.error('Failed to initiate Montonio payment!', { error });
+    log.error('Failed to initiate Montonio payment!', { error: error.message });
     await log.flush();
     if (slack) {
-      await slack.send({ text: `Failed to initiate Montonio payment! error: ${error}` });
+      await slack.send({ text: `Failed to initiate Montonio payment! ${error.message}` });
     }
-    return NextResponse.json({ message: error }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Failed to initiate Montonio payment!', error: error.message },
+      { status: 500 }
+    );
   }
 }

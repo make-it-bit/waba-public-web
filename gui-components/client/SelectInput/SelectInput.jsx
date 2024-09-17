@@ -1,38 +1,26 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { ReactSVG } from 'react-svg';
-
-/* import {
-  caretDownSm,
-  caretDownReg,
-  caretDownLg,
-  caretDown,
-} from "./_selectInput.module.scss"; */
+import classNames from 'classnames';
 
 const SelectInput = ({
-  id = undefined,
+  theme = 'dark',
   name,
-  options,
-  onChange,
   value,
-  label,
-  size = 'reg',
-  disabled = false,
+  options,
+  label = '',
   placeholder = '',
+  disabled = false,
+  onChange,
+  errorMessage = '',
+  otherClassnames = '',
 }) => {
-  const sizes = {
-    sm: 'selectInput-sm',
-    reg: 'selectInput-reg',
-    lg: 'selectInput-lg',
-  }[size];
-
-  /* const svgSizes = {
-    sm: caretDownSm,
-    reg: caretDownReg,
-    lg: caretDownLg,
-  }[size]; */
+  const themes = {
+    dark: 'bg-transparent border border-black-100 hover:border-black-40 focus-visible:outline-none focus-visible:border-purple-100 focus-visible:drop-shadow-text-input disabled:border-black-20 placeholder-black-60 hover:placeholder-black-80 focus-visible:text-black-100 disabled:placeholder-black-40',
+    light:
+      'bg-transparent text-white-100 border border-white-100 hover:border-white-40 focus-visible:outline-none focus-visible:border-purple-100 focus-visible:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus-visible:text-white-100 active:text-white-100 disabled:placeholder-white-40',
+  }[theme];
 
   const [selectOptions, setSelectOptions] = useState([]);
 
@@ -45,44 +33,37 @@ const SelectInput = ({
   }, [options, placeholder]);
 
   return (
-    <div className="cursor-pointer">
-      {label && (
-        <label className={`${sizes}__label word-no-break`} htmlFor={name}>
-          {label}
-        </label>
-      )}
-      <div className="relative width-100">
+    <div className="flex flex-col gap-4 cursor-pointer">
+      {label && <label htmlFor={name}>{label}</label>}
+      <div className={classNames('relative flex flex-col grow-1', otherClassnames)}>
         <select
-          onChange={onChange}
-          name={name}
-          id={id}
-          disabled={disabled}
-          value={value}
           className={classNames(
-            'selectInput pr-40 cursor-pointer text-black',
-            !value && 'selectInput--placeholder',
-            disabled && 'selectInput--disabled',
-            sizes
+            themes,
+            errorMessage && 'border-signal-red-100 text-black-60',
+            'cursor-pointer w-full px-16 py-[10px] text-sm leading-sm appearance-none'
           )}
+          id={name}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={onChange}
         >
           {selectOptions.map(({ label, value }, index) => (
-            <option key={index} value={value} className={`text-black`}>
+            <option key={index} value={value}>
               {label}
             </option>
           ))}
         </select>
         <ReactSVG
-          className={classNames(
-            /* svgSizes,
-            caretDown, */
-            'flex justify-center items-center'
-          )}
-          src="/caret-down.svg"
+          className={classNames('absolute top-1/2 translate-y-neg-1/2 right-16')}
+          src={theme === 'dark' ? '/caret-down-black.svg' : '/caret-down-white.svg'}
           beforeInjection={(svg) => {
             svg.classList.add('block');
           }}
         />
       </div>
+      {errorMessage && <p className="text-sm text-signal-red-100 m-0 mt-[-4px]">{errorMessage}</p>}
     </div>
   );
 };

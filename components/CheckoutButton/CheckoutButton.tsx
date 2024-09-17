@@ -5,18 +5,13 @@ import { useLogger } from 'next-axiom';
 import classNames from 'classnames';
 
 import { PaymentForm } from '@/page-components/Product/Checkout/Checkout';
+import { PaymentMethodEnum } from '@/lib/enums';
+
 import { payingInPartsValidation, paymentFormValidation } from '@/utils/formValidation';
 
 import { Button } from '@/gui-components/client';
 
 import styles from './_checkoutButton.module.scss';
-
-export enum PaymentMethodEnum {
-  PAYMENT_INITIATION = 'paymentInitiation',
-  CARD_PAYMENTS = 'cardPayments',
-  HIRE_PURCHASE = 'hirePurchase',
-  BNPL = 'bnpl',
-}
 
 const CheckoutButton = ({
   CTA,
@@ -41,7 +36,7 @@ const CheckoutButton = ({
 
     const payingInPartsCheck = payingInPartsValidation(paymentForm.quantity * 962, method, paymentForm.period);
     if (payingInPartsCheck) {
-      setInitCheckoutError(payingInPartsCheck);
+      return setInitCheckoutError(payingInPartsCheck);
       return;
     }
 

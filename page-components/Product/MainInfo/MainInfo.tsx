@@ -29,24 +29,79 @@ const MainInfo = ({ mainInfoData }) => {
           </div>
         </div>
 
-        {/* desktop first image */}
         {mainInfoData.images[0]?.image && (
           <div className="lg:block hidden col-start-1 col-span-5">
-            <div className="relative w-full h-full min-h-[526px]">
-              <Image
-                src={getImageFullUrl_server(mainInfoData.images[0].image.data)}
-                fill
-                quality={100}
-                className={`absolute w-full h-full object-${mainInfoData.images[0].object_fit}`}
-                alt="device"
-              />
-              <div className="absolute bg-[#f3ecee] w-full h-full top-0 left-0 z-[-1]"></div>
+            <div className="flex flex-col h-full">
+              {/* desktop first image */}
+              <div className="relative w-full h-full">
+                <Image
+                  src={getImageFullUrl_server(mainInfoData.images[0].image.data)}
+                  fill
+                  quality={100}
+                  className={`absolute w-full h-full object-${mainInfoData.images[0].object_fit}`}
+                  alt="device"
+                />
+                <div className="absolute bg-[#f3ecee] w-full h-full top-0 left-0 z-[-1]"></div>
+              </div>
+              {/* desktop second image section */}
+              <div className="grid grid-cols-5 grid-flow-row gap-24 my-24">
+                <div className="col-start-1 col-span-3 row-span-2">
+                  <div className="relative w-full h-full min-h-[416px]">
+                    {mainInfoData.images[1]?.image && (
+                      <Image
+                        src={getImageFullUrl_server(mainInfoData.images[1].image.data)}
+                        fill
+                        quality={100}
+                        className={`absolute w-full h-full object-${mainInfoData.images[1].object_fit}`}
+                        alt="product main info image"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="col-start-4 col-span-2">
+                  <div className="relative w-full h-full min-h-[196px]">
+                    {mainInfoData.images[2]?.image && (
+                      <Image
+                        src={getImageFullUrl_server(mainInfoData.images[2].image.data)}
+                        fill
+                        quality={100}
+                        className={`absolute w-full h-full object-${mainInfoData.images[2].object_fit}`}
+                        alt="product main info image"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="col-start-4 col-span-2">
+                  <div className="relative w-full h-full min-h-[196px]">
+                    {mainInfoData.images[3]?.image && (
+                      <Image
+                        src={getImageFullUrl_server(mainInfoData.images[3].image.data)}
+                        fill
+                        quality={100}
+                        className={`absolute w-full h-full object-${mainInfoData.images[3].object_fit}`}
+                        alt="product main info image"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+              {/* desktop third image */}
+              <div className="relative w-full h-full max-h-[217px]">
+                {mainInfoData.images[4]?.image && (
+                  <Image
+                    src={getImageFullUrl_server(mainInfoData.images[4].image.data)}
+                    fill
+                    quality={100}
+                    className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
+                    alt="device"
+                  />
+                )}
+              </div>
             </div>
           </div>
         )}
 
         <div className="lg:col-start-7 lg:col-span-5 col-span-12">
-          {/* sticky top-[201px] */}
           <div className="flex flex-col">
             <div className="flex flex-wrap gap-8 lg:mb-48 mb-32">
               {mainInfoData.tags.data.map((tag, index) => (
@@ -61,64 +116,6 @@ const MainInfo = ({ mainInfoData }) => {
             <h2 className="text-2xl leading-2xl lg:my-8 my-16">{mainInfoData.price}</h2>
             <p className="text-sm leading-sm lg:mt-32 mt-16 lg:mb-40 mb-32">{mainInfoData.description}</p>
             <Checkout mainInfoData={mainInfoData} />
-          </div>
-        </div>
-
-        <div className="lg:block hidden col-start-1 col-span-5">
-          <div className="grid grid-cols-5 grid-flow-row gap-24">
-            <div className="col-start-1 col-span-3 row-span-2">
-              <div className="relative w-full h-full min-h-[416px]">
-                {mainInfoData.images[1]?.image && (
-                  <Image
-                    src={getImageFullUrl_server(mainInfoData.images[1].image.data)}
-                    fill
-                    quality={100}
-                    className={`absolute w-full h-full object-${mainInfoData.images[1].object_fit}`}
-                    alt="product main info image"
-                  />
-                )}
-              </div>
-            </div>
-            <div className="col-start-4 col-span-2">
-              <div className="relative w-full h-full min-h-[196px]">
-                {mainInfoData.images[2]?.image && (
-                  <Image
-                    src={getImageFullUrl_server(mainInfoData.images[2].image.data)}
-                    fill
-                    quality={100}
-                    className={`absolute w-full h-full object-${mainInfoData.images[2].object_fit}`}
-                    alt="product main info image"
-                  />
-                )}
-              </div>
-            </div>
-            <div className="col-start-4 col-span-2">
-              <div className="relative w-full h-full min-h-[196px]">
-                {mainInfoData.images[3]?.image && (
-                  <Image
-                    src={getImageFullUrl_server(mainInfoData.images[3].image.data)}
-                    fill
-                    quality={100}
-                    className={`absolute w-full h-full object-${mainInfoData.images[3].object_fit}`}
-                    alt="product main info image"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:block hidden col-start-1 col-span-5">
-          <div className="relative w-full h-full min-h-[217px]">
-            {mainInfoData.images[4]?.image && (
-              <Image
-                src={getImageFullUrl_server(mainInfoData.images[4].image.data)}
-                fill
-                quality={100}
-                className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
-                alt="device"
-              />
-            )}
           </div>
         </div>
       </div>

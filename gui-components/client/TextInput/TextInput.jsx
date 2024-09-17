@@ -10,8 +10,7 @@ const TextInput = ({
   theme = 'dark',
   name,
   value,
-  /* size = "reg", */
-  label = undefined,
+  label = '',
   placeholder = '',
   disabled = false,
   onChange,
@@ -24,15 +23,12 @@ const TextInput = ({
       'bg-transparent text-white-100 border border-white-100 hover:border-white-40 focus-visible:outline-none focus-visible:border-purple-100 focus-visible:drop-shadow-text-input disabled:border-white-20 placeholder-white-60 hover:placeholder-white-80 focus-visible:text-white-100 active:text-white-100 disabled:placeholder-white-40',
   }[theme];
 
-  /* const sizes = { sm: "input-sm", reg: "input-reg", lg: "input-lg"}[size]; */
-
   return (
-    <>
+    <div className="flex flex-col gap-4">
       {label && <label htmlFor={name}>{label}</label>}
       <div className={classNames('flex flex-col grow-1', otherClassnames)}>
         <input
           className={classNames(
-            /* sizes, */
             themes,
             errorMessage && 'border-signal-red-100 text-black-60',
             'w-full px-16 text-sm leading-sm',
@@ -48,7 +44,7 @@ const TextInput = ({
         />
         {errorMessage && <p className="text-sm text-signal-red-100 m-0">{errorMessage}</p>}
       </div>
-    </>
+    </div>
   );
 };
 

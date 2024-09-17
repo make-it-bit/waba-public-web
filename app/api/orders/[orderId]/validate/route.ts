@@ -4,18 +4,20 @@ import { getDatabase } from '@/lib/mongoClient';
 import { JwtPayload } from 'jsonwebtoken';
 import { IncomingWebhook } from '@slack/webhook';
 
+import { OrderStatusEnum } from '@/lib/enums';
+
 import jwt from 'jsonwebtoken';
 
 const { SLACK_ALERTS_WEBHOOK_URL, MONTONIO_SECRET_KEY, MONTONIO_ACCESS_KEY } = process.env;
 
-let slack: IncomingWebhook | null = null;
-if (SLACK_ALERTS_WEBHOOK_URL) slack = new IncomingWebhook(SLACK_ALERTS_WEBHOOK_URL);
-
 export async function POST(req: NextRequest, context: any) {
   const { orderId } = context.params;
-  const { montonioOrderToken } = await req.json();
+  const { orderToken: montonioOrderToken } = await req.json();
 
   const log = new Logger();
+
+  let slack: IncomingWebhook | null = null;
+  if (SLACK_ALERTS_WEBHOOK_URL) slack = new IncomingWebhook(SLACK_ALERTS_WEBHOOK_URL);
 
   try {
     log.info('Received a request to validate a Montonio payment.');
@@ -38,57 +40,61 @@ export async function POST(req: NextRequest, context: any) {
 
     const db = await getDatabase();
     const orders = db.collection('orders');
-    const order = await orders.findOne({ montonioOrderId: decoded.uuid }); // TODO: mongodbOrder
+    const mongoDbOrder = await orders.findOne({ montonioOrderId: decoded.uuid });
 
-    if (!order) {
+    if (!mongoDbOrder) {
       log.error('Order not found in the database!', { montonioOrderId: decoded.uuid });
       throw new Error(`Order not found in the database (montonioOrderId: ${decoded.uuid})!`);
     }
 
-    if (order.montonioPaymentStatus === 'PAID') {
+    if (mongoDbOrder.montonioPaymentStatus === 'PAID') {
       log.info('Order already paid!', { montonioOrderId: decoded.uuid });
-      return NextResponse.json(
-        { data: { orderDetails: { ...order, merchantReference: decoded.merchantReferenceDisplay } } },
-        { status: 200 }
-      );
+      return NextResponse.json({ data: { orderDetails: mongoDbOrder } }, { status: 200 });
     } else {
-      if (decoded.uuid !== order.montonioOrderId || decoded.accessKey !== MONTONIO_ACCESS_KEY) {
-        log.error('Order not found in the database! Failed to validate Montonio order!', {
-          // TODO: vale sõnum
-          montonioOrderIdInDb: order.montonioOrderId,
-          montonioOrderIdDecoded: decoded.uuid,
-        });
-        if (slack) {
-          await slack.send({
-            text: `Order not found in the database! montonioOrderIdInDb: ${order.montonioOrderId}, montonioOrderIdDecoded: ${decoded.uuid}`,
-          });
+      if (decoded.uuid !== mongoDbOrder.montonioOrderId || decoded.accessKey !== MONTONIO_ACCESS_KEY) {
+        log.error(
+          `Mismatch between decoded uuid and mongodb order's montonioOrderId OR mismatch between decoded access key and MONTONIO_ACCESS_KEY (decoded: ${JSON.stringify(
+            decoded
+          )}, mongoDbOrder: ${JSON.stringify(mongoDbOrder)})!`
+        );
+        throw new Error(
+          `Mismatch between decoded uuid and mongodb order's montonioOrderId OR mismatch between decoded access key and MONTONIO_ACCESS_KEY!`
+        );
+      }
+
+      if (decoded.paymentStatus === OrderStatusEnum.PAID) {
+        const updateResult = await orders.updateOne(
+          { montonioOrderId: decoded.uuid },
+          { $set: { montonioPaymentStatus: decoded.paymentStatus } }
+        );
+        if (!updateResult.acknowledged) {
+          throw new Error(`Failed to update order in database (updateResult: ${JSON.stringify(updateResult)})!`);
+        } else if (updateResult.modifiedCount === 0) {
+          throw new Error(`Nothing was updated in the database (updateResult: ${JSON.stringify(updateResult)})!`);
         }
-        return NextResponse.json({ message: 'Order not found!' }, { status: 404 });
+
+        const updatedOrder = await orders.findOne({ montonioOrderId: decoded.uuid });
+
+        log.info('Montonio order validated successfully!', { orderDetails: updatedOrder });
+        await log.flush();
+        return NextResponse.json({ data: { orderDetails: updatedOrder } }, { status: 200 });
+      } else {
+        // still update the order with whatever status montonio payment has
+        const updateResult = await orders.updateOne(
+          { montonioOrderId: decoded.uuid },
+          { $set: { montonioPaymentStatus: decoded.paymentStatus } }
+        );
+        if (!updateResult.acknowledged) {
+          throw new Error(`Failed to update order in database (updateResult: ${JSON.stringify(updateResult)})!`);
+        } else if (updateResult.modifiedCount === 0) {
+          throw new Error(`Nothing was updated in the database (updateResult: ${JSON.stringify(updateResult)})!`);
+        }
+
+        const updatedOrder = await orders.findOne({ montonioOrderId: decoded.uuid });
+
+        log.info('No unexpected errors, but payment not yet completed!', { montonioOrderId: decoded.uuid });
+        return NextResponse.json({ data: { orderDetails: updatedOrder } }, { status: 200 });
       }
-
-      // IF decoded.paymentStatus === 'PAID' THEN update order in database and say success
-      // ELSE say something like "no unexpected errors, but payment not yet completed"
-
-      const updateResult = await orders.updateOne(
-        { montonioOrderId: decoded.uuid },
-        { $set: { montonioPaymentStatus: decoded.paymentStatus } }
-      );
-      if (!updateResult.acknowledged) {
-        throw new Error(`Failed to update order in database (updateResult: ${JSON.stringify(updateResult)})!`);
-      } else if (updateResult.modifiedCount === 0) {
-        throw new Error(`Nothing was updated in the database (updateResult: ${JSON.stringify(updateResult)})!`);
-      }
-
-      const updatedOrder = await orders.findOne({ montonioOrderId: decoded.uuid });
-
-      log.info('Montonio order validated successfully!', {
-        orderDetails: { ...updatedOrder, merchantReference: decoded.merchantReferenceDisplay },
-      });
-      await log.flush();
-      return NextResponse.json(
-        { data: { orderDetails: { ...updatedOrder, merchantReference: decoded.merchantReferenceDisplay } } },
-        { status: 200 }
-      );
     }
   } catch (error) {
     log.error('Failed to validate Montonio order!', { error: error.message });
