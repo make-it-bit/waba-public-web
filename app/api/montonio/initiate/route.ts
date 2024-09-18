@@ -125,6 +125,7 @@ export async function POST(req: NextRequest) {
     if (!insertResult.insertedId || !insertResult.acknowledged) {
       throw new Error(`Failed to insert order into database (mongoPayload: ${JSON.stringify(mongoPayload)})!`);
     }
+    log.info('Order inserted into database successfully!', { orderId: insertResult.insertedId });
 
     const payload = {
       accessKey: MONTONIO_ACCESS_KEY,
@@ -169,16 +170,19 @@ export async function POST(req: NextRequest) {
         currency: 'EUR',
       },
     };
+    log.info('Montonio payload created successfully!', { payload });
 
     const token = jwt.sign(payload, MONTONIO_SECRET_KEY, { algorithm: 'HS256', expiresIn: '10m' });
     if (!token) {
       throw new Error(`Failed to create token (payload: ${JSON.stringify(payload)})!`);
     }
+    log.info('Montonio token created successfully!', { token });
 
     const response = await axios.post(`${MONTONIO_API_BASE_URL}/orders`, { data: token });
     if (!response.data?.uuid || !response.data?.paymentStatus || !response.data?.paymentUrl) {
       throw new Error(`Failed to create checkout URL (response: ${JSON.stringify(response)})!`);
     }
+    log.info('Got Montonio payment response!', { montonioOrderId: response.data.uuid });
 
     const updateResult = await orders.updateOne(
       { _id: insertResult.insertedId },
@@ -195,6 +199,7 @@ export async function POST(req: NextRequest) {
     } else if (updateResult.modifiedCount === 0) {
       throw new Error(`Nothing was updated in the database (updateResult: ${JSON.stringify(updateResult)})!`);
     }
+    log.info('Order updated in database successfully!', { orderId: insertResult.insertedId });
 
     log.info('Montonio payment initiated successfully!', { paymentUrl: response.data.paymentUrl });
     await log.flush();
