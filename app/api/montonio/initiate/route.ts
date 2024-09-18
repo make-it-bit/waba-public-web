@@ -157,14 +157,14 @@ export async function POST(req: NextRequest) {
       },
       lineItems: [{ name: 'WABA Eclatia', quantity, finalPrice: 962 }],
       payment: {
-        method: 'bla',
+        method: paymentMethod,
         methodOptions: {
-          ...(paymentMethod === 'paymentInitiation' /* PaymentMethodEnum.PAYMENT_INITIATION */ && {
+          ...(paymentMethod === PaymentMethodEnum.PAYMENT_INITIATION && {
             preferredProvider: '',
           }),
-          ...(paymentMethod === 'cardPayments' /* PaymentMethodEnum.CARD_PAYMENTS */ && { preferredMethod: 'wallet' }),
-          ...(paymentMethod === 'hirePurchase' /* PaymentMethodEnum.HIRE_PURCHASE */ && {}),
-          ...(paymentMethod === 'bnpl' /* PaymentMethodEnum.BNPL */ && { period }),
+          ...(paymentMethod === PaymentMethodEnum.CARD_PAYMENTS && { preferredMethod: 'wallet' }),
+          ...(paymentMethod === PaymentMethodEnum.HIRE_PURCHASE && {}),
+          ...(paymentMethod === PaymentMethodEnum.BNPL && { period }),
         },
         amount: quantity * 962,
         currency: 'EUR',
