@@ -15,7 +15,8 @@ export { default as MainInfo } from './Product/MainInfo';
 export { default as ProductInfo } from './Product/ProductInfo';
 export { default as Warranty } from './Product/Warranty';
 export { default as ProductFAQ } from './Product/ProductFAQ';
-export { default as Checkout } from './Product/Checkout';
+
+export { default as CheckoutForm } from './Checkout/CheckoutForm';
 
 export { default as UserStoriesHero } from './UserStories/UserStoriesHero';
 export { default as Examples } from './UserStories/Examples';

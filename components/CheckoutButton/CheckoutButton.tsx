@@ -4,7 +4,7 @@ import React from 'react';
 import { useLogger } from 'next-axiom';
 import classNames from 'classnames';
 
-import { PaymentForm } from '@/page-components/Product/Checkout/Checkout';
+import { PaymentForm } from '@/lib/types';
 import { PaymentMethodEnum } from '@/lib/enums';
 
 import { payingInPartsValidation, paymentFormValidation } from '@/utils/formValidation';
