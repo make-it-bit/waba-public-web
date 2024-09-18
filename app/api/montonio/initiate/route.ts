@@ -159,12 +159,12 @@ export async function POST(req: NextRequest) {
       payment: {
         method: 'bla',
         methodOptions: {
-          ...(paymentMethod === PaymentMethodEnum.PAYMENT_INITIATION && {
+          ...(paymentMethod === 'paymentInitiation' /* PaymentMethodEnum.PAYMENT_INITIATION */ && {
             preferredProvider: '',
           }),
-          ...(paymentMethod === PaymentMethodEnum.CARD_PAYMENTS && { preferredMethod: 'wallet' }),
-          ...(paymentMethod === PaymentMethodEnum.HIRE_PURCHASE && {}),
-          ...(paymentMethod === PaymentMethodEnum.BNPL && { period }),
+          ...(paymentMethod === 'cardPayments' /* PaymentMethodEnum.CARD_PAYMENTS */ && { preferredMethod: 'wallet' }),
+          ...(paymentMethod === 'hirePurchase' /* PaymentMethodEnum.HIRE_PURCHASE */ && {}),
+          ...(paymentMethod === 'bnpl' /* PaymentMethodEnum.BNPL */ && { period }),
         },
         amount: quantity * 962,
         currency: 'EUR',
