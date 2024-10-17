@@ -34,7 +34,7 @@ const Home = async () => {
       <Hero heroData={indexPageData.attributes.hero} />
       <Colors colorsData={indexPageData.attributes.color} />
       <Foundations foundationsData={indexPageData.attributes.foundation} />
-      <Video videoData={indexPageData.attributes.peek_inside} />
+      {/* <Video videoData={indexPageData.attributes.peek_inside} /> */}
       <Foundations foundationsData={indexPageData.attributes.testimonial} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
