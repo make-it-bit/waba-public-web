@@ -15,7 +15,7 @@ module.exports = withAxiom({
       { protocol: 'https', hostname: '*.cdninstagram.com' },
     ],
   },
-  async redirects() {
-    return [{ source: 'https://www.wabaskin.com', destination: 'https://www.waba.health', permanent: true }];
-  },
+  // async redirects() {
+  //   return [{ source: '/', destination: 'https://www.waba.health', permanent: true }];
+  // },
 });
