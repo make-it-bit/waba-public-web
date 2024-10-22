@@ -18,7 +18,6 @@ const dmSans = DM_Sans({
   style: 'normal',
   weight: ['400', '500', '700'],
 });
-
 const rufina = Rufina({
   variable: '--rufina-font',
   subsets: ['latin'],
