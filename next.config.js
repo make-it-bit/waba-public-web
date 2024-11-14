@@ -10,12 +10,12 @@ module.exports = withAxiom({
   // experimental: { serverActions: true },
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'wabaskin.eu', pathname: '**' },
+      { protocol: 'https', hostname: 'waba-strapi.fly.dev', pathname: '**' },
       { protocol: 'http', hostname: '127.0.0.1', pathname: '**' },
       { protocol: 'https', hostname: '*.cdninstagram.com' },
     ],
   },
-  async redirects() {
-    return [{ source: 'https://www.wabaskin.com', destination: 'https://www.waba.health', permanent: true }];
-  },
+  // async redirects() {
+  //   return [{ source: '/', destination: 'https://www.waba.health', permanent: true }];
+  // },
 });
