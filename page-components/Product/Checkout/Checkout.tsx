@@ -58,9 +58,14 @@ const Checkout = ({ mainInfoData }) => {
         <>
           <p className="text-xs text-center leading-xs text-signal-red-100 mt-8">
             {initCheckoutError} Please contact us via{' '}
-            <a className="underline" href="mailto:info@wabaskin.com">
-              info@wabaskin.com
+            <a className="underline" href="mailto:info@waba.health">
+              info@waba.health
+            </a>{' '}
+            or via{' '}
+            <a className="underline" href="https://www.instagram.com/wabahealth">
+              Instagram
             </a>
+            .
           </p>
         </>
       )}
