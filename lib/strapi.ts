@@ -61,14 +61,9 @@ export const getComponentData = async (component: Component) => {
   const query = qs.stringify({ populate: populateComponent[component] });
   const url = `${STRAPI_BASE_URL}/api/${component}?${query}`;
   revalidateTag(component);
-  const response = await fetch(url, {
-    method: 'GET',
-    headers,
-    next: { tags: [component] },
-  });
+  const response = await fetch(url, { method: 'GET', headers, next: { tags: [component] } });
   if (!response.ok) throw new Error('Failed to fetch component data.');
   const { data } = await response.json();
-
   log.info('Successfully fetched component data.', { component: component });
   await log.flush();
 

@@ -35,7 +35,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const promobarData = await getComponentData('promobar');
+  // const promobarData = await getComponentData('promobar');
   const navbarData = await getComponentData('navbar');
   const cookieConsentData = await getComponentData('cookie-consent');
 
@@ -66,7 +66,7 @@ export default async function RootLayout({ children }) {
         </Script>
         <AxiomWebVitals />
         <div className="sticky top-0 z-[500]">
-          <PromoBar promobarData={promobarData.attributes} />
+          {/* <PromoBar promobarData={promobarData.attributes} /> */}
           <Navbar navbarData={navbarData.attributes} />
           <NavbarSlim navbarData={navbarData.attributes} />
         </div>
