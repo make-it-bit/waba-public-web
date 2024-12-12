@@ -7,37 +7,29 @@ import { Button } from '@/gui-components/client';
 
 import styles from './_checkoutButton.module.scss';
 
+export enum CHECKOUT_TYPE {
+ STRIPE = 'stripe',
+ PAY_LASTER = 'pay_later',
+}
+
 const CheckoutButton = ({
   CTA,
   style = 'primary',
+  type,
   quantity,
   setInitCheckoutError,
 }: {
   CTA: string;
+  type: CHECKOUT_TYPE,
   style?: 'primary' | 'tertiary';
   quantity: number;
   setInitCheckoutError: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const log = useLogger();
 
-  const initCheckout = async () => {
-    try {
-      log.info('Checkout process started (button clicked).', { quantity: quantity ? quantity : null });
-      const response = await fetch(`/api/shopify/checkout?quantity=${quantity}`);
-      if (!response.ok) {
-        log.error('Checkout process failed. Network response was not ok.', { response: response });
-
-        return setInitCheckoutError(`Currently only e-mail based checkout is available.`);
-      }
-      const { data } = await response.json();
-      window.location.href = data.URL;
-      log.info('Checkout process in progress. Redirecting to checkout page.', { data: data });
-    } catch (error) {
-      console.log('error: ', error);
-      log.error('Checkout process failed. Something went wrong.', { error: error });
-      setInitCheckoutError('Something went wrong. Please try again.');
-    }
-  };
+  const initCheckout = async () => type === CHECKOUT_TYPE.STRIPE
+    ? window.location.href = 'https://buy.stripe.com/bIY3dicSV4jJ0W44gi'
+    : setInitCheckoutError('Currently only e-mail based Buy Now Pay later checkout is available.');
 
   return (
     <div className={styles.checkoutButtonWrapper}>
