@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.waba.health
+
+# Sitemaps
+Sitemap: https://www.waba.health/sitemap.xml

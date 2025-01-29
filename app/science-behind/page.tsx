@@ -1,19 +1,20 @@
 import React from 'react';
 
-import { getPageData, getComponentData } from '@/lib/strapi';
+import { getPageData, getComponentData, getScienceArticles } from '@/lib/strapi';
 
 import {
   AboutScienceHero,
   Skin,
-  Photobiomodulation,
   Wavelengths,
   Beam,
   TextImage,
-  ScienceWarranty,
   LogoBar,
   CTABlock,
   PreFooterCard,
   Footer,
+  Spectrum,
+  ProblemSolution,
+  VerifiedScience,
 } from '@/page-components';
 
 export const dynamic = 'force-static';
@@ -40,7 +41,7 @@ const ScienceBehind = async () => {
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
-
+  const scienceArticles = await getScienceArticles();
   return (
     <>
       <AboutScienceHero
@@ -50,8 +51,20 @@ const ScienceBehind = async () => {
         background="bg-black-100"
       />
       <Skin skinData={sciencePageData.attributes.skin.skins.data} />
-      <Photobiomodulation photobiomodulationData={sciencePageData.attributes.photobiomodulation} />
-      <Wavelengths wavelengthsData={sciencePageData.attributes.wavelength} />
+      <Spectrum spectrumData={sciencePageData.attributes.electromagnetic} />
+      <ProblemSolution problemSolutionData={sciencePageData.attributes.problem_solution} />
+      <VerifiedScience 
+        verifiedScienceData={{
+          title: sciencePageData.attributes.verified_science.title, 
+          description: sciencePageData.attributes.verified_science.description 
+        }}
+        scienceArticles={scienceArticles}
+      />
+      {/* <Photobiomodulation photobiomodulationData={sciencePageData.attributes.photobiomodulation} /> */}
+      <Wavelengths 
+        wavelengthsData={sciencePageData.attributes.wavelength} 
+        secondPartData={sciencePageData.attributes.text_image}
+      />
       <Beam beamData={sciencePageData.attributes.beam} />
       <TextImage
         title={sciencePageData.attributes.text_image.title}

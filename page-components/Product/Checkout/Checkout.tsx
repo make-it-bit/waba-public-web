@@ -22,6 +22,7 @@ const Checkout = ({ mainInfoData }) => {
         <div className="flex flex-col items-center gap-8 grow-1">
           <CheckoutButton
             type={CHECKOUT_TYPE.STRIPE}
+            style="tertiary"
             setInitCheckoutError={setInitCheckoutError}
             quantity={quantity}
             CTA={mainInfoData.button_1.href_text}

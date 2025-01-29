@@ -109,6 +109,15 @@ const indexPageNestedComponents = [
   'hero.tags.logo',
   'hero.background_video',
   'hero.background_video_first_frame',
+  'new_era',
+  'new_era.new_era_list',
+  'compare_index',
+  'compare_index.compare_cards',
+  'compare_index.compare_cards.title',
+  'compare_index.compare_cards.description',
+  'compare_index.compare_cards.before',
+  'compare_index.compare_cards.after',
+  'waba_users',
   'color.device_head_blue.light_image',
   'color.device_head_blue.head_image',
   'color.device_head_red.light_image',
@@ -136,6 +145,13 @@ const indexPageNestedComponents = [
 ];
 const productPageNestedComponents = [
   'seo',
+  'quote_bar',
+  'quote_bar.person_image',
+  'backed_science',
+  'transformation',
+  'transformation.before',
+  'transformation.during',
+  'transformation.after',
   'hero.images.image',
   'hero.tags.logo',
   'hero.button_1',
@@ -150,6 +166,7 @@ const productPageNestedComponents = [
   'product_info.stories.button',
   'product_info.stories.result_image',
   'product_info.specifications',
+  'product_info.compare_title',
   'warranty.background_image',
   'warranty.icon',
   'faq.faq_elements',
@@ -157,6 +174,11 @@ const productPageNestedComponents = [
 const sciencePageNestedComponents = [
   'seo',
   'hero.background_video',
+  'verified_science',
+  'electromagnetic',
+  'electromagnetic.image',
+  'problem_solution',
+  'problem_solution.image',
   'skin.skins.image',
   'photobiomodulation.image',
   'wavelength.wavelength_images',
@@ -164,6 +186,8 @@ const sciencePageNestedComponents = [
   'beam.beam_image',
   'beam.device_images',
   'text_image.image',
+  'text_image.second_image',
+  'text_image.references',
   'text_image.animation_images',
   'warranty.quote_author',
   'warranty.quote_text',
@@ -311,8 +335,11 @@ type BlogPost = {
   };
 };
 
-export const getBlogPosts = async (): Promise<null | BlogPost[]> => {
-  const query = qs.stringify({ populate: '*' });
+export const getBlogPosts = async (limit: number = 3): Promise<null | BlogPost[]> => {
+  const query = qs.stringify({ 
+    populate: '*', 
+    pagination: { limit }
+  });
   const url = `${STRAPI_BASE_URL}/api/blog-posts?${query}`;
   revalidateTag('blogPosts');
   const response = await fetch(url, {
@@ -326,6 +353,72 @@ export const getBlogPosts = async (): Promise<null | BlogPost[]> => {
   responseData.sort((a, b) => new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime());
 
   log.info('Successfully fetched blog posts.');
+  await log.flush();
+
+  return responseData;
+};
+
+export const getCompareSection = async (limit: number = 6): Promise<null | any[]> => {
+  const query = qs.stringify({ 
+    populate: 'compare_card.after,compare_card.before',
+    pagination: { limit }
+  });
+  const url = `${STRAPI_BASE_URL}/api/compare-sections?${query}`;
+  revalidateTag('compareCards');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['compareCards'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched compare cards.');
+  await log.flush();
+
+  return responseData;
+};
+
+export const getUserVideos = async (limit: number = 6): Promise<null | any[]> => {
+  const query = qs.stringify({ 
+    populate: '*',
+    pagination: { limit }
+  });
+  const url = `${STRAPI_BASE_URL}/api/user-videos?${query}`;
+  revalidateTag('userVideos');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['userVideos'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched user videos.');
+  await log.flush();
+
+  return responseData;
+};
+
+export const getScienceArticles = async (limit: number = 6): Promise<null | any[]> => {
+  const query = qs.stringify({ 
+    populate: '*',
+    pagination: { limit }
+  });
+  const url = `${STRAPI_BASE_URL}/api/science-articles?${query}`;
+  revalidateTag('scienceArticles');
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+    next: { tags: ['scienceArticles'] },
+  });
+  const data = await response.json();
+  const responseData = data.data as any[];
+  if (responseData.length === 0) return null;
+
+  log.info('Successfully fetched science articles.');
   await log.flush();
 
   return responseData;

@@ -13,7 +13,7 @@ const ExampleBlock = ({ title, image, contentArray, imageFit = 'cover' }) => {
       <div className="grid lg:grid-cols-10 grid-cols-12">
         <div className={classNames("col-start-1 col-span-12", imageFit === 'cover' ? 'md:col-span-5' : 'lg:col-span-4 md:col-span-5')}>
           <div className="relative w-full md:h-full h-[210px] md:mb-0 mb-64">
-            <Image src={image} alt="example image" fill quality={100} className={`object-${imageFit}`} />
+            <Image src={image} alt="example image" fill quality={100} className={`object-${imageFit}`} />            
           </div>
         </div>
         <div className={classNames("col-start-1 lg:col-span-6 md:col-span-7 col-span-12", imageFit === 'cover' ? 'lg:col-start-6 md:col-start-6' : 'lg:col-start-5 md:col-start-6')}>

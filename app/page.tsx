@@ -1,8 +1,22 @@
 import React from 'react';
 
-import { getComponentData, getPageData } from '@/lib/strapi';
+import { getBlogPosts, getCompareSection, getComponentData, getPageData, getUserVideos } from '@/lib/strapi';
 
-import { Hero, Colors, Foundations, Video, LogoBar, CTABlock, PreFooterCard, Footer } from '@/page-components';
+import { 
+  Hero, 
+  Compare, 
+  LogoBar, 
+  CTABlock, 
+  PreFooterCard, 
+  Footer, 
+  NewEra, 
+  WabaPeople, 
+  BestEveryCategory, 
+  HappyUsers, 
+  FeaturedIn, 
+  SenjaTestimonials 
+} from '@/page-components';
+import ReadBlog from '@/page-components/Index/ReadBlog/ReadBlog';
 
 export const dynamic = 'force-static';
 
@@ -16,7 +30,7 @@ export async function generateMetadata() {
     },
     openGraph: {
       images: [
-        `/api/og?title=${indexPageData.attributes.seo.title}&desc=${indexPageData.attributes.seo.description}` ?? null,
+        `/api/og?title=${indexPageData.attributes.seo.title}&desc=${indexPageData.attributes.seo.description}`,
       ],
     },
   };
@@ -28,14 +42,25 @@ const Home = async () => {
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
+  const blogPosts = await getBlogPosts();
+  const compareSection = await getCompareSection();
+  const userVideos = await getUserVideos();
 
   return (
     <>
       <Hero heroData={indexPageData.attributes.hero} />
-      <Colors colorsData={indexPageData.attributes.color} />
-      <Foundations foundationsData={indexPageData.attributes.foundation} />
+      {/* <Colors colorsData={indexPageData.attributes.color} /> */}
+      <FeaturedIn />
+      <NewEra newEraData={indexPageData.attributes.new_era}/>
+      <Compare compareData={indexPageData.attributes.compare_index} compareSection={compareSection}/>
+      <SenjaTestimonials variant="thin" />
+      <BestEveryCategory />
+      <HappyUsers happyUsersData={indexPageData.attributes.waba_users} userVideos={userVideos}/>
+      <WabaPeople />
+      <ReadBlog blogPosts={blogPosts} />
+      {/* <Foundations foundationsData={indexPageData.attributes.foundation} /> */}
       {/* <Video videoData={indexPageData.attributes.peek_inside} /> */}
-      <Foundations foundationsData={indexPageData.attributes.testimonial} />
+      {/* <Foundations foundationsData={indexPageData.attributes.testimonial} /> */}
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />

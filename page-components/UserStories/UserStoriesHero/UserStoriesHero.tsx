@@ -7,7 +7,7 @@ import { LazyLoadVideo } from '@/components';
 
 const UserStoriesHero = ({ userStoriesHeroData }) => {
   return (
-    <div className="relative bg-supplementary-warm-gray overflow-hidden">
+    <div className="relative bg-white-100 overflow-hidden">
       <Image
         src={getImageFullUrl_server(userStoriesHeroData.background_media.data[0])}
         alt="user stories hero image"

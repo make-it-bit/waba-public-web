@@ -11,6 +11,8 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 import { TextInput, Button } from '@/gui-components/client';
 
 import styles from './_footer.module.scss';
+import { ReactSVG } from 'react-svg';
+import SenjaRating from '../Product/SenjaRating';
 
 const Footer = ({ footerData, small = false }) => {
   const pathname = usePathname();
@@ -126,29 +128,82 @@ const Footer = ({ footerData, small = false }) => {
               </div>
               <div className="border border-white-100"></div>
               <div className="relative flex md:flex-row flex-col md:justify-between justify-center items-center gap-y-48">
-                <div className="flex lg:gap-40 md:gap-16 gap-40">
-                  {footerData.social_media_links.data.map((link, index) => (
-                    <Link key={index} href={link.attributes.href} target={link.attributes.target}>
-                      <Image
-                        src={getImageFullUrl_client(link.attributes.icon.data)}
-                        alt={link.attributes.name}
-                        width={16}
-                        height={16}
-                        quality={100}
-                      />
-                    </Link>
-                  ))}
-                </div>
-                <div className="flex flex-wrap sm:justify-normal justify-center xl:gap-40 lg:gap-40 md:gap-16 gap-40 gap-y-8">
-                  {footerData.terms_policies_links.data.map((link, index) => (
-                    <Link
-                      key={index}
-                      href={link.attributes.page_link_data.href_src}
-                      className="text-xs leading-xs text-white-100"
-                    >
-                      {link.attributes.page_link_data.href_text}
-                    </Link>
-                  ))}
+                <div className="flex flex-col md:flex-row gap-[100px] items-center md:items-start text-center md:text-left">
+                  <div className="flex flex-col items-center md:items-start">
+                    <ReactSVG src="/logos/logo-white.svg" className="block" />
+                    <div>
+                      <p className="text-2sm text-white-100 mt-[25px] mb-[10px]">Discover Liberating beauty</p>
+                    </div>
+                    <div>
+                      <SenjaRating variant="dark" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white-100 mt-[15px]">Waba is more than just a skincare solution. It's a gateway to a freer, more confident you.</p>
+                    </div>
+                    <div className="grid grid-cols-12">
+                      <div className="md:col-span-4 col-span-12 mt-[25px]">
+                        <Link href="/product">
+                          <Button style="tertiary" otherClassnames='w-full' CTA={'Shop now'} svg />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center md:items-start">
+                    <h3 className="font-rufina text-xl text-white-100">Follow Us</h3>
+                    <div className="flex flex-row mt-[15px]">
+                      {footerData.social_media_links.data.map((link, index) => (
+                        <Link key={index} href={link.attributes.href} target={link.attributes.target}>
+                          <Image
+                            className="mr-[10px]"
+                            src={getImageFullUrl_client(link.attributes.icon.data)}
+                            alt={link.attributes.name}
+                            width={24}
+                            height={24}
+                            quality={100}
+                          />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col text-white-100 items-center md:items-start">
+                    <h3 className="font-rufina text-xl text-white-100">Contact</h3>
+                    <div className="flex flex-col mt-[15px]">
+                      <p className="text-2sm">United Arab Emirates</p>
+                      <p className="text-sm mt-[10px]">Etihad Towers</p>
+                      <p className="text-sm">Office Tower 3, Level 2</p>
+                      <p className="text-sm">Abu Dhabi</p>
+                      <p className="text-sm">United Arab Emirates</p>
+                    </div>
+                    <div className="flex flex-col mt-[20px]">
+                      <p className="text-2sm">Estonia</p>
+                      <p className="text-sm mt-[10px]">Kakumae Tee 257</p>
+                      <p className="text-sm">13516 Tallinn</p>
+                      <p className="text-sm">Estonia</p>
+                    </div>
+                    <div className="flex flex-col mt-[20px]">
+                      <p className="text-2sm">Waba Technologies OÜ</p>
+                      <p className="text-sm mt-[10px]">Reg. No. 16800211</p>
+                      <p className="text-sm">+372 510 7629</p>
+                      <p className="text-sm">info@waba.health</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col text-white-100 items-center md:items-start">
+                    <h3 className="font-rufina text-xl text-white-100">Support</h3>
+                    <div className="flex flex-col mt-[15px]">
+                      {footerData.terms_policies_links.data.map((link, index) => (
+                        <Link
+                          key={index}
+                          href={link.attributes.page_link_data.href_src}
+                          className="text-sm leading-sm text-white-100"
+                        >
+                          {link.attributes.page_link_data.href_text}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

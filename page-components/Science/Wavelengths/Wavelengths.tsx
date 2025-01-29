@@ -8,7 +8,7 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import styles from './_wavelenghts.module.scss';
 
-const Wavelengths = ({ wavelengthsData }) => {
+const Wavelengths = ({ wavelengthsData, secondPartData }) => {
   const [triggerBlueWaveAnimation, setTriggerBlueWaveAnimation] = useState(false);
   const [triggerPinkWaveAnimation, setTriggerPinkWaveAnimation] = useState(false);
   const blueWave = useRef<HTMLDivElement>(null);
@@ -124,6 +124,30 @@ const Wavelengths = ({ wavelengthsData }) => {
         </div>
         <div className="col-span-12 xl:hidden">
           <p className="text-sm leading-sm text-center">{wavelengthsData.description}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-12 items-center xl:mt-136 md:mt-78 mb-20">
+        <div className="col-span-12 xl:col-start-2 xl:col-span-5 xl:h-full h-144 xl:my-0 mt-48 mb-[200px] order-1 xl:order-none">
+          <Image
+            src={getImageFullUrl_client(secondPartData.second_image.data)}
+            alt="wavelength second background"
+            width={525}
+            height={219}
+            quality={100}
+          />
+        </div>
+        <div className="col-span-12 xl:col-start-8 xl:col-span-5 order-2 xl:order-none">
+          <div className="flex flex-col gap-32 xl:text-left text-center">
+            <h1 className="font-rufina text-5xl leading-5xl">{secondPartData.second_title}</h1>
+            <p className="text-sm leading-sm">{secondPartData.second_description}</p>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-12 mb-20">
+        <div className="col-start-2 col-span-10">
+          {secondPartData.references.map((reference, index) => (
+            <p key={index} className="text-sm text-[#07000E66] opacity-40">{reference.reference_text}</p>
+          ))}
         </div>
       </div>
     </div>

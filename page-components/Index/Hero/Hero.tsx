@@ -11,6 +11,7 @@ import { Tag } from '@/components';
 import { Button } from '@/gui-components/client';
 
 import styles from './_hero.module.scss';
+import SenjaRating from '@/page-components/Product/SenjaRating';
 
 const Hero = ({ heroData }) => {
   return (
@@ -61,6 +62,9 @@ const Hero = ({ heroData }) => {
                   svg={tag.attributes.logo.data && getImageFullUrl_client(tag.attributes.logo.data)}
                 />
               ))}
+            </div>
+            <div className="flex flex-row items-center justify-center mt-[20px]">
+              <SenjaRating />
             </div>
           </div>
         </div>

@@ -11,7 +11,9 @@ module.exports = withAxiom({
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'waba-strapi.fly.dev', pathname: '**' },
+      { protocol: 'https', hostname: 'instagram.ftll2-1.fna.fbcdn.net', pathname: '**' },
       { protocol: 'http', hostname: '127.0.0.1', pathname: '**' },
+      { protocol: 'http', hostname: 'localhost', pathname: '**' },
       { protocol: 'https', hostname: '*.cdninstagram.com' },
     ],
   },

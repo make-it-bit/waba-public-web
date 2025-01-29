@@ -6,12 +6,24 @@ export { default as PreFooterCard } from './PreFooterCard';
 export { default as Footer } from './Footer';
 
 export { default as Hero } from './Index/Hero';
+export { default as NewEra } from './Index/NewEra';
+export { default as Compare } from './Index/Compare';
+export { default as WabaPeople } from './Index/WabaPeople';
+export { default as BestEveryCategory } from './Index/BestEveryCategory';
+export { default as HappyUsers } from './Index/HappyUsers';
+export { default as FeaturedIn } from './Index/FeaturedIn';
 export { default as Colors } from './Index/Colors';
 export { default as Foundations } from './Index/Foundations';
 export { default as Video } from './Index/Video';
 export { default as Testimonials } from './Index/Testimonials';
 
 export { default as MainInfo } from './Product/MainInfo';
+export { default as SingleMulti } from './Product/SingleMulti';
+export { default as QuoteBar } from './Product/QuoteBar';
+export { default as VisibleTransformation } from './Product/VisibleTransformation';
+export { default as SenjaRating } from './Product/SenjaRating';
+export { default as ProductInfoTable } from './Product/ProductInfoTable';
+export { default as SenjaTestimonials } from './Product/SenjaTestimonials';
 export { default as ProductInfo } from './Product/ProductInfo';
 export { default as Warranty } from './Product/Warranty';
 export { default as ProductFAQ } from './Product/ProductFAQ';
@@ -34,6 +46,9 @@ export { default as Trust } from './About/Trust';
 export { default as Difference } from './About/Difference';
 
 export { default as Skin } from './Science/Skin';
+export { default as Spectrum } from './Science/Spectrum';
+export { default as ProblemSolution } from './Science/ProblemSolution';
+export { default as VerifiedScience } from './Science/VerifiedScience';
 export { default as Photobiomodulation } from './Science/Photobiomodulation';
 export { default as Wavelengths } from './Science/Wavelengths';
 export { default as Beam } from './Science/Beam';
@@ -50,3 +65,5 @@ export { default as DownloadablesContent } from './DownloadablesContent';
 
 export { default as FooterSlim } from './FooterSlim';
 export { default as NavbarSlim } from './NavbarSlim';
+
+export { default as CartContent } from './CartContent';

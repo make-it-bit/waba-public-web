@@ -118,7 +118,7 @@ const Skin = ({ skinData }) => {
         )}
       </div>
       {categorizedElements[navbarItems[pageIndex]].map((element, index) => (
-        <div key={index} className="grid grid-cols-12 items-center md:mt-80 mt-8 md:mb-176 mb-80">
+        <div key={index} className="grid grid-cols-12 items-center md:mt-80 mt-8 md:mb-80 mb-80">
           <div className="xl:col-start-3 xl:col-span-4 lg:col-start-2 lg:col-span-5 md:col-span-6 col-span-12 md:order-1 order-2">
             <div className="flex flex-col justify-center gap-48">
               <h1 className="font-rufina text-5xl leading-5xl md:mt-0 mt-56">{element.attributes.title}</h1>

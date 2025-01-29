@@ -5,38 +5,41 @@ import Image from 'next/image';
 import classNames from 'classnames';
 
 import Features from './Features/Features';
-import UserStories from './UserStories/UserStories';
 import Included from './Included/Included';
 import Science from './Science/Science';
 import Specifications from './Specifications/Specifications';
 import { ScrollableNavbar } from '@/components';
 
 import styles from './_productInfo.module.scss';
+import Compare from '@/page-components/Index/Compare';
+import ProductFAQ from '../ProductFAQ';
 
-const ProductInfo = ({ productInfoData }) => {
+const ProductInfo = ({ productInfoData, compareSection, faqData }) => {
   const backgrounds = [
-    styles.background0,
-    styles.background1,
-    styles.background2,
+    styles.backgroundBeige,
     styles.background3,
+    styles.background0,
     styles.background4,
+    styles.background2,
+    styles.backgroundBeige,
   ];
-  const navbarItems = ['Features', 'User stories', 'What’s included', 'The Science Behind', 'Technical specifications'];
+  const navbarItems = ['User stories', 'The Science Behind', 'Features', 'Technical specifications', 'What’s included', 'FAQ'];
   const navbarPages = [
-    <Features key={0} featuresData={productInfoData.feature_cards} />,
-    <UserStories key={1} title={productInfoData.user_stories_title} userStoriesData={productInfoData.stories} />,
+    <Compare key={0} compareData={{title: productInfoData.compare_title}} compareSection={compareSection} />,
+    <Science key={1} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
+    <Features key={2} featuresData={productInfoData.feature_cards} />,
+    <Specifications
+      key={3}
+      title={productInfoData.specifications_title}
+      specificationsData={productInfoData.specifications}
+    />,
     <Included
-      key={2}
+      key={4}
       title={productInfoData.included_title}
       includedData={productInfoData.included}
       includedImage={productInfoData.included_image}
     />,
-    <Science key={3} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
-    <Specifications
-      key={4}
-      title={productInfoData.specifications_title}
-      specificationsData={productInfoData.specifications}
-    />,
+    <ProductFAQ key={5} productFaqData={faqData} />
   ];
   const [pageIndex, setPageIndex] = useState(0);
 

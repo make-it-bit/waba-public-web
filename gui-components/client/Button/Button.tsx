@@ -7,9 +7,11 @@ import classNames from 'classnames';
 type SizeOptions = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type ButtonProps = {
-  CTA: string;
+  CTA?: string;
   type?: 'button' | 'submit';
   style?: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
+  caretDirection?: 'left' | 'right';
+  outline?: boolean;
   size?: 'sm' | 'reg';
   onClick?: () => void;
   disabled?: boolean;
@@ -25,6 +27,8 @@ const Button = ({
   type = 'button',
   style = 'primary',
   size = 'reg',
+  caretDirection = 'right',
+  outline = false,
   onClick,
   disabled = false,
   svg = false,
@@ -48,9 +52,13 @@ const Button = ({
   if (style === 'primary') {
     buttonCaret = 'icons/caret-right-white-100.svg';
   } else if (style === 'secondary' && !disabled) {
-    buttonCaret = 'icons/caret-right-black-100.svg';
+    caretDirection === 'right' 
+      ? buttonCaret = 'icons/caret-right-black-100.svg'
+      : buttonCaret = 'icons/caret-left-black-100.svg'
   } else if (style === 'secondary' && disabled) {
-    buttonCaret = 'icons/caret-right-black-60.svg';
+    caretDirection === 'right' 
+      ? buttonCaret = 'icons/caret-right-black-60.svg'
+      : buttonCaret = 'icons/caret-left-black-60.svg'
   } else if (style === 'tertiary') {
     buttonCaret = 'icons/caret-right-white-100.svg';
   } else if (style === 'quaternary' && !disabled) {
@@ -87,6 +95,8 @@ const Button = ({
         btnBlock && 'block',
         svg && 'flex items-center gap-8',
         'relative justify-center text-base leading-base',
+        outline && !disabled && 'border-2 border-black-100',
+        outline && disabled && 'border-2 border-black-50',
         otherClassnames
       )}
       type={type}

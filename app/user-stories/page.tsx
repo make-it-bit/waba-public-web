@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { getPageData, getComponentData } from '@/lib/strapi';
+import { getPageData, getComponentData, getCompareSection, getUserVideos } from '@/lib/strapi';
 
 import {
   UserStoriesHero,
-  Examples,
-  UserStoriesTestimonials,
-  UserStoriesWarranty,
   LogoBar,
   CTABlock,
   PreFooterCard,
   Footer,
+  Compare,
+  SenjaTestimonials,
+  HappyUsers,
 } from '@/page-components';
 
 import { InstagramBlock } from '@/components';
@@ -27,9 +27,9 @@ export async function generateMetadata() {
     },
     openGraph: {
       images: [
-        `/api/og?title=${userStoriesPageData.attributes.seo?.title ?? ''}&desc=${
-          userStoriesPageData.attributes.seo?.description ?? ''
-        }` ?? null,
+        `/api/og?title=${userStoriesPageData.attributes.seo?.title}&desc=${
+          userStoriesPageData.attributes.seo?.description
+        }`,
       ],
     },
   };
@@ -61,22 +61,71 @@ const UserStories = async () => {
   const ctaBlockData = await getComponentData('cta-block');
   const preFooterCardData = await getComponentData('pre-footer-card');
   const footerData = await getComponentData('footer');
+  const compareSection = await getCompareSection();
+  const userVideos = await getUserVideos();
+  const queryParams = [
+    'media_url',
+    'username',
+    'permalink',
+    'caption',
+    'media_type',
+    'thumbnail_url',
+    'children{media_url, media_type, thumbnail_url}'
+  ];
+  const queryLimit = 30;
 
-  const { data: posts } = await fetch(
-    `https://graph.instagram.com/me/media?fields=media_url,permalink,caption&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`,
-    { method: 'GET', headers: { 'Content-Type': 'application/json' } }
-  ).then((res) => res.json());
+  const fetchInstagramPosts = async () => {
+    try {
+      const { data: posts } = await fetch(
+        `https://graph.instagram.com/v22.0/17841465347182420/media?fields=${queryParams.toString()}&limit=${queryLimit}&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`,
+        { method: 'GET', headers: { 'Content-Type': 'application/json' } }
+      ).then((res) => res.json());
 
-  const { ig_block: igBlock } = userStoriesPageData.attributes;
+      const processedPosts = posts.map((post) => {
+        if (post.media_type === 'CAROUSEL_ALBUM') {
+          return {
+            ...post,
+            media_url: post.children.data[0].media_url,
+            thumbnail_url: post.children.data[0].thumbnail_url,
+          };
+        } else if (post.media_type === 'VIDEO') {
+          return {
+            ...post,
+            media_url: post.thumbnail_url,
+          };
+        }
+        return post;
+      });
+  
+      const pinnedPostIds = ['18015646946580030', '17892689018984587'];
+      const pinnedPosts = processedPosts.filter((post) =>
+        pinnedPostIds.includes(post.id)
+      );
+  
+      const regularPosts = processedPosts.filter(
+        (post) => !pinnedPostIds.includes(post.id)
+      );
+      const combinedPosts = [...pinnedPosts, ...regularPosts];
+  
+      return combinedPosts;
+    } catch (error) {
+      console.error('Error fetching Instagram posts:', error);
+      return [];
+    }
+  };
+  
 
-  const matchingPosts = findMatchingPosts(posts, igBlock);
+  const posts = await fetchInstagramPosts();
 
   return (
     <>
       <UserStoriesHero userStoriesHeroData={userStoriesPageData.attributes.hero} />
-      <Examples examplesData={userStoriesPageData.attributes.example} />
-      <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} />
-      {matchingPosts && <InstagramBlock posts={matchingPosts} blockData={igBlock} />}
+      <Compare compareData={{title: 'Salon-grade results. Minimal effort. A multi-use product.'}} compareSection={compareSection}/>
+      <SenjaTestimonials variant="thin" />
+      <HappyUsers happyUsersData={{title: 'Happy Waba Users'}} userVideos={userVideos}/>
+      {/* <Examples examplesData={userStoriesPageData.attributes.example} /> */}
+      {/* <UserStoriesTestimonials testimonialsData={userStoriesPageData.attributes.testimonial} /> */}
+      <InstagramBlock posts={posts.slice(0, 6)} />
       <LogoBar />
       <CTABlock ctaBlockData={ctaBlockData.attributes} />
       <PreFooterCard preFooterCardData={preFooterCardData.attributes} />

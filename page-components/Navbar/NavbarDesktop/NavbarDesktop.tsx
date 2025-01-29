@@ -9,10 +9,11 @@ import classNames from 'classnames';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
+import { useCartStore } from '@/page-components/CartContent/CartContent';
 
 const NavbarDesktop = ({ navbarData }) => {
   const pathname = usePathname();
-
+  const quantity = useCartStore((state) => state.quantity);
   return (
     <div className="bg-white-100 lg:block hidden">
       <div className="container">
@@ -53,6 +54,7 @@ const NavbarDesktop = ({ navbarData }) => {
                 )}
               >
                 {link.attributes.page_link_data.href_text}
+                {link.attributes.page_link_data.href_text === 'Cart' && quantity > 0 && ` (${quantity})`}
               </Link>
             ))}
             <Link href={navbarData.button.href_src}>

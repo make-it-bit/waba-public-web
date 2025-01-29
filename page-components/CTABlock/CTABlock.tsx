@@ -22,7 +22,7 @@ const CTABlock = ({ ctaBlockData }) => {
           <div className="flex flex-col gap-56 justify-center md:items-center text-center mt-360 md:mb-80 mb-72">
             <h1 className="font-rufina md:text-7xl text-5xl md:leading-7xl leading-5xl">{ctaBlockData.title}</h1>
             <Link href={ctaBlockData.button_1.href_src} className="md:flex contents justify-center">
-              <Button CTA={ctaBlockData.button_1.href_text} svg />
+              <Button style="tertiary" CTA={ctaBlockData.button_1.href_text} svg />
             </Link>
             <div className="border border-black-20 w-full"></div>
             <div className="flex md:flex-row flex-col gap-y-16 w-full">
@@ -31,7 +31,7 @@ const CTABlock = ({ ctaBlockData }) => {
                 <p className="text-sm leading-sm text-black-80">{ctaBlockData.trade_in_line_2}</p>
               </div>
               <Link href={ctaBlockData.button_2.href_src} className="md:flex justify-center items-center contents">
-                <Button CTA={ctaBlockData.button_2.href_text} style="secondary" svg />
+                <Button CTA={ctaBlockData.button_2.href_text}  svg />
               </Link>
             </div>
           </div>
