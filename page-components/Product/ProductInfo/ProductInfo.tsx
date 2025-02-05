@@ -18,14 +18,14 @@ const ProductInfo = ({ productInfoData, compareSection, faqData }) => {
   const backgrounds = [
     styles.backgroundBeige,
     styles.background3,
-    styles.background0,
-    styles.background4,
-    styles.background2,
+    styles.backgroundBeige,
+    styles.backgroundBeige,
+    styles.backgroundBeige,
     styles.backgroundBeige,
   ];
   const navbarItems = ['User stories', 'The Science Behind', 'Features', 'Technical specifications', 'What’s included', 'FAQ'];
   const navbarPages = [
-    <Compare key={0} compareData={{title: productInfoData.compare_title}} compareSection={compareSection} />,
+    <Compare isTab={true} key={0} compareData={{title: productInfoData.compare_title}} compareSection={compareSection} />,
     <Science key={1} background={styles.background1} scienceData={productInfoData.photobiomodulation} />,
     <Features key={2} featuresData={productInfoData.feature_cards} />,
     <Specifications
@@ -45,16 +45,16 @@ const ProductInfo = ({ productInfoData, compareSection, faqData }) => {
 
   const gradientsLeft = [
     styles.gradientLeft0,
-    styles.gradientLeft1,
-    styles.gradientLeft2,
     styles.gradientLeft3,
+    styles.gradientLeft2,
+    styles.gradientLeft2,
     styles.gradientLeft4,
   ];
   const gradientsRight = [
     styles.gradientRight0,
-    styles.gradientRight1,
-    styles.gradientRight2,
     styles.gradientRight3,
+    styles.gradientRight2,
+    styles.gradientRight2,
     styles.gradientRight4,
   ];
   const scrollContainerRef = useRef<any>(null);

@@ -10,6 +10,7 @@ import { Button, NumberInput } from '@/gui-components/client';
 import { useCartStore } from '@/page-components/CartContent/CartContent';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import SenjaRating from '../SenjaRating';
+import { Slide, toast, ToastContainer } from 'react-toastify';
 
 const MainInfo = ({ mainInfoData }) => {
   const markupDescription = parseProductMarkup(mainInfoData.new_description);
@@ -20,7 +21,10 @@ const MainInfo = ({ mainInfoData }) => {
   const swiperRef = useRef<SwiperRef>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuantity(parseInt(e.target.value));
-  const addToCart = (quantity: number) => setStoreQuantity(quantity);
+  const addToCart = (quantity: number) => {
+    setStoreQuantity(quantity);
+    toast.info('Added to Cart!');
+  }
 
   const handlePrev = useCallback(() => {
     if (!swiperRef.current) return;
@@ -69,7 +73,7 @@ const MainInfo = ({ mainInfoData }) => {
                 ref={swiperRef}
                 className="h-full w-full z-0"
               >
-                {mainInfoData.images.slice(5,9).map((image, index) => (
+                {mainInfoData.images.slice(0,4).map((image, index) => (
                   <SwiperSlide key={index}>
                     <Image
                       src={getImageFullUrl_client(image.image.data)}
@@ -114,40 +118,43 @@ const MainInfo = ({ mainInfoData }) => {
                 </div>
               </div>
             </div>
+            <div className="flex flex-col items-center justify-center mt-5 text-center md:flex-row md:items-start md:justify-start md:text-left">
+              <p className="text-sm text-black-60">Buy Now, Pay Later options from €39/month (12 payments)</p>
+            </div>
           </div>
         </div>
 
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="grid grid-cols-3 gap-24">
             <div className="relative w-full h-full min-h-[416px]">
-              {mainInfoData.images[9]?.image && (
+              {mainInfoData.images[4]?.image && (
                 <Image
-                  src={getImageFullUrl_client(mainInfoData.images[9].image.data)}
+                  src={getImageFullUrl_client(mainInfoData.images[4].image.data)}
                   fill
                   quality={100}
-                  className={`absolute w-full h-full object-${mainInfoData.images[9].object_fit}`}
+                  className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
                   alt="product main info image"
                 />
               )}
             </div>
             <div className="relative w-full h-full min-h-[416px]">
-              {mainInfoData.images[10]?.image && (
+              {mainInfoData.images[5]?.image && (
                 <Image
-                  src={getImageFullUrl_client(mainInfoData.images[10].image.data)}
+                  src={getImageFullUrl_client(mainInfoData.images[5].image.data)}
                   fill
                   quality={100}
-                  className={`absolute w-full h-full object-${mainInfoData.images[10].object_fit}`}
+                  className={`absolute w-full h-full object-${mainInfoData.images[5].object_fit}`}
                   alt="product main info image"
                 />
               )}
             </div>
             <div className="relative w-full h-full min-h-[416px]">
-              {mainInfoData.images[11]?.image && (
+              {mainInfoData.images[6]?.image && (
                 <Image
-                  src={getImageFullUrl_client(mainInfoData.images[11].image.data)}
+                  src={getImageFullUrl_client(mainInfoData.images[6].image.data)}
                   fill
                   quality={100}
-                  className={`absolute w-full h-full object-${mainInfoData.images[11].object_fit}`}
+                  className={`absolute w-full h-full object-${mainInfoData.images[6].object_fit}`}
                   alt="product main info image"
                 />
               )}
@@ -157,12 +164,12 @@ const MainInfo = ({ mainInfoData }) => {
 
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[217px]">
-            {mainInfoData.images[4]?.image && (
+            {mainInfoData.images[7]?.image && (
               <Image
-                src={getImageFullUrl_client(mainInfoData.images[4].image.data)}
+                src={getImageFullUrl_client(mainInfoData.images[7].image.data)}
                 fill
                 quality={100}
-                className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
+                className={`absolute w-full h-full object-${mainInfoData.images[7].object_fit}`}
                 alt="device"
               />
             )}
@@ -170,12 +177,12 @@ const MainInfo = ({ mainInfoData }) => {
         </div>
         <div className="lg:block hidden col-start-1 col-span-5">
           <div className="relative w-full h-full min-h-[217px]">
-            {mainInfoData.images[12]?.image && (
+            {mainInfoData.images[8]?.image && (
               <Image
-                src={getImageFullUrl_client(mainInfoData.images[12].image.data)}
+                src={getImageFullUrl_client(mainInfoData.images[8].image.data)}
                 fill
                 quality={100}
-                className={`absolute w-full h-full object-${mainInfoData.images[4].object_fit}`}
+                className={`absolute w-full h-full object-${mainInfoData.images[8].object_fit}`}
                 alt="device"
               />
             )}

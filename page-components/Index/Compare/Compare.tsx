@@ -1,5 +1,5 @@
 'use client'
-import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slider";
+import { ReactCompareSlider, ReactCompareSliderHandle, ReactCompareSliderImage } from "react-compare-slider";
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useCallback, useRef, useState } from "react";
@@ -7,7 +7,7 @@ import { Button } from "@/gui-components/client";
 import { getImageFullUrl_client } from "@/lib/getImgFullUrl";
 
 
-const Compare = ({ compareData, compareSection }) => {
+const Compare = ({ compareData, compareSection, isTab = false }) => {
   const swiperRef = useRef<SwiperRef>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -33,7 +33,9 @@ const Compare = ({ compareData, compareSection }) => {
       <div className="container">
         <div className="flex flex-col">
           <div className="grid grid-cols-12">
-            <div className="col-span-12 text-center md:mt-160 mt-72 md:mb-88 mb-40">
+            <div className={
+              `col-span-12 text-center ${isTab ? 'md:mt-40' : 'md:mt-160'} mt-72 md:mb-88 mb-40`
+            }>
               <h1 className="font-rufina sm:text-4xl text-4xl sm:leading-4xl leading-3xl">
                 {compareData.title}
               </h1>
@@ -66,6 +68,16 @@ const Compare = ({ compareData, compareSection }) => {
                   <p className="pt-7 leading-2xl flex-grow">{card.description}</p>
                   <div className="w-full pt-7 mt-auto">
                     <ReactCompareSlider
+                      handle={<ReactCompareSliderHandle portrait={false} buttonStyle={{
+                        backdropFilter: undefined,
+                        WebkitBackdropFilter: undefined,
+                        backgroundColor: 'white',
+                        color: '#444',
+                        boxShadow: undefined,
+                        border: 0,
+                        borderRadius: '0px',
+                        height: '30px',
+                      }} /> }
                       itemOne={
                         <ReactCompareSliderImage
                           src={getImageFullUrl_client(card.before.data)}

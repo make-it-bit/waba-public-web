@@ -195,6 +195,7 @@ const Colors = ({ colorsData }) => {
               quality={100}
               className="md:block hidden absolute 2xl:top-[269px] xl:top-[317px] top-400 left-1/2 translate-x-neg-1/2"
             />
+            <div className="hidden md:block w-[100px] h-[100px] z-10 bg-gradient-to-t from-white-100 via-white-50 to-transparent absolute bottom-[-220px]"></div>
           </div>
           <div
             className="md:hidden flex items-center p-16 mt-80 cursor-pointer"

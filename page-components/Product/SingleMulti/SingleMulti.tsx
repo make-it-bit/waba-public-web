@@ -4,22 +4,40 @@ import Image from 'next/image';
 import { Button, NumberInput } from "@/gui-components/client";
 import { useState } from "react";
 import { useCartStore } from "@/page-components/CartContent/CartContent";
+import { Slide, toast, ToastContainer } from "react-toastify";
 
 const SingleMulti = () => {
   const { setStoreQuantity } = useCartStore();
   const [quantity, setQuantity] = useState(1);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuantity(parseInt(e.target.value));
-  const addToCart = (quantity: number) => setStoreQuantity(quantity);
+  const addToCart = (quantity: number) => {
+    setStoreQuantity(quantity);
+    toast.info('Added to Cart!');
+  };
   return (
-    <div className="container py-[108px]">
+    <div className="container md:py-[108px]">
+      <ToastContainer
+        className="block md:hidden"
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="light"
+        transition={Slide}
+      />
       <div className="text-center pb-20">
         <h3 className="font-rufina text-5xl">Single versus Multi-Use Products</h3>
       </div>
       <div className="md:grid grid-cols-12 md:gap-x-[50px] md:gap-y-[5px]">
         <div className="col-span-12 md:col-span-6 bg-[#F3ECEE] order-1">
           <div className="grid grid-cols-12 p-10">
-            <div className="col-span-12 md:col-span-6 relative flex">
+            <div className="col-span-12 md:col-span-6 relative flex pt-[25px] md:pt-auto">
               <div className="bg-white-100 px-3 p-2 absolute -top-[20px] z-10">
                 <p className="text-sm">Other products in the market - 550 EUR</p>
               </div>
@@ -133,7 +151,7 @@ const SingleMulti = () => {
         </div>
         <div className="col-span-12 md:col-span-6 bg-[#F3ECEE] order-2 md:order-2">
           <div className="grid grid-cols-12 p-10">
-            <div className="col-span-12 md:col-span-6 relative flex">
+            <div className="col-span-12 md:col-span-6 relative flex pt-[25px] md:pt-auto">
               <div className="bg-white-100 px-3 p-2 absolute -top-[20px] z-10">
                 <p className="text-sm">WABA Eclatia - 475 EUR</p>
               </div>

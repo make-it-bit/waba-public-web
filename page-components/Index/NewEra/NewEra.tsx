@@ -18,8 +18,8 @@ const NewEraBlock = ({ title, description, isLast }) => {
         {description}
       </p>
     </div>
-  )
-}
+  );
+};
 
 const NewEra = ({ newEraData }) => {
   const currentImage = '/mask.jpg';
@@ -27,7 +27,7 @@ const NewEra = ({ newEraData }) => {
   const arraySplit = splitArrayIntoTwo(newEraData.new_era_list);
 
   const numberOfDots = newEraData.new_era_list.length;
-  const totalDuration = 1.5;
+  const totalDuration = 3;
   const delayBetweenDots = totalDuration / numberOfDots;
   const arcRadius = 150;
   const startAngle = 135;
@@ -84,7 +84,7 @@ const NewEra = ({ newEraData }) => {
       </div>
       <div className="hidden md:flex md:flex-col">
         <div className="grid grid-cols-12">
-          <div className="col-span-12 text-center md:mt-160 mt-72 md:mb-88 mb-40">
+          <div className="col-span-12 text-center md:mt-50 mt-72 md:mb-88 mb-40">
             <h1 className="font-rufina sm:text-6xl text-4xl sm:leading-4xl leading-3xl">
               {newEraData.title}
             </h1>

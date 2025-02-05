@@ -10,6 +10,7 @@ import { ReactSVG } from "react-svg";
 const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [playingVideos, setPlayingVideos] = useState({});
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
     const checkMobileView = () => {
@@ -23,17 +24,22 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
   const isSwiper = isMobile || userVideos.length > 4;
 
   const handleVideoToggle = (index) => {
-    const videoElement = document.getElementById(`video-${index}`) as HTMLVideoElement;
-
-    if (videoElement) {
-      if (playingVideos[index]) {
-        videoElement.pause();
-        setPlayingVideos((prev) => ({ ...prev, [index]: false }));
-      } else {
-        videoElement.play();
-        setPlayingVideos((prev) => ({ ...prev, [index]: true }));
+    videoRefs.current.forEach((video, idx) => {
+      if (video) {
+        if (idx === index) {
+          if (video.paused) {
+            video.play();
+            setPlayingVideos((prev) => ({ ...prev, [index]: true }));
+          } else {
+            video.pause();
+            setPlayingVideos((prev) => ({ ...prev, [index]: false }));
+          }
+        } else {
+          video.pause();
+          setPlayingVideos((prev) => ({ ...prev, [idx]: false }));
+        }
       }
-    }
+    });
   };
 
   if (!isSwiper) {
@@ -46,7 +52,7 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
             style={{ width: "300px", height: "550px" }}
           >
             <video
-              id={`video-${index}`}
+              ref={(el) => (videoRefs.current[index] = el)}
               muted
               loop
               playsInline
@@ -57,6 +63,7 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
                 objectFit: "cover",
               }}
               className="rounded-40"
+              onClick={() => handleVideoToggle(index)}
             >
               <source
                 src={getVideoFullUrl_client(
@@ -106,7 +113,7 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
             style={{ width: "300px", height: "550px" }}
           >
             <video
-              id={`video-${index}`}
+              ref={(el) => (videoRefs.current[index] = el)}
               muted
               loop
               playsInline
@@ -117,6 +124,7 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
                 objectFit: "cover",
               }}
               className="rounded-40"
+              onClick={() => handleVideoToggle(index)}
             >
               <source
                 src={getVideoFullUrl_client(
