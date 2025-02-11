@@ -5,6 +5,41 @@ import 'swiper/css';
 import { useCallback, useRef, useState } from "react";
 import { Button } from "@/gui-components/client";
 import { getImageFullUrl_client } from "@/lib/getImgFullUrl";
+import { ReactSVG } from "react-svg";
+
+const CustomHandle = ({ portrait }) => {
+  return (
+    <div
+      style={{
+        backgroundColor: 'white',
+        color: '#444',
+        borderRadius: portrait ? '0px' : '0px',
+        width: portrait ? '100%' : '40px',
+        height: portrait ? '30px' : '20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        position: 'relative',
+      }}
+    >
+      {!portrait && (
+        <>
+          <div className="absolute left-0">
+            <ReactSVG
+              src={'icons/caret-left-black-60.svg'}
+            />
+          </div>
+          <div className="absolute right-0">
+            <ReactSVG
+              src={'icons/caret-right-black-60.svg'}
+            />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 
 const Compare = ({ compareData, compareSection, isTab = false }) => {
@@ -68,16 +103,7 @@ const Compare = ({ compareData, compareSection, isTab = false }) => {
                   <p className="pt-7 leading-2xl flex-grow">{card.description}</p>
                   <div className="w-full pt-7 mt-auto">
                     <ReactCompareSlider
-                      handle={<ReactCompareSliderHandle portrait={false} buttonStyle={{
-                        backdropFilter: undefined,
-                        WebkitBackdropFilter: undefined,
-                        backgroundColor: 'white',
-                        color: '#444',
-                        boxShadow: undefined,
-                        border: 0,
-                        borderRadius: '0px',
-                        height: '30px',
-                      }} /> }
+                      handle={<CustomHandle portrait={false} /> }
                       itemOne={
                         <ReactCompareSliderImage
                           src={getImageFullUrl_client(card.before.data)}

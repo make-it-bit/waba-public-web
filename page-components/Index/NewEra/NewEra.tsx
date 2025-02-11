@@ -114,7 +114,7 @@ const NewEra = ({ newEraData }) => {
           </div>
         </div>
       </div>
-      <Badges />
+      <Badges otherClassNames="py-[50px]"/>
     </div>
   );
 };

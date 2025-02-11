@@ -265,24 +265,27 @@ const SingleMulti = () => {
         </div>
       </div>
       <div className="grid grid-cols-12 mt-[50px] md:gap-[50px] ">
-        <div className="col-span-12 md:col-span-6 p-5 md:order-1 order-2">
+        <div className="col-span-12 md:col-span-6 md:p-5 mt-5 md:mt-0 md:order-1 order-2">
           <h3 className="font-rufina text-3xl leading-3xl md:text-5xl md:leading-5xl">Professional-Grade Results At No Cost</h3>
           <p className="text-2sm leading-2sm mt-10">
             Similar to many in-clinic and salon skin treatments, maintaining the benefits of light therapy requires consistent sessions.
           </p>
-          <p className="text-2sm leading-2sm mt-20">
+          <p className="text-2sm leading-2sm mt-10">
             With the investment equivalent to just a couple of professional light therapy sessions, you can own the WABA Eclatia. Enjoy the convenience of treating your skin from just 3 minutes, anytime and anywhere you choose.
           </p>
-          <p className="text-2sm leading-2sm mt-20">Interested in making it yours?</p>
+          <p className="text-2sm leading-2sm mt-10">Interested in making it yours?</p>
           <div className="grid grid-cols-12 mt-10 gap-5">
-            <div className="col-span-2">
+            <div className="col-span-12 md:col-span-2">
               <NumberInput label="Quantity" name="product-quantity" value={quantity} minValue={0} onChange={handleChange} />
             </div>
-            <div className="col-span-10">
+            <div className="col-span-12 md:col-span-10">
               <div className="pt-5">
                 <Button onClick={() => addToCart(quantity)} style="tertiary" otherClassnames='w-full' CTA={'Add to cart'} svg />
               </div>
             </div>
+          </div>
+          <div className="flex flex-col items-center justify-center mt-5 text-center md:flex-row md:items-start md:justify-start md:text-left">
+            <p className="text-sm text-black-60">Buy Now, Pay Later options from €39/month (12 payments)</p>
           </div>
         </div>
         <div className="col-span-12 md:col-span-6 p-5 bg-[#F3ECEE] py-[20px] md:py-[100px] md:order-2 order-1">

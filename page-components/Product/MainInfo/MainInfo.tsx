@@ -42,7 +42,6 @@ const MainInfo = ({ mainInfoData }) => {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
   }, []);
-  
 
   return (
     <div className="container lg:mt-64 mt-24 lg:mb-72 mb-64">
@@ -50,14 +49,14 @@ const MainInfo = ({ mainInfoData }) => {
         {/* mobile images */}
         <div className="lg:hidden block col-span-12">
           <div className="flex gap-24 overflow-x-auto">
-            {mainInfoData.images.length > 0 &&
-              mainInfoData.images.map((imageData, index) => (
+            {mainInfoData.mobile_images.length > 0 &&
+              mainInfoData.mobile_images.map((imageData, index) => (
                 <div key={index} className="relative min-w-[260px] h-[260px]">
                   <Image
-                    src={getImageFullUrl_client(imageData.image.data)}
+                    src={getImageFullUrl_client(imageData.image.data[0])}
                     fill
                     quality={100}
-                    className={`absolute w-full h-full object-${imageData.object_fit}`}
+                    className={`absolute w-full h-full object-contain`}
                     alt="product main info image"
                   />
                 </div>
@@ -69,11 +68,23 @@ const MainInfo = ({ mainInfoData }) => {
         {mainInfoData.images[0]?.image && (
           <div className="lg:block hidden col-start-1 col-span-5">
             <div className="relative w-full h-full min-h-[520px]">
-              <Swiper
-                ref={swiperRef}
-                className="h-full w-full z-0"
+              <Button 
+                svg
+                outline
+                otherClassnames="py-[20px] px-[20px] absolute top-1/2 left-[20px] transform -translate-y-1/2 z-20"
+                style="secondary" 
+                size="reg" 
+                caretDirection="left"
+                disabled={isBeginning}
+                onClick={handlePrev}
+              />
+              <Swiper 
+                ref={swiperRef} 
+                className="h-full w-full z-0 relative"
+                onSlideChange={handleSlideChange}
+                onInit={handleSlideChange}
               >
-                {mainInfoData.images.slice(0,4).map((image, index) => (
+                {mainInfoData.images.slice(0, 4).map((image, index) => (
                   <SwiperSlide key={index}>
                     <Image
                       src={getImageFullUrl_client(image.image.data)}
@@ -85,6 +96,18 @@ const MainInfo = ({ mainInfoData }) => {
                   </SwiperSlide>
                 ))}
               </Swiper>
+              <div className="absolute right-[20px] top-1/2">
+                <Button 
+                  svg
+                  outline
+                  otherClassnames="py-[20px] px-[20px] z-20"
+                  style="secondary" 
+                  size="reg" 
+                  caretDirection="right"
+                  disabled={isEnd}
+                  onClick={handleNext}
+                />
+              </div>
               <div className="absolute bg-[#f3ecee] w-full h-full top-0 left-0 z-[-1]"></div>
             </div>
           </div>

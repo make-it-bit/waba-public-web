@@ -1,7 +1,7 @@
 import React from "react";
 import Image from 'next/image';
 
-const Badges = () => {
+const Badges = ({ otherClassNames = "" }) => {
   const badges = [
     {
       src: '/badges/year.svg',
@@ -61,7 +61,7 @@ const Badges = () => {
     },
   ]
   return (
-    <div className="grid grid-cols-4 gap-y-8 gap-8 md:flex md:flex-row justify-between py-[50px] container">
+    <div className={`grid grid-cols-4 gap-y-9 gap-8 md:flex md:flex-row justify-between md:py-[10px] container ${otherClassNames}`}>
       {badges.map((badge, index) => (
         <React.Fragment key={index}>
           <Image key={index} {...badge} />

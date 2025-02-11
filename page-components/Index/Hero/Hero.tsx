@@ -48,7 +48,7 @@ const Hero = ({ heroData }) => {
                 <Link
                   key={index}
                   href={button.href_src}
-                  onClick={() => window.scrollTo({ top: 1133, behavior: 'smooth' })}
+                  onClick={() => window.scrollTo({ top: 1050, behavior: 'smooth' })}
                 >
                   <Button CTA={button.href_text} style="secondary" />
                 </Link>
