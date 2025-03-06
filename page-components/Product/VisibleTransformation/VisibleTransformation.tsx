@@ -41,31 +41,31 @@ const VisibleTransformation = ({ transformationData }) => {
         </div>
         <div className="md:hidden block col-span-12 md:col-span-10 md:col-start-2">
           <div className="grid grid-cols-3 md:grid-cols-3 md:gap-10 gap-0">
-            <div className="relative w-full h-[150px] md:h-[450px]">
+            <div className="relative w-full min-h-[180px] md:h-[450px]">
               <Image
                 src={getImageFullUrl_server(transformationData.mobile_before.data)}
                 alt="transformation"
                 fill
                 quality={100}
-                className="object-cover md:object-bottom"
+                className="object-cover md:object-bottom min-h-[180px]"
               />
             </div>
-            <div className="relative w-full h-[150px] md:h-[450px]">
+            <div className="relative w-full min-h-[180px] md:h-[450px]">
               <Image
                 src={getImageFullUrl_server(transformationData.mobile_during.data)}
                 alt="transformation"
                 fill
                 quality={100}
-                className="object-cover md:object-bottom"
+                className="object-cover md:object-bottom min-h-[180px]"
               />
             </div>
-            <div className="relative w-full h-[150px] md:h-[450px]">
+            <div className="relative w-full min-h-[180px] md:h-[450px]">
               <Image
                 src={getImageFullUrl_server(transformationData.mobile_after.data)}
                 alt="transformation"
                 fill
                 quality={100}
-                className="object-cover md:object-bottom"
+                className="object-cover md:object-bottom min-h-[180px]"
               />
             </div>
           </div>

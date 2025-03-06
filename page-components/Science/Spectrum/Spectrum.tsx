@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Spectrum = ({ spectrumData }) => {
   return (
-    <div className="pb-[108px]">
+    <div className="md:pb-[108px]">
       <div className="container">
         <div className="flex flex-col">
           <div className="grid grid-cols-12">

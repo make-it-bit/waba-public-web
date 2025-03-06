@@ -295,7 +295,7 @@ const SingleMulti = () => {
                 <p className="text-sm">Waba Eclatia</p>
                 <p className="text-sm font-bold">475 EUR</p>
               </div>
-              <div className="absolute top-[80px] left-[10px] md:top-auto md:left-auto w-[150px] h-[200px] md:w-[210px] md:h-[260px]">
+              <div className="absolute top-[95px] left-[10px] md:top-auto md:left-auto w-[150px] h-[200px] md:w-[210px] md:h-[260px]">
                 <Image
                   src="/device-blue.png"
                   alt="mask red dots"
@@ -306,18 +306,18 @@ const SingleMulti = () => {
               </div>
             </div>
             <div className="col-span-6 relative flex flex-col pl-10 py-10">
-              <div className="mt-4 md:mt-5">
+              <div className="mt-2 md:mt-5">
                 <p className="text-2sm font-thin">Cost of Alternatives</p>
               </div>
-              <div className="mt-8 md:mt-10">
+              <div className="mt-[25px] md:mt-10">
                 <p className="text-sm font-bold">Beauty salon*</p>
                 <p className="text-sm">€1,500+</p>
               </div>
-              <div className="mt-8 md:mt-10">
+              <div className="mt-[25px] md:mt-10">
                 <p className="text-sm font-bold">Light therapy clinics*</p>
                 <p className="text-sm">€1,200+</p>
               </div>
-              <div className="mt-8 md:mt-10 md:pb-5">
+              <div className="mt-[25px] md:mt-10 md:pb-5">
                 <p className="text-sm font-bold">Traditional skincare*</p>
                 <p className="text-sm">€700+</p>
               </div>

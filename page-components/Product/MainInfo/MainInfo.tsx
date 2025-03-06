@@ -56,7 +56,7 @@ const MainInfo = ({ mainInfoData }) => {
                     src={getImageFullUrl_client(imageData.image.data[0])}
                     fill
                     quality={100}
-                    className={`absolute w-full h-full object-contain`}
+                    className={`absolute w-full h-full object-cover`}
                     alt="product main info image"
                   />
                 </div>
