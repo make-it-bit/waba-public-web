@@ -6,7 +6,6 @@ export async function POST() {
       throw new Error('Missing Modena credentials');
     }
 
-    // Check for common formatting issues
     if (process.env.MODENA_CLIENT_ID?.includes(' ')) {
       console.warn('Client ID contains spaces');
     }
@@ -29,13 +28,12 @@ export async function POST() {
     });
 
 
-    // Check if the response is empty
+
     const text = await response.text();
     if (!text) {
       throw new Error('Empty response from Modena auth');
     }
 
-    // Try to parse the response as JSON
     let data;
     try {
       data = JSON.parse(text);
@@ -46,8 +44,6 @@ export async function POST() {
 
     if (response.status === 401) {
       console.error('Modena auth 401 error details:', data);
-      
-      // Provide more specific error messages based on the error type
       let errorMessage = 'Authentication failed';
       let errorDetails = 'Please check your Modena credentials and make sure they have the correct permissions';
       

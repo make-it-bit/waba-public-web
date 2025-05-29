@@ -24,18 +24,12 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     
-    // Verify the signature
     const isValid = verifySignature(body, signature, process.env.MODENA_SIGNATURE_KEY);
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
 
-    // Log the callback data
     console.log('Modena callback data:', body);
-    
-    // Handle the payment status
-    // You should implement your own logic here to update the order status
-    // based on the payment status received from Modena
     
     return NextResponse.json({ success: true });
   } catch (error) {
