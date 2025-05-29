@@ -5,7 +5,8 @@ import { ReactSVG } from "react-svg";
 export enum PaymentRadioEnum {
   STRIPE = 'stripe',
   KLARNA = 'klarna',
-  MAKSEKESKUS = 'maksekeskus'
+  MAKSEKESKUS = 'maksekeskus',
+  MODENA = 'modena'
 }
 
 export interface PaymentRadioProps {
@@ -77,6 +78,11 @@ const PaymentRadio = ({ disabled, id, label, name, value, onChange, checked, typ
             <ReactSVG src="logos/maksekeskus.svg" className="block" />
           </div>
         )}
+        {type === PaymentRadioEnum.MODENA && (
+          <div className="ml-[5px]">
+            <ReactSVG src="logos/modena.svg" className="block" style={{ width: '80px' }} />
+          </div>
+        )}
       </label>
     </div>
     {type === PaymentRadioEnum.STRIPE && (
@@ -114,6 +120,17 @@ const PaymentRadio = ({ disabled, id, label, name, value, onChange, checked, typ
           }`} 
         >
           Estonia, Latvia, Lithuania.
+        </p>
+      </div>
+    )}
+    {type === PaymentRadioEnum.MODENA && (
+      <div className="flex flex-row justify-start pl-[30px] mt-[10px]">
+        <p
+          className={`text-sm ${
+            disabled ? 'text-gray-400' : ''
+          }`}
+        >
+          Pay in 3 installments. Available in Estonia, Latvia, and Lithuania.
         </p>
       </div>
     )}

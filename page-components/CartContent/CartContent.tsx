@@ -1,8 +1,8 @@
 'use client'
-import { Button, PaymentRadio, TermsRadio } from "@/gui-components/client";
+import { Button, PaymentRadio, TermsRadio, TextInput } from "@/gui-components/client";
 import { PaymentRadioEnum } from "@/gui-components/client/PaymentRadio/PaymentRadio";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect, startTransition } from "react";
 import { ReactSVG } from "react-svg";
 import { create } from "zustand";
 
@@ -16,17 +16,65 @@ export interface CartState {
 
 // Cart state
 export const useCartStore = create<CartState>((set) => ({
-  price: 475,
+  price: 495,
   quantity: 0,
   setPrice: (newPrice) => set(() => ({ price: newPrice })),
   setStoreQuantity: (newQuantity) => set(() => ({ quantity: newQuantity })),
   removeItems: () => set(() => ({ quantity: 0})),
 }));
 
-const CartContent = () => {
+interface ModenaError {
+  error: string;
+  details?: string;
+  technicalDetails?: any;
+}
+
+interface CustomerDetails {
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+  address: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  country: string;
+}
+
+const CartContent = ({ productData }) => {
   const { price, quantity, setStoreQuantity, removeItems } = useCartStore();
   const [selectedValue, setSelectedValue] = useState('');
   const [termsSelectedValue, setTermsSelectedValue] = useState('');
+  const [error, setError] = useState<ModenaError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [customerDetails, setCustomerDetails] = useState<CustomerDetails>({
+    fullName: '',
+    phoneNumber: '',
+    email: '',
+    address: '',
+    city: '',
+    province: '',
+    postalCode: '',
+    country: ''
+  });
+  const [touchedFields, setTouchedFields] = useState({
+    fullName: false,
+    phoneNumber: false,
+    email: false,
+    address: false,
+    city: false,
+    province: false,
+    postalCode: false,
+    country: false
+  });
+  const [showErrors, setShowErrors] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState<number>(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentHeight(contentRef.current.scrollHeight + 150);
+    }
+  }, [selectedValue]);
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -34,6 +82,32 @@ const CartContent = () => {
 
   const handleTermsRadioChange = (value: string) => {
     setTermsSelectedValue(value);
+  };
+
+  const isModenaFieldsValid = () => {
+    if (selectedValue === 'radio4') {
+      return customerDetails.fullName.trim() !== '' &&
+             customerDetails.phoneNumber.trim() !== '' &&
+             customerDetails.email.trim() !== '' &&
+             customerDetails.address.trim() !== '' &&
+             customerDetails.city.trim() !== '' &&
+             customerDetails.province.trim() !== '' &&
+             customerDetails.postalCode.trim() !== '' &&
+             customerDetails.country.trim() !== '';
+    }
+    return true;
+  };
+
+  const handleCustomerDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCustomerDetails(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    setTouchedFields(prev => ({
+      ...prev,
+      [name]: true
+    }));
   };
 
   const incrementQuantity = () => {
@@ -45,10 +119,144 @@ const CartContent = () => {
   };
 
   const navigateToStripe = () => {
-    window.location.href = 'https://buy.stripe.com/bIY3dicSV4jJ0W44gi'
+    window.location.href = productData.button_1.href_src || 'https://buy.stripe.com/bIY3dicSV4jJ0W44gi';
   }
 
-  const isCheckoutDisabled = !selectedValue || !termsSelectedValue;
+  const navigateToModena = async () => {
+    try {
+      setError(null);
+      setIsLoading(true);
+
+      const authResponse = await fetch('/api/modena/auth', {
+        method: 'POST',
+      });
+
+      const authData = await authResponse.json();
+
+      if (!authResponse.ok) {
+        throw new Error(authData.error || 'Failed to authenticate with Modena');
+      }
+
+      const { access_token } = authData;
+
+      const orderData = {
+        maturityInMonths: 3,
+        orderId: `WABA-${Date.now()}`,
+        totalAmount: quantity * price,
+        currency: "EUR",
+        orderItems: [
+          {
+            description: "WABA Eclatia",
+            amount: price,
+            currency: "EUR",
+            quantity: quantity
+          }
+        ],
+        customer: {
+          phoneNumber: customerDetails.phoneNumber,
+          email: customerDetails.email,
+          address: customerDetails.address
+        },
+        timestamp: new Date().toISOString(),
+        returnUrl: `${window.location.origin}/success`,
+        cancelUrl: `${window.location.origin}/cancel`,
+        callbackUrl: `${window.location.origin}/api/modena/callback`
+      };
+
+      const paymentResponse = await fetch('/api/modena/create-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_token,
+          orderData
+        })
+      });
+
+      const paymentData = await paymentResponse.json();
+
+      if (!paymentResponse.ok) {
+        throw new Error(paymentData.error || 'Failed to create payment');
+      }
+
+      const { redirectUrl } = paymentData;
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      }
+    } catch (error) {
+      console.error('Modena payment error:', error);
+      setError({
+        error: error instanceof Error ? error.message : 'An error occurred during payment',
+        details: error instanceof Error ? error.stack : undefined
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const handleCheckout = async () => {
+    if (selectedValue === 'radio4' && !isModenaFieldsValid()) {
+      setShowErrors(true);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const orderData = {
+        full_name: customerDetails.fullName,
+        phone: customerDetails.phoneNumber,
+        email: customerDetails.email,
+        address: customerDetails.address,
+        city: customerDetails.city,
+        province: customerDetails.province,
+        postal_code: customerDetails.postalCode,
+        country: customerDetails.country,
+        amount: quantity
+      };
+
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to create order');
+      }
+
+
+      // Proceed with payment based on selected method
+      if (selectedValue === 'radio1' || selectedValue === 'radio2') {
+        navigateToStripe();
+      } else if (selectedValue === 'radio4') {
+        await navigateToModena();
+      }
+    } catch (error) {
+      console.error('Error in handleCheckout:', error);
+      setError({
+        error: error instanceof Error ? error.message : 'An error occurred while creating the order',
+        details: error instanceof Error ? error.stack : undefined
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getErrorMessage = (fieldName: keyof CustomerDetails) => {
+    if (selectedValue === 'radio4' && (touchedFields[fieldName] || showErrors) && !customerDetails[fieldName].trim()) {
+      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+    }
+    return undefined;
+  };
+
+  const isCheckoutDisabled = !selectedValue || !termsSelectedValue || !isModenaFieldsValid();
 
   return (
     <>
@@ -104,7 +312,7 @@ const CartContent = () => {
             <div className="col-span-12 md:col-span-10 md:col-start-2">
               <div className="grid grid-cols-10 py-[25px]">
                 <div className="col-span-10 md:col-span-5 md:border-r-2 border-black-50 border-b-2 md:border-b-0 md:pl-0 pl-[25px] md:pb-0 pb-[25px]">
-                  <p className="text-2sm font-bold">Credit Cart</p>
+                  <p className="text-2sm font-bold">Credit Card</p>
                   <PaymentRadio
                     id="radio1"
                     label="Pay with"
@@ -136,6 +344,105 @@ const CartContent = () => {
                     checked={selectedValue === 'radio3'}
                     onChange={handleRadioChange}
                   />
+                  <PaymentRadio
+                    id="radio4"
+                    label="Pay with"
+                    type={PaymentRadioEnum.MODENA}
+                    name="payment"
+                    value="radio4"
+                    checked={selectedValue === 'radio4'}
+                    onChange={handleRadioChange}
+                  />
+                  <div
+                    className={`overflow-hidden transition-[max-height] duration-300 ease-in-out`}
+                    style={{ maxHeight: selectedValue === 'radio4' ? contentHeight : 0 }}
+                  >
+                    <div ref={contentRef} className="mt-[50px] space-y-3">
+                      <div className="mb-4">
+                        <h4 className="text-2sm font-bold">Billing Information</h4>
+                      </div>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="fullName"
+                          value={customerDetails.fullName}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Full name"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="tel"
+                          name="phoneNumber"
+                          value={customerDetails.phoneNumber}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Phone number"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="email"
+                          name="email"
+                          value={customerDetails.email}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Email"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="address"
+                          value={customerDetails.address}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Street address"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="city"
+                          value={customerDetails.city}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="City"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="province"
+                          value={customerDetails.province}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Province/State"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="postalCode"
+                          value={customerDetails.postalCode}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Postal code"
+                          theme="dark"
+                        />
+                      </div>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="country"
+                          value={customerDetails.country}
+                          onChange={handleCustomerDetailsChange}
+                          placeholder="Country"
+                          theme="dark"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,7 +450,14 @@ const CartContent = () => {
               <TermsRadio id="radio4" name="terms" value="radio4" checked={termsSelectedValue === 'radio4'} onChange={handleTermsRadioChange} />
             </div>
             <div className="col-span-12 md:col-span-10 md:col-start-2 py-[50px]">
-              <Button onClick={navigateToStripe} style="tertiary" otherClassnames='w-full' CTA={'Checkout'} svg disabled={isCheckoutDisabled} />
+              <Button
+                onClick={handleCheckout}
+                style="tertiary"
+                otherClassnames='w-full'
+                CTA={isLoading ? 'Processing...' : 'Checkout'}
+                svg
+                disabled={isCheckoutDisabled || isLoading}
+              />
             </div>
           </div>
         </div>

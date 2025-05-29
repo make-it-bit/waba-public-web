@@ -455,3 +455,50 @@ export const getPolicyPages = async (): Promise<null | PolicyPage[]> => {
 
   return responseData;
 };
+
+export interface OrderData {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  email: string;
+  address: string;
+  amount: number;
+}
+
+export const createOrder = async (orderData: OrderData) => {
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/orders`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: orderData
+      })
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      console.log('response not ok!');
+      throw new Error(`Failed to create order in Strapi: ${JSON.stringify(responseData)}`);
+    }
+
+    // Return a success response that matches what the frontend expects
+    return {
+      success: true,
+      data: responseData.data
+    };
+  } catch (error) {
+    console.error('Error creating order:', error);
+    log.error('Error creating order in Strapi', { error });
+    await log.flush();
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to create order'
+    };
+  }
+};
