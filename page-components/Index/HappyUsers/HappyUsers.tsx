@@ -4,7 +4,7 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/gui-components/client";
-import { getVideoFullUrl_client } from "@/lib/getImgFullUrl";
+import { getImageFullUrl_client, getVideoFullUrl_client } from "@/lib/getImgFullUrl";
 import { ReactSVG } from "react-svg";
 
 const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
@@ -22,7 +22,6 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
   }, []);
 
   const isSwiper = isMobile || userVideos.length > 4;
-
   const handleVideoToggle = (index) => {
     videoRefs.current.forEach((video, idx) => {
       if (video) {
@@ -53,6 +52,7 @@ const VideoCarousel = ({ userVideos, swiperRef, onSlideChange }) => {
           >
             <video
               ref={(el) => (videoRefs.current[index] = el)}
+              poster={getImageFullUrl_client(video.attributes.preview.data)}
               muted
               loop
               playsInline

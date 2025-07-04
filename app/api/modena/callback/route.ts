@@ -28,8 +28,6 @@ export async function POST(request: Request) {
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
-
-    console.log('Modena callback data:', body);
     
     return NextResponse.json({ success: true });
   } catch (error) {

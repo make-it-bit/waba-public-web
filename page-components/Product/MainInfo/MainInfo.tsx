@@ -2,7 +2,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 
-import { Tag } from '@/components';
+import { Dropdown, Tag } from '@/components';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 import { parseProductMarkup } from '@/utils/parseMarkup';
 import { Markup } from './Markup/Markup';
@@ -11,14 +11,26 @@ import { useCartStore } from '@/page-components/CartContent/CartContent';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import SenjaRating from '../SenjaRating';
 import { Slide, toast, ToastContainer } from 'react-toastify';
+import { flattenNewPrice } from '@/utils/flattenNewPrice';
+import { useProductPrice, useProductPriceCurrency } from '@/utils/useProductPrice';
+import { useCurrencyStore, Currency } from '@/page-components/Navbar/currencyStore';
+import CurrencyFlag from 'react-currency-flags';
 
 const MainInfo = ({ mainInfoData }) => {
+  const flatNewPrice = flattenNewPrice(mainInfoData.new_price);
+  const price = useProductPrice(flatNewPrice, mainInfoData.price);
+  const currency = useProductPriceCurrency(flatNewPrice);
   const markupDescription = parseProductMarkup(mainInfoData.new_description);
   const { setStoreQuantity } = useCartStore();
   const [quantity, setQuantity] = useState(1);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const swiperRef = useRef<SwiperRef>(null);
+  const { currency: selectedCurrency, setCurrency } = useCurrencyStore();
+  
+  const calculateMonthlyPayment = (price: number) => {
+    return (price / 12).toFixed(2);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuantity(parseInt(e.target.value));
   const addToCart = (quantity: number) => {
@@ -128,9 +140,26 @@ const MainInfo = ({ mainInfoData }) => {
              <div className="flex flex-row items-start justify-start ml-[2px] my-[5px]">
              <SenjaRating />
             </div>
-            <h2 className="text-2xl leading-2xl lg:my-8 my-16 text-deep-purple-100">{mainInfoData.price}</h2>
+            <div className="flex flex-row items-center gap-2 lg:my-8 my-16">
+              <span className="text-2xl leading-2xl text-deep-purple-100">{price}</span>
+              <span className="text-2xl leading-2xl text-deep-purple-100">{selectedCurrency}</span>
+              <Dropdown
+                className="w-[110px] ml-[20px]"
+                options={[
+                  { value: 'EUR', label: 'EUR' },
+                  { value: 'AED', label: 'AED' },
+                ]}
+                value={selectedCurrency || 'EUR'}
+                onChange={val => setCurrency(val as Currency)}
+                renderOption={c => (
+                  <div className="flex items-center gap-1"><CurrencyFlag currency={c.value} size="sm" /> {c.value}</div>
+                )}
+                renderButton={selected => (
+                  <div className="flex items-center gap-1"><CurrencyFlag currency={selected.value} size="md" /> {selected.value}</div>
+                )}
+              />
+            </div>
             {markupDescription && <Markup content={markupDescription}/>}
-            {/* <Checkout mainInfoData={mainInfoData} /> */}
             <div className="grid grid-cols-12 mt-10 gap-5">
               <div className="md:col-span-2 col-span-12">
                 <NumberInput label="Quantity" name="product-quantity" value={quantity} minValue={0} onChange={handleChange} />
@@ -142,7 +171,8 @@ const MainInfo = ({ mainInfoData }) => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center mt-5 text-center md:flex-row md:items-start md:justify-start md:text-left">
-              <p className="text-sm text-black-60">Buy Now, Pay Later options from €39/month (12 payments)</p>
+              {selectedCurrency === 'EUR' && <p className="text-sm text-black-60">Buy Now, Pay Later options from €{calculateMonthlyPayment(typeof price === 'number' ? price : Number(price))}/month (12 payments)</p>}
+              
             </div>
           </div>
         </div>

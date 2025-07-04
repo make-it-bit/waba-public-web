@@ -1,0 +1,66 @@
+/* SingleMultiOverride.module.scss */
+.force-mobile {
+  @media (min-width: 768px) and (max-width: 1536px) {
+    :global(.md\:grid) {
+      display: block !important;
+      max-width: 733px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .single-multi-maxw {
+      max-width: 733px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      display: block !important;
+    }
+    :global(.md\:col-span-6) {
+      grid-column: span 12 / span 12 !important;
+    }
+    :global(.md\:order-1),
+    :global(.md\:order-2),
+    :global(.md\:order-3),
+    :global(.md\:order-4) {
+      order: initial !important;
+    }
+    :global(.md\:p-5) {
+      padding: 0 !important;
+    }
+    :global(.md\:py-\[100px\]) {
+      padding-top: 20px !important; /* match mobile value */
+      padding-bottom: 20px !important;
+    }
+    :global(.md\:pt-auto) {
+      padding-top: 25px !important; /* match mobile value */
+    }
+    :global(.md\:gap-x-\[50px\]),
+    :global(.md\:gap-y-\[5px\]) {
+      gap: 0 !important;
+    }
+    :global(.md\:mt-0) {
+      margin-top: 1.25rem !important; /* match mobile value if needed */
+    }
+    :global(.md\:leading-5xl) {
+      line-height: 1.1 !important; /* match mobile value */
+    }
+    :global(.md\:text-5xl) {
+      font-size: 2.25rem !important; /* match mobile value */
+    }
+    /* Hide images that should be hidden on mobile */
+    :global(.md\:block.hidden) {
+      display: none !important;
+    }
+    :global(.md\:block) {
+      display: none !important;
+    }
+    :global(.hidden) {
+      display: none !important;
+    }
+    /* Remove previous .container centering for this range */
+    .container {
+      max-width: none !important;
+      margin-left: unset !important;
+      margin-right: unset !important;
+    }
+    /* Add more overrides as needed for your layout */
+  }
+} 

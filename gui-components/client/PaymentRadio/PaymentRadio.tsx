@@ -5,7 +5,6 @@ import { ReactSVG } from "react-svg";
 export enum PaymentRadioEnum {
   STRIPE = 'stripe',
   KLARNA = 'klarna',
-  MAKSEKESKUS = 'maksekeskus',
   MODENA = 'modena'
 }
 
@@ -73,11 +72,6 @@ const PaymentRadio = ({ disabled, id, label, name, value, onChange, checked, typ
             <ReactSVG src="logos/klarna.svg" className="block" />
           </div>
         )}
-        {type === PaymentRadioEnum.MAKSEKESKUS && (
-          <div className="ml-[5px]">
-            <ReactSVG src="logos/maksekeskus.svg" className="block" />
-          </div>
-        )}
         {type === PaymentRadioEnum.MODENA && (
           <div className="ml-[5px]">
             <ReactSVG src="logos/modena.svg" className="block" style={{ width: '80px' }} />
@@ -112,17 +106,6 @@ const PaymentRadio = ({ disabled, id, label, name, value, onChange, checked, typ
         </p>
       </div>
     )}
-    {type === PaymentRadioEnum.MAKSEKESKUS && (
-      <div className="flex flex-row justify-start pl-[30px] mt-[10px]">
-        <p
-          className={`text-sm ${
-            disabled ? 'text-gray-400' : ''
-          }`} 
-        >
-          Estonia, Latvia, Lithuania.
-        </p>
-      </div>
-    )}
     {type === PaymentRadioEnum.MODENA && (
       <div className="flex flex-row justify-start pl-[30px] mt-[10px]">
         <p
@@ -130,7 +113,7 @@ const PaymentRadio = ({ disabled, id, label, name, value, onChange, checked, typ
             disabled ? 'text-gray-400' : ''
           }`}
         >
-          Pay in 3 installments. Available in Estonia, Latvia, and Lithuania.
+          Pay in 3 installments. Available in Estonia.
         </p>
       </div>
     )}

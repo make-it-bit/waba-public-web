@@ -10,10 +10,20 @@ import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
 import { useCartStore } from '@/page-components/CartContent/CartContent';
+import { useCurrencyStore, Currency } from '../currencyStore';
+import CurrencyFlag from 'react-currency-flags';
+import { Dropdown } from '@/components';
 
 const NavbarDesktop = ({ navbarData }) => {
   const pathname = usePathname();
   const quantity = useCartStore((state) => state.quantity);
+  const { currency, setCurrency } = useCurrencyStore();
+
+  const currencies = [
+    { value: 'EUR', label: 'EUR' },
+    { value: 'AED', label: 'AED' },
+  ];
+
   return (
     <div className="bg-white-100 lg:block hidden">
       <div className="container">
@@ -44,6 +54,18 @@ const NavbarDesktop = ({ navbarData }) => {
             </Link>
           </div>
           <div className="flex flex-1 justify-end items-center 2xl:gap-64 xl:gap-32 gap-16">
+            <Dropdown
+              className="mr-4"
+              options={currencies}
+              value={currency}
+              onChange={val => setCurrency(val as Currency)}
+              renderOption={c => (
+                <div className="flex items-center gap-1"><CurrencyFlag currency={c.value} size="sm" /> {c.value}</div>
+              )}
+              renderButton={selected => (
+                <div className="flex items-center gap-1"><CurrencyFlag currency={selected.value} size="md" /> {selected.value}</div>
+              )}
+            />
             {navbarData.rightside_links.data.map((link, index) => (
               <Link
                 key={index}

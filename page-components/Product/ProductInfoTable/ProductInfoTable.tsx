@@ -17,51 +17,60 @@ const ProductInfoTable = () => {
   ];
 
   return (
-    <div className="overflow-x-auto container py-[108px]">
+    <div className="container py-[108px]">
       <div className="flex flex-row pb-10">
         <h2 className="font-rufina text-5xl leading-5xl">The Waba Eclatia Advantage</h2>
       </div>
-      <table className="table-auto border border-black-100 w-full">
-        <thead>
-          <tr className="bg-white border-b border-black-100">
-            {tableData[0].map((header, index) => (
-              <th
-                key={index}
-                className="p-5 text-sm text-left font-normal"
-              >
-                {header || ' '}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.slice(1).map((row, rowIndex) => (
-            <tr
-              key={rowIndex}
-              className={`${
-                rowIndex % 2 === 0 ? "bg-white" : "bg-[#F3ECEE80]"
-              }`}
-            >
-              {row.map((cell, colIndex) => (
-                <td
-                  key={colIndex}
-                  className={`p-5 text-sm ${
-                    colIndex === 0 ? "text-left" : "text-center"
-                  } ${colIndex === 1 ? "bg-[#F3ECEE] bg-opacity-80" : ""}`}
+      <div className="overflow-x-auto">
+        <table className="table-auto border border-black-100 w-full">
+          <thead>
+            <tr className="bg-white border-b border-black-100">
+              {tableData[0].map((header, index) => (
+                <th
+                  key={index}
+                  className={`p-5 text-sm text-left font-normal ${
+                    index === 0 ? "sticky z-10" : ""
+                  }`}
+                  style={index === 0 ? { left: 0 } : {}}
                 >
-                  {cell === 'check-stroke' ? (
-                    <ReactSVG src="icons/check-stroke.svg" className="inline-block" />
-                  ) : cell === 'check' ? (
-                    <ReactSVG src="icons/checkmark.svg" className="inline-block" />
-                  ) : (
-                    cell
-                  )}
-                </td>
+                  {header || ' '}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tableData.slice(1).map((row, rowIndex) => (
+              <tr
+                key={rowIndex}
+                className={`${
+                  rowIndex % 2 === 0 ? "bg-white" : "bg-[#F3ECEE80]"
+                }`}
+              >
+                {row.map((cell, colIndex) => (
+                  <td
+                    key={colIndex}
+                    className={`p-5 text-sm ${
+                      colIndex === 0 ? "text-left sticky z-10" : "text-center"
+                    } ${colIndex === 1 ? "bg-[#F3ECEE] bg-opacity-80" : ""}`}
+                    style={colIndex === 0 ? { 
+                      backgroundColor: rowIndex % 2 === 0 ? 'white' : '#F3ECEE',
+                      left: 0
+                    } : {}}
+                  >
+                    {cell === 'check-stroke' ? (
+                      <ReactSVG src="icons/check-stroke.svg" className="inline-block" />
+                    ) : cell === 'check' ? (
+                      <ReactSVG src="icons/checkmark.svg" className="inline-block" />
+                    ) : (
+                      cell
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

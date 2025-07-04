@@ -81,6 +81,8 @@ const UserStories = async () => {
         { method: 'GET', headers: { 'Content-Type': 'application/json' } }
       ).then((res) => res.json());
 
+      console.log(posts);
+
       const processedPosts = posts.map((post) => {
         if (post.media_type === 'CAROUSEL_ALBUM') {
           return {

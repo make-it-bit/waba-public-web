@@ -9,10 +9,14 @@ import classNames from 'classnames';
 import { getImageFullUrl_client } from '@/lib/getImgFullUrl';
 
 import { Button } from '@/gui-components/client';
+import { useCartStore } from '@/page-components/CartContent/CartContent';
+import { useCurrencyStore, Currency } from '../currencyStore';
 
 const NavbarMobile = ({ navbarData }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const quantity = useCartStore((state) => state.quantity);
+  const { currency, setCurrency } = useCurrencyStore();
 
   return isOpen ? (
     <div className="lg:hidden block fixed bg-black-100 w-full h-screen top-[41px]">
@@ -46,6 +50,7 @@ const NavbarMobile = ({ navbarData }) => {
               onClick={() => setIsOpen(!isOpen)}
             >
               {link.attributes.page_link_data.href_text}
+              {link.attributes.page_link_data.href_text === 'Cart' && quantity > 0 && ` (${quantity})`}
             </Link>
           ))}
           {navbarData.rightside_links.data.map((link, index) => (
@@ -59,6 +64,7 @@ const NavbarMobile = ({ navbarData }) => {
               onClick={() => setIsOpen(!isOpen)}
             >
               {link.attributes.page_link_data.href_text}
+              {link.attributes.page_link_data.href_text === 'Cart' && quantity > 0 && ` (${quantity})`}
             </Link>
           ))}
         </div>

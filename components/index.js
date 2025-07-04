@@ -11,3 +11,4 @@ export { default as CookieConsent } from './CookieConsent';
 export { default as InstagramBlock } from './InstagramBlock';
 export { default as RichTextBlock } from './RichTextBlock';
 export { default as StrapiForm } from './StrapiForm';
+export { default as Dropdown } from './Dropdown/Dropdown';

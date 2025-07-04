@@ -19,15 +19,17 @@ const Spectrum = ({ spectrumData }) => {
         </div>
         <div className="grid grid-cols-12">
           <div className="col-span-12">
-            <Image
-              src={getImageFullUrl_server(spectrumData.image.data)}
-              alt="electromagnetic spectrum"
-              quality={100}
-              width={700}
-              height={700}
-              style={{ width: '100%', height: 'auto' }}
-              className="w-full h-full object-cover inset-0"
-            />
+            <div className="overflow-x-auto md:overflow-x-visible scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100" style={{ WebkitOverflowScrolling: 'touch' }}>
+              <Image
+                src={getImageFullUrl_server(spectrumData.image.data)}
+                alt="electromagnetic spectrum"
+                quality={100}
+                width={700}
+                height={700}
+                className="w-[1200px] md:w-full max-w-none md:max-w-full h-full object-cover inset-0"
+                style={{ height: 'auto' }}
+              />
+            </div>
           </div>
         </div>
       </div>

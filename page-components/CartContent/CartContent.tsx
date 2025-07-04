@@ -1,13 +1,16 @@
 'use client'
-import { Button, PaymentRadio, TermsRadio, TextInput } from "@/gui-components/client";
+import { Button, PaymentRadio, TextInput } from "@/gui-components/client";
 import { PaymentRadioEnum } from "@/gui-components/client/PaymentRadio/PaymentRadio";
+import { flattenNewPrice } from "@/utils/flattenNewPrice";
+import { useProductPrice, useProductPriceCurrency } from "@/utils/useProductPrice";
 import Link from "next/link";
-import { useState, useRef, useEffect, startTransition } from "react";
+import { useState, useRef, useEffect, startTransition, useMemo } from "react";
 import { ReactSVG } from "react-svg";
 import { create } from "zustand";
+import { useCurrencyStore } from "../Navbar/currencyStore";
 
 export interface CartState {
-  price: number;
+  cartPrice: number;
   quantity: number;
   setPrice: (newPrice: number) => void;
   setStoreQuantity: (newQuantity: number) => void;
@@ -16,9 +19,9 @@ export interface CartState {
 
 // Cart state
 export const useCartStore = create<CartState>((set) => ({
-  price: 495,
+  cartPrice: 0,
   quantity: 0,
-  setPrice: (newPrice) => set(() => ({ price: newPrice })),
+  setPrice: (newPrice) => set(() => ({ cartPrice: newPrice })),
   setStoreQuantity: (newQuantity) => set(() => ({ quantity: newQuantity })),
   removeItems: () => set(() => ({ quantity: 0})),
 }));
@@ -41,9 +44,23 @@ interface CustomerDetails {
 }
 
 const CartContent = ({ productData }) => {
-  const { price, quantity, setStoreQuantity, removeItems } = useCartStore();
+  const { cartPrice, quantity, setStoreQuantity, removeItems, setPrice } = useCartStore();
+  const flatNewPrice = useMemo(() => flattenNewPrice(productData.new_price), [productData?.new_price]);
+  const price = useProductPrice(flatNewPrice, 495);
+  const currency = useProductPriceCurrency(flatNewPrice);
+  const { currency: selectedCurrency, setCurrency } = useCurrencyStore();
+
+  useEffect(() => {
+    if (flatNewPrice && selectedCurrency) {
+      const priceObj = flatNewPrice.find(
+        (item) => item.country === selectedCurrency
+      );
+      const price = priceObj ? Number(priceObj.price) : 0;
+      setPrice(price);
+    }
+  }, [flatNewPrice, selectedCurrency, setPrice]);
+
   const [selectedValue, setSelectedValue] = useState('');
-  const [termsSelectedValue, setTermsSelectedValue] = useState('');
   const [error, setError] = useState<ModenaError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [customerDetails, setCustomerDetails] = useState<CustomerDetails>({
@@ -80,10 +97,6 @@ const CartContent = ({ productData }) => {
     setSelectedValue(value);
   };
 
-  const handleTermsRadioChange = (value: string) => {
-    setTermsSelectedValue(value);
-  };
-
   const isModenaFieldsValid = () => {
     if (selectedValue === 'radio4') {
       return customerDetails.fullName.trim() !== '' &&
@@ -97,6 +110,9 @@ const CartContent = ({ productData }) => {
     }
     return true;
   };
+
+  const isModenaSelected = selectedValue === 'radio4';
+  const totalAmount = (quantity * cartPrice);
 
   const handleCustomerDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -140,14 +156,14 @@ const CartContent = ({ productData }) => {
       const { access_token } = authData;
 
       const orderData = {
-        maturityInMonths: 3,
+        maturityInMonths: 12,
         orderId: `WABA-${Date.now()}`,
-        totalAmount: quantity * price,
+        totalAmount: isModenaSelected ? Number((totalAmount * 1.04).toFixed(2)) : totalAmount,
         currency: "EUR",
         orderItems: [
           {
             description: "WABA Eclatia",
-            amount: price,
+            amount: isModenaSelected ? Number((cartPrice * 1.04).toFixed(2)) : cartPrice,
             currency: "EUR",
             quantity: quantity
           }
@@ -256,7 +272,7 @@ const CartContent = ({ productData }) => {
     return undefined;
   };
 
-  const isCheckoutDisabled = !selectedValue || !termsSelectedValue || !isModenaFieldsValid();
+  const isCheckoutDisabled = !selectedValue || !isModenaFieldsValid();
 
   return (
     <>
@@ -289,7 +305,7 @@ const CartContent = ({ productData }) => {
                 </div>
                 <div className="flex flex-row items-center gap-10">
                   <div>
-                    <p className="text-2sm select-none">{`€${price}`}</p>
+                    <p className="text-2sm select-none">{`${selectedCurrency === 'EUR' ? '€' : ''} ${cartPrice} ${selectedCurrency === 'AED' ? 'AED' : ''}`}</p>
                   </div>
                   <ReactSVG src="icons/trash.svg" className="inline-block cursor-pointer" onClick={() => removeItems()}/>
                 </div>
@@ -298,7 +314,7 @@ const CartContent = ({ productData }) => {
             <div className="col-span-12 md:col-span-10 md:col-start-2">
               <div className="flex flex-row py-7 justify-end">
                 <div className="mr-14">
-                  <p className="text-2sm font-bold select-none">{`Total: €${quantity * price}`}</p>
+                  <p className="text-2sm font-bold select-none">{`Total: ${selectedCurrency === 'EUR' ? '€' : ''} ${totalAmount.toFixed(2)} ${selectedCurrency === 'AED' ? 'AED' : ''}`}</p>
                 </div>
               </div>
             </div>
@@ -333,26 +349,20 @@ const CartContent = ({ productData }) => {
                     value="radio2"
                     checked={selectedValue === 'radio2'}
                     onChange={handleRadioChange}
+                    disabled={currency !== 'EUR'}
                   />
-                  <PaymentRadio
-                    disabled={true}
-                    id="radio3"
-                    label="Pay with"
-                    type={PaymentRadioEnum.MAKSEKESKUS}
-                    name="payment"
-                    value="radio3"
-                    checked={selectedValue === 'radio3'}
-                    onChange={handleRadioChange}
-                  />
-                  <PaymentRadio
-                    id="radio4"
-                    label="Pay with"
-                    type={PaymentRadioEnum.MODENA}
-                    name="payment"
-                    value="radio4"
-                    checked={selectedValue === 'radio4'}
-                    onChange={handleRadioChange}
-                  />
+                  <div className="flex flex-col">
+                    <PaymentRadio
+                      id="radio4"
+                      label="Pay with"
+                      type={PaymentRadioEnum.MODENA}
+                      name="payment"
+                      value="radio4"
+                      checked={selectedValue === 'radio4'}
+                      onChange={handleRadioChange}
+                      disabled={currency !== 'EUR'}
+                    />
+                  </div>
                   <div
                     className={`overflow-hidden transition-[max-height] duration-300 ease-in-out`}
                     style={{ maxHeight: selectedValue === 'radio4' ? contentHeight : 0 }}
@@ -447,7 +457,17 @@ const CartContent = ({ productData }) => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-10 md:col-start-2">
-              <TermsRadio id="radio4" name="terms" value="radio4" checked={termsSelectedValue === 'radio4'} onChange={handleTermsRadioChange} />
+              <div className="mt-[25px]">
+                <p className="text-sm"> 
+                  I have read and agree with all the 
+                  <Link href="/terms">
+                    <span className="underline ml-[5px]">Terms of Use</span>
+                  </Link> and  
+                  <Link href="/privacy-policy">
+                    <span className="underline ml-[5px]">Privacy Policy</span>
+                  </Link>
+                </p>
+              </div>
             </div>
             <div className="col-span-12 md:col-span-10 md:col-start-2 py-[50px]">
               <Button

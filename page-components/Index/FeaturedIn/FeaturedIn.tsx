@@ -4,7 +4,7 @@ import Image from 'next/image';
 const FeaturedIn = () => {
   const logos = [
     {
-      src: '/logos/logo-scroll/eesti-naine.svg',
+      src: '/logos/logo-scroll/eestinaine.png',
       alt: 'eesti naine logo',
       width: 118,
       height: 24,

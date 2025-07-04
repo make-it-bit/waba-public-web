@@ -27,7 +27,7 @@ const ProblemSolution = ({ problemSolutionData }) => {
                     </div>
                     <div className="w-full lg:w-1/2 flex items-stretch order-2">
                       <div className="flex flex-col justify-between md:ml-48 w-full">
-                        <div className="border-black-100 border-b pb-5">
+                        <div className="border-black-100 border-b pb-[30px] pt-[40px]">
                           <h3 className="font-rufina text-3xl">{item.title}</h3>
                           <p className="text-base leading-bas mt-10">Problem</p>
                           <p className="text-xs leading-xs mt-3">{item.problem}</p>
@@ -43,7 +43,7 @@ const ProblemSolution = ({ problemSolutionData }) => {
                   <>
                     <div className="w-full lg:w-1/2 flex items-stretch order-2 lg:order-1">
                       <div className="flex flex-col justify-between md:ml-48 w-full">
-                        <div className="border-black-100 border-b pb-5">
+                        <div className="border-black-100 border-b pb-[30px] pt-[40px]">
                           <h3 className="font-rufina text-3xl">{item.title}</h3>
                           <p className="text-base leading-bas mt-10">Problem</p>
                           <p className="text-xs leading-xs mt-3">{item.problem}</p>

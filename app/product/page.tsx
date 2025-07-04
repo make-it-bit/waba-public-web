@@ -55,7 +55,7 @@ const Product = async () => {
       <VerifiedScience verifiedScienceData={productPageData.attributes.backed_science} scienceArticles={scienceArticles} />
       <HappyUsers happyUsersData={{title: productPageData.attributes.waba_users_title}} userVideos={userVideos}/>
       <Colors colorsData={indexPageData.attributes.color} />
-      <SingleMulti />
+      <SingleMulti new_price={productPageData.attributes.hero.new_price}/>
       {/* <Warranty warrantyData={productPageData.attributes.warranty} /> */}
       {/* <ProductFAQ productFaqData={productPageData.attributes.faq} /> */}
       <ProductInfoTable />

@@ -161,6 +161,8 @@ const productPageNestedComponents = [
   'hero.button_1',
   'hero.button_2',
   'hero.powered_by_logos',
+  'hero.new_price.country',
+  'hero.new_price.price',
   'product_info.feature_cards.icon',
   'product_info.photobiomodulation.image',
   'product_info.photobiomodulation.background_video',
