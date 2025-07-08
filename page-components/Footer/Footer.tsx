@@ -177,6 +177,11 @@ const Footer = ({ footerData, small = false }) => {
                       <p className="text-sm">United Arab Emirates</p>
                     </div>
                     <div className="flex flex-col mt-[20px]">
+                      <p className="text-sm mt-[10px]">Rejuvenation FZE-LLC</p>
+                      <p className="text-sm">Formation No. 4309016</p>
+                      <p className="text-sm">Phone: +971 58 529 0023</p>
+                    </div>
+                    <div className="flex flex-col mt-[20px]">
                       <p className="text-2sm">Estonia</p>
                       <p className="text-sm mt-[10px]">Kakumae Tee 257</p>
                       <p className="text-sm">13516 Tallinn</p>
