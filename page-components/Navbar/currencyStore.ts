@@ -7,7 +7,8 @@ interface CurrencyState {
   setCurrency: (currency: Currency) => void;
 }
 
+// Todo: add dynamic currency default from strapi
 export const useCurrencyStore = create<CurrencyState>((set) => ({
-  currency: 'EUR',
+  currency: 'AED',
   setCurrency: (currency) => set({ currency }),
-})); 
+}));
