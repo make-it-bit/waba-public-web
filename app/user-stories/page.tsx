@@ -75,13 +75,12 @@ const UserStories = async () => {
   const queryLimit = 30;
 
   const fetchInstagramPosts = async () => {
+
     try {
       const { data: posts } = await fetch(
-        `https://graph.instagram.com/v22.0/17841465347182420/media?fields=${queryParams.toString()}&limit=${queryLimit}&access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}`,
+        `https://graph.instagram.com/v23.0/${process.env.INSTAGRAM_ACCOUNT_ID}/media?fields=${queryParams.toString()}&limit=${queryLimit}&access_token=${process.env.STRAPI_IG_TOKEN}`,
         { method: 'GET', headers: { 'Content-Type': 'application/json' } }
       ).then((res) => res.json());
-
-      console.log(posts);
 
       const processedPosts = posts.map((post) => {
         if (post.media_type === 'CAROUSEL_ALBUM') {
