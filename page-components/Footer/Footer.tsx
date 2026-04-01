@@ -208,6 +208,34 @@ const Footer = ({ footerData, small = false }) => {
                         </Link>
                       ))}
                     </div>
+                    <div className="flex flex-col mt-[24px] gap-[10px] text-center md:text-left">
+                      <h4 className="font-rufina text-lg text-white-100">Support for WABA development</h4>
+                      <div className="w-full flex justify-center md:justify-start">
+                        <Image
+                          src="/unnamed.jpg"
+                          alt="Co-funded by the European Union"
+                          width={802}
+                          height={594}
+                          className="w-full max-w-[300px] h-auto"
+                        />
+                      </div>
+                      <p className="text-sm leading-sm">
+                        European Regional development Fund supports Waba Technologies development activities of new
+                        generation at-home skincare devices.
+                      </p>
+                      <p className="text-sm leading-sm">
+                        European Union cohesion policy funds support the development of WABA&apos;s integrated skin
+                        measurement and light therapy solution.
+                      </p>
+                      <p className="text-sm leading-sm">
+                        The objective of the project is to develop and validate an innovative skincare device that
+                        combines skin analysis and personalized light therapy in one system. The project supports
+                        product development.
+                      </p>
+                      <p className="text-sm leading-sm">Project number: 2021-2027.1.01.25-1453</p>
+                      <p className="text-sm leading-sm">Project duration: October 2025 - April 2026</p>
+                      <p className="text-sm leading-sm">Support amount: EUR 35,000</p>
+                    </div>
                   </div>
                 </div>
               </div>
