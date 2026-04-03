@@ -11,7 +11,7 @@ import {
   OGDeviceGreenLight,
 } from '../../../components/OGElements';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const maxDuration = 180;
 
 export async function GET(request) {
