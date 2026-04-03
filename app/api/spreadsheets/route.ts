@@ -18,7 +18,7 @@ const {
   EMAIL_VERIF_API_KEY,
 } = process.env;
 
-export const maxDuration = 180;
+export const maxDuration = 60;
 
 const sharedEmailConf = {
   to: 'mart.lakspere@wabaskin.com',
